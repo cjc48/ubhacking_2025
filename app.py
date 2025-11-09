@@ -4,14 +4,11 @@ from firebase_admin import credentials, firestore
 from flask_cors import CORS
 from backend.messenger import messengerMain
 from backend.profileCreation import profileMain
+from backend.FireBase import db
 import json
 
 app = Flask(__name__)
 CORS(app)
-
-cred = credentials.Certificate("serviceAccountKey.json")
-firebase_admin.initialize_app(cred)
-db = firestore.client()
 
 @app.route('/handle_chat',methods=['POST'])
 async def handle_chat():
