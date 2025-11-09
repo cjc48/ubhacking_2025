@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Chat from './Chat'
+import Chat from './Chat.tsx';
 import logo from '../assets/DoppelLogo.png';
 import { createTheme } from '@mui/material/styles';
 import PsychologyAlt from '@mui/icons-material/PsychologyAlt';
@@ -22,8 +22,8 @@ const MentorList : Navigation = [
         icon: <PsychologyAlt />,
     },
     {
-        segment: 'orders',
-        title: 'Orders',
+        segment: 'ash',
+        title: 'Ash',
         icon: <PsychologyAlt />,
     },
 ]
