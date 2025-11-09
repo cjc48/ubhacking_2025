@@ -1,4 +1,4 @@
-from aiDelegate import mainHelper
+from ..aiDelegate import mainHelper
 
 
 def generateTag(chunk): 

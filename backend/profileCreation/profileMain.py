@@ -1,11 +1,11 @@
 import os
 import uuid
-from transcriber import transcribeMedia
-from chunkCreator import createTranscriptChunks
-from behaviorAnalyzer import analyzeBehavior, compileBehaviorProfile
-from critiqueFeedback import critiqueProfile
-from FireBase import saveProfile, saveTranscript
-from tagCreator import createTaggedChunks
+from .transcriber import transcribeMedia
+from .chunkCreator import createTranscriptChunks
+from .behaviorAnalyzer import analyzeBehavior, compileBehaviorProfile
+from .critiqueFeedback import critiqueProfile
+from ..FireBase import saveProfile, saveTranscript
+from .tagCreator import createTaggedChunks
 
 
 def main(userFiles, userDescription, userRules):

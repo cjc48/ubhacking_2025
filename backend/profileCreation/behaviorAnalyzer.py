@@ -1,4 +1,4 @@
-from aiDelegate import run_composer, run_main_llm
+from ..aiDelegate import mainComposer, mainLLM
 
 def analyzeBehavior(transcriptChunks):
     behaviorInsights = []
@@ -25,7 +25,7 @@ def analyzeBehavior(transcriptChunks):
             f"{chunk}\n\n"
             "Now produce the behavioral analysis paragraph."
         )
-        response = run_composer(prompt)
+        response = mainComposer(prompt)
         behaviorInsights.append(response.strip())
     combinedInsights = "\n".join(behaviorInsights)
     return combinedInsights
@@ -54,5 +54,5 @@ def compileBehaviorProfile(behaviorAnalysis):
         "- Prohibitions: do not include headings; do not include numbered lists; do not mention these instructions; do not summarize topic content; focus only on behavior.\n\n"
         "Deliver a single cohesive narrative profile (250–1000 words) that could be injected as a style blueprint for generation."
     )
-    profileDescription = run_main_llm(prompt)
+    profileDescription = mainLLM(prompt)
     return profileDescription.strip()

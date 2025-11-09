@@ -1,4 +1,4 @@
-from aiDelegate import run_helper
+from ..aiDelegate import mainHelper
 
 def createTranscriptChunks(transcripts):
     allChunks = []
@@ -11,7 +11,7 @@ def createTranscriptChunks(transcripts):
             f"Text:\n{transcript}"
         )
 
-        response = run_helper(prompt)
+        response = mainHelper(prompt)
         splitChunks = [c.strip() for c in response.split("\n") if c.strip()]
         allChunks.extend(splitChunks)
 

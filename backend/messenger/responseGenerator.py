@@ -1,4 +1,4 @@
-from aiDelegate import generationAI
+from ..aiDelegate import generateAI
 import asyncio
 
 async def generate_llm_response(user_prompt, chat_history, profile_description, relevant_chunks, response_type):
@@ -20,5 +20,5 @@ async def generate_llm_response(user_prompt, chat_history, profile_description, 
         "Write the final mentor response only."
     )
 
-    response = await asyncio.to_thread(generationAI, prompt)
+    response = await asyncio.to_thread(generateAI, prompt)
     return response

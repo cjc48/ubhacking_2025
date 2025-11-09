@@ -1,4 +1,4 @@
-from aiDelegate import critiqueAI, generateAI, mainLLM
+from ..aiDelegate import critiqueAI, generateAI, mainLLM
 
 
 def critiqueProfile(generalProfile):

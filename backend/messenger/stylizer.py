@@ -1,6 +1,6 @@
 import asyncio
-from aiDelegate import messageStyleAI
-from FireBase import getTranscripts
+from ..aiDelegate import messageStyleAI
+from ..FireBase import getTranscripts
 
 async def transform_stylistic_response(mentor_id, llm_response):
     transcripts = getTranscripts(mentor_id)
