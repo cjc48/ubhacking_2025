@@ -1,4 +1,4 @@
-from FireBase import intent_detectionAI, response_typeAI
+from aiDelegate import intent_detectionAI, response_typeAI
 
 
 def identify_response_type(user_prompt):
