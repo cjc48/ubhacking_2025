@@ -10,9 +10,6 @@ async def handle_chat():
     user_prompt = data.get('prompt')
     chat_history = data.get('history',[])
 
-    # IDENTIFY INTENT
-    intent = await identify_intent(user_prompt)
-
     # IDENTIFY RESPONSE TYPE
     response_type = await identify_response_type(user_prompt)
 
