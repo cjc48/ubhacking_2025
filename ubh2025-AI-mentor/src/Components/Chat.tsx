@@ -1,5 +1,6 @@
+
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -23,11 +24,19 @@ interface ChatProps {
 }
 
 export default function Chat({ mentor }: ChatProps) {
-    const [messages, setMessages] = useState<Message[]>([
-        { id: 1, text: 'Hello! How can I help you today?', sender: 'mentor' },
-        { id: 2, text: 'I have a question about ...', sender: 'user' },
-    ]);
+    const [messages, setMessages] = useState<Message[]>([]);
     const [inputText, setInputText] = useState('');
+
+    // This useEffect hook runs whenever the `mentor` prop changes
+    useEffect(() => {
+        // When the mentor changes, reset the chat to its initial state.
+        // This simulates loading a new chat session for the selected mentor.
+        setMessages([
+            { id: 1, text: `Hello! I am ${mentor}. How may I help you today?`, sender: 'mentor' },
+        ]);
+        // Also, clear any text from the input field
+        setInputText('');
+    }, [mentor]); // The dependency array ensures this effect runs only when `mentor` changes
 
     const handleSendMessage = () => {
         if (inputText.trim() !== '') {
@@ -43,7 +52,7 @@ export default function Chat({ mentor }: ChatProps) {
             setTimeout(() => {
                 const mentorReply: Message = {
                     id: messages.length + 2,
-                    text: `That's a great question. Let me think...`,
+                    text: `That's a great question about ${mentor}. Let me think...`,
                     sender: 'mentor',
                 };
                 setMessages((prevMessages) => [...prevMessages, mentorReply]);
