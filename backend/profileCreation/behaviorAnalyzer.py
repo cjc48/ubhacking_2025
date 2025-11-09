@@ -49,6 +49,7 @@ def compileBehaviorProfile(behaviorAnalysis):
         "- Handling uncertainty: preferred strategy under ambiguity (enumerate possibilities, qualify claims, defer to principles, request more context), and how this is worded.\n"
         "- Lexical fingerprint: list a handful of likely recurring transitions or signature phrases IF reliably implied by the observations (do not invent brand-new catchphrases without basis; if uncertain, describe their type rather than exact wording).\n"
         "- Operational guidance: instruct a downstream generator how to implement this style (ordering of steps, where to place examples, when to recap, how to phrase directives or questions). "
+        "Anylize each of the characteristics and attributes expressed with responses for each of the types: {define, explain, prove, compare, motivate, summarize, reflect, critique, instruct}. you need to go in depth to anylize how each of these responses are behaviorly expressed.\n"
         "Write as natural prose, not bullet points.\n"
         "- Prohibitions: do not include headings; do not include numbered lists; do not mention these instructions; do not summarize topic content; focus only on behavior.\n\n"
         "Deliver a single cohesive narrative profile (250–1000 words) that could be injected as a style blueprint for generation."
