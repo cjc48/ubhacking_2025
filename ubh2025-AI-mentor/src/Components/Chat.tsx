@@ -8,6 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import Send from '@mui/icons-material/Send';
 
 // Define the shape of a message
 interface Message {
@@ -95,7 +96,7 @@ export default function Chat({ mentor }: ChatProps) {
                     multiline
                     maxRows={4}
                 />
-                <Button variant="contained" color="primary" onClick={handleSendMessage} sx={{ ml: 1 }}>
+                <Button variant="contained" sx={{paddingTop: 2, paddingBottom: 2}} color="primary" onClick={handleSendMessage} startIcon={<Send/>}>
                     Send
                 </Button>
             </Box>

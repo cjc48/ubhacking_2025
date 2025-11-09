@@ -1,9 +1,10 @@
+import * as React from 'react';
 import Chat from './Chat'
+import logo from '../assets/DoppelLogo.png';
 import { createTheme } from '@mui/material/styles';
 import PsychologyAlt from '@mui/icons-material/PsychologyAlt';
 import { AppProvider, type Navigation } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
-import { DemoProvider, useDemoRouter } from '@toolpad/core/internal';
 
 /*
 *
@@ -34,7 +35,7 @@ const ChatList : Navigation = [
     },
 ]
 
-const demoTheme = createTheme({
+const appTheme = createTheme({
     cssVariables: {
         colorSchemeSelector: 'data-toolpad-color-scheme',
     },
@@ -50,21 +51,14 @@ const demoTheme = createTheme({
     },
 });
 
-interface DemoProps {
-    /**
-     * Injected by the documentation to work in an iframe.
-     * Remove this when copying and pasting into your project.
-     */
-    window?: () => Window;
-}
+export default function DashboardLayoutBasic() {
+    const [activePage, setActivePage] = React.useState('socrates');
 
-export default function DashboardLayoutBasic(props: DemoProps) {
-    const { window } = props;
+    const router = {
+        pathname: activePage,
+        navigate: (path: string) => setActivePage(path.split('/').pop() || 'socrates'),
+    };
 
-    const router = useDemoRouter('/dashboard');
-
-    // Remove this const when copying and pasting into your project.
-    const demoWindow = window !== undefined ? window() : undefined;
 
     let nav : Navigation = [{
         kind: 'header',
@@ -83,20 +77,18 @@ export default function DashboardLayoutBasic(props: DemoProps) {
     nav = nav.concat(ChatList);
 
     return (
-        // Remove this provider when copying and pasting into your project.
-        <DemoProvider window={demoWindow}>
-            {/* preview-start */}
-            <AppProvider
-                navigation={nav}
-                router={router}
-                theme={demoTheme}
-                window={demoWindow}
-            >
-                <DashboardLayout>
-                    <Chat mentor={router.pathname} />
-                </DashboardLayout>
-            </AppProvider>
-            {/* preview-end */}
-        </DemoProvider>
+        <AppProvider
+            navigation={nav}
+            router={router}
+            theme={appTheme}
+            branding={{
+                title: '',
+                logo: <img src={logo} width={110} alt="Doppel Logo"/>
+            }}
+        >
+            <DashboardLayout>
+                <Chat mentor={router.pathname} />
+            </DashboardLayout>
+        </AppProvider>
     );
 }
