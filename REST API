@@ -38,12 +38,6 @@ def get_transcript(transcript_id):
     if transcript is None:
         return jsonify({'Error': 'Transcript not found'}),404
 
-    data = request.json
-
-    transcript['title'] = data.get('title',transcript['title'])
-    transcript['content'] = data.get('content',transcript['content'])
-    transcript['mentor_id'] = data.get('mentor_id',transcript['mentor_id'])
-
     return jsonify(transcript)
 
 
