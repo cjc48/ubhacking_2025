@@ -1,4 +1,5 @@
 import os
+import uuid
 from transcriber import transcribeMedia
 from chunkCreator import createTranscriptChunks
 from behaviorAnalyzer import analyzeBehavior, compileBehaviorProfile
@@ -8,10 +9,12 @@ from tagCreator import createTaggedChunks
 
 
 def main(userFiles, userDescription, userRules):
+    userId = str(uuid.uuid4())
     formattedData = formatUserData(userFiles)
     profile = generateBehaviorProfile(formattedData)
     if profile:
-        print(" saved successfully.")
+        createUserInFirebase(userId, profile, formattedData, userDescription, userRules)
+        print(f"User {userId} profile created and saved successfully.")
     else:
         print("Profile generation failed.")
 
@@ -19,7 +22,6 @@ def main(userFiles, userDescription, userRules):
 def formatUserData(userFiles):
     transcribedData = []
     videoAudioExt = [".mp4", ".mov", ".m4a", ".mp3", ".wav", ".aac"]
-
     for file in userFiles:
         ext = os.path.splitext(file)[1].lower()
         if ext in videoAudioExt:
@@ -28,21 +30,18 @@ def formatUserData(userFiles):
             with open(file, "r", encoding="utf-8") as f:
                 text = f.read()
         transcribedData.append(text)
-
     return transcribedData
 
 
-def generateBehaviorProfile(interactionData): 
+def generateBehaviorProfile(interactionData):
     chunks = createTranscriptChunks(interactionData)
     behaviorAnalysis = analyzeBehavior(chunks)
     generalProfile = compileBehaviorProfile(behaviorAnalysis)
-
     if critiqueProfile(generalProfile):
-        saveProfile(generalProfile)
+        saveProfile({"profileDescription": generalProfile}, "temporaryProfile")
         return generalProfile
     else:
-        print("Profile did not pass critique and was not saved.")
-        updateProfile("unverifiedProfile", generalProfile)
+        updateProfile("unverifiedProfile", {"profileDescription": generalProfile})
         return None
 
 
@@ -54,8 +53,13 @@ def createUserInFirebase(userId, profileDescription, chunks, userDescription, us
         "userRules": userRules
     }
     saveProfile(profileData, userId)
-
     taggedChunks = createTaggedChunks(chunks)
-    for chunk in taggedChunks:
-        transcriptName = chunk["chunkId"]
-        saveTranscript(userId, transcriptName, chunk)
+    for index, chunk in enumerate(taggedChunks):
+        transcriptName = f"chunk_{index}"
+        chunkData = {
+            "chunkId": transcriptName,
+            "mentorId": userId,
+            "content": chunk.get("content", chunk),
+            "tags": chunk.get("tags", [])
+        }
+        saveTranscript(userId, transcriptName, chunkData)
