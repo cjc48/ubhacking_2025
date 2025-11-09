@@ -40,18 +40,23 @@ def create_profile():
         # --- 1. Get the text data from 'request.form' ---
         mentor_id = request.form.get('mentor_id')
         description = request.form.get('description')
-        rules = request.form.get('rules')  # This will be a JSON string
+        rules = request.form.get('rules')
 
         if not mentor_id:
             return jsonify({"error": "mentor_id is required"}), 400
 
         # --- 2. Get the file(s) from 'request.files' ---
-        # .getlist() gets all files sent with the name 'files'
-        files = request.files.getlist('files')
+        uploaded_files = request.files.getlist('files')
+
+        # --- This is the new part: Read file contents ---
+        # We assume the profileMain.main function can handle the file objects directly.
+        # If it expects content, you would read it here:
+        # files_content = [file.read().decode('utf-8') for file in uploaded_files]
 
         # --- 3. Call your "brains" to do the work ---
+        # Pass the list of FileStorage objects directly
         result = profileMain.main(
-            files,
+            uploaded_files,
             description,
             rules,
         )
@@ -61,6 +66,7 @@ def create_profile():
     except Exception as e:
         print(f"Error creating profile: {e}")
         return jsonify({"error": str(e)}), 500
+
     
     
 # CREATING A TRANSCRIPT

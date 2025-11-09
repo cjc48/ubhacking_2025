@@ -11,7 +11,10 @@ from .tagCreator import createTaggedChunks
 def main(userFiles, userDescription, userRules):
     print("MAIN HAS BEEN BECKONED!!!")
     userId = str(uuid.uuid4())
+    print("USER ID GENERATED: ", userId)
+    #the error is somewhere in formatUserData or below
     formattedData = formatUserData(userFiles)
+    print("DATA FORMATTED")
     chunks = createTranscriptChunks(formattedData)
     profile = generateBehaviorProfile(chunks)
     if profile:
@@ -24,14 +27,15 @@ def main(userFiles, userDescription, userRules):
 def formatUserData(userFiles):
     transcribedData = []
     videoAudioExt = [".mp4", ".mov", ".m4a", ".mp3", ".wav", ".aac"]
-    for file in userFiles:
-        ext = os.path.splitext(file)[1].lower()
-        if ext in videoAudioExt:
-            text = transcribeMedia(file)
-        else:
-            with open(file, "r", encoding="utf-8") as f:
+    for filename in userFiles:
+        with open(filename, "rb") as f:
+            file = f.read()
+            ext = os.path.splitext(file)[1].lower()
+            if ext in videoAudioExt:
+                text = transcribeMedia(file)
+            else:
                 text = f.read()
-        transcribedData.append(text)
+                transcribedData.append(text)
     return transcribedData
 
 
