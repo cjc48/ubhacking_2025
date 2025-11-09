@@ -2,6 +2,9 @@ from flask import Flask, jsonify, request
 import firebase_admin
 from firebase_admin import credentials, firestore
 from flask_cors import CORS
+import messengerMain
+import profileMain
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -10,6 +13,60 @@ cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
+@app.route('/handle_chat',methods=['POST'])
+async def handle_chat():
+    data = request.json
+    user_prompt = data.get('user_message')
+    user_id = data.get('user_id')
+    mentor_id = data.get('mentor_id')
+    history = data.get('history',[])
+
+    if not user_prompt or not user_id or not mentor_id:
+        return jsonify({"error": "Missing required fields"}), 400
+
+    response_data = await messengerMain.handle_chat(
+        user_prompt=user_prompt,
+        user_id=user_id,
+        chat_history=history,
+        mentorID=mentor_id
+        )
+    return jsonify(response_data)
+
+
+@app.route('/api/create_profile', methods=['POST'])
+def create_profile():
+    """
+    Receives mentor data and transcripts from the frontend.
+    This is a multipart/form-data request.
+    """
+    try:
+        # --- 1. Get the text data from 'request.form' ---
+        mentor_id = request.form.get('mentor_id')
+        description = request.form.get('userDescription')
+        rules = request.form.get('userRules')  # This will be a JSON string
+
+        if not mentor_id:
+            return jsonify({"error": "mentor_id is required"}), 400
+
+        # --- 2. Get the file(s) from 'request.files' ---
+        # .getlist() gets all files sent with the name 'userFiles'
+        transcript_files = request.files.getlist('userFiles')
+
+        # --- 3. Call your "brains" to do the work ---
+        result = profileMain.main(
+            mentor_id=mentor_id,
+            description=description,
+            rules_json=rules,
+            files=transcript_files
+        )
+
+        return jsonify(result)
+
+    except Exception as e:
+        print(f"Error creating profile: {e}")
+        return jsonify({"error": str(e)}), 500
+    
+    
 # CREATING A TRANSCRIPT
 @app.route('/api/transcripts',methods = ['POST'])
 def create_transcript():
