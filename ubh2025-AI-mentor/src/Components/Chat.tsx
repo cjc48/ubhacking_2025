@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
@@ -11,14 +10,12 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Send from '@mui/icons-material/Send';
 
-// Define the shape of a message
 interface Message {
     id: number;
     text: string;
     sender: 'user' | 'mentor';
 }
 
-// Define the props for the Chat component
 interface ChatProps {
     mentor: string;
 }
@@ -27,42 +24,59 @@ export default function Chat({ mentor }: ChatProps) {
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputText, setInputText] = useState('');
 
-    // This useEffect hook runs whenever the `mentor` prop changes
     useEffect(() => {
-        // When the mentor changes, reset the chat to its initial state.
-        // This simulates loading a new chat session for the selected mentor.
         setMessages([
             { id: 1, text: `Hello! I am ${mentor}. How may I help you today?`, sender: 'mentor' },
         ]);
-        // Also, clear any text from the input field
         setInputText('');
-    }, [mentor]); // The dependency array ensures this effect runs only when `mentor` changes
+    }, [mentor]);
 
-    const handleSendMessage = () => {
-        if (inputText.trim() !== '') {
-            const newMessage: Message = {
-                id: messages.length + 1,
-                text: inputText,
-                sender: 'user',
+    const handleSendMessage = async () => {
+        if (!inputText.trim()) return;
+
+        const newMessage: Message = {
+            id: Date.now(),
+            text: inputText,
+            sender: 'user',
+        };
+        setMessages(prev => [...prev, newMessage]);
+        setInputText('');
+
+        try {
+            const res = await fetch('http://localhost:5000/handle_chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    user_message: inputText,
+                    user_id: 'testUser123',
+                    mentor_id: mentor,
+                    history: messages.map(m => ({ text: m.text, sender: m.sender })),
+                }),
+            });
+
+            const data = await res.json();
+
+            const mentorReply: Message = {
+                id: Date.now() + 1,
+                text: data.reply || "I'm thinking...",
+                sender: 'mentor',
             };
-            setMessages([...messages, newMessage]);
-            setInputText('');
 
-            // Simulate a reply from the mentor
-            setTimeout(() => {
-                const mentorReply: Message = {
-                    id: messages.length + 2,
-                    text: `That's a great question about ${mentor}. Let me think...`,
-                    sender: 'mentor',
-                };
-                setMessages((prevMessages) => [...prevMessages, mentorReply]);
-            }, 1000);
+            setMessages(prev => [...prev, mentorReply]);
+        } catch (err) {
+            console.error('Error:', err);
+            const errorReply: Message = {
+                id: Date.now() + 2,
+                text: "Sorry, I couldn't reach the server.",
+                sender: 'mentor',
+            };
+            setMessages(prev => [...prev, errorReply]);
         }
     };
 
-    const handleKeyPress = (event: React.KeyboardEvent) => {
-        if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault();
+    const handleKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
             handleSendMessage();
         }
     };
@@ -70,25 +84,25 @@ export default function Chat({ mentor }: ChatProps) {
     return (
         <Paper elevation={3} sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ p: 2, borderBottom: '1px solid #ddd' }}>
-                <Typography variant="h6">Chat with {mentor.replace('/', '')}</Typography>
+                <Typography variant="h6">Chat with {mentor}</Typography>
             </Box>
             <Box sx={{ flexGrow: 1, overflow: 'auto', p: 2 }}>
                 <List>
-                    {messages.map((message) => (
-                        <ListItem key={message.id} sx={{
-                            display: 'flex',
-                            justifyContent: message.sender === 'user' ? 'flex-end' : 'flex-start'
-                        }}>
+                    {messages.map((m) => (
+                        <ListItem
+                            key={m.id}
+                            sx={{ justifyContent: m.sender === 'user' ? 'flex-end' : 'flex-start' }}
+                        >
                             <Box
                                 sx={{
-                                    bgcolor: message.sender === 'user' ? 'primary.main' : 'grey.300',
-                                    color: message.sender === 'user' ? 'primary.contrastText' : 'black',
+                                    bgcolor: m.sender === 'user' ? 'primary.main' : 'grey.300',
+                                    color: m.sender === 'user' ? 'white' : 'black',
                                     p: '8px 12px',
                                     borderRadius: 2,
                                     maxWidth: '70%',
                                 }}
                             >
-                                <ListItemText primary={message.text} />
+                                <ListItemText primary={m.text} />
                             </Box>
                         </ListItem>
                     ))}
@@ -105,7 +119,13 @@ export default function Chat({ mentor }: ChatProps) {
                     multiline
                     maxRows={4}
                 />
-                <Button variant="contained" sx={{paddingTop: 2, paddingBottom: 2}} color="primary" onClick={handleSendMessage} startIcon={<Send/>}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    sx={{ ml: 2, py: 1.5 }}
+                    startIcon={<Send />}
+                    onClick={handleSendMessage}
+                >
                     Send
                 </Button>
             </Box>

@@ -1,8 +1,5 @@
 import React from 'react';
-import { TextField, Box, Typography, ListItemText } from '@mui/material';
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
+import { Box, Typography, TextField, Button, List, ListItem, ListItemText } from '@mui/material';
 
 const backgroundPrompt = `- Education:
   - Degrees, institutions, and years of graduation.
@@ -20,11 +17,11 @@ const backgroundPrompt = `- Education:
   - Programming languages, technologies, and other relevant skills.
 `;
 
-
-function MyDoppel() {
+export default function MyDoppel() {
     const [transcriptFiles, setTranscriptFiles] = React.useState<File[]>([]);
     const [background, setBackground] = React.useState(backgroundPrompt);
     const [rules, setRules] = React.useState('');
+    const [loading, setLoading] = React.useState(false);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
@@ -32,101 +29,108 @@ function MyDoppel() {
         }
     };
 
-    const handleBackgroundChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setBackground(event.target.value);
-    };
+    const handleSubmit = async () => {
+        if (transcriptFiles.length === 0) {
+            alert('Please upload at least one transcript file.');
+            return;
+        }
 
-    const handleRulesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setRules(event.target.value);
+        setLoading(true);
+        const formData = new FormData();
+        formData.append('mentor_id', 'ash');
+        formData.append('userDescription', background);
+        formData.append('userRules', rules);
+        transcriptFiles.forEach(file => formData.append('userFiles', file));
+
+        try {
+            const res = await fetch('http://localhost:5000/api/create_profile', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await res.json();
+            console.log('Profile created:', data);
+            alert('Profile uploaded successfully!');
+        } catch (err) {
+            console.error('Upload failed:', err);
+            alert('Upload failed. Check the console for details.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <Box sx={{ p: 3 }}>
-            <Typography variant="h4" gutterBottom>
-                My Doppel
-            </Typography>
-            <Box>
-                <Typography variant="h6" gutterBottom>
-                    Transcripts
-                </Typography>
-                <Typography variant="body1" paragraph>
-                    Please provide field-relevant transcripts here. For now, provide only in .txt (plaintext) format.
-                </Typography>
-                <Button variant="contained" component="label">
-                    Upload Files
-                    <input
-                        type="file"
-                        hidden
-                        multiple
-                        accept="text/plain"
-                        onChange={handleFileChange}
-                    />
-                </Button>
-                <Box sx={{ mt: 2 }}>
-                    <Typography variant="subtitle1" gutterBottom>
-                        Selected Files:
-                    </Typography>
-                    <List>
-                        {transcriptFiles.length > 0 ? (
-                            transcriptFiles.map((file, index) => (
-                                <ListItem key={index}>
-                                    <ListItemText primary={file.name} />
-                                </ListItem>
-                            ))
-                        ) : (
-                            <ListItem>
-                                <ListItemText primary="No files selected." />
-                            </ListItem>
-                        )}
-                    </List>
-                </Box>
-            </Box>
-            <Typography variant="h6" gutterBottom>
-                User Background
-            </Typography>
-            <>
+            <Typography variant="h4" gutterBottom>My Doppel</Typography>
+
+            <Typography variant="h6" gutterBottom>Transcripts</Typography>
             <Typography variant="body1" paragraph>
-                Please provide your field-oriented background here. Include details such as those listed below.
-            </Typography></>
+                Upload your plaintext (.txt) transcripts below.
+            </Typography>
+
+            <Button variant="contained" component="label">
+                Upload Files
+                <input
+                    type="file"
+                    hidden
+                    multiple
+                    accept="text/plain"
+                    onChange={handleFileChange}
+                />
+            </Button>
+
+            <Box sx={{ mt: 2 }}>
+                <Typography variant="subtitle1" gutterBottom>Selected Files:</Typography>
+                <List>
+                    {transcriptFiles.length > 0 ? (
+                        transcriptFiles.map((file, i) => (
+                            <ListItem key={i}>
+                                <ListItemText primary={file.name} />
+                            </ListItem>
+                        ))
+                    ) : (
+                        <ListItem><ListItemText primary="No files selected." /></ListItem>
+                    )}
+                </List>
+            </Box>
+
+            <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>User Background</Typography>
+            <Typography variant="body1" paragraph>
+                Provide your field-related background below.
+            </Typography>
             <TextField
                 label="Background Information"
                 multiline
-                rows={15}
+                rows={12}
                 fullWidth
-                variant="outlined"
                 value={background}
-                onChange={handleBackgroundChange}
-                sx={{
-                    '& .MuiOutlinedInput-root': {
-                        height: 'auto',
-                        width: '100%',
-                    },
-                }}
+                onChange={(e) => setBackground(e.target.value)}
+                variant="outlined"
             />
-            <Typography variant="h6" gutterBottom>
-                Rules
-            </Typography>
+
+            <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>Rules</Typography>
             <Typography variant="body1" paragraph>
-                Please provide any rules the LLM should follow here.
+                Provide any rules or guidelines the AI should follow.
             </Typography>
             <TextField
                 label="Rules"
                 multiline
-                rows={8}
+                rows={6}
                 fullWidth
-                variant="outlined"
                 value={rules}
-                onChange={handleRulesChange}
-                placeholder="Enter any rules the LLM should follow..."
-                sx={{
-                    '& .MuiOutlinedInput-root': {
-                        height: 'auto',
-                    },
-                }}
+                onChange={(e) => setRules(e.target.value)}
+                variant="outlined"
             />
 
+            <Button
+                variant="contained"
+                color="primary"
+                sx={{ mt: 3 }}
+                onClick={handleSubmit}
+                disabled={loading}
+            >
+                {loading ? 'Uploading...' : 'Create My Doppel'}
+            </Button>
         </Box>
     );
 }
-
-export default MyDoppel;
