@@ -1,0 +1,1089 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+And we'll talk about mid-semester grades. You know what that means when that happens.
+
+Next Wednesday, we'll take a minute and talk briefly about mid-semester grades.
+
+But I do want to get those released. And they're much more meaningful if they have the midterm score on them.
+
+So our goal is, again, to make this perfectly clear,
+
+to release just the numeric score and then the score distribution for the midterm over the next couple of days.
+
+And then we will release the scans to you. Um, after break some time.
+
+Right. And a couple of days after that, in between,
+
+we won't answer any questions about how you did on the midterm because they're pointless until you can actually see, you know, how we graded it.
+
+Right. Um, so that's the plan. Um, so if you like your grade, grade, if you don't like your grade, don't stress.
+
+We will have a chance to talk about it as soon as the, you know, as soon as we can have the grades back.
+
+Of course, there it is. In fact. Uh, break.
+
+Um, starting. Today.
+
+Right after today. Um, we do not expect you to work substantially over brake.
+
+The class is designed such that, uh, you can take a break now, uh,
+
+I can't promise you that you can do nothing over the next four days, and everything will work out the way you want it to work.
+
+But the intent is that you should be able to take a couple of solid days of not thinking about 220 absolutely at all,
+
+and not be behind at all in this course. Right. Um, we did release par three yesterday morning.
+
+Uh, I do recommend that you find some time in the next couple of days, starting yesterday, ideally.
+
+But I do understand that there's like many of you, also had other midterms in this last few days in linear or in 250 or 331 or whatever other courses,
+
+which, by the way, if you're in, I just found out today, if you're in 331, the two 2331, we're on the same day and I apologize for that.
+
+We try not to do that to you guys, but somehow that one flew under the radar.
+
+Um, I mean, you got to take the midterm either way. So and so I'm saying it doesn't matter.
+
+But in other sense, like that's a big day, right? That's a big day. And we know that.
+
+And we do try to avoid that. Um. All the same.
+
+Oh, so please at least read through your A3 and start thinking about it.
+
+I mean, you had theoretically yesterday to day, right?
+
+And then if you spend any time at all over the next four days, right, do spend a little time looking at that par three.
+
+Um, it's do um not the Thursday we, we come back.
+
+Right. But the Thursday after. Right. Yeah. It will be due.
+
+There are labs next week. Uh, Wednesday. Thursday, Friday.
+
+There will be no other 220 services whatsoever on Monday and Tuesday.
+
+Your your student assistants also get Monday and Tuesday off. So there's no office hours.
+
+Don't expect us.
+
+I mean probably there will be answers on Piazza, but definitely don't expect them to be as rapid as they are, you know, under ordinary circumstances.
+
+Are there any questions about logistics coming up? Yeah.
+
+Are we getting, like, the class average? Uh, yeah.
+
+I will give you the grade distribution with the with your school midterm score.
+
+Yeah. And I don't know what the, um, what the average is.
+
+Uh, but from grading yesterday, I'm guessing it's in the, like, low to mid 20s.
+
+Uh, the midterm was out of, I think, 29 points. And I think the average is probably going to be like yeah, not percent.
+
+Sorry. I'm thinking it's probably 2223 out of 29.
+
+Right. Is probably about where the class averages. Um.
+
+Yeah. No. Why was everybody so stressed?
+
+If I say the average in the low to mid 20s, you should be like, Holy [INAUDIBLE], I crushed that midterm, right?
+
+Yeah. Um, so I think 22 to 23 points somewhere in there, probably out of 29.
+
+But I haven't run the numbers. That's just my impressions of like seeing the exams were great and you guys did a good job.
+
+It was a good midterm. Uh, it was good. Okay. Um, I guess this should be on.
+
+So what I want to talk about today is, uh, some things, and I said a few, I don't know,
+
+a few lectures back that there were some things that I wanted to talk about in lecture about programing that we hadn't gotten to yet.
+
+Today I'm going to talk about some things about programing. Right. The title of this lecture is Programing Practices.
+
+Um, I don't know how far we're going to get today.
+
+Um, this is one where I tend to wander a little bit of field and talk about, you know, things that are adjacent to what's actually on the slides.
+
+And that's that's fine. Um, the good news is this is not the kind of thing that we can easily put a bunch of questions on your final,
+
+because a lot of it's about how you should conduct yourself when you're doing, you know, your work, which I can't really test you on, on the final.
+
+Uh, the bad news is that that makes it easy for you to assume that the.
+
+Hey, Ethan did a filler lecture after the midterm.
+
+I don't really have to, like, do the things that he talked about, but I promise that there are things in this lecture that if you think about them,
+
+if you try to apply them, it's going to be good for your grades. It's going to be good for your grades, not only in this course, but going forward.
+
+It will also be good for things like technical interviews and, um, programing interviews and things like that that you do, uh, in the future.
+
+So this lecture is about affective programing.
+
+Um, and it turns out that there's a big difference between a programmer or someone who has learned to do some programing and a good programmer,
+
+someone who is treats programing as a craft and spend some time, uh, building the skills that make them, uh, effective as a programmer.
+
+Um, and that's not to say, you know, there's the sort of, um, meme of the ten x engineer kind of situation.
+
+And it's not to say that I don't actually think there's such a thing as a ten x engineer, per se.
+
+Um, although I will say that I have worked with people who are just better programmers than I am,
+
+and they're just always going to be better programmers than I am. Like, they get something more naturally than I do.
+
+Uh, I worked with a guy for a while who would write ten lines of code for every line of code.
+
+I guess that's the ten x, right? Uh, ten lines of code for every line of code that I would write.
+
+Um, and they would mostly work. Right. And they were good lines of code.
+
+Um, on the other hand, the he they were undocumented and nobody else knew what the [INAUDIBLE] he was doing.
+
+And so coming after him and cleaning up was like a lot of work, you know, um, so there are people who are just better programmers,
+
+and there are people who are not necessarily as naturally good at programing.
+
+But that's not what this is about.
+
+What this is about is taking whatever skill level of programing that you have built, because it's a skill that you can practice,
+
+uh, and doing the things that enable you to move it to the next level of programing.
+
+Right? Because however good you are, you can always be better. Right?
+
+And however well you are doing, however effectively you are completing your tasks, you you can work on that, right?
+
+You can you can complete them a little bit more with a little more alacrity.
+
+You can complete them with a little bit more correctness, you know, with little or less effort on your part.
+
+Uh, and this lecture is about, um, things that you can do, specific habits you can adopt to be a better programmer at the end of the day.
+
+Most of being a better programmer is how many hours of you spent behind the keyboard, right?
+
+How much practice do you have solving problems? And to some degree, you cannot short circuit that.
+
+You cannot get around the fact that you are just going to have to practice programing.
+
+But there are things you can do to make that practice more effective, so that you program more better sooner than you would otherwise.
+
+So this course is called Systems Programing. It's clearly about programing.
+
+It's mostly about systems. It's also about programing.
+
+Programing in this course is a tool. This lecture is just about programing.
+
+It's not about systems, it's about programing. So, um, I'll fly through some of this because it gets preachy.
+
+But you know these five bullets here. I've told you, all these other people have told you all these Jesse and Paul and yours.
+
+And whoever told you all these, your mom told you all this, right?
+
+Uh, but you don't do them, and you don't do it because you're 20 years old and you think that,
+
+you know, well, people do that, but, like, we're just built different here, and Gen Z, uh, it's not.
+
+You're not. Right. Um. And you eventually you'll learn that.
+
+But I have to say it, because if I don't, then I'm not doing my due diligence.
+
+Um, the biggest thing you can do to have better results on programing projects specifically is,
+
+uh, start early, work a little bit at a time every day. Right?
+
+Work diligently. Not in marathons, right? A little bit at a time.
+
+Not in marathon sessions. It is kind of a marathon anyway.
+
+Uh, a little bit every day. Not all in one, uh, block.
+
+Write comments, write documentation, be ready to write a second draft.
+
+And most of all, just read and write.
+
+And we'll talk about each of these bullets in a little bit more detail.
+
+Some of them I will skip by more quickly than others.
+
+So start early. Why do we say start early?
+
+Um, I mean, obviously part of it is that we want to spread out the burden on the core staff, and we want to give you more opportunity to get help.
+
+Uh, but some of it is also because we're doing a task that I've said this before.
+
+Right? It's just hard. It's when we talked about imposter syndrome.
+
+It's just hard. Your brain is extremely effective at seeing patterns and solving problems.
+
+Like biologically, human beings are just extremely effective at seeing patterns and solving problems.
+
+We are not necessarily extremely effective at intellectually identifying patterns.
+
+We are good at naturally identifying patterns.
+
+When you're working on something that is very complicated, the patterns may not be immediately apparent, but if you give your mind time,
+
+it will notice things and it will ping you and say, hey,
+
+did you notice this thing that you've been seeing over the last three days is related to this other thing over here or whatever,
+
+but you have to give it the time you can grind through and notice the patterns,
+
+or you can work on something for a little bit and take a break and let your subconscious do whatever it does to work on a problem.
+
+How many of you and you don't have to raise your hands? But how many of you have been working on a problem and just really struggling with it?
+
+And then you go to take a shower and you're standing in the shower and you're like, oh [INAUDIBLE], I know what's wrong.
+
+I know how to fix it. Right? It's not because showers are magical.
+
+Sometimes in computer science and engineering, they're a little more magical than we give them time for.
+
+But, uh, it's not because showers are magical. Uh, it's.
+
+But I used to literally, when I would get stuck on a problem if it's, you know, getting towards the time of day, I usually shower in the evening.
+
+I'm an evening shower guy.
+
+Um, if it's getting towards, you know, after, you know, dinner and I'm stuck on something, I'm like, I'm just going to go take a shower, right?
+
+And it's not that the shower is magical.
+
+It's that you get away from the problem and you're busy, but you're not busy in a way that's like making you think hard.
+
+You just, like, have things you have to do and you know the routine and you can kind of go on autopilot, but it keeps you busy.
+
+And then all of a sudden your brain is like, hey, line 37, have you considered that previously?
+
+And you're like, oh, I haven't, you know?
+
+And then you go back to your keyboard and it's probably not line 37, but it might be in that neighborhood, right?
+
+Maybe you go for a drive. Maybe you go for a walk. Maybe.
+
+Uh, if you're that kind of person, maybe you go for a run.
+
+I don't. Maybe you should see a doctor if you're that kind of person.
+
+But some people like to run. Uh, maybe you go for a run, you know?
+
+But something that gets you away, that gets you busy, that gets you not programing.
+
+And all of a sudden you'll be like, hey, you know, I've had insights.
+
+So that's what it's about. That's really what it's about. That's why we start early.
+
+We don't start early because we know we should start early.
+
+We don't start early because we were told to start early. We don't start early so we can ask our questions and office hours early.
+
+The real reason you start early is so that your brain has time to subconsciously work on things so you can get away from the problem,
+
+and it can answer things for you. All right.
+
+Commenting. There are two kinds of comments that I see in this course.
+
+No comments and code that you wrote and then commented it out.
+
+Most. Budding programmers don't write useful comments.
+
+You don't write a comment above a chunk of code that took you a while to figure out.
+
+That explains what you did. When you when you finally figured out you wrote that code, right?
+
+Um, some of you do put pseudo code in comments, which I love.
+
+That's fantastic. Right? But comments are a way for you to see.
+
+Remember we talked about the multiple views of things. They're another view of the problem.
+
+Right? Just taking the time to write the comment, to take the code that you wrote or that you want to write and put it back into prose.
+
+Into a plain language description uses a different part of your brain.
+
+You know, the whole thing about we only use 10% of our brain is not true.
+
+But it is true that most individual tasks that we do don't use our entire brain,
+
+because different parts of your brain are good at different things and are more useful for different tasks.
+
+If you're doing a task and you can arrange for different ways of looking at the problem,
+
+then literally different neurons in your brain will work on that problem.
+
+Depending on whether you're looking at a diagram or writing a little bit of English text, or writing a little bit of code,
+
+or reading the code, or reading the English text, or just reading it out loud to yourself, right?
+
+That's a different part of your brain. And some of those neurons may be more useful than others at any given point in time, right?
+
+In particular, the transition of I'm writing code to I'm writing English,
+
+or I'm writing English to I'm writing code will cause you to think about the problem in different ways, and will often improve your, uh, programing.
+
+So when you write code, if you had to work hard to figure out how it works.
+
+Stop. Write a comment. Why did you do it that way?
+
+How does it work? You frequently find bugs, come up with better ideas to solve other parts of the problem, etc., right?
+
+There's a fantastic book called The Mythical Man Months by a man named Frederick Brooks.
+
+He unfortunately passed away just a couple of years ago.
+
+Um, I mean, he was like 90 something, so it's not like it was an untimely demise, but, uh, he was still one of the giants, right?
+
+In our, uh, industry.
+
+He worked on a project at IBM called um, OS 360, which was an operating system that they wrote in the late 1960s, maybe early 1970s.
+
+Um, he wrote a book called The Mythical Man. Months.
+
+And so, uh, man months is this notion of labor that was pervasive from the industrial revolution, uh, through, I mean, it's still around.
+
+Um, we tend to call it person effort instead of man months anymore.
+
+But, um, it's the same idea, which is the a man month is how much work can one person get done in one calendar month?
+
+And of course, there's this famous adage that, um,
+
+which just shows the ridiculousness of the idea of how much can one person do in one month of being a like a fungible unit that we can move around?
+
+Uh, one woman can make a baby in nine months, but nine women cannot make a baby in one month.
+
+Right. So there are certain tasks that just take an amount of time.
+
+And it doesn't matter how many people you put on it, it doesn't matter how much they work.
+
+Okay, fine. I'm going to work overtime. Right? It's just it's going to take a long time.
+
+It's going to take an amount of time. But he wrote this book called The Mythical Man Month that talks about this kind of,
+
+um, idea of how do we apply our effort, how do we measure it, where do we use it?
+
+And he has this quote where he says, um, he's talking about writing code and how much you learn the first time you solve a problem.
+
+And he says, plan to throw one away. You will anyhow.
+
+And the idea is that the first time you write something, it's frequently is not actually the solution that you need,
+
+but it teaches you a lot about the solution you actually need.
+
+So you write it. Once you learn everything, you learn from it, and then you throw that away and you write what you should have written the first time.
+
+Now, for many of you and me and other programmers and just creators in general.
+
+Once you have written a line of code, it is your baby and you cannot conceive of a more perfect line of code.
+
+Uh, but we have we are blessed in 2025 to have excellent version control where you can commit put to GitHub, push to GitHub.
+
+That code is now immortal. You can delete it and write a new one.
+
+And if you don't like the new one, you can always just go back and get the old one.
+
+It's still there, right? It's very, very powerful when you are stuck on something,
+
+when you have written something and you realize that it's maybe not exactly what you want, just delete it and write a new one.
+
+The second one will be better, because even if you don't think it, you learned a lot about the problem when you wrote the first one.
+
+And you will make different decisions, you will write better code.
+
+Frequently, students who repeat this course will tell me, hey, I'm really worried that when I turn in my assignment,
+
+it's going to look like the assignments I did last time, which is self plagiarism.
+
+And I'm going to, you know, get in trouble for an academic integrity violation.
+
+And I tell them, if you write the same code the second time that you wrote the first time, then this isn't going well, right?
+
+Because the second time you write the code, it's going to be different because you learned a lot the first time,
+
+even if it didn't come out the way you wanted. You learned a lot the first time you wrote that code, right?
+
+So plan to write a second one. You will anyhow plan to throw it away.
+
+So are you willing? Well, this book is. I read a quote to somebody the other day.
+
+Was there someone in this section? I read a quote out of a book to anybody in here. Think someone in dissection.
+
+Um, out of this book. It is my favorite book for prose and insights about programing.
+
+It's just such a good book. Uh, it's a beautiful book. Um.
+
+Okay, so often the hardest part of doing a project in a difficult course is getting started.
+
+Um, how many of you have lost?
+
+You don't have to raise your hands, but have lost hours or days to.
+
+I've read the handout. I've thought about what I want to do.
+
+I haven't written a single line of code, and I don't know what line to write first.
+
+And you just get stuck and you don't make progress. It's natural.
+
+It's normal. Right? It's really hard when you have a problem that doesn't have an obvious entry point to figure out.
+
+Where do I start? Where do I. And the key is it doesn't matter.
+
+Just do something. Because once you've done something, you're not getting started.
+
+You're just improving what you've already done. And that's a whole different process.
+
+And it's easier to do, right. There's a reason we have all of these.
+
+Colloquialisms for getting started on something. You know, in conversations we say breaking the ice, right?
+
+Nobody wants to be the first one to open the social interaction, right?
+
+Uh, it's because it's hard to do. So the best thing you can do, my best advice for you when you're not sure, go like you've read the handout.
+
+You're ready to go. And you're just like, I don't know where to get started. Remind yourself it doesn't matter what I do.
+
+First, find anything you know how to do and just write the code.
+
+It doesn't matter if it's right. The fact that you wrote some code, you broke that ice, you got started on that interaction.
+
+It's easier to take the next steps.
+
+Um, look at things like when I first start the program, do I need to check and see that it has a certain number of arguments?
+
+Do I need to find file names? You know, files that I have to open to be able to parse?
+
+Do I like things that like is not a problem you have to solve,
+
+which is I have to do this thing that I've been shown before and I just have to do it right.
+
+The boilerplate kind of stuff. Right? Just do it. Uh, once you started the problem again, you're not starting the problem.
+
+You're continuing the work you've already started. And for most people, that's an easier thing to do, right?
+
+So just get started. Um, I've said this before.
+
+I don't know if I've said it. Uh, in this class. Um, I also like how long before you get started,
+
+if you spend 10% of the total amount of time you plan to spend on a project making plans, and you haven't written any code yet.
+
+So in this class, our products, our projects, a two week project is like 15 to 20 hours of programing effort.
+
+Uh, if you spend an hour and a half to two hours reading the handout and planning what you might do,
+
+and you haven't written any code yet, you're done planning. Write some code.
+
+Write for two reasons one, now you're actually just stalling.
+
+And two, uh, once you start writing code, you're going to realize that some of those plans were castles in the air, right?
+
+There's you're going to have to change some of those plans once you start writing the code. Right. So go ahead and get started.
+
+Write some code there. Any questions? You can stop me at any time with questions about any of this.
+
+Yes. The Mythical Man Months by Frederick P Brooks was published in 1975.
+
+There is a 20th anniversary edition from 1995.
+
+Either one of them is fine. You can probably get it online from a used book place for like $3.
+
+I'm sure they have it at the library. Yes.
+
+So I think before you talk about one thing before about like, you know, you say like only you have like a certain amount of.
+
+Yes. Like how much planning should you do?
+
+How much funding should you do? Varies, uh, depending on your task.
+
+Um, in this class, the projects are just not that big, like they're intended to be intended to finish in that 15 to 20 hours.
+
+So 10% planning time and then just get started.
+
+That rule goes away on very large projects, because the more planning you do up front, the less the fewer mistakes you're going to make later, right?
+
+The thing is that in this class, because you're doing things you don't know how to do yet,
+
+that you're doing for the first time, it's better to get started, make the mistake, and correct it than planned forever.
+
+Assume you won't make any mistakes, and then find out there's something you didn't know when you were getting started, right?
+
+So it's almost a different kind of problem from some other problems, right?
+
+For very large projects, you want to have a really, really good plan before you get started because you paint yourself into corners.
+
+In one of these projects, if you were one week in and you throw everything away and start over,
+
+but you've been working on it for a week, you're going to be fine, right?
+
+So 10%. Does that make sense? I guess.
+
+I had a teaching assistant some years ago. Um.
+
+Fantastic student. This did not come naturally to the student when they took the course.
+
+Who was sitting in my office for for at that time, sitting in my office, uh, crying because par four was not happy, fun times.
+
+And decided sitting right there that their solution was just not good.
+
+And they're going to rewrite it over the weekend. And it was due at that time on Friday.
+
+And so Monday was the late deadline.
+
+And the student was like, I'm just going to throw it away and I'm going to rewrite over the weekend because it can't be worse than what I got now.
+
+And, uh, proceeded to do that and turn in what I would consider like an idiomatically correct solution.
+
+At the end of the weekend, sure, for 80% credit,
+
+but it was like all 80% of the credit versus whatever thing that they'd been working on for three weeks,
+
+that they'd just been pushing around, and it just wasn't right.
+
+And it wasn't going to be right. Right.
+
+In this class, if you start over in week two and you are working on it in week one, you're going to be fine, right?
+
+Because you learned so much in that process. I've ranged far afield, but I hope I gave some sort of answer that you can work with.
+
+That student was in MIT for like three and a half years or something.
+
+Uh, really fantastic. Uh, um, okay.
+
+So, uh, when I say read and write, that was the last board. It was in red.
+
+This is really the best thing you can do. And note that write code is in red.
+
+There's no shortcut for just writing lots of code.
+
+The more you write, the better you'll get. And it almost doesn't even matter what it is.
+
+Try to do things you haven't done before, because at some point you're not learning more.
+
+You're just sort of refining something you already know, right? So try to write code you haven't written before, but just write code.
+
+Um, you know, people will tell you work life balance and all this and yeah, that's definitely a thing.
+
+And you should have some work life balance.
+
+And they'll say, well, you shouldn't do in your free time what it is that you do in your work time and did it in the data.
+
+That may be true. Your students right now, you're not.
+
+When you have a 9 to 5 job, it's different. You're paid to work from 9 to 5 right now.
+
+You're paid to learn. And the best that you can do is learn as much as you can in these four years.
+
+Um, breaks weekends, time between projects.
+
+Don't burn yourself out. There is a fine line. Just write code, find a project and solve it.
+
+If you find something that's interesting to you, you don't burn out nearly as quickly.
+
+So if you like games, write some games. If you like interactive fiction, that's definitely a thing that people in fiction like.
+
+If you like reading and writing, right? That's interactive. Fiction is a thing.
+
+Look it up. Right. It's a thing. Write some interactive fiction. If you like graphics, you write some demos.
+
+You know, write some like find something that you have some interest in and just write code.
+
+Write it in C, write it in Python, write it in Java, write it in.
+
+Go write it in Scala. Write it in. Oh camel, Perl, Lisp I don't care, right?
+
+Just write code. Also read uh, there are great programing texts I just named one Write the Mythical Man.
+
+It's a fantastic programing text. Once a year, twice a year.
+
+Go get one and read it. Uh, you will be a better programmer if you do.
+
+There's a lot of delivered wisdom that you can receive from the ancients.
+
+Um, ones that I like in particular.
+
+The mythical Man month is definitely one. Um. The practice of programing by Brian Koenig and Rob Pike.
+
+Koenig is the K and K and R. Uh, Rob Pike was also at Bell Labs.
+
+They wrote a book called The Practice of Programing.
+
+Um, the other book that you've seen from those two that I have plugged before is the Unix programing environment.
+
+Uh, Koenig and Pike are both fantastic writers. Um, their the Practice of programing is one of the best books I've ever read on programing.
+
+The Pragmatic Programmer by Dave Thomas and Andy Hunt, not the Wendy's Dave Thomas is a different Dave Thomas.
+
+Um. It's a fantastic book.
+
+Those are two of the people who were involved in spawning the agile development, uh, movement, um,
+
+which, like it or not, is definitely here to stay and definitely has some helpful things to say to us.
+
+Um, the but The Pragmatic Programmer is a fantastic book, has a lot of, uh, like one sentence aphorisms in it that then they,
+
+they tell you a story, and then they clench it with this one sentence that you remember to remind you of the story or whatever.
+
+Um, it's it's good. Um. Clean code.
+
+Code complete. Uh. Effective a variety of different things.
+
+Effective go effective Java. There's effective several books.
+
+Um, I don't know. There's a lot of good programing techniques out there.
+
+Uh, read pick one once a year, twice a year. Read it.
+
+You'll be a better programmer. There's citations at the end of this slide deck, which are up online.
+
+If you go to references, some of these books are in there just as things that you can that you can look up.
+
+Uh, documentation is another. I guess I didn't say anything about that.
+
+Documentation is another thing, uh, to read. It's worth your time.
+
+Um, for a variety of reasons. One is you're never going to get away from it.
+
+I know that you don't like to read as a generation.
+
+Um, which is fine. Uh, I mean, I enjoy reading for the sake of reading, but there's nothing that says you have to.
+
+There's is nothing like it's. It's as a pastime like any other. Um.
+
+But you are not going to get away from reading a lot of documentation in your career.
+
+Uh, that's something we actually don't make you do nearly enough of as students.
+
+So when you go out and get a job, you're going to be handed a mask.
+
+Well, if you're lucky, you're going to be handed a massive ream of documentation.
+
+If you're unlucky, there'll be like, there's a wiki over there. Um, some of you, there's going to be a wiki over there.
+
+Some of you, you're going to have actual documentation.
+
+Uh, you're just going to have to read it, and it might be hundreds, thousands of pages and you're just going to have to read it.
+
+You don't read it all at once, but you're going to have to read it, because when you go asking people questions,
+
+they're going to start telling you, hey, that's in the API reference, right?
+
+You have a feature this, do you know, two Fridays from now and it's in the API reference, right?
+
+Go, go read it. If you don't practice now that's going to be harder later. Man pages are great.
+
+They're very pithy. They have repeated structure. All man pages look the same.
+
+They're not all written to the same level of quality. Some are better than others, but the standard library man pages tend to be pretty good.
+
+The basic Unix command library man pages tend to be pretty good.
+
+We've shown you how to use man pages. Use them, read them. Um, don't do it right now.
+
+But after you finish this course, go grab a copy of the ISO C99 spec and read the spec.
+
+It's hard to read, but you're going to get specs like that in the future,
+
+and you're going to have to read them right, and it's going to be helpful to you. Uh, various standards, uh, standards are great things to read.
+
+They again, like man pages, they tend to be very consistent.
+
+So you read a few of them and you kind of learn how to read them. It's going to come up right.
+
+Read. It's good for you. Any questions. Yeah.
+
+How do you uh. So you told the recommender to find a project to enjoy and do it?
+
+Yep. Um, right now I'm trying to get into Python scripts because it's related to what I want to do as a career.
+
+And the things that I'm finding to do just I have no chance of doing, like.
+
+Yeah. So, um, when I say just write code, there is a problem, which is how much code?
+
+Like what do you choose? So you can pick the most complicated thing you can say, you know what, I am going to write a Triple-A game.
+
+Quality, you know, photorealistic rendering, complex storyline, lots of moving parts.
+
+Can you do that? Yeah, you can do that. Can you do that before the heat death of the universe?
+
+No. These things have teams of hundreds of people. Right. Um, so there is a little bit of like, where do I get started?
+
+How do I pick a project that's an appropriate size?
+
+The thing to remember is, um, everything always takes longer than you think it's going to take.
+
+So start small. Start smaller than you think you need to.
+
+Um. After you've done one, then you sort of have a better gauge of how far can you reach for the next one,
+
+and then pick one that does feel like a little bit of a reach, but a little bit of a reach within the amount of time that you have available.
+
+But until you've started small and you've just done a few really small things,
+
+it's hard to judge which of these are actually out of my reach and which of these just feel out of my reach right now.
+
+Right. You will find that after you get started and you do a few of them,
+
+you you lose sort of the trepidation of that blank slate in front of you that it gets easier to say, okay, well, I can get started on this.
+
+And then some of the ones that you're saying now, it's like, you know, they just seem so far away, you'll be like,
+
+oh no, that one I actually think I can like there's really only one thing I don't know how to do here.
+
+That's a perfect project. I know how to do all but one thing that I'm supposed to do now I have to learn how to do that one thing,
+
+and then just write the code to make it happen. If it's I don't know how to do any of these things, that's not appropriate project.
+
+Don't start that now, right? Start something that's just like one thing beyond what you already know how to do.
+
+But the first couple start with something you already know how to do.
+
+Maybe just in a new language, right? Like, I already know how to do all these things.
+
+I just have to learn a little bit of Python, or.
+
+I already know Python, but I've never done network programing, so I'm going to have to learn a little bit about sockets or just like,
+
+say one thing that's pretty close to what you already know, then reach for one that's like, okay, there's a solid amount of learning I have to do.
+
+I didn't answer your question, but I mean, hopefully that gives you a direction to start because that is really hard.
+
+How do I scope those projects? The answer is don't pick something that's big yet.
+
+And then you'll learn. How big can I pick and still tackle?
+
+Don't be afraid to pick a project that has, like an associated, uh, tutorial or guide or something like that.
+
+Um, because that's a great way to keep you on the rails and tell you how big the next step is.
+
+So there are many, many, many. Now, not all guides are created equal.
+
+Not all tutorials are created equal, but there are a lot of guides and tutorials out there that like walk you through how to do something.
+
+Don't feel ashamed that like, oh, I'm just doing a tutorial.
+
+No, if you've never done it before. That's experience, right?
+
+Grab one. If you're looking at Python scripts, you know,
+
+maybe find some DevOps type stuff where like there's some tutorials for how to do some DevOps stuff, right?
+
+There's lots of those out there. Just go for it.
+
+Right? Ask for some free AWS credits or Amazon for being a student and go do some DevOps.
+
+Like maybe that's not even your goal, but. There's tutorials, right?
+
+Uh, that looks like projects you have on you. Yes.
+
+So recommend nose's. Uh, yeah. Four out of 220.
+
+That's the key. So there's a list of systems programing projects on my website after you finish 220.
+
+I think there's a lot of good stuff there to to dive into. Yeah, but don't wait till you're done with 220.
+
+Otherwise you're going to be both learning what I need to teach you in this semester and whatever else there is.
+
+And like it's it becomes a tall hurdle, right?
+
+Shameless plug. If you want to make a game in the lead up game, that plug is going.
+
+And having the game jam for a week starting October 16th.
+
+So if you want to see the game but you're like, look, I never read a game.
+
+Here's a project. Yeah, beautiful. October 16th.
+
+Yeah, game jams are a lot of fun. I am not a game programmer.
+
+I've tried, I just I get lost in the weeds and then, like, I have a whole lot of game engine, but no actual game, you know, that sort of thing.
+
+Uh, but game jams are a lot of fun. You got to keep focus. You got to keep focused.
+
+Um, also, another one place coming up to do, uh, some good programing is you be hacking, which will be November 7th and 8 or 8.
+
+The night, November 8th. The night. Um, okay.
+
+Uh, any questions about any other questions on in all this before I move on? This seems to be a preachy lecture for me.
+
+When you are designing things for projects in school, I highly recommend that you take a two pass process at solving your problems.
+
+You read the documentation, you read the handout, you figure out what you're going to do, and then you design your project from the top down,
+
+starting with this is my project, breaking it down into smaller and smaller pieces until you've enumerated all the pieces you need to write.
+
+And then implement it from the bottom up. Start with those individual pieces.
+
+Pick one that seems small and doable and do it. Do some of the others and then start collecting them together into a solution.
+
+And I if I remember correctly, I have a slide for each of these things. Yes I do.
+
+So top down design says, um, figure out what you're trying to solve and what it is that you need.
+
+Remember that. What do I need? What do I have? You know, that sort of thing. Right?
+
+So you basically go through that whole thing for the I haven't started anything
+
+yet stage of the process and then break down all of the things that you need,
+
+um, into. Well, if I had these things, then I would have what I need and then look at those things and say, well, what do I need?
+
+Do you all do these things? And, well, if I had these things that I would have what I would need and break it down into smaller
+
+and smaller pieces until you get down to pieces that you look at and you're like,
+
+that's kind of a fundamental. Like piece of this puzzle.
+
+Like there's. This doesn't make sense to break this down any farther, because I.
+
+There's something I can just do. Right. So you start with the overall design and you break it down into smaller, smaller pieces like a tree.
+
+Um, as you're doing this,
+
+you look at the things that you're breaking it down into and you try to find commonalities between the things you're asking for.
+
+So it's like, I need this and I need that, but actually they're the same thing.
+
+It's just that this one is on one kind of data, and that one's on another kind of thing.
+
+I'm just sorting, you know, or whatever.
+
+Take those things that you've broken down and sort of notate them as, hey, maybe this is like a submodule function,
+
+something that I should be designing and writing when I implement this,
+
+so that I can solve more than one of these, what do I need with the same implementation?
+
+After you've broken this down to a level where you have a bunch of those things, that's like,
+
+I'm not sure how to break these down anymore, pick one that you think you know how to do and do it.
+
+Implement it. Right. Uh, after you've implemented one.
+
+You've started the second stage of this. My cursor is on the wrong screen.
+
+You started the second stage of this and you're now implementing from the bottom up, right?
+
+You broke it down from one big task into smaller tasks, like a tree.
+
+You go to the leaves of the tree and you start implementing things.
+
+Solve the ones you know how to solve. At some point, you will have solved all of the things you need to solve a bigger thing.
+
+Then you say, well, can I solve that bigger thing and implement your way right back on up to the top?
+
+Uh, at some point you may need to stop and refine this and say, actually, I thought I was going to be able to do this.
+
+I thought this was a fundamental problem, but now that I'm looking at it like, actually, it's it's harder.
+
+I need to break this down more. Or you may say, oh, I don't actually have to solve that over there, because now that I've done this,
+
+I see how I can apply it and I can just solve this other thing that I need over there.
+
+So let me just rearrange my set of what do I haves and what do I need to reflect the fact that I've already solved that part of the problem, right?
+
+Um, but if you go through this process sort of formally or semi formally and like actually get out a piece of paper and say,
+
+what are the things that I need to solve this problem,
+
+does it, uh, you know, eventually I have a list of things I have to implement and ask yourself, which ones do I know how to do?
+
+Circle them. Now you got your to do for the next day, right?
+
+The circled things are things I know how to do. Let me do those and then revisit this process.
+
+Right. Look at the list again. Take stock again. See how far I can get.
+
+I think many of you will find that the size of projects that we ask you to do while you're in school,
+
+because even your biggest projects will be like eight week projects, right?
+
+Or ten week projects you don't do projects that I mean.
+
+So for 42, you have a larger project. That's your capstone, your software engineering capstone.
+
+You have a larger project. It's spread out over 14 weeks among, you know, 3 or 4 people,
+
+but a significant amount of your effort is actually spent on the software engineering side of things, not on the actual writing of the software.
+
+Right. So it's like making the tickets and tracking the things and recording what you've done and all that stuff.
+
+So like I say, it's an eight week project, right? That's realistic for a semester long project.
+
+Um, many of those projects, you know, the my two week projects that I give you up to,
+
+those 8 or 10 week long projects fall very rapidly to just make a plan.
+
+This method of making a plan tends to be a great well-fitted solution for projects of that scope.
+
+Again, when we get to larger projects, bigger things, you know, as we said for one of the other examples before,
+
+how like how much time you spend planning things change, right?
+
+This isn't always the solution that you should apply, but for most of the things you're going to do in the next two, two and a half years, just do it.
+
+It's going to work, right? Get out a piece of paper, start writing.
+
+Follow the rubric. When you get to a point where, like, I actually think I can do this, I don't need to follow the rubric.
+
+Great. You know, you're you're spreading your wings, right?
+
+But until you get to that point, as long as you're like, I'm not sure what to do next, follow the rubric.
+
+Questions. As you are writing things for some course or actually this applies equally well.
+
+Once you're done and you're out, you know, implementing whatever it is that you implement,
+
+um, you will find that as you work on something, the complexity grows.
+
+Uh, we have words for this. Sometimes we call it, uh, technical debt.
+
+For example, you may have heard the phrase technical debt,
+
+which is where I've made some design decisions that turn out to add some extra complexity to my system.
+
+And. It's a burden for me going forward,
+
+like I'm actually having to do more work to deal with what I've already done than I would if I had done something different.
+
+Every now and then, you want to consolidate that technical debt and pay back some of those loans by redesigning parts of your project by saying,
+
+hey, I made some decisions over there that got me to where I am now.
+
+But now when I'm looking to the future, they're probably not the way I should have solved this.
+
+These things all tie back into each other. This is kind of like the plan to throw one away.
+
+You will anyhow. Idea. Like, hey, let me revisit that and see if I can solve that in a different way.
+
+That solves the problem I have then, but also helps you with the problem I have now.
+
+Or maybe it's just I've got too much going on. I've added more and more functionality to this function.
+
+And now, a good rule of thumb if your function does not fit on one screen,
+
+if you can't see the whole function from the declaration to the closing curly bracket and see on one screen, it's too big.
+
+The human mind. So AT&T, uh, the phone company, did a bunch of research on this in, like, the middle of the 20th century.
+
+Uh, the human mind is good at remembering seven plus or minus two things at the same time.
+
+Which is why phone numbers in the United States, if you're within your area code,
+
+are seven digits long, broken up into a group of three and a group of four.
+
+Because if most people have exchanges that fall into a small number of possible groups of three.
+
+Most people can remember the last four digits of a phone number long enough to to use it for what they need to use it for when they.
+
+If we just gave you a seven digit number that wasn't broke into two and three and there was no pattern,
+
+there was no way to predict what the first few digits would be. It would be much more difficult.
+
+Right? Uh, if you have a screen full of code, there's more than seven plus or minus two things you remember on that screen.
+
+Full of code. Probably, right. But if you can keep it all on the screen, then it's not that far from your mind.
+
+It's like, oh, what was I doing with this variable? Oh, it's right there. Okay.
+
+I understand as soon as it scrolls off the screen and you don't remember what it does, you've increased your cognitive burden significantly, right?
+
+When you get those functions that are a screen full of code, you start asking yourself, is this actually two functions?
+
+Can I break this up?
+
+If is there a subroutine in here somewhere that I can pull out and give a name so that when I call it, I don't have to think about how it does.
+
+What it does is just, oh, I give it this input, it gives me the output. Fine, I can move on, I can think about something else.
+
+And it's not about making it more correct. It's about when you're thinking about the enclosing function,
+
+you've reduced the number of things you have to remember and think about, and so you can understand the problem better.
+
+Into 20, we have already given you programs that are too large for you to understand the entire program, all at the same time, right?
+
+That probably was not true in 115 and 116. You may or may not have some code you don't understand.
+
+That's a different problem. But if you understand, if you know what all the code does in a solution is something 150 or 116,
+
+you know, like without asking any questions, you can keep the whole thing in your head in to 20.
+
+We have and we will give you problems where we would be able to ask you a question.
+
+Hey, what what did you do to solve this? And you'd have to be like, I don't know, I got to go look.
+
+Because that's not what's in my head right now. I can't keep the whole thing in my head.
+
+Right. So when you see that complexity growing, take the time, break up the functions, make them smaller.
+
+Make some abstractions. Create a data structure. You know, name some things.
+
+Give them constants. Don't ever use bare numbers, right? Ask yourself, hey, I'm doing a bunch of string manipulations here.
+
+Is there something in the C standard library that will just do that for me?
+
+Right? Can I do two C standard library functions instead of writing my own string function?
+
+Is writing my own string function. Maybe faster, maybe a little more efficient, maybe.
+
+Yeah, maybe. But those two standard library functions didn't take up any space in your brain.
+
+Writing your own function takes up space in your brain. And you got to always ask yourself, did I do it right?
+
+Right. The standard library functions may not be as efficient, but they're probably right. Any questions?
+
+Yeah, this is fairly specific, but for you too.
+
+Implementing the priority queue. My insert function was very long.
+
+Definitely more than one screen. And I debated splitting it up,
+
+but it logically made sense because all of the code in the conditionals that was commented was like the size of a function,
+
+and I debated having all of the code per conditional just be its own function.
+
+But I thought it looks better in one. Yeah, so this is always a design question.
+
+So essentially let me rephrase this. You're saying, hey, here's a scenario where I thought this, I thought I should break this up.
+
+But I looked at it and what it turned out was I had a long function that actually consisted of
+
+a small number of relatively self-contained things that weren't actually easy to break apart.
+
+Is that a fair characterization? Then you look at those self-contained things and you say to those fit on a page, right?
+
+It is frequently the case. So insert is an example of that because like the case of the empty list is like.
+
+Almost its own function, but it doesn't make sense to take it out of that function,
+
+because then you still have to check and see whether you need to do it before you call it, before you know things like that, right?
+
+Uh, the case of I'm inserting something at the end of a priority that exists versus inserting
+
+something after a priority where there's not currently an item of that priority.
+
+Right? They're not quite the same. But in order to know which one I need to do, I have to do almost as much work as just doing one of them.
+
+Right. So in that case, you try to compartmentalize within the function, and that's a reasonable thing to do, right?
+
+Uh, another key place where this comes up a lot is the main function for many programs,
+
+because you're going to go through, uh, what are my command line arguments?
+
+Do I have all the inputs I need? Do I whatever? And like it's a lot of code, but it's mostly like, check this thing,
+
+get it out of the way, check the next thing, get it out of the way, check the next.
+
+So each one of those stanzas is relatively small, and then you never have to revisit it again.
+
+That's a case where it's okay to actually have a pretty long function, right?
+
+Does that make sense? It's very much a taste thing. It's an architecture thing.
+
+Do I like this architecture? And sometimes the answer is it's big, but it's the right architecture.
+
+But always ask yourself, is it the right architecture?
+
+And if the answer is yes, fine. You're doing the right thing. Keep moving. If the answer is no, figure out how to break it up then.
+
+Is your question. All right? I'm gonna let you go. Have a great break.
+
+There will be no class, obviously, on Monday. Uh, I will see you next, uh, Wednesday.
+

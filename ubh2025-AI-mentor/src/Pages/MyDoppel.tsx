@@ -37,10 +37,10 @@ export default function MyDoppel() {
 
         setLoading(true);
         const formData = new FormData();
-        formData.append('mentor_id', 'ash');
-        formData.append('userDescription', background);
-        formData.append('userRules', rules);
-        transcriptFiles.forEach(file => formData.append('userFiles', file));
+        formData.append('mentor_id', 'ethan');
+        formData.append('description', background);
+        formData.append('rules', rules);
+        transcriptFiles.forEach(file => formData.append('files', file));
 
         try {
             const res = await fetch('http://localhost:5000/api/create_profile', {

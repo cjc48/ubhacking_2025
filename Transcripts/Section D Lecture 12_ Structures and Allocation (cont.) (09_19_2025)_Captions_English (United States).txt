@@ -1,0 +1,919 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Perfect. And the recordings in this room are finally okay.
+
+They have audio. Yeah. All right.
+
+Uh, I will turn this up just a little. Okay.
+
+Is it time? It's tax close enough. So on Friday we left off on the slide before this.
+
+And I'm not going to review what we talked about on Friday. I'm going to go ahead and start rolling here.
+
+Because I started after this. In the last class I was in, I barely got to where I wanted to.
+
+So I'm going to see I'm going to try.
+
+Uh, unusually for me to stay on topic and actually do the slides so that we can get to where I want to be by the end of this class period.
+
+So, um, you may be familiar with reflection from other programing languages.
+
+Reflection is where you have, um.
+
+Uh, functionality in a programing language that is used in order to ask for the program to ask questions about itself.
+
+Right. About information about the itself.
+
+C has very few features in terms of reflection, but one that it does have is an operator.
+
+And it is an operator, not a function. Although when we call it, it normally looks like a function.
+
+It is an operator called sizeof.
+
+Um, and the size of operator you pass to it some thing, and it tells you how big that thing would be in bytes if it were stored in memory.
+
+And what you can pass to it is either the A variable, in which case it says, hey,
+
+this is how much memory this variable occupies in the memory of your computer or something.
+
+That's like a variable. So for example, a, uh, member of a structure.
+
+Right. So you have some struct s and you say s dot, you know, a or whatever.
+
+It'll tell you how big that member, not the whole structure, but that member of the structure is,
+
+uh, or you can give it a type and you can say what is size of an int, right.
+
+And it'll tell you, hey, if you were to store an int in memory, it would be, uh, four bytes or an int star would be eight bytes.
+
+Uh, or um, whatever. But it does this at compile time.
+
+So the time that you compile your program, it figures out how big a thing would be and it tells you what it is.
+
+So while it looks like a function. It's not a function and it is not being called when your program runs.
+
+It's something that the compiler computes when your program is compiled,
+
+and the fact that it's computed when your program is compiled is why size of many things.
+
+Doesn't tell you how big the thing is. It says eight because at runtime that thing is actually just a pointer of some kind.
+
+And pointers are eight bytes. So it says eight, because what it's answering is when I compile this program,
+
+if I were going to store this thing, how much space would it required to store it?
+
+So here are. Let me put my cursor on the right window.
+
+Uh, here are some examples of size of being called.
+
+So I have a function here. This function takes as an argument a double um, array.
+
+Right a matrix A to, uh, two dimensional matrix.
+
+Uh, it has a local variable of type double named dist.
+
+So if in this function I call size of int, the result of that expression is four,
+
+because no matter where I store an int on my on an x86 64 Linux computer, no matter where I store an int, it's going to occupy four bytes of memory.
+
+Size of this disk is a double.
+
+When I call size of disk it's going to say eight, because on an x86 64 Linux computer, a double is an eight byte 754 floating point number.
+
+64 bit, I should say, uh, floating point number, which 64 bits is eight bytes because there's eight bits in a byte.
+
+On the other hand, if I ask you for the size of the parameter matrix.
+
+You would think because we said that an int is four bytes.
+
+If I have two times three, that's six integers of four bytes each.
+
+That's 24 bytes of memory. Is that right?
+
+6424. Right. Yeah. 24 bytes of memory. Uh, on the other hand, when I call size of matrix, it's going to say eight, because matrix turns out,
+
+winds up being passed into this function as a pointer to the base of that array of two by three integers.
+
+And a pointer is eight bytes. So it's going to say eight.
+
+Uh, the general rule is that an array declared within the current scope will give you the correct answer.
+
+And anything else, if you knew size of an array will not give you the answer that you probably want, it's going to say eight.
+
+Uh, instead, there are some other things that will say eight, uh, regardless of how large they actually are,
+
+uh, we will talk about how to compute the actual sizes of things later.
+
+Um, in fact, starting on Wednesday, we'll start talking about that.
+
+But in general, if you ask how big something is, the compiler will tell you as long as it's not an array.
+
+Um. So the other thing we need to know what we're leading up to is allocating memory.
+
+Right. Remember we said that we have to ask for our memory, uh, from the system.
+
+It turns out that. And see, the way we ask for memory is we ask for, um, a certain number of bytes of memory.
+
+Right. And so we use size of to figure out how many bytes of memory we should ask for.
+
+When we get that memory back, it comes back as a particular type that we need to talk about first, which is void star.
+
+So if you recall, void is the return type of a function that does not return a meaningful value.
+
+So if I have a function that returns void, it's not that it doesn't return anything,
+
+because on our particular platform it's not possible to not return anything, but it doesn't return anything that's meaningful.
+
+It doesn't return anything that I should try to use. So what void means is a type that has no meaning.
+
+Void star is a pointer to something that has no meaning.
+
+So a void star variable stores a pointer.
+
+It stores an address, but it's an address to I don't know what is just an address.
+
+Um, and it turns out that this is valuable to us to be able to store a pointer to.
+
+I don't know what, because sometimes we have a pointer to something and we don't know what's stored there.
+
+Here's an address. There's some data there. I don't know what it is.
+
+Maybe you do. Right. This is a thing that happens.
+
+Um, and so we have this void star type,
+
+which allows us to do some things with pointers that ordinarily the C programing language would forbid us to do in particular.
+
+And we'll see this later. If I have a variable that stores a pointer to an integer, and I have a variable that stores a pointer to a double,
+
+and I try to assign one to the other in either direction, the compiler is going to say, you can't do that because this thing is a double.
+
+It's an address. But if I go to that address, I'm going to find a double. And this thing is also an address.
+
+But if I go to that address I'm going to find an integer.
+
+And so these addresses are not the same kind of address their addresses of different kinds of things.
+
+And so when you try to put when you try to do that assignment, the compiler will say this is a, you know, an incompatible type assignment.
+
+I won't let you do it. Void star, however, is a pointer to I don't know, I don't care, it's just a pointer.
+
+And so therefore if I have a pointer to double when I try to assign it to a variable that is of type void star, then the compiler says that's fine.
+
+The pointer to a double is an address. This is an address. Everybody's an address.
+
+Let's just do that storage right.
+
+And if I have a void star and I try to assign to a pointer to double, the compiler says, okay, well this is a pointer to I don't know what.
+
+Maybe it's a double. Great. I'll put it in this pointer to double. That seems fine.
+
+But the programmer asked me to do that. Um, so type checks are bypassed.
+
+However, we cannot in the sense that the compiler will not allow you to do it.
+
+Dereference a void point. If you have a variable that is of type void star, and you try to dereference it with a star operator,
+
+or you try dereference it with square brackets, the compiler will say, I don't know how to do anything with a void.
+
+Void is not a complete type. It doesn't have any structure.
+
+It doesn't have any meaning. So when you try to dereference it like I don't know what to do to dereference it, I don't know how big it's going to be.
+
+I don't know how to interpret the bits once I receive them. No.
+
+And your program won't compile. Uh, yeah.
+
+Okay, fine. We'll do this and then we'll talk more about Void Star. When I run the following code.
+
+What will it print out? And the answer you give is a number so you don't have to worry about the new line.
+
+Okay. Last class I had like one and two as answers, which I didn't understand.
+
+So five is understandable, but incorrect. Um, so what we have here?
+
+Is in the memory of the computer. Right here is the memory of the computer.
+
+We have x and x holds the value five.
+
+Right. And then we have uh, p and p is an address that points to.
+
+X. So star P is five right.
+
+So I take P is an address. Star P says go to what you find is that address.
+
+Give me what's there. It's five. If I change X and make it ten star P says go to that address.
+
+Give me what's there. What's there. Ten.
+
+So the answer I get is ten. All right. Good work.
+
+So this is the example I gave a moment ago. Um.
+
+Where I had two different pointers of different types. I have a pointer to int and I have a pointer to double.
+
+If I try to do either one of these assignments, the compiler is going to say, you can't do that, right?
+
+I won't let you do that because they're not the same if I launder that change through a void star pointer.
+
+So this does exactly the same thing that I did on the last slide.
+
+So on this slide I say PD uh p equals or second one is PD equals p.
+
+The compiler says no you can't do that here. I say, well what if it was a void star and the compiler says, oh yeah, sure, you can do that.
+
+But it's meaningless, right? It doesn't mean anything valid.
+
+Because when you go when you say star PD and you go in memory and you get that value, it's not a double, it's an integer.
+
+And it turns out the integers and doubles are stored differently in memory.
+
+And so the value you get back is going to be ridiculous, right. It's not going to be a meaningful value.
+
+And we will do that uh, in live coding at the end of the lecture.
+
+So you can see that happen. Maybe.
+
+All right. So that's what I want to say about the background. Right.
+
+So we talked about structures. We talked about declaring structures. We talked about size of we talked about void star.
+
+Now we're ready to actually allocate some memory. Yes sir. You won't get an error, it will happily go and dereference PD and you will get garbage.
+
+So you'll get an erroneous value, but the compiler will not complain.
+
+The runtime may or may not complain. It probably won't. It's not valid, but it won't save you from yourself.
+
+She is very big on. Okay. The programmer told me to do this.
+
+I assume the programmer knows what they're doing. I'll just do that.
+
+Uh, which is one of the reasons that you shouldn't write software in C unless you need to,
+
+is because frequently the programmer, in fact, doesn't know what they're doing and makes mistakes.
+
+And even if you do it right now, you know,
+
+by the time it goes through several development cycles and bugs are fixed and features are added or whatever,
+
+it's like all of a sudden I have a pointer to an integer, but it's stored in a double and you know, if everything goes sideways.
+
+All right. So you moral. That story has to be very careful with white star.
+
+So the C library we haven't talked about the C library very much yet although it's in K and R.
+
+Uh, the C library is a whole bunch of code that you didn't write that you can use as part of the C programing language.
+
+So if we look at and maybe I'll try to I forgot to do this in my last class, but well, maybe we'll try to do it when we get to live coding.
+
+If you look at all of the programs that you write, they are linked against a library that is called lib C, the C library,
+
+and that C library contains all kinds of code in it, including such, you know, popular examples as printf and puts.
+
+Right. And all these functions that we've used in the past Sterlin.
+
+Right. All those things are in the C library. Another thing that the C library contains is tools for allocating and releasing memory.
+
+Um, those tools in the C library for allocating and releasing memory set on my cable are, um,
+
+relatively simpler and more primitive than the tools you may have used in other programing languages.
+
+We'll see how they work. But they identify the memory that you allocate by the address at which the memory is stored.
+
+So you go to the C library and you say, please, may I have 12 bytes of memory?
+
+The C library gives you an address. And at that address you will find 12 bytes of memory that you may do with as you please.
+
+When we do that, we do it by calling Malick or Catholic.
+
+Uh, there's the third function in this family called Realloc that we're not going to talk about yet.
+
+Uh, we do that typically by calling malloc or calc.
+
+Both of these functions ultimately take a size in some fashion, which is how many bytes of memory you would like to allocate.
+
+And what they return is a pointer. That pointer is of type void star.
+
+Because when you ask for the memory you say give me 12 bytes of memory.
+
+You don't say give me a struct int list. You don't say, give me an array of integers.
+
+You say give me k bytes of memory.
+
+And it just gives you those bytes of memory and it gives you a void start pointer because it doesn't know what you're going to do with it.
+
+This is the fundamental difference between the allocator and c in the allocator.
+
+In languages that have protected typed references like Java or whatever,
+
+where you have a constructor and you say new int list and what you get back is a well-formed
+
+int list that follows all the rules that a list of integers should have to follow.
+
+In C, it's like I don't know. Here's the memory. Do with it what you want. If it looks like an it lists, great.
+
+If it doesn't, that's your problem. You get to figure that out.
+
+Um. So Malik takes just a size in bytes.
+
+Just a number of bytes. Cowlick takes a number of items and the size of each item in bites.
+
+So it's as if you are allocating an array.
+
+So I can say give me ten items that are the size of an integer, and that's equivalent to asking for an array of ten integers.
+
+Um, why are they different? I don't know, they're just different.
+
+History happened and they have different calling conventions.
+
+The big important difference between these two, as far as we're concerned, is that Catholic, um, clears the memory.
+
+So every byte in the memory that is returned by Catholics.
+
+So it gives you an address. If you go to that address, every bit of memory that you allocated at that address has a value of exactly zero.
+
+When you malloc memory, every bit of memory at that address has a value of, I don't know, whatever was there before.
+
+And so if you don't set it to something that you know what that value is when you read it, you're going to get back.
+
+Garbage collector guaranteed to get back zero.
+
+You might get zero. You might get some other value. It might be different every time you run your program.
+
+Right in CSC. 220. You should use Catholic.
+
+Because Catholic is predictable. It's always going to give you zero.
+
+In particular, if you collect a data structure that contains pointers, every pointer in that data structure will be null.
+
+And so you're guaranteed that when you try to access it, you will get a segfault and you can debug it.
+
+Your lab this week is using the debugger, which will tell you when you get a second fault.
+
+You'll no longer have to ask, where did it crash? You'll know how to ask the computer where it crashed.
+
+Now, I've said this before. About arrays and about strings and about other things.
+
+It's kind of a thing in C. That C doesn't know how big things are.
+
+So when you malloc memory, you get back a pointer.
+
+From that point, it is impossible to tell how much memory you would find if you went to that location and tried to to look at that memory.
+
+You have no idea how much memory is going to be there. There's no way to tell.
+
+I've been teaching this class for like seven years.
+
+Every semester. For seven years. There's a question that I ask on the midterm.
+
+Where I say, given only a pointer to a region of memory allocated using malloc.
+
+How can you find out how much memory is in that region?
+
+And the answer is you can't. You just can't.
+
+There's no way to tell. And I'm going to tell you that right now.
+
+And I'm going to have that in a top hat question later.
+
+Between now and the midterm. And, uh, it's going to be in our mid-term review.
+
+And I will tell you, there's going to be a question on the midterm.
+
+And it's going to say, given only a pointer to a region memory allocated using malloc, how can you tell how much memory was allocated?
+
+And the answer is you can't. And then I'm going to give you a practice midterm.
+
+And on that practice midterm there's going to be a question at the end. It's going to say given only a pointer to blah blah blah blah.
+
+And the answer is you can't. And then I'm going to put it on the midterm and people are going to get it wrong.
+
+And then I'm going to put it on the final. And people are going to get wrong.
+
+I've been teaching this class for seven years.
+
+I mean, yet to have a semester where someone did not miss that question on the final exam put down the wrong answer.
+
+And it makes me sad. For two reasons. One, I like to think of you all as intelligent, capable individuals and.
+
+It just puts the lie to that statement. And to some day you're going to be writing software that I'm going to have to use.
+
+Both of those things make me sad. So please, for the first time in seven years, can we all agree?
+
+That on the midterm and on the final. When we get to the question that says.
+
+Given only a pointer allocated using malloc.
+
+How can you find out how much memory was allocated? You will just write down.
+
+You can't. I will also allow you cannot or you cannot.
+
+Nothing else. And that something else makes me sad for two different reasons other than the existential reasons I talked about already,
+
+which is that one I have to take points away four points. 3 or 4 points.
+
+I just gave you four points on your midterm. Uh, two.
+
+I have to read it. And you can't is very, very short.
+
+And when people don't listen and they write down ever what the [INAUDIBLE] it is they write down, it is inevitably longer than you can't.
+
+And I have to read it. And that makes me sad because your handwriting is terrible.
+
+Not all of you. Some of you. I'm a little jealous. My handwriting is terrible.
+
+Okay, I'm not throwing stones like it's okay. Some of you do have beautiful handwriting, but most of you have terrible pain, right?
+
+I don't want to read it. So just write down. You can't write.
+
+Have I made a sufficiently big deal out of doubt that everyone will get it right on the midterm?
+
+Who will get that right on the midterm? Who will get it wrong on the midterm.
+
+Okay. That's better. All right. Uh uh uh uh.
+
+Like when you are calling my Madoff, you are telling the compiler how much.
+
+You want. So I didn't know. Would have to check.
+
+Uh, well, because. So that's a good question. So if I called Mal, like I told you, how much I remember, I want.
+
+Why do I care how much memory is there? Sometimes. You didn't call Malik right here.
+
+Right. Sometimes you have a chunk of memory that you got from somewhere else.
+
+As a pointer and you need to know, can I use this memory for what I want to use it for?
+
+And the answer is, if it matters how big it is, and you don't have a way to tell how big it is, then no, you can't use it.
+
+Yes. And you have explained that the answer is you cannot.
+
+You cannot. However, I prefer you can't.
+
+It's fewer letters. You can't. You can't. Yeah. With an apostrophe.
+
+I want to understand. Because, uh, in in in in asking for memory, I am specific.
+
+Give me a memory for a specific data type, for example.
+
+You cannot and c say for specific data type you tell it how many bytes you want, how many bytes I want for your specific job.
+
+Yeah. That you're doing. Yep. But. Why can I not know that?
+
+Why can I not find out? And the answer is because then that would require that the allocator keeps track of how much memory you asked for.
+
+And there are cases where that is undesirable. Right.
+
+One is there certain kinds of allocator where they just always give you the same size allocation, no matter what you asked for?
+
+Right. Uh, or maybe not the same size, but like one of a small number of possible sizes.
+
+Another one is there's a great story, and this is why I probably won't get through any further than I wanted to.
+
+There's a great story. So, um, and I don't remember who tells this story, but it's some luminary, right?
+
+It's like. I don't know.
+
+Uh, somebody from Bell Labs or something.
+
+Uh, went to a contractor, was on a contract to someplace and was going to help them work on a particular system.
+
+And it was an embedded system was a real time system.
+
+And they're looking at this real time system, and they're like, you never free any of your memory.
+
+You're going to run out of memory. And they said, no, it's fine. We won't run out of memory.
+
+And he said, what do you mean we won't run out of memory? And they said, it's an ICBM.
+
+And we calculated our rate of allocation. And we calculated the flight time.
+
+And when we get to the end, one way or another, that memory is going to be freed.
+
+Right, because either the missile is going to crash or it's going to blow up, and either way, we'll never run out of memory.
+
+That allocator probably didn't keep track of how much memory you allocated.
+
+It was never intended to be able to free the memory. Right?
+
+Um.
+
+There are other types of allocator that are commonly used where figuring it out can be done, but providing a programmatic interface to it means that,
+
+like, it could be slow, it could be painful, whatever, you know, so they don't want you to do it?
+
+Yes. Does it fall on? So. When?
+
+At what point? Free. Oh, you can call free anywhere.
+
+We'll get to that. Don't sweat that just yet. Okay.
+
+Um. All right. Now, sometimes if you know something about the memory that you've allocated, you can come up with a way to figure out how big it is.
+
+But like that pointer doesn't tell you, right? There may be some other way, but that pointer doesn't tell you.
+
+And on the exam, don't write. There may be some other way you write.
+
+You can't. Given only a pointer. It specifically says only you can't.
+
+You can't. All right. So, uh, here's an example of allocating a memory to store a structure.
+
+So I call in this case, uh, Catholic, I think.
+
+Yeah, I call Catholic and I say I, I want one.
+
+Chunk of memory of the size of a struct analyst.
+
+So if you remember, our struct int list had two members.
+
+It has an int value and a void star.
+
+No I'm sorry a struct it list star. Next. Now I don't have to know how big those values are or how big that structure is.
+
+I just use size of. I say give me enough memory to store one of those, right, and the C compiler will give it back to me.
+
+Next lecture will learn how to figure out how big that is. It turns out it's going to be 16 bytes right.
+
+It's going to give you 16 bytes. Um. But I don't have to know.
+
+I just call size of right and size of gives me however much memory I need.
+
+Now when I get this back, I know because I used Catholic.
+
+That if I say head arrow value, it's going to be equal to zero.
+
+And if I say head arrow next it's going to be equal to null.
+
+If I used malloc instead of Catholic I would not know that head arrow value could be literally anything.
+
+And head arrow next could be an invalid pointer. Right. There's no way to tell.
+
+So if I use malloc instead of Catholic I would want to say head arrow next equals zero and assign it to zero.
+
+And I would want to say head arrow. What I say I said does an extra value.
+
+I meant value and head arrow. Next. Uh is assigned to null to guarantee that that was a null pointer.
+
+Right. And then return it. But if I use Catholic, I don't have to. You should just use calc in this class.
+
+You should just use calc. I can also allocate an array.
+
+Recall that in C, an array is just a whole bunch of whatever I am accessing back to back in memory.
+
+So if I want ten of something, an array of ten of something,
+
+I just take ten times the size of whatever that thing is, and that's how big the array is.
+
+And if I use square brackets on that pointer that comes back from Malik, it's going to work just fine.
+
+Or with like I can say ten comma and then the size of whatever that thing is.
+
+Uh, any questions about allocating memory? About pointers? About.
+
+Yes, sir. Yes, it's.
+
+If you call, click twice. The relationship between the two regions of memory that you get back from Catholic is undefined.
+
+You cannot get your name guaranteed nothing about where they are in relation to one another, another.
+
+They could be contiguous. They could be arbitrarily far separated in memory.
+
+They could have one byte between them that if you touch that byte, is the end of the world.
+
+Same for Malik. Yep. Separate allocations have no relation to one another.
+
+You just get a pointer back that pointers your allocation. And all you know is it has at least as much memory as you asked for.
+
+No more, no less. No.
+
+So I requested asking for size of event. Do I have to then store an event there?
+
+No. I can store anything that is no larger than that. Right.
+
+So for example on our system and int and a float are of exactly the same size, I could put a float there.
+
+That would be fine. The system doesn't know or care. Remember it.
+
+Return to void star. It doesn't know or care. But, uh, unless you have a.
+
+You shouldn't do that. Always ask for the size of the type you actually want to store, because you're not guaranteed that,
+
+um, on any given system, for example, the int and float are actually the same size.
+
+On our system they are, but on a different system, they could be different sizes. Yes.
+
+Says. Every member says every bite of the allocated memory to zero.
+
+So any type will be whatever its value is, when every bit is zero.
+
+Mhm. Structs, arrays, anything.
+
+Every byte is zero. Which means every bit is zero.
+
+All right, now freeing memory. Unlike other languages that you've used, C has no garbage collector.
+
+When I call Malak, it reserves a small portion of memory, and it gives that portion of memory to me and that memory is mine until I should free it.
+
+If I do that enough times, eventually I run out of memory.
+
+There is no more memory in the system.
+
+So what I should do, particularly for a long lived program, is when I'm done using memory, I should call free on that memory.
+
+Now, free is a function. Well, free is a C function. It's not a mathematical function.
+
+C free is a C function that, um, returns no meaningful value and accepts exactly one pointer of type void start.
+
+The pointer is of type void star the same as Malik and click return type void star.
+
+And the reason for that is. Remember that we showed that we could assign to or from void star to any pointer type.
+
+Typically you will have some meaningful type star equals malloc something right.
+
+And so then it will become whatever the type is you actually want to use.
+
+And then when you go to free it, you'll just take whatever that meaningful type is and you'll free it.
+
+And because a void star can be assigned from any pointer of any type, it will just happily free it.
+
+Um. However, the address stored in that pointer must be an address that was returned by Malik Calc or Reality.
+
+We haven't talked about reality, but it's another allocation function that we'll talk about later.
+
+Uh, it must be a pointer that was returned from Malic Calc a reality.
+
+It can't be an arbitrary pointer. Like, you can't just take the address of a variable x and pass it to free.
+
+That's nonsense. Right? It has to be something that was returned by malloc, a reality.
+
+Um. And furthermore, because C is passed by value.
+
+If you pass a pointer variable into free.
+
+Free cannot change the value of that pointer variable.
+
+So when free is done. When free returns, the address stored in that pointer will not have changed.
+
+It will still point to whatever address it pointed to before you freed.
+
+It's just that that address is not valid anymore because free makes that address invalid.
+
+So a very good habit to get into is on the very next line.
+
+Just set that pointer equal to null so that you can't accidentally try to use it again.
+
+If you do, your program will immediately crash. It's much better for your program to immediately crash than for it to crash eventually, right?
+
+You want it to crash? Now you must never use that pointer again.
+
+Turns out that allocations can fail. You can call malloc, calc, or realloc and it can return.
+
+Instead of giving you an address that is valid that is usable, it can return null.
+
+Now, Malik and Catholic will always return exactly, either a pointer to the amount of memory you asked for.
+
+That's valid or not. They will never return anything else, either valid memory or null.
+
+Now the address of that valid memory could be arbitrary, right? It could be anything.
+
+It could be different every time you run your program. Right. But it will be memory that you can use.
+
+Or it will be null, which means that the allocation could not be made.
+
+On our systems. Normally when you call Malik, you do not expect to get null back because we have gigabytes in gigabytes and gigabytes of memory.
+
+And when you ask for memory, it's like, yeah, I hear you can just have this memory is fine.
+
+Um. Usually, if Malick returns null, it means that you meant to ask for four bytes and you accidentally ask for four terabytes or something, right?
+
+Or you had an uninitialized value that you asked for and it just happened to be huge.
+
+But on small systems, it's quite possible that you'll call malloc and it will return null.
+
+So if you're running embedded systems or older systems of some kind, um, then it's possible that you'll go to ask for memory.
+
+And there's no memory, right? There's no memory that's available to be allocated.
+
+And the system will, um, return null.
+
+In a class like KSI. 220 when the system returns null, there's really nothing you can do about that, right?
+
+You went and asked for memory because you needed it for something. And it said, no, you can't have memory.
+
+Well, now you can't do whatever you needed your memory for. Normally you just either return immediately, you print a message and exit, or you crash.
+
+Right? And that's fine. Um. It's not a good habit to not check.
+
+It's better to check. See that it's normal. Print a message and exit.
+
+But in Q 20, like you're getting a null pointer back.
+
+This time you try to access it, it's going to crash. That's fine. We don't ever expect it to actually return null.
+
+Um, but in large applications that might use all of the memory in a system.
+
+Sometimes it's reasonable to actually check this. Can any of you think of a large application that sometimes uses all the memory in a system?
+
+VS code, but VS code is a special case of what? A web browser.
+
+It's just a web browser. So Chrome, for example. I don't know about you, but I don't close tabs.
+
+I have tabs that have been open probably since some of you were born. Um, I just rebooted the desktop in my office day.
+
+It had been running for like 540 days or something.
+
+Uh, I upgraded it, and I had to reboot it. Um.
+
+Sad times, but, um, I have tabs have been open for, you know, years.
+
+And if you're like me and you leave tabs open forever. You'll note that sometimes when you click over to it, it's not actually there.
+
+And it has to like reload the entire web page. And so you have to wait for it to fetch the web page and draw it and do everything.
+
+Typically that's because while you were on some other tab, it called Malik and Malik said, no, you can't have any more memory.
+
+And they said, oh, but I have this tab over here that Ethan hasn't clicked on in six months.
+
+If I just freed that, [INAUDIBLE] never notice.
+
+And then I can call Malik again and it will succeed. And then I can keep going on about my business.
+
+In Java. If you're writing a Java program when, uh, you call new.
+
+If it tries to do new and there's not enough memory, then it'll run a garbage collection cycle, right?
+
+And find in some garbage and throw it away and then try again and hopefully it threw something away.
+
+And now you have enough space and you can allocate more memory.
+
+So in large and long lived programs, it's reasonable when you get that null back to say, well, can I make some space somewhere?
+
+Right. Do I have something that I'm caching? Do I have something that I can recreate later, or do I have some way to get more memory?
+
+But in small programs like the one where ones we're writing whatever, right?
+
+Like it doesn't matter. You just crash, right?
+
+It's fine. But keep in mind that somewhere in your career, you may run into a time where you're working on a virtual machine or an emulator or a,
+
+you know, some large application of a desktop publishing application or a web browser or something where you might do something with that.
+
+Yes. There's no garbage collection.
+
+See? It will just run out of memory. Yep.
+
+You just don't have it. Yep. You run out, you run out.
+
+All right. There's a common error so common that it has a name.
+
+Use after free. Which is where you say free, P where p is some pointer, and later on you say star P equals something or something equals star P.
+
+Where you are using the memory that you have already freed.
+
+Frequently. This does not crash. But it is an error.
+
+Your program keeps running, but is an error.
+
+You either read invalid memory or you store memory that is invalid and will eventually will become a problem for you.
+
+The C programing language will not protect you from that.
+
+Don't do it. A way to avoid it is as soon as you free a point, or go ahead and set that pointer to null,
+
+so that if you try to access that, your program will crash rather than silently doing bad things.
+
+All right. I think that's it. I don't know if there's one more. I'm not going to do one of those.
+
+Okay. Yeah, there's one more. The last thing, and this is very closely related to you can't.
+
+Is that when you allocate memory, if you try to use more memory at that pointer than you actually allocated.
+
+The compiler won't stop you. Nothing will stop you.
+
+You'll just silently access memory that you're not supposed to be using, and your program may crash.
+
+Or as in the use after free case, very likely it won't.
+
+It will keep working, but you will have done bad things right and your program will be corrupt and unstable,
+
+etc. but the compiler absolutely will not catch it.
+
+It will not tell you that you should not do that. Okay.
+
+Any questions? I want to do some live coding. Yeah. Yep.
+
+Yeah, you can say, then you can say P equals Malik something. And that's fine because it'll get a new address right?
+
+Then that address will be valid that the address is invalid.
+
+The memory that it points. I'm sorry. The address is just a number. The memory that it points to is invalid.
+
+But if you get a new address that's valid, you're good. You can use that.
+
+Yes. Would be considered.
+
+What? Yeah. This is undefined behavior. Yeah. Our favorite kind of behavior.
+
+Uh, how do you catch this? Is that the question? If you read at nine.
+
+There's a program there which many of you could have already used Valuably already this semester that,
+
+like, will literally just tell you that online 13 you're doing something you shouldn't be doing.
+
+Um. I'm not gonna tell you what it is. I'll leave that as a secret for when you read at nine.
+
+But, uh, there are tools that will help you figure that out. But in general, it's not a solvable problem.
+
+Yes. How would you. How would you make an invalid address valid?
+
+Again? You can't. So in general, once a particular address is invalid, there's no way to predictably ensure that it is valid again.
+
+So you just would allocate new memory and use the new memory, which may or may not be at the same address.
+
+It could be, in which case you made that invalid address valid again, but it could be at a new address.
+
+Yes. Uh, they do two different things, so I've used curly brackets than that.
+
+So the question is, is this a normal way to get memory. This memory is allocated on the heap and it's valid until you call free.
+
+Um, if you use curly brackets, is allocated on the stack and it will go away when the function returns.
+
+We'll talk more about that later, but it depends on how long you want to use that memory,
+
+whether you want to use curly brackets or whether you want to use malloc. Yes.
+
+No. Malik allocates from an unpredictable location every time you call it.
+
+It could, but it doesn't have to, and it frequently doesn't.
+
+All right. So let us. Uh, actually.
+
+Let me. What are you doing?
+
+There we go. I get my hands on the keyboard, like one off or something like that, and then it's bad times.
+
+Okay, so this is the same deal I have. Open a file on him. On. I want to show you a couple of things.
+
+Uh, we're going to run out of time. So I'm just going to bang it all in.
+
+Actually, I'm going to do. I'm going to cheat. You won't get to see me type it.
+
+All right. So I declare an integer I and a double d, and then an integer pointer pi, an integer pointer pd and pi points to Impd points to d, right?
+
+Then I print out um star pi and star PD.
+
+What do I expect the value of star Pi to be? 42.
+
+Right. Because I is 42 and P points to I. What do I expect the value of star PD to be?
+
+Py right? Because PD points to d and d is equal to pi out to some arbitrary decimal point.
+
+Next I create a void star pointer P and I store in it the value the address of I.
+
+I take the address of I and I store that in PD.
+
+And then I print the value that PD points to.
+
+What do I expect that to print? Garbage, right?
+
+So I have in memory. Uh, I'm going to draw them as different shapes.
+
+Right, I have, I and I have. Why did I do this to myself?
+
+And I have d right. And so when I start my program PD points here.
+
+And that's cool because PD wants to find a star and there's a star there.
+
+But then I say, okay, but what if I pointed at the circle?
+
+And so when it goes to get that, it's going to take go to that place where I is and it's going to go get a star shaped thing.
+
+Which is I, and maybe it's missing some bits and maybe it has some extra bits, right?
+
+Like it's not really the same thing because I've seen that video right?
+
+Where the girl puts or the guy puts the, um, everything in the square hole.
+
+And then there's the woman who's crying. Right. I feel that way sometimes, but, um, it's that right.
+
+Like it's we go to the square hole every time. Right. And so what we're going to get back is garbage.
+
+So let me that video is one of my favorite videos.
+
+There's another one where the guy puts the things all in the right hole, and she cries in that one too, for different reasons.
+
+And like, I feel both of those videos, they're real.
+
+So we get 42, we get pie, and then we get, you know, whatever that is.
+
+Why do we get whatever that is? Because what we got when we went there was not a double.
+
+It was an I don't know, it's not double shaped. But if I look at it, if I squint hard enough, it's a double that has that value.
+
+Right. Okay. Monday, we're going to talk about how to figure out how big your structs are and what you would put in them and where you would put it.
+
+Not Monday. Today's Monday, Wednesday we're going to talk about those things.
+
+So I will see you on Wednesday. If you're going to the job fair this afternoon, have a great time.
+
+If you've already been, I hope it turns out positive. No.
+

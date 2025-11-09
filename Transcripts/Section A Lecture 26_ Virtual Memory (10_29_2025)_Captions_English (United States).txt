@@ -1,0 +1,817 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+And usually for me, we're just a little bit ahead of um, the.
+
+Is that on? Yeah. It it's okay. Uh, we're just a little bit ahead of the all three of the other lectures,
+
+so I'm not necessarily going to take it easy because that's how we get behind.
+
+But I'm definitely not feeling in a hurry right this particular moment.
+
+Um. The slides are building right now, so I didn't I neglected to build them for class.
+
+So they're building right now. Um, but we're going to start talking about the virtual memory subsystem today.
+
+Um. So this next few sets of lectures.
+
+So we have from here on out. There's only four weeks left.
+
+Right. We're in week ten. So there's this week and then four weeks after this.
+
+It's a little bit funny because Thanksgiving's in there and we in on a Monday and you know, whatever.
+
+But essentially there's four weeks and some change, maybe one lecture or something of lectures left.
+
+The lectures that we have from here on out, or with the exception of one lecture, which will be, uh, about like six, um, threads programing.
+
+Right. Most of the lectures we have remaining are much more conceptual and much less like just something you're going to plug into your code.
+
+So we're getting into the lectures where we explain why all of the things we've been saying this whole semester are the way they are.
+
+So we had to set it up by talking about the, uh, specific, um.
+
+Interfaces and the behaviors of the languages and things like that.
+
+But now that we've set that up, we're going to go through and we're going to talk about, uh,
+
+the fundamentals behind the way, the things, the why, the way these things are, the way that we've discussed them.
+
+Yes. And I'm going to. I turned it on.
+
+Yes, as an unusual step today, I turned on the microphone. Yeah.
+
+Um, what's funny is they've never had to call me in my other lecture.
+
+It's just this one. They're like, would you mind turning your mic on? Um.
+
+So bear with me through this lecture. You're going to be a little bit like, this is not like the lectures that have gone before.
+
+And it's not it's a little more abstract than the lectures that have gone before.
+
+But as I said at the beginning of the semester, this course is systems programing.
+
+It is about systems and the programing that we do for systems.
+
+The things that we've done so far, you've been able to see immediately the tie to the I hope, the tie to the programing.
+
+Right. They've been directly relevant to the programing, maybe a little less.
+
+So when we talk about like integer representation and things like that, but still like we dump the integer in memory,
+
+you see that the bytes aren't in the order you might expect or whatever.
+
+Right. There's an immediate tide of the programing this lecture caching um kernel and IO uh or a kernel in userspace and IO.
+
+A few of these lectures coming up, it's a little, you know, one step further removed.
+
+This is more the systems and less the programing. So ask questions.
+
+We have them. So um, there is a subsystem in every modern large computer and large these days is a very, very relative term.
+
+It includes your phone for sure. Right. But every modern computer that has a, uh, multitasking, you know, large operating system on it.
+
+We'll talk more about multitasking and cetera later.
+
+Um, has a virtual memory subsystem, and the virtual memory subsystem is what manages the physical memory inside the computer, the Ram.
+
+When you buy a laptop and it says it has 16 gig of Ram or whatever,
+
+it's what manages that Ram and assigns it to the individual processes and the the programs that are running on that computer when you're using,
+
+uh, the computer, in order to do that, it divides the memory into two different address spaces and translates between them.
+
+The physical address space is the addresses that are actually communicated on the wires inside the computer,
+
+between the CPU and the memory that it would communicate with.
+
+If you go back to a tour of computer systems, we showed that diagram where we had the CPU and we had the bus,
+
+and the bus went to the memory, you know, on that bus, what happens when you want to load a particular address or a particular location in memory
+
+is the CPU will place on wires on a bus the address that you want to load in binary.
+
+Right. Some it's just a number, right? It places that number on a bus.
+
+The memory chips inside the computer will read that number off the bus and say, hey, CPU, this is the data that you would find at that location.
+
+And they will take that data and they will place it on another bus in binary,
+
+right ones and zeros that then the CPU can read those addresses that go from the CPU to the memory,
+
+or what we call a physical address is you're saying Ram chip, physical piece of hardware in my computer.
+
+May I have the memory of this address?
+
+But there is another type of address, the virtual address, which is the locations in the program space of the programs that you're using.
+
+So when you go into GDB and you print the value of a pointer, right.
+
+Or you printf percent p and then some pointer somewhere and you get that hexadecimal number, that's just a number also, right.
+
+It's made up of ones and zeros, but it is not the actual location in the physical memory chips on the computer where you would find that data.
+
+That address is an address that belongs to your program.
+
+And it may be different from the actual physical memory. With a virtual memory subsystem.
+
+Those addresses can in fact be different.
+
+And it is the job of the VM subsystem to translate between the virtual addresses that you use in your program,
+
+to the physical addresses that put the, uh, data in memory.
+
+So when we looked at process layout, we showed this diagram where we had unmapped memory down at the bottom.
+
+And then we had text data base heap, you know, and then the stack. And then there was a little bit of kernel space at the top of memory.
+
+And we said, this is what every Unix process looks like.
+
+Every process on your system looks like that. And if you run multiple programs and you print out addresses and you just print a ton of addresses,
+
+you will see that you can have two programs running at the same time that have data that's at the same address.
+
+And every program in the computer gets to pretend that it's the only program running in the computer, and then it has its own memory.
+
+But this obviously can't be the case.
+
+There are many programs running in the computer, and two of them can't store data at the same address because that would be a problem.
+
+Right. There's there's you'd either have one piece of data or the other.
+
+Uh, the virtual memory subsystem is hardware inside the computer that works along with the operating
+
+system in order to provide this illusion that every single process has its own memory space,
+
+and that the addresses in one process of the memory space are not the same memory as the same address, and a different process as memory space.
+
+So they get to pretend that they have their own memory, and they are also in turn, which is important to us.
+
+Protected from one another. You cannot name and address in another processes memory space.
+
+That other process is protected from your process, or your process is protected from the other process.
+
+It's reciprocal by the fact that the memory space does not even consist of the same set of possible addresses.
+
+Virtual memory system makes that possible. So the physical Ram in a computer may vary substantially from computer to computer.
+
+It may vary substantially from architecture to architecture.
+
+So, um, if I have a, um, an x86 PC running, um.
+
+Really anything, just an x86 PC. And then I have an ARM Mac.
+
+Uh, Apple silicon laptop. The way that they manage memory may be different because the processors are built differently.
+
+The motherboards are designed differently. The architecture of the computer is slightly different.
+
+Right. We've talked about that over and over in this, uh, course.
+
+It may even be the case that they don't put their physical memory at the same physical addresses.
+
+So the x86 PC, the memory may start at address zero.
+
+The ARM architecture, the address, the addresses of the physical memory may start at some larger number.
+
+It may be that there is no physical memory available at address zero.
+
+It turns out that most computers have some memory to address zero for practical reasons, but you know, not necessarily.
+
+Um. You may have two computers that are exactly the same, but one of them has twice as much memory as the other.
+
+My laptop has eight gigabytes of Ram and your laptop has 16GB of Ram.
+
+As a programmer, we don't worry about these things.
+
+We don't worry about the fact that one laptop has more Ram than another.
+
+We don't worry about the fact that one laptop's Ram starts at address zero, and another laptop's Ram starts at the one gigabyte address.
+
+We don't we don't think about these things. We just go in and we write a program.
+
+And between the compiler and the operating system and the hardware and all these things, it just all sort of takes care of itself.
+
+And the same C program runs the same.
+
+If we follow the rules on the one architecture as the other, architecture on the machine with more memory is the machine with less memory, etc.
+
+Historically, this was not the case.
+
+Before we had virtual memory subsystems, and that was a lot of computing history before we had virtual memory subsystems.
+
+Um, Macintoshes did not have a real virtual memory subsystem until well into the 90s, which I realized is forever ago for you.
+
+But like in computing history, it's not that long ago. You weren't born yet.
+
+They told me I can't hold that against people. It's not a protected attribute. Ageism is actually, I think you can make fun of people for being old,
+
+but you're still allowed to make fun of them for being, you know, so you can make fun of me, but I can make fun of you.
+
+But anyway, the 90s, this was not necessarily the case, right?
+
+Memory could be you often had to be aware of the layout of the memory and the computer because, for example,
+
+if you wanted to draw to the screen the way you did that was by going to a very particular
+
+region of memory that was defined by the hardware and poking particular values in there,
+
+because as we talked about before, this white just means there's a really big number at someplace in memory.
+
+Right? This blue means there's a middling number. This black means that's not black, that's red or I'm sorry, Letchworth bottom.
+
+This black means that there's a very small number at that location in memory.
+
+It's essentially the luminance of that pixel in red, green and blue.
+
+Right. So this has a big blue and a small red. This has a big red and a small blue.
+
+This has a big all the numbers because that's how light works. Right.
+
+So you go someplace in memory. You put that number in memory on a modern computer.
+
+We don't do it that way. We don't think of it that way, because there are all these layers of abstraction between us and the hardware.
+
+But in the 1980s, in the 1990s, if you want to draw to the screen, you went to a particular place in memory in what they called the frame buffer,
+
+and you just put big numbers if you wanted light colors and small numbers if you wanted dark colors and you drew a screen.
+
+Now you can't even access those locations though.
+
+The Ram in the computer that is dedicated to drawing the screen.
+
+You don't even have direct access to because the operating system, the virtual memory system,
+
+etc. hides those things from you when it gives you that memory that your process gets to pretend is your own.
+
+None of it includes the display. It's all yours, and you can ask for a chunk of display memory and draw to it.
+
+That's a thing that you can do. But when your program starts, you don't have any.
+
+However, the operating system kernel. So we talked about this a couple of times.
+
+This this term has come up a couple of times this semester. The kernel is like the inner core of the operating system.
+
+If you want to think of the operating system as a program, the kernel is that program.
+
+Now an operating system consists of much more than just the kernel.
+
+It'll have device drivers and it'll have, uh, utility programs that are required to make it,
+
+to allow it to do its job and all kinds of other little bits and bobs.
+
+But when your computer starts up, some program starts running.
+
+That program is the operating system kernel. Right. That kernel must know about the hardware layout of the memory in the machine.
+
+It has to know, hey, I am an x86 64 machine.
+
+And so therefore I have memory starting at address zero.
+
+But there is a hole at the one megabyte mark where there's a chunk of memory that I'm not allowed to access,
+
+because in 1981, when the IBM PC was designed, they put something else there.
+
+And so in 2025, I'm not allowed to touch that memory.
+
+Right. But you as a programmer, don't have to think about that.
+
+And the privilege to not have to think about that is given to you by the people who write the operating system kernel,
+
+and the people who designed the virtual memory hardware inside the computer that
+
+allows the memory to remap those virtual addresses that the physical addresses,
+
+the virtual address space doesn't have to have weirdness in it.
+
+It looks like the layout that we drew on the board, the physical address spaces, whatever the physical address spaces.
+
+Are there any questions so far? Um.
+
+So there is a piece of hardware inside every one of these computers that you're using called the Memory Management unit.
+
+Notionally, the memory management unit sits between the CPU and the memory.
+
+When we looked at that bus that went from the CPU to memory somewhere between the CPU and memory,
+
+the addresses went into a memory management unit and came out the other side.
+
+In practicality. In many of the computers we use these days, the memory management unit is actually a part of the CPU.
+
+It's inside the CPU, so notionally it's a separate piece of hardware.
+
+In practice, for like energy and speed reasons, it often is embedded into the CPU itself.
+
+Its whole job is to translate memory addresses.
+
+You give the memory management unit a virtual address, the address in the address space of your program.
+
+The memory management unit looks at that address, thinks about how the hardware of the system actually is designed,
+
+and how the operating system has configured the allocation of memory to various processes.
+
+And out the other side comes a physical address. So your process gives me says give me address 1000.
+
+The memory management unit says, oh, when this process asks for address 1000, what they really mean is address 4000 304,300 comes out the other side.
+
+Um, this translation has to be very, very fast.
+
+And the reason is that your it you've seen, I hope so far this semester your program is accessing memory constantly.
+
+Our program runs as a sequence of instructions stored in memory.
+
+So every time you run an instruction, remember we look the assembly language, right?
+
+Every time you run an instruction, you get done with that instruction. You have to load a new instruction.
+
+That instruction comes from memory. Every time you load a variable.
+
+That variable comes from memory. Every time you write to a variable, you write into memory.
+
+Every time you, uh, contact the operating system, every time any of these things that you do, you do it through the memory subsystem.
+
+And so that translation has to be very, very fast. And if it were not very, very fast, our computers would be much slower than they are.
+
+In the general case, that translation needs to happen faster than the CPU takes to go from doing one action item to doing the next action item.
+
+And if you have a CPU that is running at. In many cases we have CPUs running at, say, 3 or 5GHz, which means 3 to 5 billion instructions per second.
+
+Most of those memory translations have to happen in 3 to 5 billionth of a second, in order for the CPU to keep running.
+
+At the rate that it's running, otherwise it wouldn't. There be no point in having a computer that's so fast, right?
+
+Every now and then. These little cups are slow. You go to do a lookup.
+
+The information is not available, and it takes a while to figure out where you would access the next piece of memory.
+
+Right? For reasons that we'll talk about later in the course. We can characterize how often that is likely to be, and it's fine.
+
+But the hardware has to typically be very fast. So managing this translation so the MMU does the translation.
+
+You give it a virtual address on one side it gives you a physical address on the other that communicates with the memory.
+
+Managing that translation, configuring those lookups.
+
+That have to be very, very fast is done by the operating system.
+
+The operating system kernel informs the IMU.
+
+When this program asks for this address, give it that physical location in memory.
+
+Right. Um, and so it requires tight integration between the operating system and the hardware that implements the IMU.
+
+Every single computer, every type of architecture, every machine has special code written in the operating system just for that architecture,
+
+which is why you cannot necessarily design a new computer or say, this computer is the best.
+
+It's faster than all the others, and immediately hit the ground running with a whole software library and ready to go.
+
+Right. Somebody has to take the time to put an operating system to it and make it a viable platform.
+
+Which is why, you know, I said earlier in the semester, most of you are going to use mostly Intel on ARM machines, right?
+
+It selects for a small number of popular architectures because of the work that has not only this,
+
+but the work that has to go into making everything work on your platform.
+
+Yes. Before memory management units.
+
+Uh, the horrifying truth is, they didn't. So home computers up until the mid 90s.
+
+Mostly every program ran in the same memory space, which meant that if you had a bug in your program, you could crash the entire computer.
+
+Now, when you have a bug in your program, your program crashes, but you don't have to reboot.
+
+In 1987. If you had a bug in your program, you probably had to reboot.
+
+Right now. Rebooting didn't necessarily take as long as it does now, because the computers did do as much as they do now.
+
+But nonetheless, you could trash the entire operating system. You could corrupt the disk, write things like that.
+
+Um, it was a more dangerous time to be a programmer, and badly written programs were more likely to cause you.
+
+Annoyances than they are now. Now, if program crashes a few times, you're like, fine, I just I'm not going to mess with that program anymore.
+
+Then every time that new program that you're trying out crashed, you had to reboot your whole computer, open all your work again.
+
+You lost whatever you did between your last save, you know, whatever. It was terrible.
+
+But that's how it was. Memory management units are a blessing.
+
+Now. Real computers have had memory management units forever, right?
+
+Unix workstations in the 80s had memory management units, um, large, you know, um, data center type machines, mainframes and things like that.
+
+Had memory management units in the 60s. But for computers that you could afford to go out and buy and put on your desk and use at home.
+
+We're talking sometime in the late 1980s to mid 1990s that this became common.
+
+Other questions. It's a good question. Okay.
+
+Uh. Okay. Fine. I want to say again that I'm very proud of you guys.
+
+Um. We, as you know, on.
+
+Monday we had a lecture question and we took attendance and we matched up taking attendance
+
+with the lecture question and there were no nothing we need to follow up on in this classroom,
+
+which I really appreciate. Oh, this is a tough one, actually.
+
+You guys remember your bitwise operations? Which of the following expressions clears only bit five.
+
+Of the word stored in the variable x. Oh, this is real tricky, actually.
+
+But the two to the five bit has exactly the value zero.
+
+The only difference between x and the result is that the two to the five bit is zero, and the result.
+
+If the two of the five bit was zero in x, then it's unchanged.
+
+But if the two to the five bit was a one, it's now a zero.
+
+Does that make sense? Are there any questions? That's good work.
+
+I actually, I'll be honest, I expected this to be. I told Corey I expect this to be like 30, 30, 30, you know, instead of 54, 22 two.
+
+So good work if you got it wrong.
+
+That was a hard question. That was a hard question. But you should know it for the final. Uh, you will get practice with this in the next lab.
+
+Actually, you'll look at this in practicality in the next lab. Um, this week's lab, by the way, is attendance based.
+
+There is a post on Piazza because people kept asking if there was a lab because we didn't give you a GitHub classroom.
+
+Um, the syllabus says there's a lab. The schedule says there's a lab.
+
+There's a lab. Go to your lab. I'm sure you all went to your lab. Yeah.
+
+Good work. Okay. Um, so.
+
+Back to memory management. Any questions? Back to the memory management unit.
+
+So both these virtual and physical addresses are in what we call address spaces.
+
+So an address space is the set of possible values that represent potential addresses uh in a particular addressing scheme.
+
+So on our computer, for example, we have said the virtual addresses on our system run from 0 to 2 to the 64 minus one.
+
+So the address space for virtual addresses on our x86 64 system is all binary addresses are all all numbers, I guess from zero to 2 to 64 minus one.
+
+And they are addressed by, um, byte. Now in reality, the there are only 48 of those bits that you can actually use.
+
+If you try to use the ones in between, you will get a segmentation fault no matter what.
+
+There can't be anything mapped to that, uh, location, but that's a hardware detail that you don't have to worry about.
+
+The operating system kernel takes care of that. Right. And the reason is that two to the 48 bits is more memory than anybody has.
+
+So your it's fine. Right? Um, someday that may not be true.
+
+And when that becomes the case, they can make it two to the 49 to the 50, to the 52, whatever.
+
+Right. And to keep the same virtual address space, because the virtual address space notionally has two to the 64 possible addresses.
+
+Um. Any given piece of hardware, of course, may not have, um.
+
+Nearly that much memory installed it. Right. Most of your machines have somewhere around, um.
+
+Two to the 36, maybe 2 to 37, uh, bits of possible memory.
+
+Right? Zero to 2 to 37. Right. But because of the way the virtual memory says subsystem works,
+
+you can sort of place that anywhere in memory in that two to the 64 bits of address space.
+
+Um, 2 to 30 is four gigabytes. So two to the 30, I'm sorry to the.
+
+Yeah, to the 34GB. To the 32 is therefore I'm sorry 2 to 30 is one gigabyte to the 32 is four gigabytes.
+
+Uh, the reason I know to the 32 is because for a long time before we had 64 bit machines,
+
+we had 32 bit machines, which meant that you only had two to the 32 possible addresses in your program.
+
+I don't know if I told the story before.
+
+Um, I may have when I was doing my, um, PhD, I was working on a data set that was about four gigabytes in size.
+
+And basically I did, as all good programmers do.
+
+You do the lazy thing first. I took this data set and I just sucked the entire thing into memory.
+
+Just save the entire thing into memory. Well, my program kept crashing, so it ran fine for a while.
+
+And then as my data set got larger, my program started crashing. And the reason was that I needed on that particular machine.
+
+It was a 32 machine which ran. It had a four gigabytes of virtual address space.
+
+Uh, the kernel took a chunk of that at the top. So you only had about three gigabytes available to your program.
+
+When my data set became larger than three gigabytes, it was too large to fit in my virtual address space.
+
+And so when I would try to get more memory, my malloc would return null.
+
+My program would crash. Right? I couldn't, uh, use that much data.
+
+Um, so there's two possibilities at that time.
+
+You can either fix your program so that it doesn't just lazily suck the entire data set into memory and then grind across it,
+
+but it actually does something smart with it. Or you can buy a bigger computer.
+
+Well, my computer was old, and at that time bigger computers had gotten pretty affordable.
+
+So I went out and I just bought a 64 bit computer and that problem went away and I just kept working.
+
+I didn't change my program. I didn't make it better. Down that path lies madness.
+
+But like for in the in the exigency, it's like I can literally just buy my way out of this problem.
+
+Right. So I bought my way out of it and ultimately they gave me a degree. So it must have been okay.
+
+Um. But right. 232 is four gigabytes.
+
+If you have 16GB of Ram, then that's four times two to the 32.
+
+So, uh, two to the 34, right.
+
+If you have 32GB, that's two to the 35. 64 is 2 to 36, etc.
+
+Right? Which is why 48 is plenty.
+
+64GB of memory is two to the 36, so two of the 48 is 4096 times larger than 64GB of memory.
+
+You don't have that much memory, right? Nobody has that much memory.
+
+You may have that much disk space. You don't have that much memory. Two of the 40 is a terabyte, so 256TB would be to the 48.
+
+All right. Uh, many modern machines for their virtual address space use what we call a linear address space.
+
+In fact, I would go so far as to say virtually all modern machines use for their virtual address space a linear,
+
+um, address space, a linear address space.
+
+It's not always the case that this is fully true, but basically speaking a linear address space you can think of as, um,
+
+a 1 to 1 and on to mapping of addresses to locations where the locations are just a contiguous block of memory,
+
+starting from some number to another number. In our case, it is literally the case address.
+
+Zero is one byte of memory, address one is the next byte of memory, address, two is the next bit of memory,
+
+etc. up to address 2 to 64 minus one, which is the largest possible address in the system.
+
+Um, so it's linear in the sense that it starts at some location and it extends to some other location,
+
+and everything in between is just a valid address. Now, of course, not all of those addresses may be allocated.
+
+You may not have that much memory, but the address space,
+
+the numbers in which we store the addresses just start at some location and they extend to some other location.
+
+In the case of our system, remember I said there's only two of 48 bits of possible memory.
+
+It's actually zero to the address, two to the 47 minus one, and then two to the 64, minus one, minus two to the 47, to two to the 64, minus one.
+
+Right. There's like a chunk at the bottom and a chunk at the top and in the middle. They're not allocated.
+
+Right. Um. This is great because it is, uh, easy to understand and it is easy to compare addresses.
+
+Right? I take two addresses. If they are different, they represent different pieces of memory.
+
+If they are the same, they represent the same piece of memory. And that's all I need to know.
+
+Yes. Space is.
+
+The address space is laid out that way.
+
+Your program may have holes in it, right?
+
+So frequently it is the case. Remember we said that the text data BSS heap are all right next to each other frequently
+
+it's actually the case that there are several megabytes of unmapped data in between.
+
+Basically, for the same reason, there's no map data at the bottom so that if you go out of bounds, you get a crash, right?
+
+Um, but nonetheless, those unmapped spaces also are just in the same address range, and they extend from one place to another.
+
+Right? So notionally it starts at the beginning and goes to the end.
+
+And there's no funny business in practicality. There may be holes or something like that, but there's no like wormholes.
+
+There's just holes. Right? Does that make sense? You can think of it as like a surface, right?
+
+Um, so this is great. We love this because it's easy to understand.
+
+It is not, however, always the happy world that we live in.
+
+There are also, for example, and this is just an example of another kind of address space, segmented address space and a segmented address space.
+
+Your address is broken up broken up into two components, typically a segment and an offset.
+
+And you combine those two components mathematically in some way to arrive at the actual piece of data that you are, uh, looking for.
+
+Typically, within each segment, the offset is a linear address space, but the segments may have arbitrary relationships to one another.
+
+They may overlap. They may be discontinuous.
+
+They may have weirdness going on, which means that you may have multiple addresses that are different numbers that mean the exact same piece of data.
+
+Or you may have two addresses that are exactly the same that mean different pieces of data.
+
+Frequently in architectures that use segmented addressing.
+
+The segment portion is implicit, so when you go to read data, it will read that data from the data segment.
+
+And when you go to push something onto the stack, it will push that data to the stack segment.
+
+And when you go to execute an instruction, you will execute an instruction from the instruction segment.
+
+And so when you have an address, all you have is the location within the data segment,
+
+or the location within the stack segment, or the location within the instruction segment.
+
+And so two addresses that mean the same thing.
+
+You don't know if they mean the same piece of memory unless you know in what segment they will be accessed now.
+
+That's all we're going to say about segment address spaces. You should know that they exist.
+
+You should know that they are not as simple as linear address spaces.
+
+You should know that two addresses that are different can mean the same piece of data,
+
+or that two addresses that are the same can mean different pieces of data.
+
+But you don't need to understand how they would work or what systems they're used on or anything like that.
+
+Right. It's not going to be on your final. The point of knowing this is not that you can do some sort of segmented address calculation.
+
+It's so that you can understand the kinds of trade offs that are made when people design things like virtual memory subsystems.
+
+As a fun fact, the x86 computer that you are using, if you're using an x86 computer, if you're running for some reason beyond my comprehension,
+
+windows or, uh, Linux on x86 or whatever, um, when your computer boots up, it boots up using a segmented memory model.
+
+And one of the first things that the software that's running on it does.
+
+It says, please don't do that.
+
+Use a linear memory model, and it switches to a linear memory model where physical memory addresses are exactly equal to virtual memory addresses,
+
+and there is no difference between the two. And then only once your operating system starts booting up does it switch to the memory model,
+
+where you have a memory management unit in between, and you map from physical addresses to virtual addresses using the memory management unit.
+
+Um, and that's because the processor inside your computer was designed in 1977, and we've just been stapling crap onto it ever since then.
+
+Right. And the processor in 1977 used the segmented address space.
+
+There's a proposal from Intel. I don't know what happened to it. I haven't followed it closely.
+
+Maybe about two years ago to start releasing new processors that don't do that, that start out assuming it's like 2001 instead of 1977.
+
+Uh, and their industry was like, whoa, guys, let's not get hasty.
+
+And so it like hasn't happened as far as I know yet.
+
+Um, this is sort of like we talked about C99, like we use C99 because C11 is too new and not everybody has implemented it.
+
+Right? Same story. Right? As fast as computing moves, certain things become like bedrocks that we can never change again.
+
+So the addresses that we use on our list. Are there any questions? Yes.
+
+Segmentation. Okay, so we haven't quite gotten the pageant yet, but we will.
+
+The question is, if architecture has segmentation.
+
+Can it also have paging. Can it have both. Can it are there issues with having both etc.
+
+The answer is yes. Any weird and wonderful memory architecture that you can think of, somebody has definitely done.
+
+Not all of them are a good idea, right? But somebody has definitely done it.
+
+There are systems that have segments with pages within segments.
+
+I am not aware of any system that does it the other way around, where you have paging and then segmentation on top of the paging.
+
+Um, but I am aware of systems that have segmentation and then paging for the address space within the segments.
+
+Yeah. Yes. Don't worry about that. That will not be on the file. Yes.
+
+Yes. So the question, is this a brilliant question? Does this word segmentation have anything to do with segmentation fault.
+
+Yes. It's an archaic term like B.S. was an archaic term.
+
+It doesn't actually, it's not actually true anymore. A segmentation fault on our system is not actually a segmentation fault.
+
+It's actually a paging fault, which we'll learn about later.
+
+But we still use the term segmentation fault because of older architectures that had segment of memory addresses.
+
+Yes, exactly. It's a good observation. Okay.
+
+So, um. Other questions. Those are some great questions.
+
+Yes. Which came first.
+
+Segmented. Segmented or linear address spaces.
+
+That is actually a great question. Um, and I strongly suspect that the answer is it depends on how you look at it.
+
+Uh, in particular, because older computers frequently have what we call a Harvard architecture.
+
+Um, after the Harvard Mark one, which is where the address space for instructions and the address space for data are separate address spaces.
+
+But they were both linear address spaces.
+
+And so the question is, is a Harvard architecture actually a seven minute segmented address space with two segments,
+
+or is it a linear address space with two kinds of address?
+
+Uh, so it's probably a philosophical question.
+
+I think the answer for me, I think the answer was answer is fundamentally that segment addresses were first because of Harvard architecture machines.
+
+Uh, so there were two competing sort of ideas in architecture design, Harvard and von Neumann.
+
+All of the machines that we used, their von Neumann architecture,
+
+which means that addresses and, uh, data and instructions are in the same address space.
+
+It turns out that that's convenient for a lot of reasons. Um, but early machines, that was not the case.
+
+They were in separate address spaces. Usually because your program was not actually in Ram, it was on a separate kind of storage device of some kind.
+
+I think in the Mach one.
+
+I'm actually not sure where the Mach one was, but I think it was probably what we call a drum, which was a drum, like a rotating drum.
+
+Uh, like like a barrel. Right. That had data stored on the outside of it in rings, and it would rotate past a reed head.
+
+And like every position of the drum was a word of memory.
+
+And it would rotate through the program memory.
+
+So you would write a drum with your program, install it in the machine, run that program, take the drum out, put a new drama in, you know.
+
+But I don't know that for sure. I would have to look it up. So.
+
+Okay. Um, we did wild things from memory storage back in the day.
+
+Wild things. They. There was an experiment in the UK at one point with using, um, standing waves in mercury tubes of mercury,
+
+where they would play audio tones basically into the mercury to cause it to set up standing waves.
+
+And depending on where, whether you were at a peak or a trough when it passed, the red head would tell you whether it was a one or a zero.
+
+Right. Like we did wild stuff to store data before we were like, how about magnetism?
+
+And then we do the it got easier after that. Um.
+
+Okay. So, um, the addresses that we use on our computer are byte addresses, and this is relevant to us.
+
+Right. Because we saw Indian. This, for example, is a thing because we store words of data.
+
+But we but we address our data by bytes. Right.
+
+But this doesn't necessarily have to be the case.
+
+There are machines that are word address in which you don't have Indians, because every piece of memory is a word of memory.
+
+And so every integer has its own address and is indivisible.
+
+For example, of the original machine that Unix was written on the PDP seven, um, before it was written in C,
+
+it was originally written in an assembly language on a machine called the PDP seven, was a word address machine that had 18 bit words.
+
+So when you stored, when you stored an address,
+
+when you store data at an address or read data from an address, you read or wrote 18 bits at a time, right.
+
+And then the PDP 11 came along, which is what they wrote C on, and it was a byte address machine, and now you had Indianness and things like that.
+
+So this means that the address zero would be the first word of memory.
+
+The address one would be the second word of memory, the address two would be the third word of memory, etc.
+
+Right.
+
+Whereas on our machine addresses zero through seven are all bytes inside the first word of memory, and then by eight starts the second word of memory.
+
+Because our words are eight bytes long. Right? Um, we won't think about this further.
+
+We're not going to talk about word addressing anymore. There are architectures that you may use in your career that are word addressed.
+
+In particular, if you do large scale computing, scientific computing, things like that.
+
+Um, supercomputers tend to be word addressed because they, they I mean, who cares about a byte if you're calculating astronomical distances, right.
+
+Or something like that. Right. So they just don't provide those facilities, which means that things like dealing with strings become very painful.
+
+But on the other hand, dealing with very large numbers and doing heavy calculation becomes easier because,
+
+you know, for the hardware, right, because it doesn't have to do as much work.
+
+All right. We'll leave off there. Um, and on we'll prob I hope maybe we'll finish this up on um Wednesday.
+
+As I said, we have a few more sort of more abstract, uh, lectures to get through after that.
+
+And then we'll get back to programing. See all Wednesday.
+

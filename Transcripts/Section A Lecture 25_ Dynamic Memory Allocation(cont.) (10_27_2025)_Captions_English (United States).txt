@@ -1,0 +1,693 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+All right. If you all could give Ananya your attention for a few moments, she has an announcement to make.
+
+You have to turn that on. I didn't turn it on. Hi, everybody.
+
+Um, I'm Ananya, and I'm the publicity co-lead for Hubert Hacking.
+
+And I've come here today to make a super quick announcement for you.
+
+Be hacking. So this semester, you'll be hacking is on the eighth and 9th of November.
+
+And, um. Yes. And I'm sure all of you know that you'll be hacking is like an, uh,
+
+like an annual hackathon that you'll be does where you can basically come and just make a project.
+
+But there's so much more that you'll be hacking has. Um, there's going to be a lot of professor workshops.
+
+Ethan has a workshop. Um, there's a lot of fun events that we have for you.
+
+So if you're interested, um, there's a QR code over here that you can, like, sign up on for.
+
+You'll be hacking. You can also do it to our website.
+
+You'll be hacking.com/apply. And there's also going to be a lot of, um, free food that we have for you.
+
+There's a lot of swag that we give and there's amazing prizes for the winner.
+
+Uh, so please sign up using that QR code.
+
+And we hope to see you on the 9th of November. Thank you, thank you.
+
+And as I have said before, you be hacking is hands down my favorite event of the academic year.
+
+Actually, not just the fall of the academic year. It's worth going if you haven't gone before.
+
+Please do go. If you have gone before, come back.
+
+Thank you. Yep. I will see one of your compatriots in an hour.
+
+Bye bye. All right.
+
+So we are going to. Pick up where we left off on, um, with bitwise operations.
+
+Which stupidly, I didn't open because I opened that other thing.
+
+So give me just a second. And remind me because I get to a different place in each lecture.
+
+We already talked about right and left bit shifts in this lecture, right?
+
+We talked about right and left bit shifts, and then we talked about this and we have did not start masking.
+
+Is that correct. This is where we ended last time. Yeah okay. We're just a little bit ahead of the other lecture.
+
+But I thought that was the case. What?
+
+That's a great question. Yes I did, thank you. Nobody has to call me today.
+
+Um. You get top hat open here because we'll do top hat here in a moment.
+
+So, uh, one of the questions that came up before was, why would we do, um.
+
+Bitwise operations. Like what? What is the reason that I might use a bitwise operation?
+
+And, um, one of the big reasons is um, shifting and masking.
+
+So masking is a generic term.
+
+It's the same term that's used for like art and painting and like even house painting.
+
+Right. Like masking tape where you use masking tape to cover up the things that you don't want to paint.
+
+Right. So masking is a sort of a generic term, but we use it when we talk about operating on portions of a word.
+
+So if I have a word of data that has 32 bits in it or whatever, and I only want to change 4 or 5 of those bits for some reason, right.
+
+We will do what's called masking. And masking allows us to either extract a few bits that we want to know the value of,
+
+or cover up a few bits so that we can store a new value into their location.
+
+Uh, and this comes up a lot in communicating with hardware.
+
+So if you are writing a device driver, if you are, uh, dealing with a network stack and writing packets to the wire,
+
+if you are doing those kinds of things where the purpose of the data that you're writing is like for other computers or other devices to access.
+
+It turns out that there are many times that we communicate in terms of words, because our computer bus is in terms of words.
+
+But what we're communicating with is doesn't need a whole word of data.
+
+And so what it will do is it will pack lots of different values into that one word of data.
+
+And the way we do that is by using techniques like masking.
+
+Now in this course we are going to suggest not require but suggest that you use masking.
+
+Bless you. Uh, a little bit in your, um, par for it's in the handout.
+
+You've probably already seen it. Um, and then you will need it.
+
+In your next lab, I think not this week's lab, but next week's lab.
+
+But other than that, we don't do a lot of it because this is one of the deeper systems, things that you do when you do real systems programing.
+
+So you need to know about it. But it's hard to sort of make up a reason to do it.
+
+It would be contrived as as your next lab is a little bit contrived, right?
+
+In order to give you a, um, a task.
+
+But the kind of thing that you might, for example, frequently do is take something like,
+
+in this case, a 32 bit integer, and try to extract only the lowest eight bits out of that integer.
+
+Now, if you're talking about exactly eight bits and they're on a byte boundary, you can also do this using, uh, pointer math.
+
+Right. Or casting. Right. I could cast, you know,
+
+take a pointer or cast it to an int or cast it to an unsigned right and then extract the bits that I want out of somewhere in the,
+
+um, in this case the lowest, I could just take it straight out, but if I want it from some other part of the word right.
+
+But if it's not exactly eight bits and it's not exactly on a byte boundary,
+
+and you just want some bits out of a word, you can't do it with pointer math.
+
+You need some other technique. And so what we use is mask. So in this case, if I, uh.
+
+Bitwise and a 32 bit value, an integer with 0XF, then what I'm going to have is some sort of value that is 32 bits long.
+
+Right. And it is, you know, whatever bits. And then at the end I have.
+
+Eight bits and I'm going to and that bitwise with.
+
+All zeros followed by eight ones. And we know that it's eight ones because f is two hex digits.
+
+Hex digits are ethe four bits worth of data, and F is all once right.
+
+So we have eight ones at the end. And the key here is here I have y's in there I have x's.
+
+Anything and zero is zero.
+
+Anything and one is whatever the thing was, right?
+
+Because zero and one is zero. So it's zero, which was what we had.
+
+And one and one is one. So anything and one yields itself.
+
+And so therefore when I do this math oh that was terrible.
+
+This is dry and it's like doing that chalkboard thing. Let me see if I can find one that's less terrible.
+
+It's not that one. It's probably not that one either.
+
+But, uh, when I do this and. Right, if this is a bit wise and then all of these will be zero and all of these.
+
+Will be the input bits. Right.
+
+So I have effectively just mechanically this is how it works. But I've chopped off and kept the last four.
+
+I'm sorry. The last eight bits of this integer. So, um, in dump.
+
+Ma'am, we did this, uh, and that, again was a little bit contrived because dump, ma'am, if you remember, um,
+
+we didn't talk about that because we hadn't talked about this yet, but there were the three lines that I said, hey, what does this line do?
+
+What does this line do? In the last one I said, we haven't talked about that yet. Now we've talked about it.
+
+You should go back and look at it. But, uh, it cast the data that it was accessing to care.
+
+And if you remember correctly, on x86 64 care is assigned value.
+
+So then when we tried to print it, it would sign extend with percent D.
+
+Right. It would sign extend into an integer. And when it sign extends into an integer, you would have a bunch of extra f bytes or f nibbles.
+
+Right? That you did. I tell you this, a half byte is called a nibble.
+
+Like that's the actual technical term for four bits is a nibble. So a byte is eight bits and a nibble is four bits.
+
+I am not making this up. Um, and so therefore we cast it to chop off the sign extension.
+
+Right. We could have made that simpler by just using an unsigned value, but then we couldn't talk about it, so we used a signed value.
+
+So now you should go back and look at dump mem in general. You should go back and look at dump.
+
+Make sure you understand it. Yes, sir. So. The ampersand is always going to be the lowest.
+
+No, in this case it gives us eight bits because. Because we used f. If we had used F, it would have given the lowest 12 bits.
+
+If we had used C6 zero, it would have given us the four bits before the last two bits.
+
+Right. So it's just whatever bit pattern you put in there. Because see.
+
+Oh no, it would be six C0 sorry six C0 because that's 00111100.
+
+Right. So that whatever bits are ones is what it would give you. All right.
+
+Let's do a top out. Oh, you're doing work.
+
+You're doing good work. You're doing good work. You only have one each here.
+
+That'll take forever. Let's do, like, one per row. What is today?
+
+Today is the 27th. I cannot use this question.
+
+In. And.
+
+I can't use any of these. Give me just a second. Her.
+
+I have a bunch of questions here that we haven't actually covered yet.
+
+We already did that one. All right.
+
+This is a great one. Let's do this one. It's.
+
+What is the value expressed in base ten? When 110 is interpreted as a base two number?
+
+That's not what I want. And so this is not what I wanted.
+
+You know. I want this one.
+
+Oh. You're amazing. Yeah. This what this is about?
+
+I should probably because you've already done it. All right, here we go.
+
+Let's do this one. You two are like friggin the Three Stooges.
+
+110 is a base 16 number. Remember we did base two.
+
+You know base ten. We did base three. What would it mean if it was base 16?
+
+You may use a calculator. Don't use the calculator. Do the conversion. I mean you can.
+
+You'll get the right answer. But like it doesn't teach you what you need to know, but you can use it to calculate the fact that 16 times 16 is 256.
+
+All right. Talk amongst yourselves. Wait, so.
+
+Yes. Wait for his.
+
+You want. Have you done these yet?
+
+And let's do it again. It's oh, I think I got these backwards.
+
+So we're doing the slow one second. That's fine. I don't have to.
+
+Yeah. 816. Yeah. It's three digits, son.
+
+Yeah. Oh my God. You should know that 16, five, 16 is 256.
+
+Like small children. Know that your brother's a small child.
+
+Are you smarter than a fifth grader? It's true. That's a there's a reason there's a show called why Are You here?
+
+Are you smarter than a fifth grader? Yeah, yeah. And there's a reason people lose that show.
+
+Yeah. Give their permission to obtain. Well, it is useful.
+
+It turns out that 15 years later that make it more accessible.
+
+That's true. But we don't remember enough stuff anymore. I don't. I look up stuff now that I used to just know, because I know I can just look it up.
+
+And it's a true fact that the way your brain works is, um.
+
+If it believes that you can retain information, it doesn't move it to your long term memory to make room for stuff that like it needs to remember.
+
+Yes. That was what I could not access.
+
+Okay. You should contact Top Hat about that. I'm not talking top hat.
+
+Tango sport. All right, let's talk about the correct answer. What is the correct answer?
+
+272. That sounds accurate to me. Why is that the correct answer?
+
+Okay. Yeah, but let's break it down. So zero times 16 to the zero which is zero.
+
+One times 16 to the one which is 16. One times 16 to the two, which is 256.
+
+So it's 256 plus 16 plus zero which is 272.
+
+Now what are the probability? What is the probability?
+
+That I will ask you to do a base 16 calculation on the final.
+
+Not great. That's not zero, but it's not great.
+
+What is the probability that asked you to do this with base two or maybe base three?
+
+Real, right? Because those are those are easier to do in your head, right?
+
+You know, all of us can do three times three and three times three times three, right?
+
+If I asked you to do 16 times 16 times 16, we're going to be here for a minute because I tell you, get half a calculator, right.
+
+But nonetheless, you should understand by now that the the methodology is exactly the same, regardless of what the basis.
+
+Right. All numbers work the same regardless of what the basis.
+
+All right. Any questions? Okay.
+
+So bit wise stuff. We talked about masking. So one of the things that we'll do with masking is we will try to set and unset individual bits in a word.
+
+Again, when do you do this? Usually when communicating with hardware or devices across the network or things like that.
+
+It's not so common that you do this in just an application.
+
+Um, although it can be done in particular, you can use it to do things like rounding very quickly.
+
+Um, if when you have certain properties that you need, um.
+
+But first, if you're using bitwise operations to do mathematical operations like rounding,
+
+usually you're deep into optimization territory because there was like an if statement that would give you what you wanted.
+
+And as we all remember, first you make it work, then you make it good, then you make it fast.
+
+If you're doing bitwise operations to do mathematical operations.
+
+And like everything doesn't work in your test suite is complete and etc. then you're like, you're not done right.
+
+You're not there yet. Um. There's a book, uh, called Numerical Recipes in C that is literally just, you know, 300 pages of.
+
+You want to do this math thing. Here are some very, very fast C that will do that math thing.
+
+Right. That's the kind of thing you look up. You don't derive yourself.
+
+So, um, but when we're talking to hardware, when we're doing things like that, we frequently will set and unset individual bits in a, uh, word.
+
+And in order to do that, we frequently use a combination of masking and then other and and or operations.
+
+So here we have an example where we have some variable x which has some set of bits.
+
+And we want to compute the value of x if the lowest bit the two to the zero bit is a one, and the rest of x stays unchanged.
+
+Well, we can do that by just oring x with the number one right.
+
+If we or x with one. One or it is.
+
+And so that bit will become one. The rest are all zero.
+
+Just like we add anything and one is itself anything or zero is itself right.
+
+So we can just. Or all of these things, uh, all these bits with zero in the last one with one and set the lowest bit of x.
+
+Later, if we wanted to unset the lowest bit of X, we want the lowest bit of X to be whatever it is now,
+
+we want it to be zero, but we don't want to change any of the other data in X.
+
+Then we can say x equals x. And then this actually gets a little bit tricky.
+
+And. The bitwise complement of one.
+
+The bitwise Wise component. So one is all zeros and a one at the end.
+
+The bitwise complement of one is all ones and a zero at the end.
+
+So if you remember from what we did over here, one and anything is itself.
+
+Zero and anything is zero. So now we will get exactly x.
+
+But the last bit, whatever it was before, is now a zero.
+
+So we can unconditionally set the first bit of X and unconditionally clear the first bit of X, right?
+
+The lowest bit of x. Um, for some reason.
+
+I'm just going to say this explicitly. I say things more and more explicitly every semester.
+
+NPR for we suggest that you do this, and many people don't.
+
+And when asked why, they're like, I wasn't sure how to do it.
+
+Just type that into your code. Right? It'll do it.
+
+Um, okay. Yes. So this is going to set us up.
+
+X is a number. Everything's a number. Everything's just a set of bits and a bit.
+
+Set of bits is interpretable as a number. This will set the one does the ones bit right.
+
+The two to the zero bit. Unconditionally set it to a one.
+
+Which means that if it was incidentally numerically, if it was an even number, it becomes odd.
+
+Plus one. And if it was an odd number, it stays unchanged.
+
+And then this clears the last bit. So if it was an odd number it becomes even round down.
+
+And if it was an even number it stays unchanged. Right.
+
+So we're just forcing the very last bit to a 1 or 2 a zero.
+
+Treating it as a just a bag of bits, 32 bits forced the last one to be a one or a zero.
+
+We don't normally do this with numeric values.
+
+We do this with data, right? Some sort of data that we want to set a bit to a 1 or 0.
+
+For example in Malik you're going to use it to set a flag. Right.
+
+And all that flag is just is just a question. Is this block allocated or not?
+
+Uh, in uh device communications it frequently is is also flags.
+
+Right. So I've been working on the firmware for this little laptop. I have the code that actually runs in the keyboard, right.
+
+That runs on the, the hardware that is the keyboard.
+
+And there's this kind of stuff in it all over the place because it's a little microcontroller and you're communicating individual bits to and from,
+
+you know, different parts of the processor. Okay.
+
+Any other questions? No.
+
+All right. You did good work.
+
+You may stay or you may go. It's up to you. What that feels like something we can sort out later.
+
+But yes, we are having. All right.
+
+So if you have a particular bit and what you really want to do is complement it.
+
+So if it's a zero, you want to make it a one. If it's a one, you want to make it a zero.
+
+If you remember, we have a way to complement an entire word.
+
+That's the tilde operator right. The bitwise complement operator complements an entire word.
+
+But if you want to complement a single bit or a small set of bits, you can use the XOR operator.
+
+Because again, if you go back to the truth table for XOR and you look at it.
+
+Anything X or zero is itself. Anything XOR one becomes the other value.
+
+Right. So one becomes zero. Zero becomes one. So if you want to complement a bit.
+
+Then you can just XOR it with a particular value and then sorry, XOR a one with that value.
+
+And if the bit was a one, it becomes a zero. If it was a zero, it becomes a one.
+
+Likewise, this is frequently a. An interesting or valuable operation to do so.
+
+As an thought exercise, if you think back to your position.
+
+We have this recommendation that you create a variable that becomes one and then zero, and then one and then zero.
+
+And we showed you how to do it with the mod operator. But you now know at least three reasonable ways to do that.
+
+Right. So you now know that.
+
+While anything that's not zero is true, the actual value true is one, and the actual value false is zero.
+
+So if you have an integer that is one and you use the the exclamation point not operator on it, then it becomes zero.
+
+And if you use the exclamation point not operator on zero, it becomes one, right?
+
+So that gives you a way to get 0101. There is plus one mod two, which is what we did right.
+
+Which is 0101. And then you can also XOR with one which will give you zero one, zero one every time you do the operation.
+
+Right. It's worth. Going back and going through these things, right?
+
+How would I solve this problem? What tools do I have that would allow me to solve this problem?
+
+Not that one in particular, but in general. Just think about the things you've done.
+
+How would I solve them? Because as you go through your career,
+
+you're going to get to the point where you're going to realize that some of the ways that you solved things previously,
+
+some of the ways that we asked you to solve things previously, are not like there's just better ways to do it.
+
+And you didn't know them yet. Right. And so think about it.
+
+Right. How would I do this if I did it now? It's also just fun to see how far you've come.
+
+All right.
+
+So, um, remember I said, uh, in passing that shifting is multiplying by two to, um, the power of the number of bits that you shift algebraically.
+
+Right. Shifting is multiplying by two to the power of the number of bits that you, uh, shift.
+
+So shifting left by one bit is multiplying by two.
+
+Shifting left by two bits is multiplying by two to the 2 or 4.
+
+Shifting left by five bits is multiplying by two to the 5 or 32 right.
+
+And then shifting right is the same story. Now right shift as we talked about, are dangerous for sign numbers, right.
+
+Because their behavior you have to know more to know what answer you're going to get.
+
+For unsigned numbers. It follows exactly this rule. Uh, you will rapidly run into, uh, overflows and underflow as you shift by bits,
+
+because it doesn't take very many bits to start pushing bits off the end. Interesting number.
+
+But nonetheless, this is true. And this is something that you should know.
+
+And it follows from the summation, right?
+
+You're basically just taking and adding. If you shift left by one, you're just adding one to every I when you do the summation right.
+
+So this is follows from the summation. Um, I think that's it for we get to the example.
+
+Uh, we already did that. Yeah.
+
+Before we get the example, are there any questions before I move on to sort of a summative example of all the things that we've talked about?
+
+Yes. That is a great question.
+
+Does Indianness affect how masking works?
+
+And the answer is no. Not if you're working on integers.
+
+Because when you load an integer from memory, it has some indianness in memory.
+
+When you load it from memory into a variable that's of type int, it loses its indianness.
+
+As long as you deal with it as an int, if you deal with it as a pointer and you look at the bytes, it has indianness.
+
+But if you deal with it as an integer, then the lowest order bit is always all the way on the right,
+
+and the highest order bit is always all the way on the left. And they shift smoothly and they mask normally right?
+
+The difference is, are you treating it as an algebraic number or you treating it as a byte of data stored in memory?
+
+If it's a byte of data stored in memory, it has indianness. If it's an algebraic number, the computer hides that from you.
+
+The processor hides it from. Cool.
+
+I have a question for you. Why are you in a different seat every single day?
+
+It's very stressful for me. Okay.
+
+You're not the only one, but some of you. Some of you are very predictable.
+
+Span right here. I know where I'm going to find him. Caden tried to sit in the wrong seat.
+
+I wouldn't let him. Right. But some of you wander, okay.
+
+Clearly you don't have as much as I do. Like when you go to the dentist, do you straighten up the little business cards and stuff, you know?
+
+If not, then I don't know who you are. Yeah, nobody told me this.
+
+I think I know the answer to this stuff. On this stuff. It was operations on, um.
+
+Uh, I think it's just going to flip the characters, right?
+
+You can't. It won't let you. Um, so if you try to do a bitwise operation on a string, there's two possibilities.
+
+If the string is a care star, then the you'll do the operation on the pointer itself,
+
+in which case you'll wind up with probably an invalid pointer if it's a character array.
+
+Uh, bitwise operations on an array variable type are not defined in. The compiler won't compile it.
+
+There are languages that will let you shift like larger and aggregate values and things like that, but C is not one of them.
+
+It will. It will either not do what you want if it's a pointer, but it. I don't know this for sure.
+
+I suspect if you try to start.
+
+Masking and shifting a pointer that the compiler is likely to warn you and say, are you really sure you want to do this?
+
+You know? Um, for a and for an array, it won't compile.
+
+Like sorry to say it would do it, but on eight bits you would only be able to manipulate the eight bits a lot,
+
+whereas an integer with 32 along would be 64 on a on a carrot would you would get eight bits and you could mask those eight bits.
+
+Right. And you could shift those eight bits and you could do those things. One thing you have to watch with care.
+
+And I don't want to really you don't have to know about this for this course. But I will mention it.
+
+One thing you have to watch with care is that just like arrays rapidly become pointers when you're not looking,
+
+cares rapidly become ints when you're not looking. So if you start doing a lot of bitwise and other manipulations with a care,
+
+it's possible to accidentally turn it into an int, in which case it becomes 32 bits,
+
+and then the values can can um exceed the 0 to 255 or the -128 to 127 that you would expect from a care,
+
+because the compiler will silently turn it into an int.
+
+This is one of the things that people complain about with C is that C does integer promotion too easily.
+
+C plus. Plus does not. C plus plus is more careful about that, but C does it too easily.
+
+So be careful when you're doing this with cares.
+
+Uh, typically when you're done, you want to mask it with F to make sure that you only have eight bits.
+
+And the reason is that when you type in a number, like if you say x plus three, that three is a 32 bit integer.
+
+And so as soon as you would use it to manipulate a care, there are cases that the result turns into a 32 bit entropy.
+
+Anyway, that's not going to come up in this class probably, but you should be aware of it just for your own sake.
+
+It's not gonna be on the file or anything. All right.
+
+So here's a function. I want to give you.
+
+Say three minutes. Four minutes to just look at this function and try and decide how it works and what it does.
+
+Uh, I don't necessarily expect you to understand all of it, and I don't expect you to find that an enjoyable process.
+
+You may begin. Mhm.
+
+It's like theme music. The.
+
+Yeah, I turned it off, like, halfway through and didn't turn it back on. Thank you.
+
+I am not this bad in the other lecture.
+
+So I'm going to take a picture of this board over here and I will make it available to you, uh, on Piazza or some things.
+
+Right. So that you can see that for those of you who are over here, so you can see what I wrote, right.
+
+Um, but essentially we are just taking these eight bit chunks of this integer in, we don't know what byte order, right.
+
+In integer order, it's just a number. And then forcing it out into memory in a byte order that we can predict.
+
+Yes, I can explain what I was doing charts out like.
+
+Yes, it's just taking and saying, hey, point my pointer at this.
+
+Integer in memory at the very first bite of this integer in memory.
+
+Right. And treat it as an array of cares, right? So I can pull the individual.
+
+I'm sorry. Not this one, this one. And treat it as an array of care so that I can pull out the individual bytes.
+
+Let me take a picture of this for I forget. And then if you don't see this go up this evening.
+
+Please feel free to say. Ethan, where is your board picture?
+
+And I will put it up. Yes. What holds up? An answer?
+
+Well, uh. So that's saying. So when we do this shift down.
+
+So if I shift down by eight bits,
+
+then I'm going to have eight zeros at the top or maybe ones because I could be sign extended because this is a signed integer.
+
+Right. Uh, and then I'll have 24 bits of data, but I'm only storing eight right into out b sub b.
+
+And so I'm basically chopping off the top 24 bits and leaving only the last eight.
+
+So that's off the mask. It's an eight bit mask.
+
+We do like the last eight bits, but I shift it down.
+
+So I shifted down by 24 bits and chop off the last eight bits.
+
+That's just the what were originally the first eight bits. I shifted down by 16 bits.
+
+Chop off the last eight bits. That's what was originally the second eight bits.
+
+I shift it by a different amount every time, right. That's the it's you can't see it, but that's the shift value over there.
+
+Output to the right, removing inputs to the right and saving into output starting at the left.
+
+So the reason doesn't matter. It doesn't matter if we put in a big Indian.
+
+Because we're treating it as a number, not a sequence of bytes.
+
+Yep. Your input is not a sequence of bytes. It is a number. But the processor hides that from you.
+
+So the number is a sequence of bytes with the processor. When you treat it as a number, the processor hides that from you.
+
+When you treat it as an address, as data at an address.
+
+The processor cannot hide that from you. But when you treat it as a number, the processor hides that from you.
+
+Yes. The minus one is needed because we actually want to shift it.
+
+So if we didn't have the minus one, then we would shift by 32, 24, 16, eight.
+
+But that's not what I want. I want 2416 eight zero.
+
+So it's just subtract because the size of it doesn't give us the number of bytes we want to shift by.
+
+It gives us the total number of bytes which is plus one versus what we want because we never want to shift them all out.
+
+All right. I think that's the end. Uh, here's it in action.
+
+Right? If I don't, I'm a native integer. And then the result, we can see the two that it reversed the bytes.
+
+Um. And that's it. All right.
+
+We will start with, uh, the virtual memory subsystem on, um, Wednesday.
+
+Somebody remind me to put that photo up for you. I use trickery.
+

@@ -1,0 +1,939 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+All right. We're past this. Right? Past this.
+
+We did that. We did this, we did this, we did this, we did this.
+
+This is where we ended, right? Okay, so I told you that the movie was an actual device and does the conversion.
+
+We did this slide, right? We just didn't move past this. Yeah, I turned it on.
+
+See my green light? Yeah, that's my costume today.
+
+I'm somebody who remembered to turn the microphone on. Okay, so, um, couple of the announcements I want to make before I dive back into this.
+
+First of all, there is a form available linked from Piazza that we would ask everyone to fill out,
+
+which indicates whether you would or would not like to be a student assistant on CSC 2020.
+
+And why or why not? You feel that that is the case.
+
+So, uh. And everyone, we'd like everyone to fill it out. Even if you're like, no, I don't want to do it.
+
+Fill it out. Tell us why. All right. There's a couple of preset answers, but you can also, like, type something if you want, right.
+
+Um, so please do that. Second of all, I have been asked to remind everyone, even though labs are almost over,
+
+because it seems like there were some deficiencies in labs that there is,
+
+in fact, a video that prepares you for lab this week and for par four that's in the lab videos folder,
+
+because I guess essentially nobody has watched it. Um, so those are my two, um, announcements.
+
+Are there any questions? No.
+
+Okay. Um, I have a question for Ishmael.
+
+When does class start front? When does class start? I only ask him that because he usually sits in the front row.
+
+And now it's going to be a struggle. Uh.
+
+All right, that's fair. Okay. But, like, uh, I have read the.
+
+Rules. There's a lot of things I'm not allowed to do, but it actually doesn't say I can't bully.
+
+So. All right, so, um.
+
+The next thing I want to talk about is. So the virtual memory does the trick. Yes.
+
+Yes, we've already been through this twice already today. Uh, in fact, I made an announcement that that was my costume, right?
+
+Was that I was somebody who turned the microphone on Nicholas. It's on its.
+
+I promise it's on. Okay. So, uh, we said that the IMU is the device that does the translation.
+
+We said these two, which is right. We have the, um, virtual address space.
+
+The physical address space. We said that our virtual address space. And in fact, it turns out our physical address space also are linear.
+
+Um, but what I want to talk about now is some ideas.
+
+We're not going to not going to go through the deep details, but some ideas of how the MMU actually does the address translation.
+
+So I said that the MMU has to normally when it does the translation it has to be very, very fast.
+
+But sometimes it's allowed to be slow. Um, and the way that it's allowed to be slow is that there are some, um,
+
+calculations that it does when it doesn't know it's there, and then it just remembers the answer when it does it.
+
+But what those calculations are and how it figures out what the mapping is, are things that can vary from system to system.
+
+There are a number of ways to solve that problem. Most modern desktop type systems use what we call paging.
+
+Um, and I'm aware of at least one modern desktop type system that does not use exactly.
+
+Well, it does use paging, but it doesn't use exactly the same method. It uses what we call reverse paging.
+
+Um. But they all have this, this property in common, which is that they take up the they take the virtual and physical address spaces both,
+
+and they break them up into page, uh, pages of fixed equal size.
+
+So every page is the same size. On our system on x86 64, what we call the small pages are four kilobytes.
+
+This is why, for example, in your, um, malloc assignment, we tell you that your chunk size should be 4K.
+
+If you remember, we told you previously that your that's break only works in increments of 4K on our platform.
+
+All of these things are related.
+
+They're all the same thing, which is that's can only increase the memory map of your process in increments of whole pages.
+
+And pages are four kilobytes, because the hardware, the MMU that does the address translation only does its mapping on a per page basis.
+
+Either a page has a translation or it does not.
+
+So for every four kilobytes of memory, there either is a translation or is not.
+
+And if there is a translation, then that memory exists, then it's mapped and it works.
+
+And if there is no translation, then that memory will cause a segmentation violation when you try to access it.
+
+Right. So, um, page sizes.
+
+There may be several page sizes.
+
+Um, on our system, I believe they are four kilobytes, two megabytes and one gigabyte are the page sizes that are available.
+
+Um, almost pages of, like, normal operating system memory mapping pages are typically for.
+
+Kilobytes, although there are larger pages that are mapped from time to time for various, um, reasons.
+
+Um. Typically these are powers of two.
+
+Um, and the reason that they are powers of two is that they fit nicely into the addressing system and the way that words are laid out.
+
+And you ever have words that cross page boundaries that way and things like that.
+
+It also means if we keep them all multiples of each other,
+
+that there is an integral number of small pages that fits inside a medium sized
+
+page and an integral number of medium sized pages that fits inside a large page.
+
+And so you can always be guaranteed that you never have pages that would cross each other, right?
+
+That would overlap in any way. So powers of two are convenient for um, that reason.
+
+You may also notice that in your malloc assignment, we ask you to do, um, allocation sizes that are multiples of power of two.
+
+For the same reason, it makes them test light nicely unto the pages.
+
+Uh, every page, if it's a, um, an integral number of allocations of whatever those power of two sizes are.
+
+Yes. So apologies for more.
+
+Okay. Mhm. And one gig. Yep. Why isn't that.
+
+So 4K is small. Actually I mean we call them small pages right.
+
+The original page is the first system I'm aware of that had pages was the uh digital VAX uh,
+
+which is virtual stands for its VAX stands for virtual Address extensions for the PDP 11.
+
+Uh, and it had 512 byte pages. The trouble is that, um, because you have to do these lookups when you want to do the translation for pages,
+
+the cost of having small pages is that you have to do a lot more lookups,
+
+which means that you are more likely to have to do a slow lookup, because effectively these things, it stores a few of them.
+
+But if you try to do more of them, then you have to go look it up, right?
+
+It uses caching, which we'll talk about later. Um, and so, um, you want them to be of at least a moderate size.
+
+And so four kilobytes is sort of the smallest reasonable page size on a system that has gigabytes of memory.
+
+And it's actually getting to be quite small, which is where the two, uh, megabyte and the one gigabyte pages come from.
+
+So it's a question of efficiency of your memory. So not mapping memory that you don't need.
+
+So you want small pages for that, but also efficiency of the data structures that track all of these things.
+
+You want large pages for that. And so you want to find a meet in the middle.
+
+And the difference the reason it's 4K and then it goes immediately to two Meg is that that in terms of powers of two, uh, 4K is two to the 12.
+
+Two Meg is two to the 21.
+
+So in terms of powers of two, it's not that many bits different.
+
+And then one gig is two to the 30.
+
+Right. So again it's only nine bits different. So 11 bits and then nine bits or whatever.
+
+Or no nine bits in the nine bits. Right. It's nine bits in the nine bits.
+
+Um, and that has to do with the like the data structures in memory for how these things are laid out, which we are going to talk about in detail.
+
+But there's reasons for that. It's a good question. Uh, so, uh, in a paging system, what happens is for every, um, page of virtual memory,
+
+there's some metadata stored that tells the MMU how to do the translation between the virtual address and the physical address.
+
+And it also tells the memory management unit things like, uh, should the user's program be allowed to read data off of this page?
+
+Should the user's program be allowed to change the data that's stored on this page?
+
+Should the user's program be allowed to execute this page as instructions on the CPU?
+
+Right. So a bunch of options on that, um, pages.
+
+And whenever your program tries to access a page, the memory management unit looks at those page tables,
+
+consults the memory mapping, and says, is there a memory mapping for this page?
+
+The answer is no. Then it notifies the processor.
+
+Hey, there's been a problem with a mapping in this particular process.
+
+The processor immediately jumps to a particular location in memory that was defined by the operating system developers that handles what we.
+
+This is what it's called a page fault. It handles a page fault. The, uh.
+
+Location in the um, that it jumps to was defined again by the operating system.
+
+Authors write its code in the operating system kernel.
+
+The operating system kernel then looks at the page fault and says, is this something I can do something about?
+
+Can I fix this problem? If it can fix the problem, it does.
+
+And if it can't, it notifies the process. The way it notifies the process on Unix is it sends it a signal, and that signal is, uh, signal.
+
+Um, zigzag v for segmentation violation.
+
+And when your processor receives that signal, it prints out a message segmentation fault.
+
+And if it is configured to do so it dumps a core on disk and says core dumped.
+
+Right. So there's sort of this chain of actions from I tried to access a memory address.
+
+Oh I can't notify the operating system.
+
+Can the operating system fix that problem? If it can, it does.
+
+And you don't ever know about it. If it can't, then it notifies the process.
+
+Hey, you tried to access a memory location that doesn't exist, right?
+
+Or that you're not allowed to access. Likewise, if you try to access a memory location and you are allowed to read it,
+
+but not allowed to write it, and you try to change the data there, you'll get a segmentation fault.
+
+Some of you may have seen that this semester in that if you, um, have a double quoted string.
+
+And you a pointer to a double quoted string, and you try to change the characters in that double quoted string, your program will crash.
+
+I don't know if anybody has seen that or not. All of our examples.
+
+Uh, we very carefully. This is not a good sign.
+
+I only have one marker. We very carefully say this.
+
+Right. And we use these square brackets, which causes the compiler to allocate an array on the stack.
+
+And the stack is writeable. But if you do this.
+
+And then you say, you know s someone equals something.
+
+This will crash very frequently. It's not guaranteed to, but it will very frequently crash with a segmentation fault.
+
+This will not. Right. So you may not have seen this semester this semester, but go ahead and you can try it if you want.
+
+It's it's fairly common that um, if you declare a care star equals a double quote and then try to change it to crash because those pages,
+
+uh, as we saw in the example in class, they were put in the text section.
+
+The text section is not writeable. You cannot write to the text section.
+
+You can't change the memory in the text section. And the enemy will catch that, and it will notify your process and say, hey, you can't, you can't.
+
+The kernel will notify your process, say, hey, you can't do that. I can't allow you to change that.
+
+Um, there's various reasons why you can't allow the why you can't change the text section.
+
+They're not necessarily they're not going to appear on the, um. Fatal.
+
+Excuse me. They're not going to appear on the final, but, um, one of them is security reasons.
+
+Uh, if you can't change the code of the program, then your program is not vulnerable to certain security vulnerabilities.
+
+Uh, certain certain vulnerabilities cannot occur in your program.
+
+Um, another is that, uh, which we'll see a little bit maybe more about later in the semester.
+
+Um, or maybe later in this lecture, actually. Sometimes the tech section is actually shared between more than one program.
+
+And as long as it's not writeable, that's that's allowable. But if one program could change it, then it would violate the dedicated machine model.
+
+Just things to think about. Any questions so far about Paige?
+
+All right. So, um, these pages, these virtual pages.
+
+And to be clear. What happens is all.
+
+All to the 64 bits. Of the virtual address space are broken up into pages.
+
+Right now, the pages may not exist, but notionally there's a page at every address in that to the 64, um, address space.
+
+And they're all for the purpose of this class. We're going to say they're all equal size, right?
+
+They're all four kilobytes. In practice. Some of them may be larger, but again,
+
+it's just you overlay a large number of 4K pages with the two megabyte page or a large number of two megabyte pages with a one gigabyte page.
+
+Um, so they're all mapped to these four kilobyte pages and every one of those addresses in your virtual memory space.
+
+When you try to access it, it goes through that translation, right? And it goes to a particular page of memory.
+
+Um, that page is stored in physical memory.
+
+Right. And so when you do that, access the you give it a virtual memory address.
+
+The MMU says that virtual memory address is located on this particular virtual page.
+
+And then it says where in physical memory is that virtual page located.
+
+Does a translation and a physical page address comes out the other side.
+
+I don't think we say here. We don't.
+
+Um, it turns out I said it on the last slide, uh, loud that the, um.
+
+On this slide. That four kilobytes is 12 bits.
+
+What that means is when I say four kilobytes is 12 bits.
+
+What that means is if you treat your address as an integer.
+
+The last 12 bits of the address.
+
+Bits zero through 11. Right. The two to the zero bit through the to the 11 bit are the numbers between 0 and 40 and 95, 4095 or 4kB.
+
+Um every one of those addresses is on the same page.
+
+The 13th bit would be the selector between that page and the next page, or that page in the previous page,
+
+depending on whether it's a one or a zero, and then the bits all the way up to the base of the to the rest of the address, right.
+
+The up to the two to the 64 bit are all sort of the number of the page.
+
+So you can think of it as you have two to the 52 pages, each of which contains two to the 12 bytes of memory.
+
+Right. So when this lookup happens,
+
+what you're really doing is looking up that to the 52 bit input value and getting a different two to the 52 bit output value,
+
+the virtual page becomes a physical page. It goes to physical memory and it finds that page.
+
+Now for each one of those pages, there's a little bit of metadata. And each one of those pages may or may not be what we call backed.
+
+So an unbacked page is just memory.
+
+There's some Ram in the system. I put some data in it. It doesn't come from anywhere.
+
+My program just sort of wrote it, created it, used it as it was running.
+
+Right. So you ran malloc or something. You got some memory and you checked and you put some data in that memory.
+
+A backed page, on the other hand, contains data that came from somewhere.
+
+The somewhere that it comes from. We call the backing.
+
+If I have a backed page that has a backing, then it has this neat property that if I throw that page away from memory.
+
+If I ever need that data again, I can just go find the backing and read the data back in and put it in memory.
+
+So this is, um, like, taking notes, right?
+
+I tell you something, you write it down, you can forget about it.
+
+You shouldn't. Not till the end of the semester. But you can forget about it.
+
+Because if you ever need to know it again, you have no choice. You can go back to your notes, right?
+
+Your memory has a backing right there someplace that you've stored the information that was in your mind.
+
+The, uh, back pages. If the computer ever runs out of memory, it can take a back page and throw it away.
+
+And if it ever needs that page back, it can go to the backing, read the data, put it back in memory in the process that has the back page.
+
+Never has to know that it was taken out of memory.
+
+So in order to make this possible, we need to keep track of whether a back page is clean or dirty.
+
+Clean means that the data stored in memory is exactly the same as the data that
+
+was stored in the backing that we use to create the information on that page,
+
+right? Maybe we read it from a file. Dirty means that the page, the data that's in memory is different from the page that was on,
+
+that was in the file or wherever we got that information from.
+
+If I throw away a clean page, I can just read it back from the backing.
+
+If I throw away a dirty page, I have a problem, because if I read it back from the backing, it's different from what was in memory, right?
+
+What was in memory was different from what was saved on the backing. And so when I read the backing back, I would get, um.
+
+The wrong information. Right? Yes. Like how?
+
+I feel like that. No. No. Sadly, no.
+
+Yes. Well that. Well, this notion, it doesn't matter.
+
+The question is, what is the where is the backing with this notion?
+
+It doesn't matter. So a page is either backed or it's not.
+
+And if it's back, the point is that there's that information is somewhere.
+
+Doesn't matter where it is, it is somewhere. In practice it's normally saved on your disk.
+
+Right. It's a file not in memory. Yeah. In practice.
+
+In in practice that's where it is. Notionally. It doesn't matter.
+
+It's just that it's somewhere that I could get it right.
+
+It could be something that I asked, uh, host on the network for.
+
+It could be something that's just somewhere else in memory. It could be something that's saved on an SSD.
+
+It could be something that it pulled from a CD-Rom. It could be something that like.
+
+It doesn't matter. It's just somewhere, uh, that I can get it back from.
+
+Yes. Was originally saving a file and having backed memory.
+
+When you save a file. You are explicitly saying, take this stream of bytes and put it in a file on the disk.
+
+When you have backed memory every time you change the memory.
+
+It's the change. It becomes dirty.
+
+But at any point, the operating system can take that dirty page and just write it to the backing and save it for you.
+
+Right? Uh, there's a lab that we do.
+
+And I think we're probably not doing this semester, although I'm not sure where we actually play with this a little bit.
+
+And we map a file into memory because you can map and you can tell the operating system,
+
+take this file that's on disk, put it in my memory and it will it will actually do that.
+
+There's a lot of restrictions on how that works. And in that case, uh, it's that the answer to your question is how is it different?
+
+Is that the saving the file is explicit. You say save this data.
+
+The storing the backed memory is implicit. When you change the memory, it changes the file on disk.
+
+It just sort of happens. But there's a lot of limitations to how you can do that that makes it inconvenient to to map.
+
+We call it mapping a file to map a file directly in many cases.
+
+Um, in particular, they have the file has to be an exact multiple of a page size, or else you have a problem.
+
+You can't map the whole file. Um.
+
+Okay. So we have this notion of a back page, and we have this notion of a back page that is clean,
+
+which means it's the same as it's backing a back page, this dirty, which means it's different from its back.
+
+We'll get back to that here in a minute. Let's just do some cool things. Furthermore, we have a notion of, uh, that we call demand paging.
+
+And demand paging is where I have pages that are notionally backed, but which I have not actually read into memory.
+
+So they're neither clean, no dirty.
+
+This address would come from this backing if I ever loaded it, but I haven't loaded it, so it's not in memory anywhere.
+
+With demand paging, then when I try to access that memory.
+
+What immediately happens is the muse says that memory doesn't exist.
+
+I can't load, it notifies the operating system kernel.
+
+The operating system kernel says, can I fix this? Yes I can.
+
+This page doesn't exist. There is no memory, but I know what data should be in that memory.
+
+So I find a little bit of unused memory. I put it into my MMU mapping at this particular virtual address.
+
+I go to the backing. That contains the data that should be in this memory.
+
+I read that data in, I write it into the memory, and then I go back to the process and I say, here's the data that you asked for.
+
+Right. So the process goes to try to load a particular location in the virtual memory space.
+
+That location in the virtual memory space does not have an associated hardware memory address doesn't exist.
+
+The mu tells the kernel, hey, I don't have an address for this.
+
+The kernel says that's okay. I know what should be stored there.
+
+Find some memory stores the appropriate data there, and then let the unless the program run as if nothing had ever happened.
+
+What this means is, if you have a large amount of data that you ultimately want to move into memory, but right now it's saved in a file on disk.
+
+You don't ever have to move into memory unless the user actually tries to use it.
+
+So I can say here is a gigabyte of data.
+
+That's stored on disk. It's in your memory. You can use it if you want.
+
+And unless you try to use it, I never have to read it from the disk.
+
+I never have to allocate the gigabyte of memory. It turns out that this is frequently very, very useful for a variety of reasons.
+
+One will see a specific use case of this, uh, here in a moment.
+
+But another one that comes up very frequent frequently is in, um, algorithms.
+
+We frequently use data structures that we call sparse data structures.
+
+A sparse data structure is a data structure where you have a large notional space in which you might store data,
+
+but in fact, most of the locations don't have any data in them.
+
+With a sparse data structure, you can have a notional very large memory space.
+
+Gigabytes of memory. With, say, a megabyte of data spread out randomly throughout those gigabytes of memory.
+
+And you only ever have to actually create the memory for the places where there is data,
+
+the places where there isn't data, there's a virtual memory mapping.
+
+But as long as you never try to access it, the system will never create any memory to put at that location.
+
+We call it demand paging because the pages appear when the program demands them.
+
+You say? Yes, you may have these pages, but until the program actually comes and says give me the page.
+
+We don't create it. We create it when it is demanded on demand.
+
+Make sense? All right, so I'm gonna let you in on a little secret about teaching.
+
+It's not a secret if you've ever done it before. Sometimes you explain something and nobody has any questions.
+
+And yet, you know, it's not because they know what you're talking about.
+
+It's just because they either don't. Care to ask questions or they don't know what questions to ask.
+
+And right now I feel like we're in that situation.
+
+I feel like I have said something and you don't have any questions, but it's not because you know what I'm talking about.
+
+So would anyone like to suggest something that I have said, that they don't know what I'm talking about, that they would like for me to clarify?
+
+Okay. This is accessing virtual memory.
+
+Yes. We create a virtual memory mapping. But we don't actually create any memory.
+
+And then when the user tries to use it, we have to actually go get the actual memory.
+
+That doesn't look like an answer to your question. I mean, is it something else or the phone?
+
+It's an answer. So why would I want to have something like that?
+
+That's my. Because I'm lazy.
+
+Because I'm lazy. The answer is no, but they are super lazy.
+
+I don't know about that, but. Lazier than a student doesn't seem.
+
+I'm trying to use my mouse pointer to touch this touchscreen. That's not going to.
+
+It's not going to work. So this is not exactly how this works, right?
+
+But let's. Notionally.
+
+Think of how this works. So here's my process. I have this memory space.
+
+This is not going to end well. Do I have?
+
+I do. Let me draw a box that you can see.
+
+So here's my process. I have this memory space. And this memory space consists of all addresses from 0X00X.
+
+Lots of apps. I. And essentially what the IMU does is it says, hey, if the user asks and somewhere in your computer you have physical memory, right?
+
+And your physical memory runs from some address to some other address in a different memory space.
+
+So this is, um. The virtual address space.
+
+That's the space. This is the physical address space.
+
+So, um, the physical address space in our case is by definition,
+
+going to be much smaller than our virtual address space or our virtual address space is two to the 64 bits and size,
+
+which is just an astronomically huge number. Like literally astronomically like distance between galaxies.
+
+Huge. Um, the whereas we don't have that much ram.
+
+Right. We have 16 gig of Ram or something like that, right. So somewhere in here we have a page.
+
+In our virtual address space that has everything from some address to that address.
+
+Plus, uh, 4095, right, is stored at that address.
+
+When my program goes to try to access this page, this page address goes to the MMU.
+
+The muse says, do I know where in physical memory this data that the user is asking for is stored?
+
+And then suppose that it does. Somewhere in physical memory, there's a page and it says, oh, actually it's right there.
+
+Right. And then when I go to try to access the next page of virtual memory, it says, okay.
+
+In physical memory that is right there. And I go to access the next page and it says okay and physical memory that.
+
+Is right there. Right. And so as I access these different addresses in virtual space, it goes to different places in physical space.
+
+But it's possible that there is a place here in my virtual address space that I go to the MMU.
+
+And I said, where is that? And it says, I don't know.
+
+That's a question mark. It says, I don't know.
+
+And then the operating system says, no. You don't know.
+
+But I know that somewhere over here on disk.
+
+There's a file. And in that file is data that when the user opens this location, they expect to find that data at this location.
+
+So the user is trying to read this. Locate. Oh, is this location right here created location.
+
+So the operating system says, okay, give me a new page of hardware memory.
+
+I'm going to take this data, write it into that page of.
+
+And then change your mapping.
+
+So that when the user asks for this data, that is the data that they get.
+
+That's demand paging. The page was not created until the user demanded it by trying to actually use it when it was created.
+
+In this case, it was backed memory and it was bought from the ether containing data before the user ever touched that page, it had data in it.
+
+Can you think of something we've talked about where before the user ever touched it, it already had data in it.
+
+Not exactly. I'm out of here, but that doesn't have data in it.
+
+Something that had data in it. No. Before your program starts.
+
+There's memory created that has data in it. All of these things exist text, data and BSS.
+
+Before your program ever starts, right? We'll get to this in a second.
+
+But there actually demand paged into existence. Yes. What happens?
+
+It happens. So when I said it has to normally be very fast, um, but it can sometimes be very slow.
+
+This is when it's very slow. Is when you go to ask for an address and it's like, I don't know where that is found, right?
+
+And there's two possibilities. One is it doesn't know where it's found, it doesn't know how to figure it out.
+
+And then it goes the colonel, there's another case where it doesn't know where it found,
+
+but the colonel has already told it how to figure that out of it needs to, and then it'll do some extra work, and then it is very slow.
+
+And if that happens a lot, your program runs very slowly.
+
+And by very slowly, I mean glacial, very slowly, like thousands of times slower than it would normally run.
+
+So we have to make sure it doesn't happen very often. Yes. Yeah.
+
+Physical memory. So we'll talk about that in a second.
+
+You can run into that situation where you in all of these pages and you've used up all of your physical memory, and there's no more memory to use.
+
+And then there is something that we do. We'll talk about that here in a second. I. Free memory.
+
+It is from the virtual world. We almost never give it back to the physical memory space.
+
+For reasons. Just one second. Let me get Juliet first. So it is possible to have a machine that has more physical memory than virtual memory.
+
+It's possible to have a machine that has more physical, more virtual memory, the physical memory.
+
+Either one is possible with the size of address space that we have these days.
+
+It's not practical to have more physical memory, but historically it was and then in fact happened very frequently.
+
+Um, is it problematic? No, it's just that the rules of engagement change a little bit.
+
+And the way you think about designing programs and operating systems is a little bit different.
+
+Um, the PDP 11 on which Unix was first created had, um, a 64 kilobyte address space, but many of the machines had several megabytes of memory.
+
+Uh, and so what that meant was you could run many, many programs out of the same physical memory before you ran out of physical memory.
+
+But they could all completely occupy 100% of the virtual address space, which, if you only have 64kB of memory, happens a lot, actually.
+
+Like that's not very much memory, right. Uh, but on modern machines with a 2 to 64 address, space is just not practical.
+
+Yes. Yes.
+
+For what we'll talk about here in a second. You wind up doing what's called, um.
+
+Uh. Um. So, um, how do I want to say this?
+
+It's technically called virtual memory, but we are talking about virtual address spaces.
+
+I don't want that to be confusing,
+
+but you basically can use this paging model to allow you to keep more virtual memory than you actually have physical Ram,
+
+because you back the rest of the memory on disk. And we'll talk about how that was your question.
+
+Also, we'll talk about how here in just a moment. Yes.
+
+Is one. Is what? A range of memory.
+
+A page is a range of memory. Yes, it's four kilobytes of memory from some address to that address plus 4095.
+
+Yep. Yes. Uh. I think I know for sure I.
+
+That is just the addresses in your program. The addresses in your program are not the addresses in the actual Ram chips of the computer.
+
+They are made up addresses that map arbitrarily to the actual Ram chips in your computer,
+
+because the actual Ram chips in your computer may be in different locations,
+
+may have different properties, may have holes in the middle, may have, you know,
+
+there's all kinds of weird worldliness that happens when you're out in space.
+
+I to. Anything? Probably not, except for every page maps to a hardware page.
+
+That's the only. Or doesn't. Right?
+
+That's the other possibilities. It doesn't map to anything at all. All right.
+
+So, um. One of the things that demand pages paging allows us to do, uh, is allocate large amounts of Ram to a process very quickly.
+
+When a process, for example, calls s break and says, give me a gigabyte of memory,
+
+we don't have to go find a gigabyte of memory pages and physical memory and allocate them slowly, one at a time, to the process.
+
+Instead, what we do is we say, yeah, yeah, yeah, you can have a gigabyte of memory if you want it,
+
+and then we only actually go allocate those pages when the process tries to use those pages of memory,
+
+which means that that's break operation can be very, very fast.
+
+Right. We run s break. It just happens. Right. We mapped the memory and then the process only has to pay the price of that
+
+allocation at such time as it actually tries to use the memory that it asked for.
+
+Um, this also allows us to load data from disk again on demand.
+
+We load the data from disk only when the user actually needs it.
+
+In practice, this is how executables are loaded from disk.
+
+Remember I drew the picture of the text data bus. All of those things come from the disk, right?
+
+When you save that out file on disk, it contains all of the information that would be used to fill the text,
+
+the data, and then the not exactly the bus, but the text and the data sections of the processes memory.
+
+And so what happens is the operating system says, okay, if the user ever actually tries to run this code, I'll go get it from that file on disk.
+
+If the user ever actually tries to use this data, I'll go get it from that file on disk.
+
+But until the user tries to run that code or read that data, I don't have to do anything.
+
+It turns out that this is, um.
+
+Fairly useful and efficient because many programs on any given execution run don't use all of the code and data that are in that file on disk.
+
+So, for example, suppose that you, um, start the web browser and you're starting it to browse the web.
+
+Probably it's going to use a lot of that code and data that's on disk.
+
+But suppose that what happened was you clicked a link in another program.
+
+What that other program does is it starts your web browser and says, here is the address that I want you to load.
+
+The web browser program says, oh wait, there's already a version of me running.
+
+Let me just hand this URL to the version of me that's already running, and it will load that web address.
+
+So the when you clicked that link, you didn't have to load up the entire web browser.
+
+You just loaded the few kilobytes of code that was required to contact the version that was already running, and hand it the URL.
+
+Right, so it runs much, much faster. It starts much, much faster.
+
+Think also of a program that you run. You've all written programs where you notice that say you don't have the right set of command line options,
+
+and so you can't do whatever is the user is asked to do.
+
+Right. If you notice that immediately I checked my command line options, I don't have enough arguments.
+
+I can't run a program. Then at that point, you just exit.
+
+You don't have to load the rest of the program. There's no point. It's not going to do anything.
+
+Now for the programs we're writing in this class, it doesn't matter, right? They're not that large.
+
+They're just a few kilobytes in size. But if it was something large, like a web browser or a game or, uh, you know,
+
+office suite or something like that, that could be a lot of work that I don't have to do.
+
+Okay. Questions make sense. All right.
+
+Um, I'll do that in a minute. Or I won't.
+
+Um. Yeah.
+
+So, uh, whenever you call the break or break system call and you change the size of the heat.
+
+What actually happens is what I just said. It doesn't actually change the size of the heap.
+
+It just notes that if the user ever tries to use that memory, it should change the size of the heat.
+
+And so then, until the user tries to use the memory that U.S. break, nothing happens.
+
+Then when the user tries to use the memory that was just created,
+
+they go and they try to write something to it, or they try to read something from it.
+
+Then the memory says, wait, I don't actually have that memory, right?
+
+There is no mapping that question mark at the bottom right. There is no mapping.
+
+The operating system says, oh yeah, I haven't gotten around to that yet.
+
+Goes finds a physical memory, maps it into the process and says, all right, let it, uh, continue.
+
+It'll clear to zero, you know, etc., etc. put it in the page map and allow the process to continue.
+
+Yes. That is the normal way of doing it.
+
+There are alternate ways. Um, you could map everything immediately, right?
+
+That's definitely a thing that you can do. And in some cases, you want to, um.
+
+And there are files on the disk in many operating systems that are marked as just map me entirely before you start doing anything else,
+
+because you know you're going to need it, right? But in general, that's how we do things, right for both efficiency and simplicity reasons.
+
+If you do everything the same way, it makes your code simpler. Okay.
+
+So then, uh, here's an example of that. Right. So the program break is here.
+
+The user calls s break to, uh, increase by the size of a page.
+
+The system break is moved upward, but the page is marked is not present.
+
+Right. No address is put, uh, in there for a physical memory address.
+
+At some point, the user tries to access that page, and only then.
+
+So see here there's no mapping for that page. Only then does the operating system go find a page and put it in, um, the MMU mapping.
+
+All right. And then the process does whatever it does. Now, the last piece of this puzzle.
+
+Okay. Second last piece of this puzzle. Uh, the stack works the same way.
+
+Right. Okay, so that's the key is the stack works the same way. The difference is that in the case of the heap, the user asks for more memory.
+
+In the case of the stack, when the user's stack just overflows onto the next page, is sort of automatically goes and gets more memory.
+
+Right. Um, but what that means is that we can give every process in the system an eight megabyte stack, which is approximately what they are.
+
+Last time I looked. Let's see what they are these days. Um.
+
+Come on. Uh, actually, let me do it this way.
+
+Stack size, uh, 8192kB.
+
+It's going to be really hard to see. It'll be visible in the video. Um, but it says right here, stack size, uh, 8192kB.
+
+So about eight megabytes. Um, exactly. Megabytes, actually.
+
+So what happens is that eight megabytes notionally is allocated to the process, but we don't actually have to go get it unless the process uses it.
+
+Most processors do not use eight megabytes of stack, right.
+
+They use a few hundred kilobytes of stack. Right. They don't use eight megabytes of stack.
+
+So we save that memory. All right. The last thing.
+
+This goes back to the questions we had over here about what happens when you run out of memory.
+
+If you run out of physical memory. You go to allocate a page for a process.
+
+You go to map it into its virtual address space, and you don't have any more physical memory.
+
+You have four gigabytes of memory. You have allocated four gigabytes to the processes that are running on the system.
+
+What the operating system can do is go find a page that is backed and is clean with respect to its backing.
+
+Throw that page away and give that. Four kilobytes of of Ram to the process that needs memory right now.
+
+Then, presumably when that other process for which you just threw its memory away needs memory again,
+
+you find another page, read it back from the backing, and give it back to that process.
+
+The very last piece of this puzzle. Is that if you don't have a clean page.
+
+You can create a clean page by doing what we call swapping, and that is finding a page sized piece of unused disk space,
+
+taking the data that's in the page, writing it to the disk.
+
+And then throwing it away. Because if you ever need it back, you can just go read it back from the disc.
+
+And in this way, you can have a system that has four gigabytes of memory and has processes that are actively using more than four gigabytes of Ram,
+
+just not all at the same time. You take some processes and you swap them out to disk, and you take when they when their turn comes around again,
+
+you swap another process out and read that one back in.
+
+Right. So as long as not all of their processes need all of their memory at the same time,
+
+you can over allocate your physical or your yeah, your physical Ram.
+
+Uh, if if too many processes need memory at the same time, we get what's called thrashing,
+
+which is where you spend all of your time reading and writing from the disk and no time actually doing useful computation.
+
+Right. So you can only do this to an extent, but you could do it to a very real extent.
+
+Yes. Conceptually it's very similar.
+
+So the question is something like Google Chrome, how does it manage when you have too many tabs open?
+
+Conceptually it does a very similar thing, but it doesn't do it at the operating system level.
+
+It will throw away a page, but remember where you were.
+
+And then the next time you click on that page, it will go back to that website and reload it and throw something else away.
+
+Yeah. All right. Um, I think there was another hand.
+
+No. Okay. Uh, yes. You gotta raise it up high like you mean it.
+
+I'll answer one more question. I'm gonna let you go. Yeah. No, it's not the same as, like, garbage collection.
+
+It's a different process. It's a different process. All right. Thank you very much.
+
+Have a great weekend. Have a safe Halloween. I will see you on, uh, Monday.
+
+I have a very stupid, not stupid question. I started playing a game a couple days ago, Final Fantasy 16 on my computer.
+
+Okay. Crashing. Okay.
+
+If you're not ready to go into the personal memory settings and custom size to 1.5 times, I recommend the three time I say maximum for swamp, I think.
+
+I don't know, yeah, why would I do um, I don't know why you would need to do that.
+

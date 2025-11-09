@@ -1,0 +1,955 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Now that I have promoted sedition and.
+
+Also hackathons. Let us begin talking about races and synchronization.
+
+So if you're a member on. Wednesday the 5th of November.
+
+What do we say about the 5th of November? Remember. Remember the 5th of November?
+
+Yeah. Um, on Wednesday.
+
+This is November. It's also Gianna's birthday. So if you want to say happy birthday, um.
+
+Not today, but Wednesday. Um.
+
+I said there was one slide at the end that you should go home and look at and ask if you have any questions, so I assume everybody did that.
+
+Um, today what I want to talk about is races and synchronization.
+
+So effectively the last two lectures, the previous two lectures, the last lecture slides, we said, hey, we have a problem.
+
+Which is that we might actually want to have more than one logical flow of control in the system.
+
+And then we said, okay, let's allow that.
+
+And we talked about sort of what it means to have more than one logical flow of control in the system.
+
+But in doing so, we've created a new problem which is racist.
+
+And so we're going to introduce a new solution which is synchronization.
+
+Turns out that's going to introduce a new problem which is deadlock. And when we want to reduce the solution to that.
+
+But then I promise we're done at least for now. Like if you want more, go take like 462 or 486 or something.
+
+Right. We'll be done after that in this particular lecture.
+
+So races are a problem that occurs when we have concurrent logical flows, and synchronization is the solution to that problem.
+
+It's how we avoid the problem that we created when we allowed, uh, concurrent logical flows.
+
+So a race or a race condition? Is when we have two or more events that are dependent upon one another.
+
+Some of those two or more events can occur in more than one order, or maybe even at exactly the same time.
+
+And there is some order of those events which is undesirable.
+
+That's it. That's a race. This is the second time in this course that I told you.
+
+There's a thing that happens, and there's here's a bulleted list of all of the possible.
+
+Facts about, right? The first time was, um, creating a pointer, right?
+
+Creating a valid pointer. I said there's four ways to create a valid pointer. And I enumerated the four ways to create a valid pointer.
+
+You can take the address of an existing variable. You can, uh, declare a string or array, um, uh, static initializer.
+
+You can ask for memory from the operating system, or you can calculate a valid pointer from another valid pointer.
+
+That's the only four ways. And I said remember those four.
+
+Remember these three. Right. We're going to get to another one in a few slides.
+
+That's another set of four. Remember those four we get there. They're really these but more specific when we get to it.
+
+But you should know those. If any one of these three bullets is not true, you do not have a race.
+
+If all three of these bullets are true. You have a race.
+
+It's that easy.
+
+So an example is that you have some state that will be updated multiple times, and then you're going to produce output from your program.
+
+If there's some order of those updates to that state that would be incorrect, then that would be erased.
+
+And we'll see some more details about that. Uh, later.
+
+So before I move on to the synchronization, let me say here's the thing about raises.
+
+That's it. That's the definition of a race. Easy peasy.
+
+If those things are true, you have a race. If they're not true, you don't have a race. The problem is.
+
+That. There's no way to test.
+
+For a race. You have to analyze your code and determine whether is or is not a race.
+
+Because testing for a race, what you're actually testing for is that there's not a race.
+
+And as we all know from taking science class in sixth grade or whatever, it is very, very difficult to prove a negative.
+
+So if you write a test to test whether there's a race in your program.
+
+And the test passes 10 million times in a row.
+
+Does that mean there's no race in your program? No, it means that that order of events.
+
+That is incorrect. Didn't happen 10 million times in a row.
+
+And it could be that if you ran it a 10,000,001st time, you would immediately get the wrong result.
+
+Oh, look, I have a race, so there's no amount of testing that can prove that you don't have a race.
+
+And I know that this is something that students really hate.
+
+The only way you can be sure you don't have a race is you sit down and you look at your code and you read it.
+
+And you think really hard, and you ask yourself whether there could be a race anywhere in the code that you're looking at.
+
+Maybe you even do a proof. To show that there's not a race in the code that you're looking at, and then you're confident that there's no race.
+
+Now in KSI 220 I'm going to ask you to write some concurrent code that will have races, and I'm going to ask you to fix those races.
+
+And it'll be fine, because you're only talking about it like a dozen lines of code, right?
+
+Or something like that. And you can just look at all of them and say, is there a race, yes or no?
+
+But in very large programs, this becomes extremely difficult to ensure that you don't have a race.
+
+And so the price for concurrent logical flows is high.
+
+Remember I said at the very end of that last lecture, I said that when we have concurrent logical flows,
+
+our cognitive burden for determining the correctness of our program becomes higher.
+
+This is why because you could have a race. And the only way to know that you don't is just to look at it and think really hard.
+
+And that hurts. It makes us sad. So when you're designing programs, you want to ask yourself, do I really need concurrency?
+
+Because if I don't have concurrency, I don't have a race. Five concurrency.
+
+Now I got to think really hard. So synchronization in the context of a computer program.
+
+This is a word that has many meanings like serialization. We talked about serialization had many meanings and you could look up the wrong ones.
+
+Synchronization has many meanings in the context of a computer program is the deliberate ordering of events via some mechanism.
+
+So I ensure that those events remember the race was a sequence of events that was undesirable.
+
+Synchronization is the deliberate ordering of events, typically to ensure that that undesirable sequence doesn't happen.
+
+There are many kinds of synchronization mechanisms. We will talk about many of them in this, uh, lecture.
+
+And those synchronization mechanisms may directly order events and just say, hey, if I have events A, B, and C, then they have to happen.
+
+ABC in no other order is allowable. They may say, I don't care what order A, B, and C happen, but they can't happen at the same time.
+
+It's either A or B or C, you finish one, you move on to the next.
+
+They may say, I don't care what order these happen in, but once you say that you want to start A,
+
+then you have to also start B at exactly the same time. And I'm going to stop you until that is true, right?
+
+Whatever ordering of events you can think of. You could have a synchronization mechanism that would cause that ordering of events.
+
+Synchronization is how we avoid races. Races was an order of events that is undesirable.
+
+Synchronization is ensuring that the order of events that actually occurs in our program is not the undesirable order.
+
+Um. I don't want to do that. I think I didn't do that last time either.
+
+We didn't talk back in last class, did we? You were sitting at home trying to grow up the beard.
+
+I understand I would have done that too. Um. Uh, yeah.
+
+But I'm not going to do it right now. Maybe we'll get one at the end. Uh, so.
+
+There's our introduction. Let's formalize things a little bit.
+
+So there's a textbook Computer Systems a programmers perspective. I've told you about this right.
+
+Used to be required. Now it's not because it's expensive but it's a really good book. 9.99.9.
+
+Is that Malik? Yeah, okay. Um, it's, uh, it has this formal definition of a race,
+
+and it it says a race is when the correctness of a program depends on one thread
+
+reaching point X and its control flow before another thread reaches point Y.
+
+So this meets all the criteria we had before. Right. We have more than one flow of control.
+
+Uh, one of them, um, uh.
+
+Has to reach point X before the other one reaches point Y.
+
+So we have two events right x and y. And if x happens before y great.
+
+If y happens for x then we lost our race. Right. And that's why we call it a race.
+
+Because it's like like a foot race. Like two people running. If the one thread reaches X before the other one reaches Y, we.
+
+When we won the race, our program runs correctly.
+
+If the one thread reaches Y before the other one reaches X, then we lost the race and our program is incorrect.
+
+Right. So it is a race. Literally a race, right? A race to see what happens first.
+
+Um, so this is a formalization. We like this formalization.
+
+Is that flickering? It looks like it's flickering out of the corner of my eye.
+
+Oh. Uh, could.
+
+Who has a computer out? Could you make a piazza post to instructors that says Ethan, file a ticket for the podium.
+
+Um, so that I don't forget to report that, because our one day will come in here and I'll be on the chalkboard with a one time in,
+
+I don't know, like 2020, 2019 or something.
+
+The power went out in, I was in hock stutter, and the power went out and it came back on and the projector didn't come back on.
+
+Okay, listen. Well, that's a whole different story.
+
+The projectors in these classrooms don't work if the internet is out, because that wire doesn't go to the projector.
+
+It goes to the internet. Right? Bonkers. But anyway.
+
+Right. And then so I like found I went there was like a closet like this.
+
+And I was like, oh, okay, I'll go over this closet and I open it up. No, they don't like me on this one.
+
+And there was a overhead projector in there. So I got out markers and like the kind with the little, you know, it was a great we had a good time.
+
+We pretend to like it was 1995 again. Uh, anyway, so, um.
+
+This x and y thing is all well and good, and it's really great because it maps directly to our logical flows of control, right?
+
+Because if you remember, a logical flow of control was just a sequence of instructions that the program runs as it's,
+
+you know, doing whatever it does. So we can declare those points x and y to be specific instructions like,
+
+you have to run this instruction before that guy runs that instruction or else we have a problem.
+
+Right. And so now we can talk about sort of the relative progress of the different logical flows of control within our system.
+
+Note that in practice there may be many points x and y, right. It's not like there's just x and just y.
+
+And if you keep those in order, then your program is correct.
+
+There may be many pairs of points in the program for which this is true, and sometimes it's a little bit conditional.
+
+So you say. Well, as long as T1 is not reached point B, I don't care what T2 does.
+
+But once T-1 reaches point P. Then I need it to reach X before T2 reaches Y.
+
+Or else I have a problem. Um, and so, you know, it can get more complicated, etc.
+
+This is a formalization of this model.
+
+Um, we're not going to spend a huge amount of time with the formal aspects of this model, but it is a way to think about to to, uh,
+
+put this in the context of the logical flows control that we talked about and think about,
+
+and we'll see this in a few slides where those points X and y are when you're analyzing your program.
+
+No. Yeah. Go ahead. Yep.
+
+It's typically a specific instruction. Right.
+
+So we the process the logical flow of control is a series of program counter locations.
+
+Right. And the program counter location is an instruction that it runs at a particular time.
+
+Typically an instruction is X and another instruction is Y.
+
+Speaking on. At the architecture level? Yeah, typically.
+
+But in this class, we're not going to get down that low because we don't actually write the assembly language.
+
+But typically when we're talking about that formal model, we're talking about individual instructions.
+
+The CPU is running. When we get to atomic operations a little bit, you'll see why instructions are important.
+
+Yes. It's also based instructions because threads can do unrelated things.
+
+How do you feel about that? No, I was bullying Medhat, but he didn't care.
+
+Yeah, sure. Yeah. So he can come hit me. Yeah. Uh, I don't think you're allowed to hit me.
+
+I'm not allowed to hit you, I know that. I did take that training.
+
+Not this year, but, you know, in the past. Um, okay.
+
+So, um, other questions. Yes.
+
+Um, so I will answer that question. And first you have to answer a question for me.
+
+Russian. Why? Aren't you going to be here this weekend?
+
+Oh, you raise your hand. We better see you this weekend.
+
+All right. Uh. I actually don't get paid when you go to Ruby Hacking, just to be very clear.
+
+There's no benefit in this for me. Um, so the answer is that, um, so the question is, why do we if we just start T1 before T2,
+
+then we can just ensure that T1 gets to x before T2 gets to wiser.
+
+Why is this even a problem essentially.
+
+And the answer is that we cannot ensure the rate at which our logical flows of control execute, typically for a variety of reasons.
+
+One is frequently they're actually that's decided by the operating system, not within our program.
+
+So I may start T1 before T2, but the operating system says I don't know man T1.
+
+You just chill over there and it lets T2 run a ton and then it comes back and says, okay, T1 now is your term, right?
+
+And second is many. In many cases we're talking about logical flows of control that are long lived.
+
+And so like I may be able to ensure that T1 reaches x before T2 reaches y when I start t1 and T2.
+
+But three weeks from now, t1 is coming around to x again, where is T2, right.
+
+And so they may sort of change their relative position with respect to one another over time.
+
+Frequently, as we'll see with data races, this is actually to do with data structures.
+
+And X and Y are modifications and viewings of a particular data structure,
+
+and T1 may change that data structure millions of times during the execution of a program.
+
+And T2 may observe that data structure millions of times during an execution of a program.
+
+But the order in which they do it matters. Does that make sense?
+
+So when I said there's many points x and y, right. That's an example of why there might be many points that answer your question.
+
+Yeah. All right. Who else is going to Uber Hackney and just didn't raise their hand?
+
+Zoomers. They don't pay me enough.
+
+All right. Um. So a particular kind of race is what we call a data race.
+
+And again, this is the second set of four bullet points that I said you should just learn.
+
+Now the good news about this set of four bullet points is that it maps exactly to the three bullet points we had before.
+
+It's just a little bit more specific. So a day to race is when you have two or more concurrent flows that both access the same shared state.
+
+So if you remember in the rules for races, we said there's two or more concurrent flows that are dependent upon one another, right.
+
+That's the dependency. At least one of those flows modifies the shared state.
+
+This is actually an extra rule that was not in the first set of rules, because it's part of the dependency.
+
+We need to be just a little bit more specific, right? One of the modifies shared state.
+
+The order of the accesses and modifications is important.
+
+Remember, we said before that the order in which the events occur is important.
+
+In this case, it is the accesses and the modifications of the shared state.
+
+And the synchronization in use in the program.
+
+We'll talk more about that in a moment. Is insufficient to preserve the necessary order.
+
+So the third bullet was there is some order of those events that is incorrect.
+
+In this case, we are saying that there exists an order of those events that is incorrect, and our program allows that incorrect order.
+
+Then we have a database. Good news data races are just about the most common kind of race that you'll encounter in.
+
+Programing. Bad news. Remember before when I said that you can't prove the nonexistence of a race?
+
+A day, two races, a race. They're very common, and you can't prove that they do or do not exist.
+
+You just have to analyze the code and ask yourself. Do I have the possibility that two or more concurrent threads are going to access the same data?
+
+The answer is yes. Then you ask yourself, is it possible that one of them will modify the data?
+
+If the answer is yes, you say, is there an order of those accesses and modifications that might be wrong?
+
+And if the answer is yes, you say, have I included enough synchronization in my program?
+
+Because remember we said synchronization are ways to deliberately order events.
+
+Have I included enough synchronization of my program that no race will, that I will never lose the race?
+
+And the answer is no. Fix your program. If the answer is yes, congratulations, you did that hard thinking analysis that I talked about before, right?
+
+In a small program, it's easy because you can look at all of the data and say, ah, does more than one thread use this data?
+
+Well, the first question you ask is, do I have more than one logical flow of control? If the answer is no, good news you don't have any races, right?
+
+If the answer is yes, then you move on to looking at all the data in your program and asking those questions.
+
+But you have to do it. You have to just look at the program and think about how it works.
+
+Yes. No, those are logical.
+
+That is flow control. But is not a logic.
+
+Concurrent logical flow necessarily. Uh, it's things like threads and processes.
+
+We haven't learned how to create a thread yet in C, so none of the programs you've run so far have had multiple threads, right?
+
+Sure. Yes. It's the same words, right? Just in a different order. Yeah.
+
+It's terrible language. Um, but the we will eventually get to where we can create threads.
+
+And then once you can create threads, then you have multiple logical flows of control. Right now you don't.
+
+But by the end of this set of lectures, you will. Other questions.
+
+Okay. So, um. A nice property of this is that you can break down any arbitrarily large number of concurrent flows, and you can analyze them in pairs.
+
+And if a particular pair of threads doesn't have a race, you move on to the next pair, and once you cover all of the possible pairs of threads,
+
+then if none of them have races, then you don't have to look at the whole set of threads altogether.
+
+You don't have to look at the triples in the quadruples in the quintuplets, right?
+
+If there are no races between pairs, there are no races within the entire set of threads.
+
+Furthermore.
+
+Any two threads that do not modify because see that second bullet says one or more of the threads modifies the state cannot race with one another.
+
+So it is frequently the case that you will have, um, a bunch of threads.
+
+One of them modifies shared state and the other ones don't.
+
+The aren't. Okay. I didn't touch you that time. The only thing you have to ask yourself is.
+
+Does that one thread. Cause a race with any of these other threats.
+
+You don't have to consider the readers with the readers. It's only the writers, with the readers.
+
+Right. So this makes this problem more tractable. Frequently.
+
+You can also break them down into like what I would call classes, right where you say, like, all of these readers are actually doing the same thing.
+
+Let me pretend there's only one of those. This writer is doing this thing.
+
+Let me pretend there's one of those. Does that reader and this writer have a race?
+
+No. Okay. None of those readers in this writer have a race, right?
+
+So you can frequently do that because they're, for example, all of the readers are running exactly the same code, right?
+
+So here's an example. Yes. If all threads modify and no threads read.
+
+Yeah, that is a data race. Although if nobody ever reads, then it may not be a data race in that there may be no incorrect order of operations.
+
+Right. Uh, and that would depend on the logic of your program.
+
+So, for example, if all of your threads are writing and none of them are reading, then they probably are not racing with each other.
+
+But if those writes are producing output on the screen, the output might still be wrong.
+
+Right. So you're right is, you know, like putting a pixel on the screen, you can still put the wrong pixels in the wrong order or something like that.
+
+So now even though there are only rights, it's still wrong.
+
+But it's because the reader is not inside your process.
+
+It's outside of your process. Does that make sense? Um.
+
+But in general, if you're talking about like inside the dedicated computer, I think if it's all rights,
+
+probably you could claim there's not a race, but I don't want to go out on that limb right this particular minute.
+
+It feels like a philosophical question. Um, we don't have a philosophy of computer science class here.
+
+Although there's a man named, uh, Bill Rappaport who was an instructor here for many years.
+
+He's now emeritus faculty, although I think he lives in Florida or, like, North Carolina or something.
+
+So I haven't seen him in years.
+
+But he did teach a course called Philosophy of Computer Science, and he has a textbook, I think it's available for free online.
+
+Uh, it's at CSC somewhere. Tilda Rappaport something?
+
+Yes. Concurrent reads are never a race as long as it's only reads.
+
+It's never a race. That's definitional.
+
+The current concurrent rights thing feels philosophical. Other questions.
+
+All right, so here is some code. Take.
+
+You probably did take a minute while I was jacking my jaw. But take just a moment and look at this code.
+
+And in about 45 seconds, I'm going to ask someone to put up their hand and tell me what this code does.
+
+And I want like a sentence of this code. Does this not first it does this, then it does that in like one sentence.
+
+What does it do? Like why would I call this function? Who wants to tell me what this does?
+
+Yes, sir. It inserts a string into a table of strings.
+
+Yeah. Essentially what you said. Why do I ask you to do this exercise?
+
+We talked about this once before. It's harder than it looks. It's just a few lines of code.
+
+But going from the concrete, these few lines of code to the abstract, why would I do this is actually fairly difficult, right?
+
+It's good practice. It's good for you. Reading code is good for you. Um, okay.
+
+So, um, I assert to you, first of all, that this function is correct.
+
+That it actually does. Insert one string into a table and every time you call it, inserts one more string into that table.
+
+Now, it doesn't have some bounds checks and things like that. Like if you called it five times, it would be bad times, right?
+
+Um, but that's just so if it's on the slide, you can clearly check and make sure the strings is not greater than some maximum value or whatever.
+
+Right. I assert that this code is correct. Furthermore, I assert that if two threads try to use at the same time.
+
+That it has a database. And so let's look at that. So suppose that we have a thread t1 and a thread t2, and they each have a local variable index.
+
+Right there we have an index. Then we have two global variables in strings in the table strings.
+
+This is the state of them over on the right hand side of the slide.
+
+Right. So index doesn't exist yet because we haven't gotten there.
+
+It hasn't been pushed down onto the stack yet, right? Um, in the strings of zero.
+
+And the table of strings contains only null pointers.
+
+So suppose that T1 begins execution, and it starts by creating a local variable index,
+
+and it assigns to that variable index the current value of in strings, which is zero.
+
+Then T2 starts running on a different processor, or maybe an interrupts T1 in the CPU was running T1 and now it's running T2.
+
+We don't know. We don't know. For multitasking or multiprocessing it doesn't matter. T2 does the same thing.
+
+It creates a local variable index and it saves the value zero in that local.
+
+Then T2 assigns the index that it has reserved.
+
+Um. Into that position, it assigns its argument string right.
+
+So the string that was passed in to the function running on T2 is now in the first index of strings.
+
+Well, then T1 wakes back up and it does the same thing.
+
+And so in that first position of that in strings array or of that strings array,
+
+we have the string that was passed in to the set strings function on thread t1.
+
+T1 then increments in strings because it added one. And so right now this looks good right?
+
+We call t1. We call t1. First t1 added its string to the array.
+
+It incremented in strings. So the next time we call set strings it's going to add in the next place.
+
+It's going to increment in strings. And everything's cool except T2 was already running.
+
+So now it increments in strings and they both return.
+
+This is probably not what we wanted, right?
+
+Because instead of having either T1, the string passed in T1 and then the string passed to t2, and then in strings equals two, we have t1.
+
+T2 is nowhere to be found. We have a null and in strings is equal to two.
+
+I actually wouldn't have cared whether it said T1, T2 and insurances two or T2, t1 and T2.
+
+I might not have even cared if it said only T1, but industries was one.
+
+That depends on what problem I'm trying to solve, but I almost certainly didn't want T1 null and strings as two, right?
+
+This feels like probably my program is going to crash at some point when I try to do something with that.
+
+No point. So does substrings have a bug?
+
+Maybe. Maybe not. Remember I said before that not all APIs are thread safe?
+
+If the documentation for substring says. The term they use for thread safe is reentrant.
+
+If it says substring is not reentrant, no, there's no bug in set string.
+
+Just don't do that. But if I want to be able to call set string from two different threads at the same time that I have a race, I have a data race.
+
+Is that a bug? I mean, yes, but it's not a bug in the sense that I logically did something wrong.
+
+It's a bug in the sense that I didn't carefully order my events and ensure that the first set string completed before the second one ran.
+
+So those lines two through four form what we call a critical section.
+
+A critical section is a region of code that must be executed by at most, one logical control flow at a time.
+
+So T1 run set string. Then T2 run set string.
+
+I'm fine. T2 run set string, then t1 run set string.
+
+I'm fine. T1 runs half of set string.
+
+T2 comes in like a cannonball, blows everything up and then gets out.
+
+Now I have a problem, right? I have to do one and then the other or the other.
+
+And then the first. It's a critical section.
+
+Are there any questions? Okay.
+
+Maybe. The. While completing the crossing.
+
+A data race. Because you have races that are not data races.
+
+Yeah. The problem comes when. While executing rules.
+
+I modified. And.
+
+Now it's basically working on a. Assumption.
+
+Yeah. It assumes that the state of the world was one thing.
+
+One thread came in and changed that, and the assumption is now invalid.
+
+Right. Your statement was correct.
+
+It was fully correct. So this is only a.
+
+Multitasking or multiprocessing. Either one. On the same in the same memory space.
+
+For data databases, the key is that they're both in the same memory space. Yeah.
+
+Synchronization. Which we'll talk about next. Yes.
+
+What in your code determines when a thread switch is?
+
+It doesn't. The operating system typically decides when a thread switches.
+
+So this is part of the issue with logical flows of control is that typically we do not have
+
+extremely fine grained control over exactly what runs win unless we use synchronization,
+
+which we haven't talked about yet. We introduced races. And then I want you to synchronization.
+
+Mhm. So the question is we before we talk about multitasking and multiprocessing.
+
+And if I can broaden the question, um, does it matter whether we're talking about multitasking multiprocessing,
+
+and would this behave differently in one situation or the other? And the answer is in general, no.
+
+Because remember we did that little thought experiment about thread A and thread B, and we did multitasking.
+
+But as far as thread was concerned thread B did something.
+
+If you think about multitasking at the finest level as switching after every single machine instruction.
+
+It's effectively multiprocessing at that point, right? It's effectively like it's indistinguishable from multiprocessing at that one point.
+
+So uh, multitasking versus multiprocessing in general doesn't matter here.
+
+Now it may be that certain races are more you're more likely to lose certain races if you have multiprocessing or if you have multitasking, right?
+
+One or the other. But the existence of the race multitasking multiprocessing.
+
+Can't say to answer your question. Yes.
+
+Yes. Priorities. You can use priorities. Other priorities. We typically don't think of a synchronization.
+
+I got this for you. I want you to have us. You could establish priorities using synchronization.
+
+Yes. That's one of the things you could do with synchronization. That's a pretty complicated thing to do.
+
+So you'll get to do it for five. Other questions.
+
+You guys have to do it now because Mitt had asked that question. We.
+
+I'm not going to top that question. Top hat stood to me. All right.
+
+So, um, it is frequently the case that critical sections access or are involved code that accesses, um, shared state.
+
+So if you have a critical section that acts as a shared state, then it's probably because your critical critical section contains a data race.
+
+And in general when you're looking at your code and trying to decide.
+
+Is this code a critical section? Is this code part of a database?
+
+I gave you that laptop. I'll report it.
+
+Um. Then you should ask yourself, uh, does this critical.
+
+Does this piece of code modify any state that might be shared with another logical control flow, like global variables, right.
+
+For example. And if the answer is yes, then probably you're looking at code that has a critical section in.
+
+Then the next question you ask is, does this code observe any state that might be shared within a logical, logical, natural flow?
+
+Or does it access anything, not modify it, just look at it. If the answer is yes, then you might have a critical section in the first case.
+
+If the answer is yes, you almost certainly have a critical section.
+
+You're writing, you're changing global state. For example, in the second case, maybe you do, maybe you don't.
+
+In particular, if the shared state is immutable.
+
+For example, you never change it in the entire execution of your program.
+
+Then it doesn't matter how many logical flows of control try to read from it, because they're always going to get the same answer it does.
+
+There is no order of those reads that would be wrong, right? Because it never changes.
+
+Doesn't matter when I read it, I get the same answer.
+
+Or what is also fairly common in programing is it doesn't change very often, or it changes only at very well-defined points.
+
+So for example, I start my program, I read in some sort of configuration or data file.
+
+I set up some kind of information and then from then on I never change it again.
+
+I only look at it to see what my current configuration is.
+
+Well, in that case, as long as there's no racist while I'm reading it in, then the rest of the program doesn't have any races.
+
+Right. And that's fairly common, that you will start a program reading some data,
+
+set up some data structures, and only then create multiple logical flows of control.
+
+So when you first start your program, there's only one. There's no races. Because remember we had to have at least two.
+
+And then once I've set everything up now I create multiple logical flows of control.
+
+Um. This is something that, for example, services often do like, like web services and things like that.
+
+Right. You start up, you figure out what the state of the world is and then configure yourself appropriately.
+
+And then when people come and ask for information, you give them the information.
+
+And the information doesn't necessarily change. Sometimes it does. So I might read and not have a critical section.
+
+If I write, I almost certainly have a. And again, why do I tell you this?
+
+Because there's no way to test to make sure you have no races.
+
+You can sometimes test to verify that you do have a race.
+
+Although that's often harder than it sounds like. Some of you are going to get.
+
+All of you. I'm a par five. I'm going to test your code to try to find racism.
+
+Some of you are going to get the points even though you have a race, because I just you won, right?
+
+You won the race. Um, but testing to ensure that there's not a race.
+
+Again, it's very difficult to prove a negative. So it's important that you define those critical sections very carefully and completely.
+
+You look over all of your code, you figure out where you have access to shared state, and you say, is this possibly a critical section or not?
+
+And if it looks like this. It's a critical section, right?
+
+But there's a lot of ways that a critical section can work. Here we both read and modify state.
+
+Right. And that was part of the problem is that the the sequence of those reads and modifies was.
+
+All right, so we'll come back to that in just a moment. So now let's talk about synchronization.
+
+So once we have races. Once we have a critical section.
+
+Then we have to ensure that the order of operations in our program obeys whatever the rules are that cause us to always get the right answer.
+
+Right. We said that there's some order of events that gives it incorrect result.
+
+We want to avoid that order of events.
+
+We said that there is some sequence of modifications of data that causes our program to have an incorrect, uh, state in the database.
+
+We want to avoid that sequence of modifications. In order to do that, we use synchronization mechanisms.
+
+The simplest possible synchronization mechanism is what we call an atomic operation.
+
+An atomic operation is atomic in the same sense as an atom, right?
+
+Like the atoms that are stuff is made out of. If you take apart an atom, first of all, its.
+
+Not an enjoyable process for people who are your mind. And second of all, the stuff that you have is no longer the same, right?
+
+So it's intrinsic. If you change the atom, you've changed the stuff. Atomic operations are atomic in that sense.
+
+They cannot become any smaller. An atomic operation is an operation which cannot be interrupted once it begins.
+
+It must run to completion. Furthermore, it appears as if it is the only operation running in the entire system at the time that it is running.
+
+It may not be the only operation in the same way that the dedicated computer model.
+
+There may actually be other processes on the computer, but the hardware inside the computer makes it appear as if it is the only
+
+operation running from the time that it starts until the time that it finishes.
+
+And furthermore. It either fully succeeds and does exactly what it was supposed to do, or it does absolutely nothing at all.
+
+It cannot do something and then fail.
+
+It either succeeds or it fails. If it succeeds, it does what it set out to do.
+
+If it fails, it does nothing at all. If you have an operation in the computer that has all of these properties, it is an atomic operation.
+
+Now, the smallest operation that we know of so far is a CPU instruction.
+
+Right. I add two numbers together, I read a number for memory, etc.
+
+Many CPU instructions according to this definition are not atomic.
+
+Many of them can be interrupted. Many of them can observable happen concurrently with other CPU instructions.
+
+Um, many of them. Some of them.
+
+Can complete without fully succeeding, right? Can do part of their work and then fail.
+
+I shouldn't say many of them because that's actually fairly unusual, but it can.
+
+Um, in fact, in many CPUs. And this is a hardware property.
+
+This is a property of the the design of the processor when it is created by some computer engineer somewhere.
+
+Many of these, uh, CPU operations are not atomic.
+
+And in many CPUs or in some CPUs, there may be as few as one operation that is atomic.
+
+In fact, there could be zero, although if there is, if there are zero atomic operations on a CPU,
+
+then, uh, attempting to run more than one logical flow of control is going to be a problem.
+
+You probably shouldn't do that, right? Most CPUs have at least one.
+
+Some processors, like ARM, have exactly one.
+
+Arm has a pair of instructions L, L, and C.
+
+Load linked and sort conditional, and the only atomic guarantee that the ARM processor gives you is that a store
+
+conditional will be atomic with respect to load linked to the same location.
+
+Doesn't matter what that means. That's the only guarantee it makes. Other processors may give you much stronger guarantee.
+
+So when we looked at our code for set string, what many students will say is we had this thing where we, um, stored in the string is the index.
+
+And then we did some work and then we did in strings plus plus. And they'll say, well.
+
+What if you just don't do that? Then is there a race? What if instead you did something like.
+
+Why is there writing on all of these boards? It's like I've been in here.
+
+I never race before I leave, which is a bad habit. Um.
+
+You did something like this. This, believe it or not, is in our eye.
+
+And this is an in. Atomic.
+
+It's not. Because it's a more than one CPU instruction.
+
+And furthermore this. Is not atomic.
+
+This will probably turn into.
+
+The single CPU instruction increment in strings.
+
+Which says find the variable in strings and add one to the.
+
+And this is not an atomic operation on an x86 CPU.
+
+Because what this actually says is. Go to the memory location where the strings are stored.
+
+Put that address on the bus. Receive the data stored at that location.
+
+Add one to the value that you receive. Put that address on the bus again and then put on the bus.
+
+The new value of in strength. So it's actually multiple steps.
+
+They can be interrupted, and they do not necessarily appear as if they are the only thing happening in the computer at any given point in time.
+
+So if I run in strings twice simultaneously on two different threads, I could have an error in my increment.
+
+In fact, we'll see that probably unlike. Monday or Wednesday of next week.
+
+Can you guys move back from the door so that doesn't happen? I ask and who it is.
+
+I'm just saying, don't touch it anymore. Um.
+
+So in strings, even if we do in strings plus plus on the same line that we use in strings,
+
+it's not atomic because increment is not an atomic operation on our CPU.
+
+It could be an atomic operation or. Now, it usually must be the case that your CPU provides an atomic operation that modifies memory.
+
+If it doesn't, then they can all be atomic. It doesn't matter, I don't care.
+
+This is almost like you can't have a rate or data raise if nothing is changing any data, right?
+
+So usually a CPU must provide at least one atomic operation that modifies memory.
+
+And if it does. Then it is not true that absolutely any atomic operation is good enough.
+
+But there are many, many, many atomic operations that modify memory that if you have exactly one of those and it almost doesn't matter what it is,
+
+then you can simulate any other atomic operation.
+
+Right. So once you have one you have synchronization. You can you can simulate other operations, guarantee that they're in order etc., etc.
+
+Right. So that's why we say this is the simplest possible synchronization mechanism,
+
+which is simply that the CPU is capable of doing something as if it's the only thing happening on the computer at that point in time.
+
+Are there any questions about atomic operations? No.
+
+Um. Here's the kicker. She doesn't have any.
+
+There's no atomic operations. And see, there is.
+
+If you read the C standard, which I know at least one person has, class has done because they asked me a question about it.
+
+Um, I don't know if it's in this section or not. I don't remember who it was.
+
+Um, if you read the C standard, there is a data type that they talk about it being atomic,
+
+but they don't mean an atomic operation like we're talking about.
+
+It's it's a different it is atomic, but it's only atomic with respect to one very particular thing.
+
+It's not atomic with respect to like all the other things happening in the system.
+
+So it's not an atomic operation, which means that in order to use atomic operations in C, we have to do something else.
+
+We can include assembly language instructions in our C. That's the thing that you can do, right?
+
+You put in an Asme statement. You put in some assembly language.
+
+Exactly how that works varies from compiler to compiler, but you can put it in assembly language, the statement that you know is atomic.
+
+You can call a library function that does something that's atomic for you.
+
+That's what we're going to do in PR five.
+
+You can use certain properties of the compiler that you know happened to be atomic.
+
+That's what we're going to do in your next lab. Uh, or you can ask the operating system to provide you an atomic operation,
+
+because the operating system can do a lot of things that your program can't do.
+
+It can ensure, for example, that an atomic operation is literally the only thing happening in the computer.
+
+At the same time, by stopping all of the other processes, allowing one to proceed, and then allowing the others to start back up again.
+
+Um. I think that's all I want to say about that right now.
+
+So we will pick back up with this on Monday.
+
+I hope to finish this on Monday and get into some live, uh, get into some live coding of, um, uh, the actual, as I said,
+
+the library functions of the actual library functions that allow us to do things
+
+like create multiple logical flows of control and synchronize and things like that.
+
+In the meantime, I hope to see you all this weekend. I'll be around most of the weekend.
+
+Happy hacking.
+

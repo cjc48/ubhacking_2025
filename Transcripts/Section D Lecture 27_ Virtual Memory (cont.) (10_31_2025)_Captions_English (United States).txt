@@ -1,0 +1,897 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+We're going to try something new today and turn my mic on in both classes.
+
+I don't have candy for you, I should. I have candy in my office. If you stop by, I'll give you a piece of chocolate.
+
+Okay, well, that's the most zoomer thing I've heard. Like.
+
+You ran this morning. Okay, that's a problem.
+
+That's a problem. Running is a question way to me.
+
+All right, so we left off on this.
+
+Slide last time. Slide five. Slide six says we're going to do a lecture question I feel like we're not going to do that.
+
+Um, but we had just introduced the idea of the memory management unit as a piece of hardware that sits between the CPU and the Ram.
+
+Right. And I drew the little picture on, um, the board. I feel like that's enough of a summary of what we talked about last time.
+
+Nope, not going to happen. So, um, this MMU translates between the virtual address.
+
+Uh, the virtual address is used in your program to the physical addresses that communicate with the actual Ram chips.
+
+Um. Both of these addresses are in what we call address spaces,
+
+and the address space is the set of values that are potentially valid addresses for virtual memory or for physical memory,
+
+or for whichever one we are, um, talking about.
+
+And these address spaces need not be the same. In fact, on our system, they almost never are.
+
+In particular, the virtual address space is very, very, very large and the physical address space is almost certainly much smaller.
+
+I just told him that he can't be food in class. And now you're eating food in class.
+
+Guys. It's all right. I know you all bring your, like, actual launched a class.
+
+Somebody probably has a lunch today. See, there's a lunch back there. You're not eating it, but.
+
+It's all right. One of my favorites.
+
+The computer lab was there's the big sign on the door that says no food, and there's just people in there just shoveling it in.
+
+I'm a team. Okay.
+
+It's. Behave. Um.
+
+You'll be. So we have two of the 64 bits of virtual address space, but we don't have 2 to 64 bits of physical Ram.
+
+Right. It's just not reasonable to have to do 64 bits of physical Ram.
+
+We can't afford it, right.
+
+In fact, I think like the number of transistors required to, you know, create that amount of Ram becomes problematic in the sense that like.
+
+Fitting them into a physical device requires more atoms than are conveniently available, right?
+
+That sort of thing. Um, I don't know that I'd have to do the math on that.
+
+So that would be a processor that was a minimum of something like.
+
+I don't know many kilograms. Right. Because 6.022.
+
+Nope. Because that's ten to the 23rd. Anyway, I'm not going to do math in class, but like it would be a lot of math to create that many transistors.
+
+Like it's physically problematic. And so therefore our hardware, our physical address space is a much smaller range of valid addresses.
+
+It's not reasonable for it to be a 2 to 64, um, address space.
+
+Somebody could do the math on how much it would have to weigh, assuming it was made out of silicon and all that.
+
+But Avogadro's number 6.022 times ten to the 23rd, but that's ten to the 23rd and ten to the 23rd is two to the a lot of bits.
+
+So. Yeah.
+
+Two to the 60 is ten to the. 24.
+
+Right. Ish. If I can do arithmetic, which I typically cannot.
+
+I'm struggling. The virtual outer space.
+
+From 0 to 2. Yep. Current.
+
+Well, I haven't gone to that part yet. Oh. Notionally, it's two, the 64 minus one bytes.
+
+Turns out that the. And that's what the footnote. Oh, there's not footnotes.
+
+Another bullet is that the, um, in in truth, the hardware on our systems doesn't allow us to allocate all to the 64 minus one bytes of memory,
+
+because there's no way we actually have that much memory. And so they save money by not putting the transistors.
+
+And to be able to address, uh, the entire amount of memory, it only allows about two of the 48 bits of memory,
+
+but two to the 48 is, um, two to the 18GB of memory and two to the 18 is.
+
+To the 16 is 64,000. So it's 256,000GB of memory.
+
+So 256TB, right? We don't have 286TB of memory.
+
+And so they just said that that's enough, right. You don't need that much.
+
+If at any time we started to have memory computers that had more memory than they could raise that to the 48 without changing the size of our address.
+
+Right. The virtual address space is still notionally to the 64 bytes.
+
+So the point is. Virtual addresses and physical addresses are both in a notional address space,
+
+and the virtual address space has a certain sort of formatting and set of rules,
+
+and the physical address space has a certain formatting, a set of rules, and they don't have to be the same.
+
+In particular, you definitely don't have as much physical Ram as you have virtual address space, at least not in 2025.
+
+That is not historically always been the case in the, uh, towards the end of the heyday of 32 bit computers.
+
+So a 32 bit address space is only four gigabytes. Have I told the story about when I ran out of memory?
+
+Yeah, okay. It's only four gigabytes is not that much.
+
+At the end of the era of 32 bit computers, it was fairly common that your physical address space was larger than your virtual address space.
+
+You could have up to 36 bits of physical address, but only 2 to 32 in any one program running on that computer.
+
+So many modern machines use an address space. So an address space has properties.
+
+One of those properties is like how is it laid out? Like what if you were to visualize it as a surface?
+
+What would it look like? Right. A linear address space looks like just like a sheet of paper.
+
+Right? You start at one side, at one corner, and you work your way to the other corner.
+
+And every place on the paper corresponds to some, you know, byte of memory.
+
+And every bit of memory corresponds to some place on, uh, the paper.
+
+You can. It's not always the case in technicality, but you can think of this as being a 1 to 1 and on to mapping.
+
+Every address corresponds to a byte of memory, and if you have a bit of memory, it has a unique address.
+
+Right? It goes both, uh, directions. Um.
+
+Not all address spaces, however, have to be linear. We like linear address spaces because they're convenient.
+
+They're easy to understand. They're easy to implement.
+
+They make sense. On our system, we can think of our virtual address space as a linear address space of size two to the 64 bytes.
+
+And we can think of our physical address space as a linear address space that is much smaller and maybe contiguous, right?
+
+So it's fine. It's linear because, you know, address zero.
+
+If I have a line. Right. Address zero corresponds to this location.
+
+Address one corresponds to this location address to write to the linear address space.
+
+It is fine to have an address space that is linear, but is this contiguous?
+
+Right. So I have up through address n is here.
+
+And then I have some addresses that don't exist. And then address in place M is here and N plus m plus one is here etc.
+
+All right that's fine. It doesn't sort of break the model.
+
+It makes sense that we could have a linear address space that was multiple discrete line segments.
+
+Right. This is this is fine. But what we don't have is address spaces where like you get to end and then address
+
+in plus one is actually address two and address in plus two is actually address,
+
+you know n minus one and whatever. Right. Like it doesn't do weird stuff like that.
+
+It's not tied in knots. It's still linear. There are, however, other address space models.
+
+And I'll talk about one very quickly, uh, which is segmented address space.
+
+The reason segmented address space is interesting to us is because x86 computers
+
+like our x86 64 that we're using actually support segmented address space models.
+
+We don't use it, but it supports it.
+
+Um, in a segmented address space, you break you every address up into a segment identifier and an offset within the segment.
+
+Typically, each segment is a linear address space.
+
+Though where we depart from linear address spaces is that the segments are not necessarily disjoint address spaces.
+
+So I could have segment zero is here and segment one is here.
+
+And so address zero I'm sorry. Address one in segment zero is exactly address zero in segment one.
+
+And they refer to the same byte of memory.
+
+Two different addresses. They refer to the same byte of memory.
+
+Uh, likewise, I could have two addresses that are exactly the same that refer to different bytes of memory.
+
+I could have segment. Uh, zero is here.
+
+Segment one is here. And so address zero in segment zero and address zero and segment one are two completely different places in my memory space.
+
+Um, a an added complication to this is that frequently the segment portion of the address, the segment identifier, is implicit.
+
+When you communicate an address, you don't say, this is the segment identifier and this is the offset.
+
+You just say, here's the offset within the segment. And the receiver has to know what segment you are talking about.
+
+Um, which makes for example,
+
+debugging on those systems is very difficult because you print out an address and you still don't know where it actually is in memory.
+
+You have to do more work to figure out where it actually is in memory.
+
+And the way this works is and this is just an example, and you don't have to really know all these details,
+
+but to give you a feel for how this stuff is put together. For example, on x86 it had a data segment and a code segment.
+
+The data segment was exactly the data segment. That's in our process model, right?
+
+You would have your data stored there.
+
+And so when you loaded data into a register, it would automatically implicitly go to the data segment at that offset that you gave.
+
+You say load offset seven. And it would go to the data segment and load offset seven of the data segment.
+
+But when you said jump to address seven and execute the instruction there, it would go to the code segment.
+
+Implicitly because you execute instructions from the code segment and you read data from the data segment.
+
+And so those address sevens meant different locations in memory.
+
+And the reason this is relevant to x86 is when you turn on a brand new.
+
+Del. Well, they don't call them XPS anymore, whatever their Pro line or whatever laptop from 2025 that you just bought today.
+
+It boots up as an Intel 8088 processor from 1977,
+
+with a segmented memory model that is capable of addressing no more than one megabyte of memory at a time.
+
+It starts running code. At some point the code says please pretend that you have a linear address model.
+
+That maps address space, physical address space, or sorry,
+
+virtual address space directly to physical addresses that correspond like you were a 386 from 1987.
+
+And then it does that for a while. 1984 I don't know when three six came out.
+
+It does that for a while, and then eventually it says, hey, let's hot stuff.
+
+Let's pretend that you are a Pentium.
+
+Core duo or something, I don't know. From 2006.
+
+And you have 64 bits of address space and they map to physical memory and etc. and then it starts running your operating system or whatever.
+
+So. Segment and addresses aren't what we commonly use today, but they're not.
+
+Gone either. They're still out there.
+
+We still there are still machines that that run with segmented address spaces, including many of the computers in this room.
+
+Yes. So the CPU has an address that is in a virtual address space.
+
+The physical memory is in the physical address space.
+
+The virtual address space is what would be linear or segmented in this case.
+
+The physical address space is typically always linear, although it doesn't need to be.
+
+And the IMU does a translation from one address space to the other. And the point is.
+
+And the reason it's confusing. They can be arbitrarily different. And it's the mieux job to do that.
+
+Translation. Memory management unit.
+
+That was the very last slide that we talked about before we left on. Whether they were here last Wednesday.
+
+On Wednesday? Yes. Then in the physical memory, there's a gap at 15 to 16MB on x86 machines.
+
+No, that has to do with 1984. You know, 1986 or something like that.
+
+Yeah, whenever the IBM PS2 was released. No, not PS2 it.
+
+Maybe. I think the PGA. Yes. Okay.
+
+You asked this in exactly the right way. The question is, why would a programmer.
+
+Choose to develop something with segmented addresses. And the answer is because it isn't up to the programmer.
+
+It's up to the hardware designer. So if your CPU has a segmented memory model, that's just what you have is a segment, a memory model.
+
+You can't change it on x86. We absolutely don't because it does both and we add segments are dumb.
+
+So let's not do that right. But in many cases, if you're using a segment segmented memory model, it's because that's all your hardware supports.
+
+Segment addresses made a lot of sense when memories were very small.
+
+Um, and in particular when your physical memory space was much larger than your, uh, virtual memory space.
+
+Segmented addresses made a lot of sense because they allowed you to effectively use more physical memory in the same process.
+
+I don't want to talk about the details of it, but it did make sense at one point in time.
+
+They're rather archaic at this point in time. Why are there modern systems that are still being used today that you segmented address spaces?
+
+Because when you make a design decision. Sometimes you're stuck with it for a long time.
+
+There were design decisions made at Intel in the late 1970s that we still deal with today when we write software for modern PCs.
+
+We're made at IBM in the early 1980s that we still deal with today when we write software for modern PCs.
+
+Yeah. This is why we stress that you should design your software and think about it is because you can get stuck with it for decades.
+
+If you do something dumb, you do something dumb,
+
+and all of a sudden that something dumb becomes your life and eventually you retire from fixing that dumb mistake that you made.
+
+You know, when you were a junior engineer who didn't believe that you needed to read documentation.
+
+Not that any of you would believe that, but.
+
+Because you all definitely read the handouts and definitely don't put them in ChatGPT and ask for a summary.
+
+Okay. So the point of segmented address spaces is that the, uh, there another way to deal with addressing here,
+
+the bullets on this slide are really all you need to know about it. We won't discuss it further.
+
+I need you to understand that linear address spaces, which makes sense and are cool and we really like to think about them,
+
+are not the only way that this problem can be solved, in that there are places in times in history where we have made other decisions.
+
+So on our system. Furthermore, another difference on our system.
+
+Each of the addresses that we deal with are byte addresses.
+
+And in fact, this is why we care about things like Indians, because we have, um.
+
+Words of data stored in memory that's addressed by byte.
+
+But there's no reason that addresses should all be byte addresses.
+
+It is okay. To have addresses that are address by words.
+
+So address zero is the first word of memory, and address one is the second word of memory.
+
+On our system address. Zero is the first word of memory, and address eight is the second word of memory.
+
+Right. Because the first word is eight bytes long and we address by bytes.
+
+There's no reason it has to be that way. In particular, supercomputers frequently use word address memory.
+
+When you ask for a location, you're not asking for the location of a byte.
+
+You were asking for the location of a word. I wouldn't be shocked to find out that there are GPU architectures that also,
+
+or ways that you use GPUs that are effectively were addressed because for some of the same reasons that, uh, supercomputers use word address memory.
+
+But I don't know. I don't know that that's an architectural detail that I'm not privy to.
+
+Um. But nonetheless, they do exist. And that's not.
+
+It's something that could that could happen.
+
+Uh, when Unix was originally developed, it was developed on the PDP seven, uh, which was an 18 bit word address computer.
+
+Um, and so it had word address, memory.
+
+And one of the reasons that, uh, the C programing language was developed was that the languages that they had been using in Unix prior to C,
+
+um, namely B and um assembly language, were word addressed languages.
+
+They didn't want to write a new operating system in assembly if they could avoid it.
+
+But B was designed for a word address computer, not a byte address computer.
+
+And then when they made. So uh, Dennis Ritchie took B and made it, um.
+
+Support byte addressing. And among a few other things, byte types and things like that.
+
+Called it newbie. Um, and then at some point diverged enough from Newby that they needed from me that they needed a new name.
+
+And so C comes after B in the alphabet. So we named it C.
+
+Uh, a fun question though is if there were a next version of C,
+
+would it be called D or P because B was a stripped down version of a language out of Cambridge called B CPL.
+
+So it's either BCD or BCP.
+
+That's a little bit of a question. As it turns out, Bjarne Stroustrup was like, I don't care, I'm just going to call C plus plus.
+
+And so he called it C plus plus. But there is a programing language called D.
+
+Uh, that is essentially a uh uh a riff on C.
+
+Anyway, none of that's going to appear on your final, uh, the thing that you need to know about word address machines is that they exist.
+
+Right? Like segmented addresses. We won't discuss it any further, but like, this is a concern.
+
+This is one of the reasons that we have all the different types of pointers in C,
+
+and we have stride and we have is that we have to be able to, to deal with these, um, strange systems.
+
+So every time you and I drew this picture on the board last time,
+
+every time your CPU tries to access a piece of memory, your program says, please give me data at this virtual address.
+
+The CPU takes that virtual address, presents it to the memory management unit.
+
+And says Memory Management Unit, please give me this piece of memory that the programmer has asked for.
+
+The memory management unit says, okay, this virtual address would correspond to this other physical address,
+
+takes that physical address, puts that on wires on the motherboard that go out to the physical memory chips.
+
+The memory chips come back and say, here's the data that the, uh, user asked for.
+
+This process is called address translation. That's the muse.
+
+Only job is to do address translation. Um.
+
+We just talked about the fact that our memory space we like to think of as a linear address space, but that we could have other address spaces.
+
+Note in particular that the physical address space and the virtual address space do not have to use the same addressing model.
+
+It is okay if the virtual address space, for example,
+
+is segmented and the physical address space is linear, which was exactly what was the case on the IBM PC.
+
+The that's processor from 1977.
+
+And the system that IBM created in 1981 that I keep talking about, it had a segmented virtual address space but a linear physical address space.
+
+Um, any questions so far before we talk about paging?
+
+Every process has its own virtual memory space, that the mappings to physical memory are unique to that process.
+
+Yes. And then we have. They can be every location in.
+
+Yes. Overlapping. The virtual address spaces of two different processes are different address spaces.
+
+So they can have the same address, but they're not in the same address space.
+
+They each process has its own two of the 64 bytes of memory that are notionally distinct from one another.
+
+Good question though. All right, so, um.
+
+There are many ways for the CPU to communicate with the MMU.
+
+How to do the mapping from some virtual address to some physical address.
+
+Right, because the CPU says MMU, please give me the physical address that corresponds to this virtual address.
+
+But the IMU has to know what physical address corresponds to any given virtual address.
+
+And the way that happens is the operating system configures the MMU in some way to say,
+
+hey, when I ask for this virtual address, give me this physical address, right?
+
+There's a lot of ways to do that. Configuration. Most modern desktop class systems, and in fact many other systems also use what we call paging.
+
+Paging is where we break up the virtual address space into what we call pages.
+
+Which are fixed size chunks of memory that are all the same size.
+
+On our system, therefore kilobytes. In fact, there are sometimes several possible sizes, but they are normally exact multiples of one another.
+
+On our system, it's four kilobytes, two megabytes, and one gigabyte are small, medium, and large pages.
+
+I think they call them huge pages, actually small, large and huge or something like that.
+
+It's like McDonald's, you know, or Starbucks where they can't just call small, medium, large.
+
+Um, and they really are huge.
+
+The huge pages are one gigabyte, right. They're really quite huge. Um.
+
+And so we take this virtual memory space and we break it up into pages of all the same size.
+
+And then we take our physical memory and we break it up into effectively pages of all that we can physical memory.
+
+We tend to call them frames instead of pages, but they're the exact same size as the pages in.
+
+The virtual memory. And so now what we do is when we ask for an address translation, we don't have to translate the entire address.
+
+We have to translate this page of.
+
+Virtual memory to that page of physical memory, and all of the addresses on that page are just a linear offset from the beginning of the page.
+
+So on our system pages are four kilobytes, so all addresses from address zero to address 4095 are on the same page.
+
+All addresses from address 4096, address 8191 are on the same page.
+
+All addresses from 8192 to whatever that plus 4096 are, are on the same page.
+
+And so we only have to sort of calculate the mapping every four kilobytes.
+
+All right. We don't have to calculate the mapping for every single byte. Um.
+
+This has a variety of benefits. One benefit is that you're guaranteed that all the pages are exactly the same size,
+
+and so that you can substitute any one page for any other without regard to whether they fit or not.
+
+This is also the reason that if you have multiple page sizes that are normally powers of two
+
+is because any power of two fits into any other power of two an integer multiple of times,
+
+sort of like in your PR for all of the, um, multiple allocated sizes that we give you are powers of two,
+
+because every power of two fits into 4096 and integral number of times.
+
+Right? So if your power of two is two to the ten, that's 1024, 1024 times exactly four is 4096.
+
+If your power of two is eight, that's 256, 256 times exactly 16 is 4096, right?
+
+Likewise. This is why you can only break four kilobytes of memory,
+
+because what it does is it changes the configuration of page mappings that have been communicated with the memory management unit.
+
+Because the memory management unit does not map bytes to bytes, it maps pages to pages.
+
+You can only map or on map one page at a time, which is four kilobytes.
+
+So when I asked the operating system for more memory, it can either give me one more page of memory or it could do nothing at all.
+
+It has no other choices, right? Um, this is also why NPA for your chunk size is four kilobytes is because every time you call go to call s break,
+
+you have to call it by a round page size.
+
+And the round pages on our system is 4096.
+
+Are there any questions about generally what paging is? We take our memory, we divide it into four kilobyte slices and we map one slice to another.
+
+Yes. Every. Page. The small pages are four kilobytes.
+
+Two megabytes are one gigabyte. So they get larger by large factors at a time, two to the nine at a time.
+
+Yes. Why we need to access one.
+
+When you just go get memory, you say, give me this address. Right.
+
+Give me this address of memory. What happens is the move.
+
+The CPU goes to MMU and says, give me the hardware address that corresponds to this virtual address.
+
+The MMU chops off the page part of that address, which is the first, in our case, two to the 52 bits.
+
+Right. Because two to the 12 bits, 4096 is two to the 12, write to the 12 bits is the offset within the page, takes the first 2 to 52 bits.
+
+Says this virtual address to the 52 bits corresponds to some hardware address.
+
+Go to that hardware address, offset it by the difference between two of the 12 and that.
+
+Right. Get that byte of memory. That's the byte the user asked for.
+
+Not instructions, but the page number and the offset on the page, which is sort of like a segment, except they can't overlap.
+
+Yes. So why do we need to page virtual memory?
+
+The fundamental reason is that we don't actually use to 64 bytes of memory.
+
+Uh, and so there's a large portion of our address space that is not mapped.
+
+Like there's no memory associated with it. And we need a way to be able to say, this memory is mapped and this memory is not mapped.
+
+Um, and so we have to be able to divide it up if we allow dividing it up in arbitrary sizes, that gets very complicated very rapidly.
+
+So instead we say divided up into fixed sized chunks. Every single chunk is either map where it is not mapped.
+
+Every fixed size virtual address chunk of virtual addresses either has physical memory associated with it or it does not.
+
+And then we also associate that actual mapping with the page.
+
+Going into your question. To virtual memory for which there is no physical memory.
+
+Yep. Which is why when you try to access it, your program crashes. Because the IMU says, I don't have any memory for that.
+
+We'll talk about how that works here in just a minute. Yes.
+
+Why? So the question is, uh, given that Linux is the best available operating system out there,
+
+I wouldn't say it's the best operating system because, like, it kind of sucks, but, like, it sucks in a way.
+
+It shines like the noonday sun compared to, say, Windows or Mac OS, right?
+
+Which are. Poor, pale imitations of an operating system.
+
+Um, and in fact, its virtual memory system is very good.
+
+And that is one of the reasons that it is very efficient. It runs fast and is efficient on almost any hardware.
+
+Unix also uses paging. Paging is a hardware thing. Either your hardware supports it or doesn't.
+
+Uh, but in fact, in particular, the Unix virtual memory subsystem is much faster than the Mac OS virtual memory subsystem.
+
+Which is one reason that if you have a mac with 16 GB of Ram and it runs like a dog,
+
+if you install Linux on it, you're like, Holy crap, this computer is fast.
+
+It's because 16 GB of Ram is not enough for Mac OS because its memory paging system sucks.
+
+Blame Berkeley. Uh.
+
+Apple. Of course, you all know that Apple doesn't invent anything. They just steal things from other people.
+
+Uh, they use an operating system that was written at Berkeley called mock to manage their virtual memory.
+
+Uh, and it's slow. And then years later, they claim they invented it.
+
+And all the Apple people were like, isn't it cool what Apple just invented?
+
+And then they give them three times as much money as you could give to somebody else to get exactly the same thing you could get from somebody else.
+
+But branding is important. Huh?
+
+Branding is important. Um. Steve Jobs is dead.
+
+Um. Okay.
+
+So, um. In order to accomplish all of these tasks.
+
+Now that I've crapped on Apple and Windows and probably there's somebody else I should.
+
+Dig into right now. It is so frustrating. To have been in a field for decades and know so much about it and see the just horrible,
+
+horrible things that people do and use and be like, it doesn't have to be like this.
+
+When you're my age, you'll feel my pain. You will be like, we could do so much better, but instead we don't.
+
+Instead, we have blue screens of death and, you know, batteries that run out and, you know, whatever.
+
+Okay. Rest my case. So in order to do this mapping, uh, what we do is we configure the memory management unit with metadata about pages.
+
+If you remember, metadata is data about data. The data in this case is whatever information is stored on a page.
+
+The metadata is information about the page itself.
+
+In particular, for any given page of virtual memory of virtual address space,
+
+we will include the information about where in hardware address space, where in the hardware, um, address space.
+
+In the physical memory, you can find the data that's associated with this page,
+
+or indeed whether you can or cannot find this page in the hardware address space.
+
+Because as we said, your virtual address space is very, very large.
+
+You don't have that much hardware memory. We also include information about what you're allowed to do with that address space.
+
+Are you allowed to read the data that's stored in that address space?
+
+Are you allowed to change the data that's stored?
+
+I'm sorry, on that page. Are you allowed to execute execute the data that is stored on that page as if it were program code, things like that.
+
+And when your program goes to access memory, you when you access a virtual address, you access it for some reason.
+
+You are reading the data there. You are writing the data there.
+
+You are executing the data. There you are doing something with the data at that address.
+
+Your program says to the CPU, I wish to access the data at some particular virtual address.
+
+The CPU says to the memory management unit.
+
+This program wants to access the data at this particular virtual address.
+
+Can you map that to a physical address for me?
+
+And furthermore, the user wants to read that data or the user wants to write that date or whatever.
+
+The Mu then goes and looks at that page page metadata and determines do I have a mapping for that address?
+
+If the answer is yes, it says is the user allowed to do whatever they're trying to do at that address?
+
+And if the answer is yes, then it puts that address on the memory lines,
+
+gets the data from the memory or stores the data to the memory or whatever end goes back to the CPU and says, here you go.
+
+On the other hand, if at any point it says no.
+
+It says, I don't have a mapping for that address or it says I have a mapping for that address, but you're not allowed to write to it.
+
+Then it raises an exception goes to the CPU. It's called a page fault.
+
+Goes to the CPU and says CPU no.
+
+The CPU says why not? Goes to the operating system and says.
+
+You can't do that. Why are you trying to do that? The operating system looks around and determines one of two things either.
+
+Is it something I should be able to do that I'm just not prepared to do right now, in which case it fixes it and then does it anyway.
+
+Or is it something that I should not be doing? And if it's something that it should not be doing, it goes to your program and says program.
+
+I would like to present you with this segmentation violation. And the program says segmentation fault, core dumped and quits.
+
+But if at any point along the line the menu says either yes, I can do this mapping, yes, you should be allowed to do this thing.
+
+The operating system says, well, I can't do that right now, but we should be able to say, let me fix it then.
+
+Your program never knows, right? The translation goes on behind the scenes.
+
+It happens where you're not looking. You ask for a piece of memory, you get that memory back.
+
+But if it cannot be resolved, you get a segmentation fault.
+
+Does that make sense? So this can be a fairly complicated process.
+
+And if you remember last lecture, I said that these memory management unit lookups need to ordinarily be very, very fast.
+
+But sometimes they can be slow. And that's okay as long as they're not slow.
+
+Very often they're slow for reasons like, hey, this memory mapping doesn't exist.
+
+Operating system, can you fix that? And then the operating system goes and does some work and fixes it, right.
+
+But if you have to do that all the time, then you slow your computer down by a factor of a thousand or, you know, a million or whatever.
+
+And it's not good times. Questions?
+
+Yes. Yep.
+
+Yeah, it could, but they don't do that for that reason. So that would have caused pages that overlap.
+
+And pages that overlap or not. Okay, so pages are or they always test the late perfectly into memory.
+
+And the way these we're not going to talk about the structure of these data
+
+structures that are used to communicate between the operating system and the memory.
+
+But the way they are structured, there is no way to express a memory mapping that is not a perfect tessellation.
+
+Yes. They they're not pages in a segmented address.
+
+So paging and segmentation are two different ways to manage memory.
+
+So if you have segmented addresses they're not pages. Uh.
+
+Yeah, I'm going to say that it's a little more complicated than that, but I'm going to say that.
+
+So you either have paging or you have segmentation. Modern systems use paging.
+
+Yes. No.
+
+So the question is can I say page fall and segfault are the same thing. A segfault occurs because a page fault occurred.
+
+But in practice there are many,
+
+many page faults which do not result in a segmentation fault because if the operating system can fix the problem, no segfault occurs.
+
+And in practice, that actually happens a lot. Yes.
+
+Every time. So often when we. Just a practical example.
+
+When I pick up the address I'm getting.
+
+Is it the physical address? You know.
+
+When you declare a pointer that is a virtual address because all addresses in your program are virtual addresses.
+
+But there is no way for your program to refer to physical memory.
+
+He said. At what point in system. Can do we as a programmer from a programmer perspective, do we handle?
+
+Do we deal with physical memory? Only when you're writing the virtual memory subsystem of an operating system.
+
+Even most of the operating system doesn't deal with physical memory.
+
+It asks the virtual memory subsystem for memory, and it gets virtual memory.
+
+But the physical the virtual memory subsystem handles the physical memory.
+
+It's a very small portion of an operating system inside the operating system kernel.
+
+Yes. Could be different every single time.
+
+Could be the same. Could be different every single time. In fact, in the general cases, likely different, at least in some ways.
+
+Okay. So now that we understand that we have pages in those pages have metadata.
+
+Um, another piece of data, metadata that can be stored on a page is data about what we call page backing.
+
+So a page notionally contains data, and that data can notionally be sort of just.
+
+The page is the, um, home of that data.
+
+It came from that page. It was written to that page. It belongs to that page.
+
+But it also could be data that originally came from somewhere else.
+
+If that data originally came from somewhere else. And that's something that we choose to keep track of in the metadata.
+
+Then we say that that page is backed. A back page is a page that contains data that was read from another source.
+
+If we have a page that contains data that was read from another. So typically that means like it was saved in a file on disk or something like that.
+
+If we have data that came from another source, then we have two possibilities.
+
+Either the data is exactly the same as the data that's stored in that source, or the data is currently different from the data stored in that source.
+
+Maybe we read it in and then we made some changes to it. Right. Or something like that.
+
+If we have a back page, which means that the data on that page came from another source.
+
+And the data that's stored on that page is the same as the data that's stored in that other source.
+
+We say that the page is clean. If we have a backed page which has data that came from another source,
+
+but we've changed the data in the page, so it's no longer the same as the data in another source.
+
+We say that that page is dirty. The magical property of a clean backed page is that we can throw it away at any time.
+
+And if we ever want that data back, we could just go back to the source and read it back in.
+
+So if you're running a program and your program is reading data from memory,
+
+and that data in memory comes from a backed page and that backs page is clean,
+
+the system does not have to keep that data in Ram where you can access it at any time.
+
+It can free up that Ram and say use it for a different program.
+
+And that's fine, because if you ever need to read it again, you just create new pages,
+
+go to the original source of the data, which again is typically a file on disk.
+
+Read that data, save it into memory, and then tell the program you may continue.
+
+Go ahead and access your memory. So for example a page fault would happen right?
+
+The operating system would go read the data, put it in memory and allow the process to continue.
+
+Yes. Uh, it's super slow.
+
+But slow. But I didn't run out of memory is better than fast.
+
+But I ran out of memory in my program crash, so we put up with it. So what this means is suppose that I have a program and it's in memory, right?
+
+It's stored in the memory of the computer. And somewhere in there there is a page.
+
+Right. And my program is accessing data on this page.
+
+When my program tries to access data on the page, the program, the CPU will put the address of this page out on the memory bus.
+
+It will go into the MMU, the MMU.
+
+Here's your physical Ram, right. We'll say uh, this page is located here in physical Ram.
+
+And it will do that. Translation. And then say, I try to access another location in virtual memory.
+
+So this is virtual address space and this is physical address space, right.
+
+I try to access another location, goes to the IMU and it says okay, this page is here in physical memory.
+
+So I try to access that page and I go. Here.
+
+Suppose that I try to access a backed page.
+
+Well, this is kind of covering some things that will come up on the next slides that will wind up talking about on, um, Monday.
+
+It tries to access a back page and that back page is not present.
+
+It's not available in memory. Then the operating system somewhere there's a disk or something,
+
+somewhere that has a file on it, and that file contains the data that belongs in this page.
+
+Right. But it's not there right now. The ordering system goes the mu and says can I have the mapping for this page?
+
+The mu says, I don't know the mapping for this page.
+
+The operating system says, okay. It looks at the metadata and it says, ah, this is a backed page, and I save that data to disk at some point.
+
+It then goes into physical memory, allocates a page of physical memory, copies this data.
+
+Into that physical memory. Updates the Mu and says when the user asks for this address.
+
+You should go here. And then says, okay, proceed with your access.
+
+The user tries to access that address. They go in here. They ask for a piece of data.
+
+They get exactly the piece of data that had been saved onto the disk.
+
+This is a backed page. This was a page fault for a backed page.
+
+We fixed the page fault. It did not become a segmentation fault.
+
+We were able to access the memory, and furthermore, we were able to access the memory that should have been.
+
+In the virtual address space. If we, for example, had had enough Ram,
+
+usually the reason this happens is either we've never actually access this memory before or we don't have enough Ram, and we had to shove it out.
+
+We will talk about that sort of thing. Not having enough Ram shoving it out and what we call demand paging when we come back on Monday.
+
+So everybody have a safe Halloween. Have a great weekend and I will see you on Monday.
+

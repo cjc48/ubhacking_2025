@@ -1,0 +1,949 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+I got smart last week, and I wrote a command that opens up the, um, slides that I don't like.
+
+I just have to tell it which slides to open, and it just opens it so that it doesn't take me forever to get the slides open,
+
+because previous to last week, I was too stupid to do that. So.
+
+I'll let you know what you're working with. All right. Uh, we already talked about this.
+
+We talked about this. We did that, we did that.
+
+We did this, we did this. We did that.
+
+We did this and we want to start here.
+
+So, um, we basically laid out last time what, like logical flows of control and the fact that we could have.
+
+All right. Cramping my style. I walk around way too much to have these out here.
+
+I will definitely die by the end of the period if I don't do this. Um,
+
+we talk about logical flows of control and the fact that we could actually have
+
+multiple of these logical flows of control in the system at the same time.
+
+Um, and, uh, specifically that so far we have always talked about, um,
+
+a situation where we have one logical flow of control in, um, a dedicated machine environment, right,
+
+that has its own memory and its own access to the peripherals and whatever,
+
+and that your program has exactly one flow of control, and that's the only thing you have to worry about.
+
+And that this is like a simple simplification of the complexity of the system that allows you,
+
+as a programmer, putting together not only what we talked about last time,
+
+but all the way back to the beginning of the course that allows you, as a programmer to sort of discount a lot of the complexities of the system.
+
+When you write a program, if you only have one logical flow of control, you don't have to worry.
+
+What else is running on the computer when you run, uh, a program.
+
+And then we said, hey, there's this other model.
+
+We said, we briefly mentioned threads right where we can have more than one logical flow of control in the same memory space,
+
+where they can access each other's data and that that may have some value or, um, whatever.
+
+And then we said, well, but why do we care about these things? Why would we want to have more than one logical flow of control?
+
+And I laid out some, some ideas for that. Like, what if you want to use more than one core in order to do faster computation?
+
+We talked about the different processes and cores and things, the processors and cores and things like that.
+
+Um, and then I said, you may want to dedicate a particular logical flow of control to some particularly important task or,
+
+you know, like there's different reasons you might do this.
+
+And I gave you some examples of situations where you might have more than one program that actually
+
+wanted to know about each other or didn't want to know about each other at the same time.
+
+Um. And. More specifically, we have seen what we would call process level concurrency in this course already.
+
+And the example of that is our, um, that we have specifically seen that we spent some time with was the chat client and server.
+
+And I mentioned last time that those are completely separate applications.
+
+They're even written in different programing languages, right.
+
+But they communicate with one another and they work with one another to solve some kind of, um, problem.
+
+But in general, that doesn't have to be the case. We may have process level concurrency in any manner of ways.
+
+So we may have processes that in fact proceed independently on the computer at the same time doing unrelated things.
+
+Uh, and this is all of the multitasking that you do every day on your computer, right?
+
+You have a web browser open, you have a music player open, you have, um, uh, chat client.
+
+You have, you know, all these different programs running. And none of them depend on one another.
+
+Right. You have a terminal open, you're running Emacs, you're running, you know, whatever godawful editor you've decided you might try to use.
+
+Um, and none of them need to do anything with one another.
+
+They just happened to run on the same computer.
+
+And in this environment, that dedicated machine model is beautiful because Emacs does not need to know about iTunes.
+
+Nobody should know about iTunes, but. If you're a mac user, that's what you get.
+
+Um, your web browser does not need to know about discord.
+
+Also, nobody should know about this discord, but kids these days.
+
+Why are you giving me that look? Do you like discord? You looked at my matrix client and said, is that discord?
+
+And I said, no. Okay. Um, yes.
+
+Said. That's really. Each other?
+
+Yeah. Yep. Yep.
+
+How? How? That's a great question. It's outside the scope of this course, but I will answer it.
+
+I mean, in this course we. So the question is hey, the chapter is written in Python.
+
+The client is written in C and they communicate with somewhat with each other somehow.
+
+How? It's a great question. Um, it's outside the scope of this course in the sense that we're not going to do it.
+
+But I will answer your question, which is they use what we call Unix domain sockets.
+
+So a socket is the abstraction that Unix uses for network communication.
+
+So when you connect to a web server or whatever, you use a socket that would be a TCP socket.
+
+In this case a Unix socket is a pure software abstraction where two programs on the computer can connect to the socket at the same time,
+
+and then whatever one sends, the other one receives, and vice versa.
+
+Right. So it gives you a two way communication channel where I can send you data.
+
+You can send me data, but it looks like a file. I write data to a file.
+
+And when you read you get the data that I wrote. Um, sockets.
+
+If you are interested in network programing and communicating between processes.
+
+Um 312, 486 and 489 would be the places to go for that.
+
+312 is um, web development. 486 is distributed systems and 49 is modern network concepts.
+
+Um, all three of them will do socket programing.
+
+Um. But we in 220, like we've seen all the sockets we're going to see.
+
+We just don't have enough time to, to to cover that to.
+
+So, um, anyway, this model is beautiful when you have the dedicated machine model, because, like, these programs don't need to know about each other.
+
+They don't want to know about each other. They just happen to run on the same computer.
+
+But we also saw where we had the chat client server where two different processes that proceeded independently.
+
+They weren't sort of um. Or maybe we'd say they cooperated, but it's one of these last two bullets, right?
+
+Like the chat client is not continuously sort of using the resources of the server for everything that it does.
+
+It's just every now and then it sends some data to the server or the server, send some data back to it.
+
+And but without the server it doesn't make a lot of sense. Right.
+
+Like it kind of depends on the existence of this other process that's providing we say server because it's providing a service to the client,
+
+which is that it's aggregating all the different clients together so they can communicate with one another.
+
+Right. Um, and in that case, we want to start breaking down this dedicated machine model and say,
+
+hey, what if two processes could actually communicate with one another?
+
+But we did it in such a way that this process model, this dedicated machine model, was preserved.
+
+If there was a bug in your client, not that there would be a bug in your client, but if there was a bug in your client,
+
+it crashes and you can just start a new one and reconnect to the server because the server isn't affected, right?
+
+There are two different processes that just happen to run on the computer and talk to each other at the same time.
+
+Um, why would we do this? So we gave you the reasons before why we would, uh, use concurrency.
+
+But why specifically might we do it by creating a multi process solution where we had multiple
+
+processes running in that dedicated machine environment that were cooperating in some way?
+
+A big reason for that is reliability. And in fact, your web browser does exactly that in the dedicated machine model,
+
+if one process has an error, other processes on the machine need not be aware of it.
+
+In your web browser, every tab of the browser is a different process, and they communicate with each other in very well defined ways.
+
+And probably many of you have seen if you use, for example, Chrome, they all do this in different ways.
+
+But if you use Chrome, uh, you'll click over to a tab or you'll be using a tab and like all of a sudden it gets chunky, it slows down whatever.
+
+And then it'll disappear. And the little, um, monitor will come up on the screen with a face on it.
+
+And it's maybe it's an elephant or a keyboard or something, but it says underneath it all, snap.
+
+You know, this tab has crashed. You know, reload it to come back.
+
+Um, and what that means is the, the process that was drawing that web page crashed.
+
+But if you just click over to another tab, the other tab is fine because it was a different process.
+
+So while that tab crashed, the other tabs are still running.
+
+They're still doing whatever it is they were doing. You didn't lose your context, right?
+
+By isolating them from each other by explicitly saying this dedicated machine model is good for me, it protects my programs from one another.
+
+It allowed that one tab to crash and the other ones to keep doing whatever it is that it is that they do.
+
+However, this has a cost. Within the dedicated machine model.
+
+Remember I said before that in the dedicated machine model,
+
+anytime of a logical flow of control wants to be aware of another logical flow of control, it has to ask the operating system.
+
+That puts a barrier between the separate logical flows of control in the system.
+
+Your process. When it wants to communicate with another process, it cannot directly just give it information.
+
+It has to go to the operating system and say, could you pass this to this other process?
+
+Could you give this other process this information for me? And so there's an intermediary.
+
+An intermediary means time and space and complexity and, you know, slows things down, uses more memory.
+
+Whatever overhead there is. And in particular when two processes communicate, we call that inter process communication.
+
+You will see the acronym IPC used. IPC normally requires interaction with the operating system.
+
+Um, so that I think that's what I want to say about Wall-E process design.
+
+There are times where you will be faced with a task where you want to use multiple flows of control for practical reasons,
+
+for some of the reasons we talked about before. And those multiple flows of control need to coordinate in some fashion.
+
+But you will be able to look at that problem and say, you know what? The coordination is not that much.
+
+There's just a little bit of coordination. And I can do that by creating more than one process that communicate with one another.
+
+And then if I have a bug, if I have a logical error, if I make a mistake,
+
+I've protected some parts of my application for all other parts of my application.
+
+In the case of the web browser that tab crashes, you just hit reload and you continue as if you know nothing can ever happen.
+
+Occasionally the whole browser crashes, and that's a bigger deal, right? It takes longer to start back up.
+
+Maybe it didn't say exactly where you were. Things like that. Any questions?
+
+Okay. Um.
+
+No. I might not do one today. We'll see how the spirit moves me.
+
+All right. Um, so then we said, by the way, there's threads and threads run in the same dedicated machine, right?
+
+Threads are like processes, but whereas processes are separated from one another,
+
+and the operating system sort of provides a barrier between any two processes.
+
+Threads share a lot of things.
+
+They are not protected from one another in the same way that processes are.
+
+In particular, they share memory.
+
+If you have two threads in the same process and they both have a global variable x, that global variable x is the same variable.
+
+Thank you. That is the same variable. And so if you change x in one process and you read x in the other process,
+
+you will see the value that the first process you know wrote to x or changed in x.
+
+Um. They always run the same code, multiple processes as we saw again in the case of the client server.
+
+The server was not even in the same language as the client was.
+
+Multiple threads in the same process always run the same code.
+
+They're part of the same binary. They may not be in the same function, right?
+
+They may be running different parts of the same code, but they always run the same code.
+
+They have the same code available to them.
+
+The cost of this is that they are not well isolated from one another, and so a bug in one thread can directly affect another thread.
+
+The benefit of this is that you no longer have that operating system sitting in between the threads of the process,
+
+and so communicating with one another, working with the same data, etc. becomes very, very fast and easy.
+
+As an additional bonus, we talked before. We talked about multitasking, about you due process a you due process b due process C you go back to a.
+
+If a, b, and C are logical flows of control within the same process,
+
+they're threads within the same process that is faster than if A, B and C are different processes.
+
+And by faster I mean maybe 10 or 100 times faster, you lose less overhead to the operating system for switching between threads.
+
+The reasons for that are complicated.
+
+Um, many of it has to do with things like, uh, when you change between processes, we call a context switch, when you context switch between processes.
+
+Remember when we talked about how every process has a different virtual memory map.
+
+And so you have different configuration for the mu.
+
+When the operating system changes from process A to process B, it has to tell the mu, hey, there's a new memory map, right?
+
+You need to use this new memory map that has cost, right?
+
+Uh, when uh, we have recently found like, say, in the past 20 years, um, 15 to 20 years, uh, increasingly,
+
+we have found that there are leakages in the abstractions where just the fact that a process was using a
+
+particular piece of memory may have security implications that may tell you something about that process.
+
+And so when you switch between processes, you have to tell the operating system, hey, forget all of the memory access or the hardware.
+
+Forget all of the memory accesses you've done recently. Right. Don't allow the next process to see what memory the first process was accessing.
+
+And again, that has cost, right? All of these things have cost. So switching between processes is slow.
+
+Switching between threads uh may be faster.
+
+So this diagram shows us sort of the, um, logical difference between having two processors and having two threads.
+
+If each of these is the memory space of a, um, a dedicated virtual machine.
+
+Right. Here we have process P1. It has an entire memory space that has data BSS, heap, stack, kernel, etc. all of this memory inside this process.
+
+Here is a process p2. Note that P2 has a completely separate.
+
+Memory space. There's no overlap between anything that these two.
+
+You know, processes are doing. The virtual memory space is entirely disjoint.
+
+Here we have a third process P3 again completely disjoint from processes P1 and p2.
+
+However P3 has two threads t1 and t2.
+
+T1 and t2 have the same data bss heap kernel.
+
+All that stuff is exactly the same virtual memory space.
+
+The stack for T1 and the stack for T2 exist in exactly the same virtual memory space.
+
+They're just in different places. They have different addresses.
+
+So the local variables for T1 and local variables for T2 are at different addresses, but they're accessible to one another.
+
+The heap of T1 and T2 is exactly the same memory.
+
+If you call malloc and t1, you get a pointer back and you somehow give that pointer to T2.
+
+T2 can just use that memory. If I'm in process P1 and I call like and I somehow give that address to P2.
+
+When P2 goes there, it doesn't get the same memory that P1 had.
+
+It gets its own memory at that location, which may not even exist.
+
+And if it does, it certainly doesn't have the data that P1 had at that address.
+
+Right. If you, um. Create a variable.
+
+And if one of the threads is it like implicitly available or other.
+
+It is implicitly available in the other, um. No.
+
+Okay. Implicit is important. It is available in the other in that that that variable is available.
+
+It is implicitly available in that you cannot just use the name.
+
+You would have to use. You would have to somehow receive word that that variable exists.
+
+If we're talking about local variables, global variables you can just use by name.
+
+Right. If I have a global variable x it's available to all threads but a local variable x.
+
+If t one has a local variable x and t will two to it wants to use it.
+
+T2 can't necessarily call it x t. One would have to say hey, x exists is at this address.
+
+Here's a pointer to it. And then t two when you do that pointer.
+
+So implicitly it is available explicitly it is not. It makes sense.
+
+He said. Read some of the same executable code as the same instance of the same instance.
+
+Yeah, exactly the same. So T1 and T2 are running the same program and at some point some.
+
+So say T1 was the first thread, the one that was created at the beginning of time.
+
+There's a logical control flow that existed when this process was created. T1 will say operating system.
+
+Please create me another thread T2 and run this function.
+
+And that function is in the same code the T1 is in. And we'll see exactly how that works later.
+
+Like programmatically. Yes. Would you run out of memory faster because you have two stacks in the same memory space?
+
+Yes and no. So no, in the sense that on our system, a stack is eight megabytes.
+
+They both get eight megabytes. And. There's a pill grow on that.
+
+Sometimes that can be. Now T1 runs out because T1.
+
+On the other hand. But something that used 100% of the available virtual address space.
+
+You now have less of it because you gave part of it to. So in some sense, yes.
+
+In some sense no. In practicality, in our modern systems, we have so much memory,
+
+and our address spaces are so large that the mere fact that you created another thread
+
+is not going to make a big difference in older machines that have less memory.
+
+Like the first computer that I ever ran Linux on had eight megabytes of memory.
+
+Like the whole thing. That's all it had was eight megabytes of memory. Now I care, right?
+
+Because I'm going to run out of memory if I have 16GB and I do have eight megabytes, like I just don't care.
+
+I probably should, but I don't. All right.
+
+Good questions. What is quacking.
+
+You guys hear that? Something's cracking.
+
+Right? Yeah. Okay. All right.
+
+Uh, I think I said all these things. I said all these things.
+
+So the price of threads. Concurrent access to shared resources becomes tricky with threads, and we'll see why.
+
+That's the whole topic of the next set of lecture slides.
+
+Basically, once you give up that dedicated machine model, now you do have to think about what the other threads in your process are doing.
+
+And so the complexity, the sort of mental complexity of understanding the correctness of my program becomes higher.
+
+It becomes more difficult to understand whether my program is correct or not.
+
+Um, in particular, also many established APIs.
+
+So we've said API many times in this course, but as application programing interface,
+
+it is a set of rules for how you interact with a piece of software are not what we call thread safe.
+
+Um, which means that if you try to use them in two threads at the same time, even though you did everything right,
+
+you might still have a program that crashes because you can only use them in one thread at a time.
+
+In particular, in many operating systems, the graphical environment has this property,
+
+so I actually don't know if it's true of windows anymore because I haven't used windows in literally longer than you've been alive,
+
+but up until the mid 2000 to maybe 2010 or so, uh, in windows, every application had what was called a single, um, graphics device interface.
+
+I think they called a GDI. Um, and you could only access the GDI from one thread at a time,
+
+and if you tried to access it from a second thread, then your program would crash, right?
+
+Because it wasn't capable of doing that. I actually don't think that's true anymore.
+
+I think the GDI model has gone well. It's not gone in the sense that you can run a windows application from 1992 and it will, like, run fine.
+
+Um, so there's like some emulation layer that allows it. But I think if you write a modern application, that's not true anymore.
+
+But there are many times things like that in GUIs, right, that you can only do from one, um, thread at a time, or you have to somehow think about, um.
+
+Over the next few lectures, I want you to think about whether or not your malloc is, in fact, thread safe.
+
+It's not what we told you that writes in the handout. It says you can't use multi-threaded applications and like what you do to fix it,
+
+to make it thread safe and what those trade offs would be and what the implications of it being thread safe would be.
+
+Don't do it. That's a different course. Right.
+
+But just think about like what does that mean. Um.
+
+Okay. Any questions? So when do I want to use threads.
+
+So we talk about when we want to use processes. And we talked about the advantages of processes.
+
+And we talked about the advantages and disadvantages of threads. When do I want to use threads.
+
+When do I want to say I'm solving a problem where the right answer is threads?
+
+Because this is the design tradeoff that you will absolutely make as a programmer.
+
+And while this is a system programing concept, this is the kind of thing that you'll come across no matter what kind of programing you do.
+
+When do I want to use threads? When do I want to create a new program and or a new process of some kind?
+
+When do I want to use different programing models, some of which you're already aware of and some of which you aren't?
+
+Pro threads is one programing model for concurrency. There are others.
+
+There's the actor model and there's event models and there's, you know,
+
+all kinds of different models for concurrent programing that you will learn some of over the years.
+
+And when do you use one? When do you use another? When do you how do you make that decision.
+
+The answer to when. So if you ask the question should I use threads?
+
+The answer is frequently no. But if one of these things is true, the answer may be yes.
+
+If you have parallel tasks that need to change control between each other back and forth very, very rapidly.
+
+Right. Sometimes we even call these code routines right where you are doing a little bit here and a little bit there,
+
+and a little bit here and a little bit there. And like they're interleaved in some fashion threads may very well be the answer.
+
+And event loop might also be the answer,
+
+but threads may very well be the answer because of that fact that that context switch between threads is very cheap and fast.
+
+Right? Whereas if I had multiple processes and I wanted to exchange control back and forth very rapidly,
+
+it would be slower, I would lose a lot more overhead to the operating system, to the hardware, etc.
+
+If I have lots of large shared data structures.
+
+So I read some data in from some source, write a file on disk or a database or something.
+
+I build a large, complicated data structure.
+
+And I have multiple logical flows of control that want to query that data structure or want to modify that data structure and its gigabytes.
+
+This is reasonable, right? In 2025, it's reasonable to have a single data structure that's gigabytes in size.
+
+Threads may be your answer because allocating that data structure separately in multiple processes is a lot of overhead.
+
+And then if one process changes it the other ones can't see the change.
+
+So if you really want to have a shared data structure, there are other ways to do it.
+
+But threading is. Often an appropriate answer.
+
+In many programing languages.
+
+IO operations are blocking what we call blocking, which is if you say, I want to read data from a file or from the network or something like that,
+
+your program will stop until that data actually is available for your program to read.
+
+While the network and disks and things like that are slow.
+
+And so your program can't do anything for potentially a long period of time where it could conceivably be doing computational work.
+
+In a language like that. Java is like this, right? Java by default has blocking IO, although it does have an IO interface.
+
+Now, um, if Java has blocking IO. Um.
+
+The way you solve that is you say, okay, here's a thread. Let this thread read from the network, which may take hundreds of milliseconds, right?
+
+Or seconds, right. If you're downloading a large file. Could even be minutes.
+
+And in the meantime, I'll have another thread that does some work.
+
+And when this first thread is done doing whatever input and output stuff that it's doing,
+
+then maybe it notifies my thread and says, hey, that file is ready for you.
+
+Do you want to do something with it now? Right.
+
+Um, and then of course, the big reason is, um, in modern computing, if you want to do more computation than a single CPU core can do.
+
+You stress, right? Sometimes you can use processes. They use threads.
+
+Um. All right. There's a little flavor of that.
+
+I will tell you now that into 20. We are going to tell you to use threads at some point.
+
+You've already used processes at various points. You're not going to have to make that decision into 20.
+
+But as you go forward, this is going to be a question that's going to come up. Pocket towels.
+
+She stays awake. All right.
+
+That's it. That's all I want to say about that. Um, and then, uh, wolves will start a new set of lecture slides.
+
+Are there any questions? Yeah.
+
+That is a very astute question. Is that blocking thing part of the reason that malloc is not thread safe?
+
+The answer is no, but the reason is not easy to make Malik thread safe.
+
+Is that blocking thing? Because if you this. The easy way to make Malik thread safe means only one thread can Malik at a time.
+
+And that makes your process slow. Sit back down.
+
+Now, Carl got to slide 16. In this set of lecture slides.
+
+And. Oh, no. All right.
+
+Yeah. Here. I'll just. So there's something on the screen for entertainment.
+
+I didn't build the set of slides yet. Or did I?
+
+Why does it say it doesn't exist? Like it's right there, right?
+
+I can't copy and paste this. I can. Okay.
+
+What? Which one is it?
+
+Can you open it or not? This is fantastic. We're learning things.
+
+So, um. There's the file like it exists.
+
+Right. So I just listed it. But this program says it can't open it.
+
+But then it did open it and then it didn't open it. All right, well that's awesome.
+
+All right. Uh, I would explain what just happened, except I don't really know what just happened, so I thought we would have a learning moment,
+
+but it turns out I don't know what's happening, so we're not going to have a learning moment.
+
+Okay. Um. Maybe it's a race. So this next lecture is.
+
+So essentially what's happened is we said, hey, we have this dedicated computer model that's beautiful.
+
+And then we said, but there's times where it's a little bit limiting.
+
+So what if we relaxed that restriction and allowed for multiple logical concurrent flows of control, concurrent logical flow to control.
+
+Great. Well, it turns out that has a price. It causes some problems.
+
+And so now that we have allowed that, if we choose to use it,
+
+we have to understand the problems that it created and we have to understand how to fix those problems.
+
+It turns out that fixing those problems is going to cause some more problems, and then we'll have to learn how to fix those.
+
+And then we're kind of done right. We don't have to go any farther like we've we've.
+
+Had a problem, we created solution. It caused problems that created.
+
+We created a solution. Now we're done.
+
+We can sort of move on. Right. It turns out that it gets more complicated, right?
+
+It's turtles all the way down.
+
+But, uh, for our purposes, you know, we'll have two, sort of two layers of problems and solutions, and then we can move on.
+
+Um, as a spoiler. Races is the problem that we've created, and synchronization is the first solution that we'll use to solve that problem.
+
+Synchronization is going to cause another problem that we call deadlock. And then we'll solve that as well.
+
+So, uh, a race. And again, I think I said this before when we talked about.
+
+Pointers right there four ways to get a valid pointer.
+
+And we enumerated them. We talked about all four. And I said as you probably know all four of these right.
+
+And that's taking an address. I'm going to see if I can do this on the top of my head, taking an address of a variable that, uh, already exists, um,
+
+creating an array or string, um, constant, calculating a valid pointer from, uh, another pointer that you know is already valid.
+
+And we saw how to do that with pointer math or asking for memory from the operating system.
+
+And there's no other ways to get a valid pointer. So like learn that list.
+
+And now anytime you see a pointer being created you can immediately answer, is it possible that the pointer is valid.
+
+Right. Here are the, um conditions that are necessary to have it.
+
+There are necessary and sufficient to have a race. If you have two or more events that are dependent on one another, right?
+
+So they interact with each other in some way. Some of those events can happen in more than one order, or perhaps simultaneously.
+
+And there exists some ordering of those events that is incorrect.
+
+Then you have a race. Right. And we call it a race.
+
+Exactly like a foot race. Right. Those events are all racing to compete first.
+
+And if they can, if they to compete first, and if they complete in an order that is correct, then everything is good.
+
+But if they complete an order that is incorrect, then everything is not good.
+
+And your program has a bog. Um.
+
+Races are terrible because with many bugs, you figure out what it is that triggers the bug and you do that.
+
+And then the bug happens with races.
+
+Sometimes it happens and sometimes it does it.
+
+And of course, this is one of those things sort of like silent memory corruption that when you run the program in testing 1 million times,
+
+it works correctly every time. And then you give it to your boss and you say, this is ready to deliver to the customer,
+
+or your boss says, well, I'll try it out and it immediately has a race and crashes, right?
+
+The only way. To know that you do not have a race.
+
+Is to go down this list. Look at your code.
+
+And prove to yourself that there is no race.
+
+There is no program that can check your program and tell you that there are no races.
+
+It's. What we call in fact un computable.
+
+If you take 396, you'll learn about that. There is no compiler that will tell you, hey, the program has a race.
+
+There is no test suite that you can write that will show that there are no races in your program because you cannot prove a negative.
+
+Because you can run it 10 million times and it runs just fine.
+
+Almost 10,000,001st. You lose the race.
+
+Right. There is no test suite that can prove that there are no races.
+
+The only way to prove that a program has no races is to look at it.
+
+Think really hard. Maybe even write out some actual proofs on paper that there are no races.
+
+So students hate this. Because you cannot just ask the operator.
+
+You cannot just write a test. Not that you want to write a test. There's no way.
+
+You just have to think about it. Which means you have to understand your code.
+
+And you have to understand the interactions between the different parts of your code,
+
+and you have to understand what it should be doing and be able to say, yes, it is in fact doing that every time.
+
+Right. That's why you learn the list. So you can ask those questions.
+
+Um. So for example, suppose we have some state that will be updated multiple times by different, um threads.
+
+And then we'll produce some output. If the order of the updates can reduce and can result in output, that is not the correct answer.
+
+Then that would be a race. That would be a data race. We'll talk about data races here in a moment.
+
+Synchronization in the context of computer programs and races and um.
+
+Concurrent logical flows is the deliberate ordering of events via some mechanism.
+
+Now, this is the second time in this course where I tell you a story about Stack Overflow.
+
+Maybe you've already told this story. Uh, but a number of semesters ago, uh, I had.
+
+Um, I gave an exam. I think I did tell this story where two students wrote down the same answer on the exam.
+
+I said, what is synchronization? And they wrote down the same answer, and it was wrong on the final.
+
+Right? And it's like, well, I know you didn't look this up because you were taking the final in the classroom in front of me.
+
+What's going on? And one of the students pulled out, but I said, do I have to look into this?
+
+Right. Like, how do you both have the same answers wrong. And like, it wasn't like it just wasn't the right answer.
+
+Like, it was incredibly detailed and not right.
+
+And one of them flipped out their notebook and they had a definition of synchronization in, like, multicolored pens.
+
+That wasn't right. And they googled for it.
+
+What is synchronization? And a post came up on StackOverflow and they copied the answer from StackOverflow into their notes.
+
+And it was wrong. And it was actually a copy and paste from the Microsoft Developer Network documentation for C-sharp dotnet.
+
+And it was talking about no, it wasn't synchronization with serialization. Right.
+
+We already talked about this. It was serialization wasn't synchronization. It's a good story though.
+
+I'll finish it. Uh, they copied it down and they wrote it in their notes, and I was like.
+
+But the definition is literally in the slides, like,
+
+it's like here it just says synchronization is the deliberate ordering of events, like, why would you do that anyway?
+
+It was serialization and it was, you know, uh, representing data as a stream of bytes.
+
+So, uh, this is another one, actually, that that didn't happen with synchronization, but synchronization is another one that is dangerous.
+
+Uh, because, for example, if you know Java, you may know that there is in fact a keyword in Java synchronized.
+
+And it does do synchronization. But it doesn't encompass all possible concepts of synchronization.
+
+It's just a very specific case of synchronization. So there are many synchronization mechanisms.
+
+They can work in different ways. We are going to learn about 4 or 5 of them in this course.
+
+Um some of those synchronization mechanisms may directly order events.
+
+They may say if I have event A, B and C, then it must be the case that A happens and then B happens, then C happens.
+
+I don't care how you try to do it, that's how it's going to happen. Some of them may say, well, you have events A, B, and C,
+
+and I don't care when you do A and when you do B and when you do C, but you can't do A and B at the same time.
+
+You have to either do A and then B, or you have to do b in the A and B what you can't do in save time.
+
+Yes. Just like how to. A priority queue may be used in some synchronization contexts, and you can use it for ordering of events.
+
+But there are many other ways to do that, right? So a priority queue could be used as part of a synchronization solution.
+
+As what I'm saying, there's many different ways to solve this.
+
+Uh, another thing you may do is say, hey, events A and B, I don't care when they happen, but they have to start at the same time.
+
+Events A and B, I don't care when they happen, but they have to finish at the same time, right?
+
+You can say all these things with different types of synchronization, uh, mechanisms.
+
+Synchronization is how we avoid races because as you remember, the third bullet of races.
+
+Was that there. Well or let's say go go at it from the second bullet, which is that the events may happen in any order.
+
+Well or in different orders. Well, with synchronization we can say yes, they can happen in different orders,
+
+but they can only happen in orders that don't violate the third bullet,
+
+which is that there is some order of events that would lead to an incorrect result.
+
+So if it has to be the case that we do A before B, we insert a synchronization mechanism that says you can't do B until you're done with A, right.
+
+And now any thread in the system, any logical flow of control can try to do B.
+
+And if A has happened yet it'll stop and it'll wait until A happens and then it'll do B or whatever.
+
+Right. Whatever your synchronization mechanism does. So we use these synchronization mechanisms to eliminate races.
+
+Yes. Uh, so that's a very.
+
+Insightful question. Actually, does this mean that C has a clock like Java has a clock?
+
+Um, and the answer is no, not really, although Unix does.
+
+Um, but it turns out that most synchronization mechanisms don't work in terms of time.
+
+Because if you do your synchronization in terms of time,
+
+then you're vulnerable to a an unknown movable fact in computing, which is that your computer is going to get faster.
+
+So whatever period of time you choose, eventually it's it's too long, right.
+
+Or if it's the right length on your computer, you're a developer with a hyper fast sweet development workstation,
+
+and then you sell it to somebody who has, you know, a.
+
+Surface Laptop from, you know, 2003.
+
+And like your period of time is not long enough because it's just too slow or whatever.
+
+Um, so for synchronization, we normally don't we cannot use time because it's dangerous.
+
+There are cases where that's exactly what we do, and there are ways to get clocks and see, but it's dangerous.
+
+And so we try not to. It's a good question.
+
+Um. Sure.
+
+It's good for you. I don't.
+
+Oh. You know. Oh.
+
+So. What are you talking about?
+
+My entire conference. Probably.
+
+Probably works on Friday. Even if they have a remote day. Are coming to get some of.
+
+Well, in that case, they don't mean remote. They mean not working.
+
+That's a different thing, actually. So I thought about our staff, some of our staff's remote days or more.
+
+Remotes and others. Top hats.
+
+Loading. I promise we're loading. Top hat over here. Yeah. Um.
+
+Like. Yep, two threads that for loops that are alternating the same local variable.
+
+Yep. And then you get an output. How would.
+
+This is a process that we will. So I'm going to punt on this question and we are going to talk about that in great detail.
+
+Remember I said that we'd have two theoretical lectures and then we do one where we actually do live coding.
+
+That is actually an example that we're going to go through.
+
+And the answer is that you're right, that sometimes you effectively wind up making it a single thread of control,
+
+even though it's technically two or more.
+
+Right. But that's something you have to think about when you're designing your program. But what for everybody else?
+
+We'll answer that question here. Top hat finally did its thing. Uh, we'll talk about that when we get to, um, the live coding portion of this.
+
+Which of the following things lead to page faults?
+
+This is going to separate the people who sat here in class from the ones who actually read the slides and thought about it.
+
+She is second when Keller. Her eyes were rolling back.
+
+Eyelids were going down. Just sitting there.
+
+She's like. It's possible.
+
+Talk about yourselves, 30s. Let's turtles all the way down.
+
+Do you know that where those sayings from? Yeah. Okay.
+
+It's not to say it's a problem, but it's just like, yeah, in the back of a turtle.
+
+Yeah, yeah, yeah. And then.
+
+And then an old lady asks, okay, well what's that turtle standing on?
+
+And the wise person says, no. Someone asks an old lady, then what?
+
+That. What is that, uh, turtle standing on? And the old lady says it's turtles all the way down.
+
+So it's an early parable for infinity.
+
+All right. Um, well, it's a modern retelling of an alleged early parable of infinity.
+
+I think, actually. All right.
+
+Do it again. This is why I don't like Top Hat.
+
+By the time I got Top Hat started, like we lost four minutes of lecture and we're just going to be done after this.
+
+So many things I could talk about. And sometimes it has to come and go.
+
+All right. Let's look at the results. Dirty versus clean doesn't matter.
+
+Dirty versus clean has to do with whether a page is backed or not.
+
+The two reasons that we talked about were you would get a, um.
+
+Page fault, or when you have a page that's not mapped, which is a page that either shouldn't be.
+
+Or in the second case it could be, but is it right now.
+
+And we talked about that mechanism for demand paging. Right.
+
+Or when an access to a page violates the page's metadata.
+
+So you try to write to a read only page, or you try to execute code on a page that's not available for execution or something like that.
+
+Uh, all right. Thank you all very much. I will see you on Friday.
+
+Um. And this weekend is what?
+
+You be hacking? See you there. Just now.
+
+How many times?
+

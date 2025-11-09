@@ -1,0 +1,877 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+So what slide. Does anybody know what slide was our last slide.
+
+Like what slide number we were on. Was it this one? Or do we get farther than this?
+
+We'll start here. Let's start here. Okay.
+
+So, um. We've talked so far about the requirement for aligning data that's stored in memory to
+
+whatever the platform the hardware actually requires for accessing that type of data.
+
+And we talked a little bit about the underlying reason for that, which is that memory is actually accessed by word, not by byte.
+
+And so different addresses have different um properties when we go to access them.
+
+Um. And then we said that this is all well and good when we put individual items into memory.
+
+We just put them in the right place. And it's okay when we use arrays of primitive items or of simple, uh, data types,
+
+because then we can just put them side by side and like we can show that that preserves alignment as long as the first one is aligned.
+
+But when we build aggregate types that have, uh,
+
+items in them of more than one different type members of different types, that then we have a problem,
+
+because if we just put them immediately one after another, like we did in arrays,
+
+then we may have members of a structure that are not aligned properly.
+
+And we'll see how that, uh, why that is and how that works as we move on.
+
+But then we closed by saying that the sort of fundamental way that we get around this problem is when we put heterogeneous types in a structure.
+
+Sometimes we have to put some extra space inside the structure to preserve the alignment of the individual members.
+
+We call that padding. Um, and the padding is not something that you should mess with because it's not like it's not predictable.
+
+It could have absolutely any, um, value.
+
+And that's okay. That's allowed by the C, um standard.
+
+So in the least complicated case of building a structure, it's just like an array.
+
+And we don't need any of this padding that we're talking about.
+
+So if you recall the rules for laying a structure out in memory, uh,
+
+which I think we talked about very briefly when we define structures, but I want to, uh, make it explicit.
+
+Now, uh, I remember I said that a structure is just like a structure of all the same type is just like an array,
+
+except that instead of naming the items in the array,
+
+we name them by their index in a structure, we name them by their member names, but they occur in the order that we declare them.
+
+And it turns out that that's a hard and fast guarantee that C provides you.
+
+When it puts the members of a structure into the structure, it will always place them in the order that you declare them.
+
+So the first variable that you declare will be at the address where the base of the structure is located.
+
+We call it the base, right. The very first bit of memory that's occupy though the structure, whatever that address is.
+
+That's where the first element that you define in the, uh, remember that you define in the structure will be located.
+
+And then the second element that you define, the second member in the structure will be at the next higher address that meets its requirements.
+
+The third member that you define will be at the next higher location after that, etc., etc.
+
+Right. So they start at the bottom of uh, some address and memory and they move upward in address space from there, exactly like arrays do.
+
+Right. Remember we said that, you know,
+
+array sub I is equivalent to saying find the base address of the array multiply I times the size of whatever you store in that array.
+
+Go to that location and get what you find there. Right.
+
+So the rules are the same for structs. It's just that instead of them being numbered from zero to, you know, whatever the size of the array is,
+
+they are named and they occur in the order that they are defined in, uh, in the source code when you define the struct.
+
+So if I have a struct over here, that is a complex number that where the, um,
+
+components of the complex number are floats, um, then which are 32 bits, a float is a 32 bit.
+
+754 uh, number. Um, we won't talk about 74 in this class, but you will when you take 341, you'll talk about lecture 754.
+
+It's a way to represent, um, rational numbers. Um, and I name the one member real, and I name the next imaginary.
+
+Then when I look in memory, that struct will be located at some address, right.
+
+It's placed in memory somewhere by the definition of what our sort of model for this system is like.
+
+Everything, all data is in memory. Somewhere in that memory has addresses, right.
+
+So it's placed in memory somewhere. And the real portion right.
+
+The float real that's defined first is at exactly the address at which that struct is located.
+
+So if I use the ampersand operator and took the address of that struct, I would get some address.
+
+If I use the ampersand operator and took the address of that struct dot real, I would get the same address right.
+
+And so we say that it's offset. From the base of the struct is zero.
+
+The offset between the address of the base of the struct and where that member is stored is zero.
+
+They're stored at the same address. Then the imaginary portion.
+
+1 a.m. I? Let her stick out of the box. That's not okay.
+
+Are they like that on the website? Yeah, it looks better on the website.
+
+I'm going to call the supervisor. Uh, I don't like that.
+
+Just pretend it's not like that.
+
+Um, so then if I go to the address at which the struct is stored, and I add four bytes to that address, I'll get a new address.
+
+And that address is where the imaginary portion will be stored. And the reason it's four bytes is because a float is 32 bits.
+
+A byte is eight bits. And uh, 32 divided by eight is four.
+
+Right. So there are four bytes, by the way. I will say this in passing because it came up in the offtopic chat for Kes 20 for the for the staff.
+
+Uh, bytes are eight bits by convention. There are platforms in which bytes are not eight bits.
+
+We'll talk about that when we talk about integer types, but on our platform they're always eight bits.
+
+They're always going to be eight bits. In at least eight bits.
+
+It used to be that they could be fewer. And now they have to be at least eight bits.
+
+That can be more. So that's one thing.
+
+Uh, two thing is the size of all these data types is variable from platform to platform.
+
+Right. So a float is not necessarily going to be exactly four bytes.
+
+Uh. To fight. When I say bit, I mean a value that can store exactly a zero or a one, and that's all.
+
+That's the only things that can store by those bits aggregated together into one, um, data type.
+
+And then when I say a word, I mean like. The definition of word that we've been.
+
+64. Third Time's a Charm 64. That's right. Is the size of our memory word.
+
+But the definition of more than one bite, right?
+
+Um. So the reason I say this is that frequently students are not precise and careful about whether they mean bits or bytes.
+
+Which is kind of okay as long as you've got it straight in your head, right?
+
+But if you are not sure and you're actually mixing it up, you wind up with wildly wrong calculations, right?
+
+They're off by a factor of eight. Um, for one and for two, if we give you an exam and we ask, like, how large is our word?
+
+And you write 64 bytes, like, that's wrong, it's 64 bits.
+
+If you write eight bits, that's wrong. It's 64 bits.
+
+It's eight bytes. Right. So you need to keep track of what's a bit and what's a byte.
+
+Right. There's eight bits in a white. Um, so at any rate 32 bit word, eight bits in a byte, that's four bytes.
+
+And so the address is four larger. And that's why we have four is the.
+
+Offset of that imaginary portion. Yes, sir. I'm sorry.
+
+I have to come closer. Am I right here? I'm old.
+
+461. Okay.
+
+This is exactly what I was just talking about. Bits and bytes are different.
+
+Floats are 32 bits, which is four bytes on our system.
+
+Floats are always at least four bytes or much more complicated.
+
+It tends to be the case on most reasonable modern platforms that, um.
+
+Floats are typically 32 bits and doubles are typically 64 bits,
+
+but the standard says that floats are at least 32 bits and doubles are at least 64 bits.
+
+They can be larger, so you can have a platform where float and double are both 64 bit, and CDC standard would allow that.
+
+INTs are much more complicated, and we'll talk about that in quite a bit of detail later in the course.
+
+What you should know is that on our platform an int is four bytes and so is a float.
+
+But if you were on a different kind of computer that that could be different. I woke up the other morning and this ear just doesn't quite work, right?
+
+It ain't hot. I don't recommend it. Um.
+
+I'm sure it will. I'm sure it's fine. So if, on the other hand, we had a struct where we had members that are of different sizes,
+
+those members of different sizes might have different alignment requirements.
+
+And so, uh, just because the first so in the previous case,
+
+if the first element of that struct was aligned, then every element of that struct was aligned.
+
+And we don't have to do any more work.
+
+But if they have different alignment requirements, then we run the possibility that one or more members of the struct are in fact correctly aligned.
+
+But if we put them directly back to back, others may not be.
+
+And here's an example. So um, if I have this is in this case this is a linked list node.
+
+Right. Again this is our same int list node where we have uh a 32 bit or four byte first member, which is an integer named value.
+
+And then we have a 64 bit or eight byte second member, which is a pointer named next on our platform.
+
+All pointers, regardless of what they point to, are 64 bits long, right?
+
+They occupy 64 bits of memory.
+
+And so the alignment requirement of value is that the address at which it is stored when divided by four has a remainder of zero.
+
+And the alignment requirement of next is that at the address at which it is stored when divided by eight, must have a remainder of zero.
+
+And so. Every other address that is valid for value is invalid for next.
+
+Right. So if I put value at address zero and I put next address for four divided by eight is remainder four.
+
+That's not okay. But if I were to put value at address four.
+
+And next at address eight. That would have been okay.
+
+Right? Because next required eight.
+
+So what we do instead is we say let's align everything to the alignment requirements of the largest element of the struct,
+
+which in this case is eight. We align the entire struct to some address which is congruent to zero mod eight.
+
+And then we put padding inside the struct so that every member of the struct will be properly aligned.
+
+Assuming that the address of the struct is concurrent to zero mod eight.
+
+So in this case zero is congruent to zero mod 248 1630.
+
+To write any power of two, write zero is in fact congruent to zero mod any number, right?
+
+So when I divide zero by any number, I get a remainder of zero zero remainder zero.
+
+Right? Um.
+
+But then to ensure that our next value, which must be at a remainder of zero when divided by eight, is always at an address that has that property.
+
+We place the bottom of our struct at some address, which when divided by eight, yields a remainder of zero,
+
+and we make sure that that next pointer is eight bytes after that first address.
+
+And so by the lemma that we talked about last time, right.
+
+If I have any integer n, if n divided by k has remainder zero, then n plus k also has remainder zero, right.
+
+Just because of the way, uh, arithmetic works. In order to do that, what we do is we take our four byte value.
+
+We put four more bytes of I don't care what in between.
+
+And then put the next after that we had between the value in the next.
+
+Yes. It does.
+
+When you declare this struct, it actually does that.
+
+The C language does that, right. The problem is that not the problem.
+
+The fact is that in C I can take the address of value and I can take the address of next.
+
+And now if I subtracted those two I would find that the difference is in fact not four.
+
+It is eight. So you need to know that.
+
+Right. In other languages. You don't need to know. In other languages, do exactly the same thing and you don't need to know it.
+
+Because since you can't take the address of anything, you'll never know that there was dead space in between.
+
+It can put them in wildly different places in memory, and you would never know.
+
+Yes. Because an address doesn't have a type.
+
+A pointer has a type. And so if you had a pointer to struct int list, then you would be talking about the whole struct.
+
+And if you had a pointer to int you would be talking about value.
+
+If there's what? You can do that.
+
+But then you would have either a point or the outer structure, or a point or the inner structure.
+
+Right? So the type is carried by the variable, not by the address.
+
+The address is sort of an artifact that's somewhere there inside the system.
+
+It's a good question. You guys. That's great. Great questions. I like these early afternoon classes because you're all paying attention, right, Carl.
+
+Carl. That always winds up with like eight and 9 a.m. I'm not saying there's anything wrong with the students in the 9 a.m. classes,
+
+but I've taught eight and 9 a.m. classes and you don't get good questions.
+
+You get snores. So. I appreciate y'all's attentiveness and great questions.
+
+Um. Okay. Does this make sense? Are there any questions about why we put four bytes of padding in there?
+
+Because there's more examples coming up. Right? Okay.
+
+So this is the rule that I gave you, um, before, essentially, uh,
+
+in order for the padding inside the structure to work out so that every member of the structure is aligned.
+
+It must be the case that every is at the base of the structure, right?
+
+This zero offset of the structure follows certain rules.
+
+And the rules that we are going to use is that the base of that structure must be at an address, um,
+
+that is divisible by the largest requirement alignment requirement of any member inside the structure.
+
+So you just take the max of every type inside the structure.
+
+In this case we add an int and a pointer. The int is for the pointer is eight.
+
+We take the max of that and we get eight. So this address here must be congruent to zero mod eight.
+
+Right in order for the rest of our padding to work out. Does that make sense?
+
+Are there any questions about that?
+
+So, um, remember that when we allocated memory, we asked the standard allocator for memory by asking for a certain number of bytes.
+
+And so the standard allocator doesn't know for what reason we're asking for that memory.
+
+If I ask the standard allocator malloc right. If I ask malloc for 16 bytes, it might be because I'm storing a struct int list.
+
+But it might be because I'm storing a string of, you know, 15 bytes in an old terminator.
+
+Or it might be because I'm storing 16 individual bytes, or it might be that I'm storing for integers, or like the allocator doesn't know.
+
+It doesn't know what I'm going to do with the memory. And so when the allocator gives us memory, when we call Malik and we get an address back,
+
+the address that malloc returns must always be aligned to the largest possible alignment requirement that the system could ever have.
+
+On our system. We talk about that as if it is eight bytes.
+
+It turns out it's actually 16 bytes. There is a, uh, in fact, in some situations it might be 32, but I don't think so.
+
+Um, for things we're not going to talk about. Right. It's actually even larger.
+
+Um, not because of any of these alignment requirements for individual data types,
+
+but because the processor has inside it what's called a vector unit, uh,
+
+which is where it can do the same calculation across a large number of data items at the same time,
+
+it's used for things like matrix, uh, manipulations and graphics computations.
+
+And it has like, extra special requirements. Uh. That it has to maintain.
+
+So, uh, on our system, the map, like, when it returns an address, from our perspective, that address will always be congruent to zero mod eight.
+
+And in fact I believe it's actually be congruent to 16 mod in the real allocator.
+
+You're going to implement an allocator where we ask you make it convert zero, right.
+
+But the I think the real allocator is actually 16. Um, and so this means that there's overhead in every allocation to maintain that.
+
+Um. Requirement. So if you like one byte of memory and every single allocation has to be at an address that's a multiple of 16,
+
+then that means the next time you malloc one byte of memory, it has to be at least 15 bytes away from that last allocation that you did.
+
+Right. Which means that there's effectively a minimum size of allocation that is 16 bytes, right?
+
+No matter how little memory you asked for. Uh, I'm sorry, eight bytes.
+
+Uh, it adds at least eight bytes away. Uh, and so you have wasted memory in between.
+
+Um, and it turns out that, um, that overhead usually doesn't matter to us because when we do allocations, we normally do allocations of moderate size.
+
+We'll talk more about this later. Um, but it can be meaningful.
+
+And it leads to, you know, extra waste in the system. And so, for example, if you are allocating a zillion very small things,
+
+it is better to do something like malloc or click a zillion of them into an array than it is to allocate them individually,
+
+because then you save that, you know, whatever alignment, overhead and other out overheads from the allocator.
+
+Yes. Yeah.
+
+You're going to write Malik in four. Yeah, four. You're going to write Malik.
+
+Yeah. Buckle up. Um, that's after the midterm, though, so don't worry about that yet.
+
+Worry about the midterm. Um.
+
+All right. Any questions about this? You don't have to do anything with this. Now. Just be aware that it's like a thing that exists.
+
+Okay. So there's another property that's closely related to alignment but only comes into effect for aggregate type.
+
+So all types have to be aligned right.
+
+But only aggregate types do we have to worry about uh, stride, which is the other property, I guess I should say its name.
+
+The other property, which is, um, stride and stride is the distance between any two items of the same type in memory for.
+
+Uh, simple types. This is alignment or the alignment requirement and stride are trivially exactly the same thing.
+
+For aggregate types, the alignment requirement and the stride may be different values.
+
+Right. So you may have a struct that has an alignment requirement of four bytes, but that say it's contains four integers.
+
+Right. So as an alignment requirement of four bytes, but it has a stride of 16 because it occupies 16 bytes of memory.
+
+And so if I put two of these in memory back to back they would be 16 bytes apart.
+
+So effectively stride is if I have two pointers to, uh, a particular data type,
+
+and they're as close to possible as together in memory as they can possibly be, but no closer.
+
+What is the integer distance between those two addresses? Right.
+
+That is the stride. This is also the distance between any two items when they're placed in an array.
+
+So again, for simple types, we know that the distance between two simple types in array is exactly the size of that type.
+
+For a struct, it's a little bit more complicated, right?
+
+We have to know what members are in the struct, how many, how much padding there is between and what the alignment requirements are, um, etc.
+
+Um. Why is the slide messed up?
+
+On the web site is this eight on the same line is the word is.
+
+Does anybody have the slides up? It is. I have some font metrics problems.
+
+All right, well, I'll sort that out some other time. Um.
+
+I don't like it. I'll sort it out some other time. Um.
+
+So there's a magic. Thing down here at the bottom, which says that void star is a special case and its stride is one.
+
+Um, so for any pointer, the stride of the pointer type is how far apart?
+
+Two items of that. Type are going to be in memory void star.
+
+We don't know what it points to. Right. We have no idea what a void star points to.
+
+So it's stride is defined by fiat as one.
+
+I will point out, this is absolutely not in the C 99 standard.
+
+The C99 standard says that the stride of void star is undefined.
+
+However, I have been writing C programs for 30 years.
+
+I have never seen a compiler where the straight avoid star was anything other than one, and it was well defined as one.
+
+So technically speaking, if you're doing safety critical stuff or you're doing stuff that has to be formally verified,
+
+Void Star does not have a defined stride for our purpose.
+
+And the reason I bring this up is it makes life easier when we start doing pointer math, which we're going to start doing relatively soon.
+
+Void star will have a stride of one on our platform. It will always. In fact, I believe any platform using GCC it will have a stride of one.
+
+Um, so just stick that in your mind. Void star has his stride of one.
+
+Trick question. If stride is the distance between any two items of the same type in memory.
+
+Void. Star doesn't have a stride because you can't have a void in memory.
+
+So the stride, a void star is not well defined and we fix it at one.
+
+What is the stride of Void? Star. Star.
+
+No. No.
+
+No. Void star is a type that we don't know what it stores, right?
+
+It's a pointer to I don't know what. Void.
+
+Star. Star is a pointer to what? Void star.
+
+What does a void star variable contain?
+
+A pointer. How big is a pointer on our system?
+
+64 bits. So what is the stride of Void?
+
+Star. Star? 64 bits.
+
+Eight bytes. Right. Because we don't know what a void star points to.
+
+But we know that a void star star points to a pointer. Right.
+
+And a pointer is eight bytes. So it is in fact well-defined.
+
+And the C standard would say it's always going to be the size of your pointer type. Um.
+
+C is not a fantastic language to start thinking deeply about types because types and see are, you know, kind of wibbly wobbly, uh,
+
+when you take 305, which is Introduction to programing languages, uh, you will talk a lot about types and you will see that like that sort of.
+
+Um. Meta. Processing over types, right?
+
+They actually call the type calculus. You won't learn type calculus in 3 or 5.
+
+Right. But uh is useful and it's useful to say what is the type of this thing and what are the properties of that type?
+
+Even though I may not know a lot about the actual thing.
+
+Right? That's a useful thing to do. Uh, don't sweat it too much into 20, but when you get to 3 or 5, you'll still talk about it.
+
+Yeah. Let's do a lecture question. But you.
+
+Carl wanted me to finish these slides today. I told them I'd see what happened. I always wonder when that door opens.
+
+Is somebody who's late, or is it somebody who's just going to walk through the hallway in the back of the classroom?
+
+Yeah, this time. I understand that one. At least 50% of the time.
+
+It's just people walking randomly through the back of my classroom. Sometimes talking.
+
+All right. Was today. Today is the 26th. Oh, yeah.
+
+Okay, listen. All right. Why do I look?
+
+All right. We're going to do this again. The answer is B you can't.
+
+This will absolutely 100%, I guarantee it, be on your midterm.
+
+It will be worth four points. I told you this on.
+
+Was it Wednesday or Monday? Monday.
+
+I told you this would be on your midterm. I told you the answer is you can't.
+
+I told you it's going to be on the final and that people would miss it on the final one.
+
+I was going to be sad. Oh.
+
+Oh. Okay. All right, so there's 81 people that will absolutely not get that wrong on the midterm.
+
+Right. Someday.
+
+I'll retire. And before that day, I just want one class.
+
+Just one class. Everybody gets that right. Not even on the midterm.
+
+You can miss on the midterm. On the final. By the final, 100% of the students who stayed to the end didn't resign.
+
+Who? They made it to the end. And they. Right.
+
+You can't. Could you be that class? All right, so, um.
+
+Stride then means that we have to worry when we put two structs back to back in memory,
+
+that the next struct after the one that we place is aligned right the same as the first struct that we place was.
+
+Um, and there's a number of ways to ensure that.
+
+But what we it turns out we actually do is we take when we're all done packing all of the members into a struct,
+
+we look at the offset between the beginning of the struct and the end of the last member,
+
+and we ask, is this size divisible cleanly remainder zero by the alignment requirements of the of the struct, right?
+
+In this case, the alignment requirement of the struct is eight.
+
+Because the largest member of the struct is eight, and we have an eight by type, and then a four byte type, which is 12 bytes.
+
+And if we take 12 and we divide it by eight, we get four, which is not zero.
+
+I think we can all agree on that.
+
+And so what we do is we pad the end of this structure until the, um, next address that would meet the alignment requirements.
+
+So in this case the next address that is divisible by eight.
+
+So when we have this pointer in this integer in a struct it doesn't matter what order we put them in.
+
+We're still going to have four bytes of padding. But where we put the padding is in a different place.
+
+If we have the point the integer and then the pointer,
+
+then we have an integer and we have four bytes of padding so that the pointer in the same struct it preserves its alignment.
+
+If we have the pointer and then the integer, we don't need any padding between the pointer and the integer,
+
+because the alignment requirements of the pointer are strictly greater than the alignment requirements of the integer.
+
+But we put a little bit of extra padding after the integer, so that if the very next thing we put in memory is another one of these structs.
+
+It will be aligned properly. Right. We pad at the end to preserve stride.
+
+Yes, we should always. Vice versa.
+
+Uh, so this is a good observation. And this is you asked about this the other day, too, right?
+
+It's a related observation. If you always define your struct with the largest members first, you will minimize padding.
+
+Right now, sometimes you might want to rearrange and pull some smaller ones forward to fill like chunks.
+
+You know, uh, depending on what sizes you have. If they're not all, they're all multiples of two, you just put the largest one first and you're done.
+
+But if you're on a system where you not all types are a multiple of two, right?
+
+Then then you might have to pull some forward to fill chunks. Um.
+
+And that will minimize the amount of padding in your struct, so that the only padding you have will be at the end.
+
+Right, you'll never have padding in the middle. And the question was asked last time is when do we think about this?
+
+Right? When do we think about the order of the members in our struct?
+
+And what I said was, first, make it work. Then make it good.
+
+Then make it fast. The order.
+
+Is about fast, not about work or good, right?
+
+So my recommendation to you is not to worry about this when you lay out structs in memory, right?
+
+What you should think about when you're laying out a struct in memory is if I have members of a structure,
+
+logically speaking, how would the programmer expect to find those in this structure?
+
+Right? So if a structure as if it only has a couple of members, it doesn't matter very much.
+
+But if it gets larger and it has several members right, then you will probably find that some of them are more related to each other than others,
+
+and you should put those near each other and put a little comment in that says, you know, hey, this is the x coordinate in the y coordinate.
+
+You would never say, for example, if I have an x coordinate, a y coordinate, a color and a size, I would never say x size color y.
+
+Because then when you're reading the structure like what is this? Or worse y size color X, right?
+
+It's like, why is it like this? Right, x comes over a y and etc. etc., right?
+
+You would say x and y and then size and color like one is where do I put the thing.
+
+And the other one is what kind of characteristics does it ask. Right. And maybe a comment in between or something like that.
+
+Right. Only when you're done with your programing.
+
+You're like, damn, these structs are big. And it's a problem for me.
+
+Then you say, okay, do I need to rearrange these? Right. To make sure that the biggest stuff is at the front and the smallest stuff is at the.
+
+Makes sense. Any questions?
+
+All right. So. It turns out that pointers are just integers.
+
+We've said this before, right? Is this an. The address is just a number, right?
+
+It's like, how far from the beginning of memory do I go to find a thing and so we can compute them.
+
+Um. And I said, stride is how big a thing is.
+
+It turns out the C compiler knows this, and frequently it's convenient to think about pointers being,
+
+um, pointing to integral chunks the size of whatever is you're pointing to.
+
+And so pointer arithmetic is calculated in terms of stride, not in terms of bytes.
+
+So when you add one to a pointer, what you're saying is give me the next thing just like this in memory,
+
+not give me the very next byte laid out in memory.
+
+Right? Same as when you say a race of zero, you get the first say integer, and a race of one gives you the next integer.
+
+It doesn't give you part of the first integer and part of the second integer, right?
+
+It doesn't move forward by one byte. It moves four by one integer pointer.
+
+Math also wouldn't move forward by one byte, it would move forward by one integer.
+
+So if I have a double pointer. Assume for some reason that the value of this pointer is zero, right?
+
+The address is zero. If I add one to that DPR and I look at the integer value of the pointer, it's going to be eight, not one.
+
+Because it didn't move forward by one byte, it move forward by one double.
+
+And if I had an int pointer and I added one to it, it would go 4x4 bytes.
+
+Because it doesn't move forward by one byte, it moves forward by one int.
+
+Remember when I said we defined it to have a stride of one?
+
+That's because of this. Because if I have a pointer to some arbitrary type, and I want to calculate the location of something of a different type,
+
+it can be difficult to do because I'm now calculating in multiples of some size of I don't know and like it can be done,
+
+but that sounds like work and work. I don't know about you, but it gives me hives.
+
+So therefore we use void star to do pointer calculations, right?
+
+Yes. I don't know, because it's not one of those.
+
+And you would like that by one by four. You can, but don't.
+
+It's. It would be an, uh. It would be an unaligned access.
+
+And unaligned access is, technically speaking, and implementation defined behavior.
+
+So you'd have to read the C manual to see what it's going to do. It's going to give you garbage is what it's going to do.
+
+Like whatever kind of time doesn't matter. Don't do it.
+
+All right, so the stride of a compound's type can be arbitrarily large.
+
+So when we think about stride, we like to think about nice numbers like one and four and eight.
+
+But the stride of a compound type can be arbitrarily large. Consider this type.
+
+It is a struct that contains within it a large array.
+
+It is a character array of 286 characters.
+
+This means it's 256 bytes. That means that the stride of a pointer to struct big.
+
+Is 256. So when I say B plus one.
+
+The address of B is 256 bytes different from B plus one, because I move forward by one entire struct big.
+
+And of course this is arbitrary that 256 was arbitrary.
+
+That could have been one gigabyte. Right. And the stride of that struct would have been one gigabyte.
+
+Now we normally don't define structs that are that large, right?
+
+One gigabyte. That's not. I don't think I'm going out on a limb and saying that I have literally never,
+
+ever seen a truck that's larger than maybe a few hundred bytes, but a few hundred bytes is very, very real and very possible.
+
+Right? Consider that C is not an object oriented language, and so therefore it does not have objects.
+
+So what we use instead when we want to aggregate values is structs.
+
+And you could have a struct that had maybe a buffer of some kind in it and a string and maybe some other metadata.
+
+And like a few hundred bytes to a few kilobytes is very reasonable, right?
+
+For a struct. It's very reasonable. Um, there's reasons why we don't do that so often.
+
+We normally would use pointers in there and pointers are only eight bytes. And so, you know, a few dozen bytes is more common.
+
+But a couple of kilobytes. Like, I could see that that's not that's not unreasonable.
+
+In which case, that stride is going to be very large. Makes sense.
+
+What is the alignment requirement of that struct? Its stride is 256 bytes.
+
+It occupies 256 bytes of memory. What is the alignment requirement?
+
+Yes, sir. One. Why? Because it's all characters, and characters have an alignment requirement of one byte.
+
+You can put this struct at any address in memory. It doesn't matter. Right, because a care has a limit requirement of one.
+
+And remember that the alignment requirement of the overall struct. Is the maximum of the alignment requirements of all of the members of the struct.
+
+Now for various reasons. Any given C compiler may not treat this as if it has an alignment requirement of one.
+
+In fact, I suspect that GCC would treat this as if it has an alignment requirement of eight, which is a pointer size.
+
+Um, for practical reasons. But technically speaking, if I asked you on an exam, what's the alignment requirements?
+
+One. Right. Because A cares the largest item inside this struct.
+
+Make sense? All right.
+
+Um. Yeah.
+
+Let's talk about this. So here's a function. Takes just a moment.
+
+Is it rebooting? Updated again.
+
+Remember, I updated and it rebooted in class. And then I updated it to have a kernel that was stable.
+
+But then you added yesterday. Updated again.
+
+Because I don't learn well. I don't know.
+
+I recommend to you as a career strategy to keep your toys in your job separate.
+
+All right. Um. Okay, so I'm not going to ask you to figure out what this does because that took too much time.
+
+Um, so this function, uh, prints out the values of all of the bytes of memory starting at the address mem and preceding for Len bytes.
+
+So if I give it a pointer. To something, right?
+
+And the size of that something. Then it's going to print out the individual bytes of memory that make up that thing that I'm printing out, right?
+
+Because as we said, um, all of memory is just bytes, right?
+
+And then we put those bytes together into words or whatever, and we store, uh, data, um, in, in some, you know, more complicated fashion.
+
+So I have a couple of questions about individual lines of this function, but I.
+
+Yeah. We'll go ahead and do them. So, um, the very first line of this function const care star buffer equals mem.
+
+I have a comment out there that says cast mem to care star.
+
+Right. That's what this is doing. It says casting the pointer mem to care star.
+
+Why did I do that? Why did I store that address into a variable of type care star?
+
+Yes. Why? You want? Yeah.
+
+Oh, you know, Boyd might not be a character.
+
+Might be anything at all. Void could be anything at all. Which is true.
+
+But in fact, it is definitely not a character. Why would I cast it to care star.
+
+That's why I chose Care Star, which is, I think, the same thing that you're saying, right?
+
+I chose Care Star specifically because it's one bite. But why didn't I just use mem?
+
+So I can print it because I want to go to that location and print what I find there.
+
+I can't print avoid star. Right.
+
+Because if I say dereference void star, dereference mem, give me the what you find there.
+
+The compiler is going to say I can't do that. I don't know what a void is.
+
+So I need a pointer of some type. I have two choices.
+
+I can either cast it when I use it, or in this case, because I know I'm always going to want care.
+
+I can just create a variable that's of the correct type, and then use the variable of the correct type rather than using the void star.
+
+And that's why I chose. So then I have another line here.
+
+So I'm saying I'm going to use mem as an array of bytes. Right. Here's an address.
+
+Assume it's an array of bytes. So then I have this line right here.
+
+All right. So let's go back to the code. What does that line do?
+
+What does put care backslash in do. It's a new line.
+
+It's the next line. I have that inside an if statement.
+
+Why do I have it inside an if statement? Every bytes.
+
+I'm going to print a new line.
+
+So what I'm going to do is I'm going to print a word and then go to the next line, and then print the next word, and then go to the next line.
+
+Right. Just so it's easier to understand what's being printed out.
+
+I could have chosen for I could have chosen 16. Right?
+
+I could have chosen whatever. I chose eight because it, like, fits nicely, right?
+
+When I print it out. And I put it on the slide here in a minute. Um, and then here, uh, we actually don't know why I did this.
+
+Uh, that's to avoid signing. So we'll talk about that later. Uh, I'm going to quit there.
+
+We'll finish up this very last thing on Monday, and then we'll start into, um, the next set of lecture slides.
+
+Uh, I want to I don't want to scare anybody. So, like, prepare yourself.
+
+But your midterm is a week from this coming Wednesday.
+
+Right? So we have one full week of classes, and then your midterm is the week after.
+
+If you're not caught up on your required readings, think about catching up starting now.
+
+Don't put it off the paper exam in class.
+
+Yep.
+

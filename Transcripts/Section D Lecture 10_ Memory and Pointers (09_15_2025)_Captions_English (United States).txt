@@ -1,0 +1,891 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Okay, I'm going to once again pretend like turning this microphone off is actually going to do something.
+
+Even though it continues to not have any audio on the recordings.
+
+I've only sent in like five tickets about that. The group that I refused used to hand like.
+
+But it might work. I should try it. Yeah, I should try it.
+
+They just need to come in here and actually turn the knob to turn up the volume.
+
+But. I don't. I don't work here.
+
+Okay. So, um, the first question we have about using pointers and what are we going to do with pointers is how do I get one.
+
+Right. So we don't know what they are. They're variable.
+
+That stores an address and associates that address with the type so that we can retrieve or modify what's found at that address.
+
+But in order to do that, I have to have an address.
+
+I have to get an address to something that I can legitimately, in some fashion, retrieve or modify in the C programing language.
+
+There are four ways to do that.
+
+The first and the easiest one is to ask the C compiler what is the address of this variable, in which case the C compiler will return uh,
+
+from that question a pointer to whatever that variable's type is that contains the address of that variable.
+
+So if I have some variable x, I can just ask for the address of x and I what I will get back is the location of memory where x is stored.
+
+The second way is that I can ask the operating system if I may have new memory,
+
+memory that has not been used for anything previously, in which case it will return to me a pointer.
+
+And if I go to where that pointer points, if I go to that place in memory that the pointer indicates,
+
+what I will find is new memory that's available for me to use in my program.
+
+The third way, and you've already seen this actually, is that I can use a string or character constant.
+
+So when I do, you know, quotes, double quotes with a string inside what I actually get, I'm sorry, a string, an array constant.
+
+What I get back is, uh, an address in memory where I can find the characters of that string, followed by that zero byte.
+
+That's actually technically what that, uh, returns.
+
+Or if I have curly brackets. If I say int, you know, a square brackets equals curly bracket, whatever.
+
+And I give values in an array. Uh, that's actually technically also returning an address uh in memory.
+
+So I can say int start a equals curly bracket.
+
+And it would, it would work right. Uh we'll see more about that later.
+
+And then the last way, the fourth way is that if I have a valid memory address, if I have the address of something in memory that I know is correct,
+
+and I know something about how memory is being used in this particular program,
+
+then I can calculate a new address based on that existing address of something else, and have it be a valid address.
+
+I need a lot more information to be able to do that, but I can give it an address.
+
+Calculate another valid address. Um, we are only going to look at the first and third bullets on this list in this lecture.
+
+We are not going to look at requesting new memory from the system.
+
+That will be in just a few lectures from now.
+
+Uh, and we are not going to look at calculation from other addresses that will be just a little bit further down the line,
+
+maybe in a week and a half or two weeks. We'll look at how we would calculate, uh, other addresses.
+
+But we are going to look at how we can acquire the address of a data that we already have.
+
+And we are going to look at how we can, um, uh, get the address of a string or array constant and what that means.
+
+So in order to get the address of a thing that I already have.
+
+The C programing language provides an operator, the unary ampersand.
+
+The single ampersand. Uh, unary ampersand says please, Mr. C compiler.
+
+May I know where in memory you have stored this particular thing that I am asking about?
+
+So if I say int x, x is a thing, right?
+
+X is an integer, x occupies four bytes of memory and it contains in it a number.
+
+Right? X in this case equals 42. If I then say ampersand x,
+
+what I'm saying is can I know where in memory you chose to store x and what that return is an address which is just a number, right?
+
+It's a location in memory of type pointer to int, because the address of x and x is an int.
+
+So I can say int star p equals ampersand x p is a pointer to int, ampersand x is a pointer to int.
+
+And what will contain is just a number. It's a very large number typically, but it's just a number.
+
+And that number is a location in memory where if I looked there I would find 42.
+
+Right. Because I would find the the contents of the variable x.
+
+Does that make sense? So I can do this for anything in my system, any variable that I have.
+
+It has to be a named variable. Any named variable that I have, I can, uh, apply the ampersand operator to it.
+
+We call it we pronounce it address of the address of operator.
+
+And what it will return is a pointer to whatever that variable is.
+
+And it will give me what's stored in there. Yes.
+
+If X was a care, the type of ampersand X would be care.
+
+Star pointer to character. And if I said int star equals ampersand.
+
+Let's call it c care c right. Int star equals ampersand c.
+
+The C compiler would say you are attempting to assign a pointer to care.
+
+To a pointer to end. You probably don't want to do that, and it would give me a warning or an error depending on what my compiler flags are.
+
+That makes sense. Yes. I trust the large.
+
+Yes. Typically it's a very large if it doesn't have to be, but it typically is a large number, and we know that.
+
+Integer has a limited scope of what it can.
+
+Yes. So would the value of an address always be?
+
+You know. So how does it work? How does the how does it work?
+
+That's why you have to store if you have an address. The question is an address.
+
+As I said, it can be a very large number.
+
+And we already know because we saw in a tour of computer systems that integers can only store values of a certain magnitude.
+
+Uh, is it can I then store an address and an integer?
+
+And the answer is on our system. No you cannot, which is why you have to use a pointer type.
+
+So my type of p is not int it's int star.
+
+Int star is a larger type than int.
+
+It can store larger addresses. It can store larger values in the largest possible int on some systems.
+
+Int and int star are the same size like on 32 bit system.
+
+Typically it is 32 bits and an int star is also 32 bits.
+
+But it's still a type error because an int contains a logical number and an int star contains an address,
+
+and so when you try to assign it, the compiler will say, are you sure you really want to do this?
+
+These aren't the same kind of thing. They're both numbers, but one of them is an address.
+
+The other one's not. Are you sure that's what you want to do? In our case, if we try to store an address to an end, they won't fit.
+
+They will not fit. That's a good question.
+
+Insightful question. See, when you sit close, I can hear these insightful questions.
+
+It's okay, it's okay. It only hurts my feelings a little bit when people sit way in the back and there's all these empty seats up here,
+
+it makes me wonder if it's like something I did or who I am as a person.
+
+It's questionable. Also, when I take my glasses off, those of you in the back, you're just kind of a smudge.
+
+But I can still see you and identify you in the front. Yeah.
+
+Uh, very. Can I explain the variable type star star.
+
+So p is a pointer to int. Right.
+
+If I take the address of X, that gives me a pointer to p x.
+
+Right P is a pointer to int. So a pointer to p x is a pointer to a pointer to an integer.
+
+So its type is int star star. Right.
+
+So a star star is just a double pointer. It's a pointer. And when I go to that location, what I find is another pointer.
+
+And if I go to that location I find whatever the type is. Right. So care star.
+
+Star is a pointer to a pointer to a character. The answer your question.
+
+We'll see a little bit more of that later when we get to live coding. There's a hand up here somewhere.
+
+Sure it is. Yeah.
+
+Uh, that may have been an error for another problem, but you could have ten stars, right?
+
+You shouldn't. Like, if you ever have ten stars, something has gone horribly wrong.
+
+And you should revisit your program, right? Probably you need more abstractions, right?
+
+But three star certainly is a thing that happens. Yeah. Now, it's not the same as a triple dimensional array.
+
+So that may have been what was happening there. Different. There structurally different. Uh.
+
+All right. Yeah. If I just say star equals x, then the compiler is.
+
+So if I say int star x equals x, the compiler is going to say x is an int is an int star.
+
+What is this? I can't do that because x is of type int and p is of type int star.
+
+And they're they're different types and they're not compatible. Why?
+
+Let's say it's a prayer from the. So why would you give up the act?
+
+I will show you that later. I will show you where we use the address of a value.
+
+I'm not ready to do that just yet, but I will show you that.
+
+Remind me if you don't feel like that question is answered by the end of the class, put your hand up again and ask it again.
+
+But when we get to live coding, we'll look at exactly that. Okay.
+
+So now that I can create a pointer, I can declare a pointer.
+
+I can take the address of something. So now I have a pointer that points to something.
+
+The next interesting thing to do is actually use what it points to use whatever is at that address.
+
+I do that with a star operator? So if I have an int star which is equal to the address of x, I can use the star operator.
+
+Well, let me back up when we talk about dereferencing in general.
+
+I see now that that's what this slide is.
+
+Uh, dereferencing in general is the idea that I have a reference to something and see a reference as a pointer.
+
+But in other languages there are other kinds of references. Dereferencing is taking that reference to something and getting the actual thing right.
+
+So if I. Go to a library and it's a really old library like from the 1970s.
+
+And they have a card catalog. Do you guys have any of you ever used a card catalog?
+
+All right. Never mind. This analogy is not going to work. Um.
+
+I went to Office Depot the other day. It's closing.
+
+My Office Depot is closing, which is sad times.
+
+Uh, and I wanted to buy an SD card, and I went to the shelf, and I am far too poor for them to trust me with an actual SD card.
+
+I'm probably going to steal it. So what I got instead was a little piece of paper that says, if you want a SD card,
+
+take this to the front counter and some person will find your poor ass an SD card and make sure you give us the money before we allow you to touch it.
+
+That is a reference to the SD card. I go to the front counter, I give it to the nice man behind the counter who,
+
+by the way, his last job was shutting down Big Lots and now his job is shutting down.
+
+Office Depot. So, like, if this man ever shows up at your work, you probably should start looking for other jobs.
+
+Um, and I give it to him and he gives me an actual SD card. Right.
+
+That's the reference, right? The card, the papers, the reference. The actual SD card is what the man gives me after I fork over my money.
+
+When we have a pointer as a reference in order to, um,
+
+actually modify whatever it is that it points to, we have to dereference it when we do dereference it.
+
+We can either observe what we find at that location, or we can change what we find at that location.
+
+Either one of those things is fine.
+
+Remember that I said before that there are only four ways to get a valid pointer, and I went through the list, right.
+
+You can take an address of an object. You can ask for new memory from the system.
+
+You can create an array or string constant, or you can um, calculate it from another.
+
+Valid pointer. Any other pointer.
+
+Like for example, if I just say int star, semicolon and then try to use p is an invalid pointer, accessing an invalid pointer is undefined behavior.
+
+Undefined behavior, which we talked about briefly before, means that the compiler,
+
+the computer, the runtime, your program, etc. can do absolutely whatever it wants.
+
+Not what you wanted to do. Absolutely. Whatever it wants.
+
+So the possibility exists that if you try to dereference an undefined pointer that the universe as we know it immediately ceases to exist.
+
+That would be valid behavior for accessing an undefined pointer.
+
+It's possible that you access an undefined pointer and your computer burst into flame and burned to the ground.
+
+That would be valid behavior for accessing undefined behavior.
+
+What will probably happen is your program will crash. In fact, it's far more likely than those other things.
+
+In fact. Because this scares some people.
+
+The idea that they might write a program that goes wrong and then it will, like,
+
+damage their computer or damage the other software on their computer or corrupt their files or whatever.
+
+Your operating system, even if it's windows, your operating system will protect your computer from whatever badness your program does.
+
+So if you write a program and you do an invalid memory access, or you do a whatever,
+
+the worst thing that's going to happen is your program will crash.
+
+And any data that your program is reading or writing may be corrupted.
+
+Right? So if you're reading data, you won't be able to tell it's corrupted because your program crashed.
+
+If you're writing data, the output file that you created, for example, may not have the contents in it that you expect.
+
+Some of you may have seen this in one where when your program crashes,
+
+then it says that the output was not as expected, right, because your program crashed.
+
+So don't be afraid of writing bugs, but be aware that undefined behavior means that your program can do absolutely anything.
+
+The only reason it does not cause the elimination of the entire universe is that the operating system won't let it write.
+
+The operating system forbids that from being the thing that happens.
+
+But it does mean that when you have undefined behavior, your program might appear to continue to work just fine and then crash later.
+
+Or it might appear to continue to work just fine, but then just give you the wrong answer at the end.
+
+Or if we're lucky, it will crash immediately and you will see a message that many of you are becoming familiar with in one,
+
+which is segmentation fault, parentheses, core dumped.
+
+Right. Which means that your program is crashed and it's provided you with a way to debug that program,
+
+which you'll learn about next week after your, uh, lab exam is over.
+
+So how do I do a reference pointer. There's three ways to dereference a pointer.
+
+We are going to talk about two of them today and the third one later after we learn some more things.
+
+The two that we're going to talk about today are the star operator.
+
+The star operator. Dereference a pointer and square brackets.
+
+Square brackets can dereference either a pointer or an array.
+
+We've seen them dereference an array. They can also dereference pointers.
+
+And in that case pointers work a lot like arrays. We'll see more details about that later.
+
+The third way is the arrow operator, which is spelled greater than.
+
+The arrow operator is used in a certain circumstance that we won't.
+
+We haven't learned enough yet to use the arrow operator, but we will see it in, you know, maybe next week sometime.
+
+So we won't talk about the air operator today, but we'll talk about it later. So the star notation is the easiest way to dereference a pointer.
+
+The simplest in terms of syntax. Way to dereference pointer. So if I have a pointer which is a pointer to integer and I issue star p.
+
+Then what I get is the integer that that pointer points to.
+
+So if x equals 42 and p is assigned to the address of x star p x is 42.
+
+Because P contains the address of X, star says go to that address.
+
+What's up. That address is X. What's there 42.
+
+If I say star equals something, it says go to that address, which in this case is X, and change it to be whatever I am assigning it to.
+
+So if I start, say star equals seven, after that, if I print it out x x would be equal to seven, right?
+
+Because I will have changed the value stored of the location named by the variable x.
+
+Yes. No, it does not mean that if I change the value of y, I'm changing the value of x because y becomes a copy of x.
+
+So if x equals 42, when I say int y equals star x, what I'm saying is create a new variable y.
+
+Copy into it the value that you find at the location of x.
+
+This is exactly the same as if you said int x equals 32.
+
+And then you said int y equals x. And then you changed y.
+
+X would not change right. The reference.
+
+Property attaches to the pointer, not to the value.
+
+So when I say star, I'm going and getting the value remains a reference I can use to modify x,
+
+but the value I get back is just a copy of whatever it was stored in X.
+
+Does that answer your question? It's a good question.
+
+In some languages that is the case, right? That would become a reference, but in C++ it does not.
+
+In C, almost everything is a value. Okay.
+
+Uh, yes. Yes.
+
+When you dereference what you get back. So a pointer has some type.
+
+Right. So int star is a pointer to int when I dereference.
+
+What I get back is an int right. I get rid of that one star.
+
+Right. It's no longer a pointer to it's an actual int. If it was some other type what I would get back would be whatever that other type is.
+
+Does that answer your question? Maybe. Okay.
+
+I don't know. Look at this. I just feel nauseous up here.
+
+Working. Oh, it went away. I pushed the button. Okay, I fixed it.
+
+It was windows. Windows was on the screen and it was making me feel sick.
+
+But now it powered off, so. Oh no, it came back. All right.
+
+I have fixed it. I'm just gonna leave it like that. So I can't see the windows. All right.
+
+Um. October 1st to 14.
+
+If you're on Windows 10, damn it! You just can't get rid of it.
+
+Uh, October 14th. If you're on Windows 10, it's no longer supported.
+
+Um. And I recommend that you install. An operating system instead.
+
+So, uh, we can also dereference a pointer as an array by using square brackets.
+
+So I can say square brackets zero.
+
+And what that means is go to the array at the location in memory represented by the address stored in P,
+
+and give me the first value that you find in that array.
+
+And it turns out that because of the way arrays work in C, p, square, bracket zero and star P are exactly the same thing.
+
+The first element of an array is indistinguishable from a single item in memory.
+
+So if I say int x and then int star equals ampersand x, I have the address of x from the address of x.
+
+I cannot tell whether x is a single item, or an array of exactly one item, or an array of more than one item.
+
+I can't tell from the type int star or int star, right?
+
+I can't tell, I just have an address of some memory. But it turns out that if that address is the address of an array.
+
+Then the square brackets after it will access the individual elements of that array one at a time.
+
+So p sub zero will be the first element of the array.
+
+P sub one will be the second element of the array, etc. etc. just like if had been an array type.
+
+So this is because arrays and pointers are very closely related in the C programing language.
+
+However, they are not the same thing.
+
+Pointers in arrays behave the same way in some circumstances,
+
+and they behave differently in other circumstances, and this can be confusing to a novice programmer.
+
+Um, in general, you should assume that a pointer to an array and an array itself will behave very, very similarly.
+
+But remember that a pointer may not actually be a pointer to an array.
+
+It may be a pointer to a thing, not an array of things.
+
+And a true array cannot do some of the things that a pointer can do.
+
+Um. In both cases. What? I have a name of an array or a name of a pointer, and I use the square brackets.
+
+What that saying is, this thing lives at some address in memory.
+
+Go to that address in memory and move forward in memory towards larger addresses.
+
+It turns out by I times if I use square bracket, I buy I times the size of whatever thing I expect to find there,
+
+and give me what you find at that new location. So start at the beginning of the array.
+
+Move through the array by the size of the things that are stored in the array, until you find the i'th one.
+
+And give me that thing. So if you think back to when you were in school at some point, this is almost universal.
+
+Somebody will have had you will have had this at some point.
+
+You had a mailbox and it was just like a wooden hole right where you stuck homework or your teacher stuck homework for you or whatever.
+
+All those holes are the same size. If I say go to mailbox five.
+
+You can either count them over one, two, three, four, five and pull something out of the fifth mailbox.
+
+Or if you happen to know that every one of those mailboxes is four inches wide.
+
+Then you can just measure over 20in and whatever mailbox is there, pull it out of there and it's going to be the fifth mailbox.
+
+Right in. See, we do the latter. We say, hey, I know how big these things are.
+
+I will just move to where the kth one of them would be if it existed.
+
+And I will take what's there. This is why C allows you to access beyond the end of an array is because it's not actually treating it like an array.
+
+It's just saying, hey, if this array were this big, this is where I would find the item and it just goes right there and it grabs the item.
+
+And if the array is not that big, then it grabs whatever it grabs, right?
+
+You moved right past the end of the array, and you reach into the coat closet and you pull out somebodies, you know, jacket.
+
+Because if there had been 20 mailboxes, that jacket is exactly where the 20th mailbox would have been.
+
+The difference between you and the C compilers.
+
+When you reach in and grab a jacket and you expected an integer, you're like, this is not an integer.
+
+The C compiler says, if I squish this jacket hard enough, it will look like an integer and it just gives you back whatever it got.
+
+Can you size up on an array? It does not know what the last index of an array is.
+
+It doesn't. It just counts over however far it goes and it goes there.
+
+And if that is not the third index of the array. You just get whatever's there?
+
+No, it's worse than getting nothing. You get whatever's there. If it's a jacket, it's a jacket.
+
+If it's your homework, it's your homework. She doesn't care.
+
+But if you were looking for your homework and you got your jacket when you turn it in, you're going to get a zero, right?
+
+And if you were looking for your jacket and you got somebody's homework, when you go to put it on to go outside, you're going to be cold.
+
+Right. So there's the C compiler doesn't care and you just have a bug that results in a second.
+
+Not necessarily. Uh, picture it like this.
+
+I have my row of mailboxes here. I'm looking for the mailbox here.
+
+If I grab that, I get my mail. If I go to the mailbox 70, I come over here.
+
+This is the end of the mailboxes. If I come over here and this is 70, then fine.
+
+There's something here. I can grab it. If this is 65, I get a segfault.
+
+Because I can't go to 70. I run into the wall.
+
+70 doesn't exist. I get a signal. So whether the you get a seg fault or not doesn't depend on what you're trying to access.
+
+It depends on how much memory valid memory there is after whatever you're trying to access.
+
+If there's a lot of valid memory, you won't get a segfault. You'll get garbage.
+
+If there's not a lot of valid memory, then you'll get a segfault. Yeah.
+
+Until it gets to where there's the wall and then you get a seg vault.
+
+Right. Because remember that your address space is much, much larger than the actual memory in your computer.
+
+There's huge tracts of that address space that are not don't exist.
+
+If you reach for something that doesn't exist, you get a segfault. If you reach or something is not what you wanted, you just get not what you wanted.
+
+We'll learn more about this later. You'll understand how that works by the end of this course.
+
+All right. So here's an example. Suppose that I have uh an array.
+
+And I assign it to, uh, a string constant.
+
+And that string constant says hello world. What I get is the letter of capital H and then the letter lowercase e, and then l0 down to the dot.
+
+And then eventually I have that zero byte right. That null byte at the end.
+
+If I dereference that array and I ask for the second entry, then the zero is h one is e two.
+
+Is that lowercase l? I get that lowercase l. If I assign that array to a pointer, right.
+
+I take the, uh, you can either do it with or without an ampersand. They mean the same thing.
+
+Uh, assign that array to a pointer. Then that pointer now contains the address at which that h is found.
+
+And then I say pointer square bracket two. Then I look at the H.
+
+I look at the E. I look at the L, the L is the one I want.
+
+Zero. One two. I get the L. If I say pointer sub six, I get the capital W.
+
+If I say a race of six, I get the capital W in this respect.
+
+Pointers in arrays work the same way. They are very similar.
+
+They are not, however, exactly the same.
+
+Because in this case I do two different. I do the same thing in one case with an array, and in one case with a pointer,
+
+and in one case my program doesn't compile one and the other one it does.
+
+So if I have an array and I assign it to another array, that's a compilation error.
+
+If I have an array and I assign it to a pointer, then the pointer receives the address at which the array is stored and my program runs normally.
+
+So there are many things about pointers in the array that work the same, but they are not the same thing.
+
+They are different types. This, incidentally, is why size of an array sometimes tells you how big the array is, and sometimes tells you eight.
+
+If the array is truly an array, you get the size of the array.
+
+If the array is actually a pointer, what's called, uh, decay pointer decay, which happens.
+
+So for example here when I said r equals point or pointer equals r r array r decayed into a pointer, then it says eight.
+
+Right. And the problem that you will have is that as a beginning systems programmer, it is not clear to you when that array will decay.
+
+And when that array stays an array.
+
+And so when you call size of an array sometimes you're going to get the right answer and sometimes you're going to get the wrong answer.
+
+And Stack Overflow lot. All right, I think now.
+
+Yep. We jump into the editor and hopefully some of this makes sense.
+
+So the first thing I'm going to do actually, uh,
+
+the first thing I'm going to do is I'm going to come over here and I am going to run a topic question.
+
+Which, by the way, thank you very much. Of course, on Friday we took attendance.
+
+Um, there were exactly zero people who answered top hat who were not in this room.
+
+Uh, that was not true for all sections, but it was true for this section, so good work.
+
+I appreciate that. If nothing else, it saves me a lot of paperwork.
+
+All right. So these questions are what we call Goldilocks questions. I'm going to ask you about the course difficulty and pacing.
+
+Please answer honestly. Every answer is a correct answer.
+
+You get a correct. You get points for any answer that you give.
+
+If you answer honestly, it is more helpful to us than if you answer the way we think that you think that we want you to answer.
+
+So when you think about this course, do you feel like it is too hard, too easy, or just right?
+
+I feel like that is like a long time. To answer this question about your opinion, but I'm going to allow it to run out.
+
+And then I'm going to quietly on my own computer, look at the answer.
+
+Oh, okay. And then.
+
+I'm going to ask you another question about pacing.
+
+It's a little bit disappointing me that there's only 87 answers, because I'm pretty sure there's like 100 and.
+
+20 or something. People in this section. It feels early for 30 people to have just not bothered.
+
+Early in the semester, not in the day. It's early in the day for some of those people to be up.
+
+I had a student. One year ago in the fall, who slept through their 2 p.m. lab exam.
+
+So. All right. Um, okay.
+
+So, um. Interesting. Okay.
+
+So, broadly speaking, uh, the answers are mostly split between, uh, just right and too hard, uh, slash good pace and too quick.
+
+There were a few people who said that it was easy or slow.
+
+Um, but not very many. Um, and this is more or less what we expect, right?
+
+This is the breakdown we more or less expect as the most people find this course.
+
+Challenging to appropriate right in that range.
+
+And a very few people, most people who have prior experience find it, um.
+
+Easy. Uh, if you find this course challenging, if you think this going too quickly.
+
+Come see me. We're in the beginning of week four.
+
+If it's too difficult. We have time. We can fix this.
+
+If you wait until week 12, week 13, and you say, wow, I've been behind since week four, then, uh, it's going to be tough.
+
+It's going to be tough to catch up. So please, if you think it's too difficult right now, that's fine.
+
+This is hard material. Just come see me. Or Carl or somebody, but see somebody.
+
+Don't just suffer in silence. All right, now, um, we're going to do a little bit of live coding.
+
+This is Emacs. This Emacs, however, uh, is not running on demand.
+
+It's running on my laptop. It's running on this computer right here.
+
+But Emacs being the, you know, er editor that came before all editors and does everything that all the other editors do and more.
+
+One of the things that I can do is I can open a file just the same as I would open a file on my local computer that happens to be on another computer,
+
+and it's going to ask me for my password because I didn't. As a passphrase.
+
+You know, you only have to open the enter that once until you reboot again, right?
+
+So it can be long.
+
+Um, so now it says I said I connected the email on using SSA and then I'm going to open, um, CSC 220 slash D, which is the directory.
+
+I'm going to go ahead and open that directory. Uh, and it opens up right here.
+
+And this is the directory. Right. I've opened the directory and I can navigate.
+
+Right. I can go up a directory, I can go down the directory. I can also uh create a directory.
+
+Uh, if I push the right key. There we go. Uh, so I'm gonna create a directory called memory.
+
+Right. So it says create directory memory.
+
+And then if we look here I now have a directory memory. And I can hit enter and it'll change into that memory directory.
+
+Right. So I can do file editing in Emacs. Keep in mind that I am creating directories and viewing directories not on my laptop, but on Imaan.
+
+If you read at nine, it tells you how to do some of these things right?
+
+If you read the Emacs information at night. So now in this directory I can open a file.
+
+Uh, let's call it pointers C. And I am now, uh, have a file open in, uh.
+
+Pointers. See? I want bash, not Binoche.
+
+And I can open a shell. And when it opens the shell.
+
+This shell is not on my laptop. This shell is on email.
+
+So when I type commands in this shell, these commands run on my mom.
+
+Right. So I have a file on im on pointers dot c.
+
+So if I save that. Point Jersey and I and I can run commands on Iman without leaving my editor.
+
+Um, the difference between I've told you not to do this with VS code.
+
+Uh,
+
+the difference between what Emacs does and what VS code does is Emacs is doing this all by just SSH into doing on and running commands like it's me.
+
+VS code connects to himand installs a bunch of JavaScript and npm and then compiles some node.
+
+Application over there and then runs it and it's like multiple gigabytes of memory or whatever.
+
+But if I look to see what I am running on him on oops, wrong.
+
+Is this? Uh, I am running.
+
+SSH! Cat. Clanged in a shell and that's it, right?
+
+There's no vs code. Let's see who is running VS code. Nobody.
+
+Nice. Usually by now somebody is trying it.
+
+But we haven't. It hasn't crashed yet. So anyway.
+
+All right, so I'm here to talk about. Well, I'm here to talk about his pointers.
+
+Uh, I'm actually not going to need those arguments, but that's fine.
+
+So, uh, if I do exactly what we did in our examples.
+
+Like this. Uh, now I'm going to print out some values so we can look at them.
+
+Uh, I used percent p there.
+
+Um, percent peace as.
+
+Uh, print out the next pointer that you receive in a convenient representation for pointers on this system,
+
+which on our system is going to be a 64 bit hexadecimal number.
+
+It will with a leading zero x, so it will say zero x and then a hexadecimal number.
+
+Uh, so now if I run this. I don't know why it said no match.
+
+Okay. If I run this, I see that x equals 42 star x equals 42.
+
+The address of x is 0X7, f blah blah blah nine c and the value stored in the pointer variable p is exactly the same thing as the address of x.
+
+And this is what we expect. Right. This is what our code says to expect.
+
+Now, uh, let me do the following.
+
+Let me say star equals 31337.
+
+And then print off. X.
+
+What do we expect that to print? Yes.
+
+Change, the value of x will change y equals.
+
+I knew that. We went to the address where X is stored and we gave it a new value.
+
+And so we expect x to be 31337. Right.
+
+That is correct. An XS 31337.
+
+Right. It's exactly the value that I expected it to be. So what happened was we had memory in the computer.
+
+What we didn't have was chalk. Whatever.
+
+It's a brand new box of chalk and somebody has already dropped on the ground or something. Work with animals.
+
+All right. So we have memory in the computer, right?
+
+And somewhere in memory, we have X. And it stores the value 42.
+
+Somewhere in memory we have what stores is the location where I would find X?
+
+So when I say start, I say go here. This is a number zero effort.
+
+You know, whatever it is seven, five. Right. Whatever it is, go to that location.
+
+That's here. This is 0X7F, whatever it is. Right.
+
+Go to that location and give me what's there, or go to that location and change what you find there.
+
+Right. Okay. Uh, so the next thing I can do that's interesting is.
+
+I can print out the address of p. S so p is also stored at some address.
+
+It also starts with seven f, but in this case x ended in.
+
+Zero C and ended in one zero.
+
+Right. So this is blah blah blah zero C and this is blah blah blah blah.
+
+One zero right. It's a different location in memory.
+
+So I can take the address of a pop quiz.
+
+What is the type? Of ampersand.
+
+In star start, it is a pointer.
+
+And if I go to that location, what I find is a pointer.
+
+And if I go to that location, what I find is an int. So it is a pointer to a pointer to an integer or int star star.
+
+Right. Ampersand is an int star. Star.
+
+Now what I cannot do. Is this?
+
+And I don't know what this error means. This label X is used but not defined.
+
+I really don't know why that's the error that it prints. I would have to go think about that to figure out why that's the error that it prints.
+
+But what I've done is I've said give me the address of X.
+
+The address of X is not a variable. It's an address.
+
+It's an app. The abstract idea of a pointer to an int.
+
+So I'm saying give me the address of the abstract idea of a pointer to an int.
+
+And the compiler is like, I don't have one of those, right?
+
+I have to create a pointer to int and I can take the address of that, but I can't take the address of an address.
+
+That doesn't make sense. The address exists sort of in a different philosophical plane from the object itself.
+
+Right. Like what is the address of the algebraic notion of the address of X?
+
+Like, well, that's a thing, but it's not a thing that exists in the computer and the compiler can't take the address of it.
+
+Right. There was a hand over here somewhere. Yes.
+
+Yeah, I'm sure it's fine. My computer is rebooted.
+
+That's the second time it's done that today. I updated.
+
+It's a long story. I'm running an experimental operating system, and I updated it last night.
+
+Do you know what you should not do when you use a computer every single day?
+
+You should not update your experimental operating system to a new version.
+
+There's just a period at the end of that. Actually, it sounded like there were more words, but that's just the thing you should not do.
+
+Yeah. So I will update it today and hopefully get a version that doesn't crash.
+
+Uh, well, in there, because I don't we're not going to reboot this right now.
+
+Um. On it's Debian unstable.
+
+Uh, on, um, Friday, we'll move on to a new set of lecture slides.
+
+Of course, lab exams will continue to go on for the rest of the week.
+

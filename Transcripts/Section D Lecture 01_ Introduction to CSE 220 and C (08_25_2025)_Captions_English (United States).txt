@@ -1,0 +1,1059 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hopefully that's where you plan to be. It seems like a lot of people. But you also look like nerds, so probably were good.
+
+I when I first walked in, I was like, is this like a the wrong class or something?
+
+I didn't expect it to be so full. Um, but this is KSI 220 and we are going to talk about systems programing this semester.
+
+This is one of those rare courses, although you have a number of them in KSI,
+
+where the title of the course is actually what we're going to talk about.
+
+Um. First things first before I go too far, because I have two of my student assistants here.
+
+Do I have any others? Just two. Two in the front? Yeah, I have two of my student assistants here.
+
+I'm going to introduce you to them. So if you could stand up. Uh, this is Sarah and Aiden.
+
+Uh, they will be two of your. You have 25 student assistants on this course this semester.
+
+They will be two of your student assistants.
+
+I'm introducing you to them because they're some of the most important people that you're going to know this semester.
+
+I don't know about these two specifically, um, for your labs, but student assistants will be teaching your labs.
+
+You'll have two, uh, student assistants in your labs. They will also be serving the majority of the office hours in this course.
+
+Um, Carl and I, there's two instructors on this course.
+
+We'll also have office hours, but there's only two of us, and there's 400 of you.
+
+Uh, so you're going to get to know your student assistants. They are not scary.
+
+Two of them bite, but not during class. Uh, they are happy to help you.
+
+They're all here for one of two reasons. Either because they really enjoyed this material and they want to share it with you,
+
+or because they really did not enjoy this material and they want to minimize your suffering.
+
+So please take advantage of them. Come see them.
+
+Look how friendly they are.
+
+Um, they will be happy to see you throughout the semester, and you guys are welcome to stick around or bounce or whatever it is you have to do.
+
+You've already been with me for an hour or so. Yeah. See you. Sarah. Um.
+
+So there's 25 student assistants and there are two faculty members on this course.
+
+We run this course. There are four sections ABCd. This is D right where d yeah.
+
+Um, we run this course as one large course in four sections and for 20 laps or whatever it is.
+
+Which means that while I will be your lecturer and structure instructor every lecture, and while you have a particular lab assistant,
+
+who is your lab assistant, you should not feel like you have to come to me or you have to go to that lab assistant.
+
+If you have a question, you look at the schedule and Carl has office hours.
+
+Go to Carl's office hours. Right. He will be happy to help you, uh, with this course.
+
+If you have a particular, um, student assistant that you've worked with in office hours,
+
+and they are not your lab assistant, but you just really think they're super helpful.
+
+Great. Go see them every time, right. It is one course with just a pool of instructors.
+
+That said, for better or for worse, you will be seeing me three times a week for the rest of the semester in this lecture.
+
+Um, barring travel or sickness or something.
+
+In which case Carl might spot me. Uh, you would ordinarily see.
+
+Um. Who am I? My name is Ethan Blanton.
+
+Uh, I am you can find me in Davis 334.
+
+There is my well, I hate. I can't point to anything in this room.
+
+There is my email address right there. Uh, you can email me.
+
+You can come see me in my office. My open office hours are from 9 to 9:50 a.m. on Wednesdays.
+
+But if that time doesn't work for you or there's something we need to talk about or whatever, send me an email.
+
+Right. We'll schedule a time to talk. Um, my office is on the third floor of Davis, behind the bathrooms.
+
+So if you go past the bathrooms into that long hallway on the west side of the building, turn left.
+
+Down the long end of the hallway. It's almost all the way down on the right.
+
+You'll be like, this is surely not where I'm supposed to be going. I promise that if I'm there, you'll know.
+
+You'll hear me. But if I'm not there, or if I'm had not been to not be meeting with someone,
+
+I'm almost all the way down, uh, on the right hand side at the end of the hallway.
+
+Um, who am I? Uh, I am here, so I worked for a little while in.
+
+I got a PhD because I wanted to teach. I really wanted to teach.
+
+So I got a PhD, and it didn't work out for me for various life reasons where I was living and whatever.
+
+And so I didn't teach for a while. I worked in industry. I worked on compilers and runtime systems.
+
+I did some networking work. I did some of the things, did my PhD in networking. Um, and then I came to UB and I got the opportunity to teach.
+
+And so I said, I would like to teach. I am teaching systems programing because I love systems.
+
+Not just computer systems. Not just programing systems, not just operating systems.
+
+I love systems. So when I say systems, I mean all of the things that sort of make our world work the way it works.
+
+So I mean, plumbing is interesting. I mean, it's wet, but plumbing is interesting if you look at it the right way.
+
+Right? Electricity, uh, mechanical systems, engines, whatever.
+
+Like, I love all of it. Anything that has little fiddly bits that you can take apart and see how they work and put them back together.
+
+I'm on board. I love it. Uh, I'm teaching systems programing because when I got here, I said I'd like to teach a course.
+
+They said, how about 191? I said, how about not? Uh, and then they said, well, there's some other options here.
+
+What can we talk about? Our systems program? I said, what's that? Because that sounds like something I'd like to do.
+
+I've been teaching it for 7 or 8 years or something since then because I really enjoy it.
+
+I think it's a good course. I think there's a lot of good material, uh, in this course, and I think it's very important.
+
+It's one of them.
+
+I mean, everybody thinks their courses like one of the more important courses you're going to take, but it's pretty foundational, right?
+
+There's a lot of things that sit on top of the things that you learn in a course like this.
+
+Are there any questions? This time it was fixing the glasses.
+
+Every time you say, are there any questions? Somebodys hand goes like this and then does it doesn't make it.
+
+All right. So this course is actually, as I said, surprisingly concerned with systems programing.
+
+Uh, what we're going to learn about is computer systems.
+
+We're going to learn about how computers are put together, how they do the computations that they do, and why they behave the way they behave.
+
+The reason for that is that we have to meet computers in the middle.
+
+When we write programs, we have to ask the computer to do something that the computer can reasonably do.
+
+The way the computer is designed, its architecture, its instruction set, its memory layout,
+
+the so all the things that make it a particular kind of computer that it is.
+
+Dictate the way we write our programs and the way we solve our problems.
+
+And our goal in this course is to help you understand how those computers work,
+
+why they do the things the way they do them, and what it is that they do.
+
+So that when you encounter a computing problem that you've not seen before, you can say, hmm, I think I have a way to approach this or, oh,
+
+I don't know how this works, but I bet if I look over there that's going to give me something I can grab on to,
+
+right and start to understand this problem, right. So our big goal in this course is to teach you enough about computer systems and
+
+architecture to improve your intuitions about how the programs that we write,
+
+read and run do the things that they do. We're also going to ask you to practice solving real problems by writing programs.
+
+Now you're a sophomore. This is, for most of you, your third programing course.
+
+They're not big problems, but they are, in fact, real problems.
+
+Every single assignment you do in this course.
+
+Echoes something that I have had to do at some point in my career to solve a real problem that I had to solve.
+
+Now, it wasn't the whole problem in most cases, because like in most of these cases, there's already something that will do that, right?
+
+Um, but it was a portion of a problem that I had to solve.
+
+Right? There are real problems with real solutions that will help you understand how to structure your programs in the future, etc.
+
+We're also going to teach you a little bit about how to use Linux, specifically in more generically Unix like systems at the command line.
+
+Um, there is a post on Piazza right now at nine, which has a whole bunch of help for how to use command line resources.
+
+I recommend that in this first slow week or so, as we get rolling and you start to, you know, get logged into your systems and whatever that,
+
+you take some time and you look at some of those resources because it will pay dividends as the course goes on.
+
+If you get halfway through the semester and you realize that you've never really spent any time learning anything about the command line,
+
+you're in a deeper hole than if you start sort of towing yourself in here at the beginning of the.
+
+Now we understand that you've never used the command line before, and you don't know anything about how these systems work necessarily.
+
+And we will help you. But we do not spend a lot of time teaching you the details because there's lots of documentation out there.
+
+We link a number of documents.
+
+In particular, there's one from the Free Software Foundation, uh, about using the menu system or something like that, and it's the link for it.
+
+And at nine says, like, just to read a couple chapters, it's the one that says, just read these chapters or sections or whatever.
+
+The reason is, it's very long document. Don't try to read the whole thing. There's a bunch of crap in there that nobody cares about.
+
+Uh, but those sections are a really good place to sort of get started to teach you a little bit about like, basically how the system is going.
+
+And then we are going to teach you the sea.
+
+Well, we're going to allow you to teach yourself the C programing language and a little bit about what we call the Posix API.
+
+And we'll talk about politics and APIs more probably on Wednesday.
+
+But essentially that is a particular programing model for systems that look like Unix systems.
+
+And then C is a programing language that is used to implement systems things.
+
+So we're going to use those things as a tool to help us understand the rest of the things.
+
+Any questions? I will try this semester.
+
+Or this. Uh, not this semester. That sounds like a commitment.
+
+This class period, to stop frequently and ask you if you have any questions.
+
+But I will stop doing that as the semester goes on. Uh, as you become more comfortable, you at any time put your hand up.
+
+If you have a question, and I will take the time to answer your question. Right.
+
+So if even if I don't ask, if you're just like, what is he talking about? Just stick your hand up and.
+
+So the point of all this is that programing doesn't occur in a vacuum.
+
+We use particular programing languages.
+
+All right. Some of you may feel my pain.
+
+Uh, I suffer from a condition that we call ADHD, where I am easily distracted and I just walk past this light switch over here.
+
+And I want you to understand that there's a whole bunch of completely unmarked buttons on this light switch right here.
+
+And there's a legend for what these buttons do.
+
+And they taped it to the bottom of the light switch dangling here when there's a whole whiteboard here to tape it to.
+
+Why are people like this? For people like me with ADHD.
+
+Like I look at that and like, now that's all I can think about is why is it like that?
+
+I. Well, yes. That's true. I understand why there has to be a label, but why is it not just taped to the wall and not dangling like this?
+
+This is. You see, this is ridiculous. Anyway, this is going to hit me a lot through the semester.
+
+You'll get used to it. Some of you will leave mean comments on my reviews about it.
+
+It's. It's okay. All right. So programing does not occur in a vacuum in the sense that every programing language we use,
+
+every program we use, every tool we use was written by someone to solve some problem, to run on some computer.
+
+And I could invent a programing language and dream it up in my mind and code with the perfect model
+
+for expressing a program and implement that programing language and design that programing language.
+
+But when I went to implement it, I would have to deal with the fact that the computer works in a particular way,
+
+and I would have to map that beautiful idea that I had to, the way the computer actually does computation,
+
+and either me or the programing language, or the programmer would suffer for the fact that if I design that programing language in a vacuum,
+
+I didn't consider how it is that the computer is actually going to come up with the answer that I want.
+
+So the way we actually design programing languages, rather than sitting down with a piece of paper and saying,
+
+what if there were no computers and I had the perfect language? We say this is how computers work.
+
+How do I write a language? How do I design a language to solve the kinds of problems that computers solve?
+
+And so all of these programing languages that you will ever use have certain commonalities.
+
+They behave in certain ways, like even if the language doesn't have a particular structure, right.
+
+It's written in a different way. It will perform in certain ways, like there are certain things that you will ask a programing language to do.
+
+And as a programmer has a good intuition for how the computer does computation, you'll say that's going to be slow.
+
+Because that's just how the computer works.
+
+But at this stage in your career, you don't necessarily have the intuition for how it is that the computer solves these things.
+
+Right. And our goal is to show you, hey, these things work the way they work because that's how computation happens.
+
+The computer is made up of silicon gates that make certain decisions in certain ways that represent data,
+
+and certain ways that store data via certain methods, etc.
+
+Now, we're not going to be at the really, really low level.
+
+You'll get you'll have other courses, like most of you will take 341 um, probably next semester or maybe in fall of next year.
+
+Computer organization, you'll talk about things that are even lower level than what we're going to talk about in this course,
+
+but we're going to start giving the idea that, hey, this isn't a magic box that just runs these programs.
+
+It's actually a machine that follows certain rules and does computation a certain way.
+
+And when I write my programs, if I write my programs, understanding how this program,
+
+this machine is going to do this computation, I can write better programs.
+
+They run faster. They're easier to debug. Uh, and this also influence influences all the other things that we do.
+
+For example, many of you, how many of you are in 250 right now? Okay.
+
+Yeah, a bunch of you buy a planner. We'll talk about that here in a minute.
+
+Um. In 250, you're going to spend a lot of time talking about how long it takes the computer to compare two numbers to each other, to determine.
+
+Whether one is larger than the other. And you're like, this is the stupidest thing in the world.
+
+Like I how often do I actually want to compare numbers? The thing is, you don't.
+
+But it turns out that's one of the only things the computer actually knows how to do.
+
+So when you write programs, the computer actually spends a lot of time comparing two numbers to one another.
+
+Right. And so as programmers, we wind up thinking about these things a lot.
+
+Not directly. You don't. Right. And you're not like, oh, I'm going to write this 3D game engine rendering, you know, Polygon Engine.
+
+And I really want to think about comparing two numbers to one another.
+
+But you will get to places that say, oh, that's going to require a lot of sorting.
+
+Sorting is slow. I can't do that right. Or whatever as you build your intuition for how computer.
+
+So our goal is to build that intuition and help you understand that context. This course, and I don't know if I should talk about this or not, I.
+
+Every semester I debate on taking the slide out of here because when I don't have it here, people are scared.
+
+And when I do have it here, if they're not scared, they are by the time I'm done talking.
+
+Uh, but I want to stress to you that this is not a weed out course.
+
+This course is not intended. To make your life difficult.
+
+This course is intended to teach you something important. And I have a logical proof for you that this is not a weed out course.
+
+So we know, of course, as of course that causes you to drop the major, leave the university, etc.
+
+What does UB want from you more than anything else in the world?
+
+Your tuition. If I fail you and you leave.
+
+You give them tuition? No. I don't.
+
+They don't. You don't? I don't. By the way, I haven't paid the same.
+
+Whether there's one of you in this room or 200 of you in this room. Right?
+
+We're not paid the same as the kids. Maybe. Actually, don't let professors complain to you about how little money they make.
+
+We're fine. Like we're all eating. It's okay. Um.
+
+I have no incentive to fail you. The department has no incentive to fail you.
+
+The university has an. Actually, the department has an incentive.
+
+They do get money for. How many of you are in this room? Think about whether that's fair or not.
+
+Is the department standing here? If you're doing this course? They are not I am they get more money.
+
+If there's more of you, I get paid the same. Anyway.
+
+Um, the dean of this university makes approximately seven times of this.
+
+Part of this, of course, makes approximately seven times what I make.
+
+Think about that every morning when I come to work, every morning when I come to work, I'm saying. Than one seventh of what the DNS.
+
+That's just okay with me. Anyway. Point is, there's no point in failing you.
+
+I want you to learn. I want you to succeed. The department wants you to learn.
+
+The department wants you to succeed. The university wants you to keep paying that sweet, sweet moolah.
+
+So this is not a weed out course. It is, however, difficult.
+
+The thing is, there's reasons that it's difficult. It's not difficult just to be difficult.
+
+And if you approach it saying this is just hard and there's nothing we can do about that, then it's going to be hard.
+
+But if you look at it and you say, why is it hard and how can I address that?
+
+You can make it easier. It is difficult because the topic that we are learning is persnickety.
+
+We are asking the computer at the lowest level that you've ever dealt with a computer for many of you to do things,
+
+and the computer is the completely unforgiving oracle of the ancients that does exactly what you asked it to do and not what you wanted.
+
+And so if you don't ask it to do exactly what you actually want, it's going to do something else.
+
+The languages you have learned and been asked to use so far.
+
+Try to put guardrails around some of the parts that are particularly annoying.
+
+And say to you, you can't have that number, it would be out of range.
+
+This semester. Your computer, your program. When you ask for a number that is out of range,
+
+your program catches on fire and burned to the ground and leaves no evidence behind as to what the problem was.
+
+Right, because we've moved closer to the computer itself,
+
+and the computer itself is cold and uncaring and does exactly what you asked for, even if it's stupid.
+
+And this is your third programing course. You're going to ask it to do things that don't make sense.
+
+You're going to think you asked it one thing and you actually asked it something else.
+
+But if you recognize that that's just the world we're working in,
+
+and that if you can gather the information to get enough details to understand what you actually ask for, you can find the problem and you can fix it.
+
+Um, another reason is this is a 200 level course. So 100 level courses.
+
+You open the handout and it says first click at the bottom left corner of your screen screen to open the menu.
+
+And then run this program and run this menu item and type exactly these things.
+
+And then push the little play button and watch it run. 200 level courses.
+
+Say, I assume you know how to do all those things. Write me a program that satisfies this very strict set of requirements.
+
+300 level courses. Say, here's a couple of requirements.
+
+Write a program that meets those. Figure the details out on your own.
+
+For higher level courses. They say design a project. I'll see you in 14 weeks.
+
+Right. It's a staging from one to the other to the other, and the gap between 100 and 200 is large.
+
+We give you a lot less direction, and at the same time, we give you an environment that is a lot pickier.
+
+So it's difficult.
+
+But if you recognize that all of those individual steps that you have to do in your 100 level course still exist at the 200 level course,
+
+you just need to fill in the details and you take the time to fill in the details before you start just blindly bashing at your.
+
+Editor. It's going to be fine, right? It's going to be fine.
+
+Um, also time management, all of you who raise your hand said you're also in 250.
+
+How many of you who are in 220 and 250 already have a planner, like a paper planner, to organize your life?
+
+Okay, you're going to be fine. The rest of you, go get one.
+
+Because the biggest thing you need this semester is time management.
+
+If you assume that there will be enough time to get everything done.
+
+Then four hours before the deadline, you're going to realize that you need about 30.
+
+And it's going to be a problem. But if you start things early, you work a little bit of time.
+
+You schedule some time for 220, you schedule some time for 250,
+
+and you make sure that you sort of know where your comings and goings are at all times.
+
+You're going to be fine, right? It's going to be all right. But time management is going to be important to you this semester.
+
+I promise to you that you will get out of this course what you put into it.
+
+If you come to this course ready to learn. If you ask questions when you have them.
+
+If you try to understand what it is you're accomplishing.
+
+You will leave this course knowing so many things that you did not know.
+
+Walking in. I promise. If you just try to get a grade out of it, you're probably going to suffer and you're not going to earn as much.
+
+And ironically, your grade will be poorer, right? The material is what's important.
+
+Learning how the systems work is what's important. Any questions?
+
+All right. So, um, I'm going to gloss over this next couple of slides.
+
+Essentially, uh, I expect you to be an adult, behave like an adult, and be here to learn.
+
+And I expect you to treat my student assistants and each other.
+
+And to a lesser extent, me and Carl, because we're big boys and we can take care of ourselves with respect.
+
+Uh, and if that if you do all of those things, then it's going to be fine.
+
+Everything's going to be fine.
+
+In particular, remember that your student assistants are students just like you, and they're here because they want to help you.
+
+They are not here for the money. Every last one of them could make more money at Mighty Taco.
+
+They're here because they want to help. They're just students.
+
+They have their own schedules, they have their own lives, etc. please treat them that way.
+
+Right. They will be here to help you. Don't make demands, though.
+
+Don't be. Don't pressure them. Don't you know? Be respectful.
+
+In return, you can and should expect that we will respect you.
+
+We will respect your time. We will respect your learning, and we will do our best to help you get through this material.
+
+Um. If at any point in time you have trouble in this course with any student, assistant or you know any aspect of the course.
+
+Come see me. Or come see Carl and say, hey, you know, I've been having trouble in office hours, don't really get along with somebody, you know,
+
+or I just am having trouble communicating or I'm not understanding the answers I'm getting or, you know, whatever problem you're having.
+
+If you have a problem with me or Carl, go to the director of undergraduate studies.
+
+The department chair. And say, hey, I have trouble with an instructor in my course.
+
+He's a jerk, you know? He whatever. Dave's heard it all before.
+
+He knows. Um, because you are paying good money to be here.
+
+And most of you are trying to learn and trying to get ahead.
+
+And we should be providing an environment where you can.
+
+So if you're doing your part and we're not doing our part, let us know and we'll try to do something about that.
+
+If you're not doing your part and it's really only bothering you,
+
+you do you if you're not doing your part and it's a problem for my student assistants,
+
+or it's a problem for the other people in the class,
+
+then you're getting an email from me and I'm going to say, come meet me and you're probably going to cry.
+
+Just historically speaking, that's usually what comes out. It doesn't happen often, but it does happen occasionally.
+
+Any questions? About expectations or why we're here, or what we're learning.
+
+I promise I am not a nice guy, but I also am here to help you learn and it's going to be fine.
+
+So don't be scared. Also like come see me if you need to see me. I promise I don't bite.
+
+I'm nice. Usually. I'm adequately nice.
+
+All right. Lecture attendance is mandatory. You must be here three days a week from now until the end of the semester.
+
+I will take attendance. If you read the syllabus which I require you to do.
+
+You will find that you're actually allowed to miss a significant number of lectures, and it's going to be fine.
+
+Um, but you are required to attend, and I will take attendance.
+
+If I take attendance, and we do that by doing lecture activities that you get points for.
+
+If I take attendance and you do the lecture activity and you are not sitting in this room and I find out about it,
+
+that is a violation of academic integrity. And you fail this course with an F.
+
+Every semester. Somebody chooses to skip too many lectures.
+
+Panics, decides they really need to do the lecture activity even though they're not here.
+
+You catch them. And it would have been better to just not do it.
+
+So please. If you're not in lecture, don't do the lecture activity.
+
+If you miss lecture, we expect you to catch up on your own.
+
+If you have to miss a large number of lectures for structural reasons, for example, an illness,
+
+or you have to leave the country in an emergency and you're gone for three weeks, or, you know, something happens.
+
+Contact us. Right, we'll work with you. But if you just have trouble getting up at 2 p.m.
+
+You're laughing, but, like, this is my first semester. I don't want to hear it right.
+
+Come lecture. Uh, labs are also mandatory, and we do track attendance.
+
+Um, we do expect you to do your labs in lab.
+
+Many particularly of the sort of middle the. So this lab in the middle of the semester labs they don't take nearly two hours to complete.
+
+Right. And people say, well, I don't want to go. I want to do them at home, and I don't want to go to lab, and I don't want to spend that two hours.
+
+I mean, at the end of the day. Tough, right? I told you, you have to go.
+
+But the point is, the reason we ask you to go is that on other labs, you'll find that if you approach them incorrectly,
+
+if you're not doing what we intend for you to be doing, they can take a lot more than two hours to complete.
+
+And I really would rather you use that time on your readings and your programing assignments and things like that.
+
+Right. So if you prepare for your labs ahead of time, you come to your lab,
+
+you work on your lab in lab, hopefully it bounds the amount of time you spend on lab you have.
+
+You get all the points right. And you can ask the questions that you have every lab in this course.
+
+It cracks me up every semester. Somebody says. The things we talked about in class we didn't see on any program or assignment.
+
+Which is just false. I don't know what class they're going to, and I didn't understand what the labs had to do with the programing assignments.
+
+Almost every lab in this course,
+
+there's a portion of it that if you copy it and paste it and maybe change a couple of little characters into your program assignment,
+
+you'll get like points, right? The point is that they're preparing you for your programing assignments.
+
+So ask the questions, be in lab, understand them.
+
+Don't just get them done, understand them. And then your programing assignments will go more smoothly.
+
+Don't be one of those people who doesn't see the connection. If you don't.
+
+If you don't understand why I would ask you to do it. Ask yourself what you're missing.
+
+Don't assume I don't know what I'm doing. Um, anything else I want to say about this?
+
+Kind of class, right? You're paying for this. It's like $100. Every time you come to class, you're paying, like, $100 to listen to me talk.
+
+So if nothing else, make sure you're getting your money's worth.
+
+Uh, if you're in state and you have, like, Excelsior or whatever, like, it goes down pretty rapidly,
+
+but still you're paying a chunk of money, or the New York taxpayers or somebody is paying a chunk of money.
+
+So. Use it wisely. Oh, so there's a whole list of things here that people do and then regret.
+
+Don't do them. In particular, start your assignments early.
+
+Work a little bit every day. Don't try to do them all in one huge rush.
+
+Ask questions as soon as you are having confusion.
+
+Don't wait until you're completely stuck because the time in between is wasted, right?
+
+As soon as you start to be confused, come ask questions and don't cheat.
+
+If you cheat, I will fill you with an F.
+
+I don't want to spend a lot of time talking about that because it causes what it mostly causes is the people who are going to do the right thing,
+
+to worry the whole time that they might be doing the wrong thing, and the people who are going to do the wrong thing don't care.
+
+Um, but in general, just, you know, don't.
+
+Every single lecture I give you.
+
+Well, maybe not every single lecture, but like 80% of the lectures that I give you will have required readings and may have optional readings.
+
+Uh, there will be a tab up here at the top of lectures.
+
+These are clickable. If you click it, it will take you to the required readings.
+
+Uh, I will not necessarily call out the required readings.
+
+I will just assume that you all go look and see what the required readings are for each, uh, lecture.
+
+Um. You don't have to do them before lecture, but you should do them shortly after we start the lecture module.
+
+So, for example, this lecture I want you to read the syllabus in chapter one of K and R.
+
+You should plan to do that by say Wednesday or maybe Thursday of this week.
+
+That would be great time frame right. Not necessarily the day we open it.
+
+And now if you have time, if you're late this afternoon, you're just like, well, I'm all moved in and I don't.
+
+Not sure what I should do. Go read cancer, right? I mean, today is great, but it doesn't necessarily have to be today, but it should be soon.
+
+In particular, I will tell you that there are several labs and programing assignments that are discussed essentially
+
+in exact detail in one of the readings I will give you at various times throughout the semester.
+
+Every single semester, the midterm comes and somebody who hasn't done any of their readings decides to do their readings.
+
+And they come to me and they're like, I wish I had known that, like, PA, whatever is in chapter or whatever.
+
+It's like, well, I assigned it to you for a reason, so I wish you had known that too.
+
+Um, but please do your readings in a timely fashion. You will be a happier camper.
+
+You should definitely read the syllabus. I'm sure there's good stuff in it. Uh, again, I won't necessarily talk about, uh, the require readings.
+
+I will just assume that you are doing them.
+
+So there are also going to be optional readings on many of the slides. The optional readings are different.
+
+You do not have to do those. The optional readings are there either because I think some of you might find them interesting,
+
+or I think they might provide you with some information that you might not otherwise encounter that is relevant to the topic or in a few cases,
+
+because I really wanted them to be required. But I didn't want to make you buy another book.
+
+Uh, in particular, there's a number of readings out of computer systems, of programmers perspective,
+
+um, that are not required only because it's $180 textbook, and I don't want you to have to pay for it.
+
+So you may it's various points.
+
+Want to like, say, go to the library and, you know, sit down with a copy of that and look through some of the readings, right.
+
+Particularly if you're feeling a little behind and there are readings on a topic that you would like more information about.
+
+Yes. These slides are available on the course web page.
+
+The course web page is linked on. You've learned from the overview its CSS courses 20 I think.
+
+And these links are clickable, by the way, and everything in the slides. Good question.
+
+I should have mentioned that earlier. I think it was actually on one of the slides, but.
+
+That isn't any good because you can't click it. Um. Any questions about readings?
+
+All right. So your primary form for assistance in this course will be Piazza.
+
+If you are a returning UB student, you already know Piazza. If you are a transferring student, Piazza is essentially a support forum.
+
+Um, you will be able to ask questions of me, Carl and the course staff easily on Piazza.
+
+You will also see each others questions if you ask public questions, although you can anonymize your own,
+
+um, username so people can't see who's asking the question or who's answering it.
+
+Um, please read the Piazza.
+
+Um, in particular, if you have questions, just go ahead and glance through and see if your question might already be there.
+
+If you're feeling stuck on an assignment and go look and see the kinds of things that people are asking,
+
+see if there's anything there that would help get you unstuck.
+
+If at any point you have a question you believe it is not answered on Piazza, please ask.
+
+If you're looking at Piazza and you say, oh, question number 47, I think is what I'm asking, but I don't understand it.
+
+Just ask a new question, right, and say, I don't. I have this question.
+
+I don't think I see the answer. We might say we think number 47 answers your question, you know.
+
+Does it. And then you just say, well, I thought it might too, but I don't I don't understand it.
+
+And here's why. Right. And help us sort of zoom in on the answer. Right. If you ever are not sure just ask again.
+
+If you want to ask a follow up to someone else's question, ask a follow up to someone else's question, right?
+
+But please use PR and use it fruitfully.
+
+Uh, we will definitely post important stuff that you need to know on Piazza, so you should check it regularly.
+
+Um, frequently with when we release assignments and labs and things like that, we will.
+
+It doesn't do anything. I can turn it on and then. Yeah, but then we'll be on the recording if I turn it on.
+
+Um, yeah. It's like a two way permission thing. I have to give you permission.
+
+Then you have to ask to actually talk. Um.
+
+You know what's really cool? Have you guys seen this? Look at the back of the room back there. That cool.
+
+I like to do it when there's people studying up there, and then they're like, what is happening right now?
+
+It's great when you see shadows up there and like people trying to look in it, you just open it.
+
+Uh. Did I mention that I probably have ADHD?
+
+Um, okay. So, uh, that's the other. So uh, that's basically it for logistics etc.
+
+We're going to start talking our program times. Then what? At some point we'll start talking about material.
+
+Are there any questions about logistics so far? Pretty straightforward right.
+
+All right. Um. A significant portion of your grade is the programing assignments that we will ask you to do,
+
+I think is like 35% of your grade or something that's in the service. Um, their individual assignments.
+
+We will ask you to write them in the C programing language.
+
+Uh, we expect them to run on a particular computer that computers Imaan dot csv buffalo.edu.
+
+Iman is just a server in a server room in Davis. There's a photo of it actually in lab one.
+
+Um, because we thought it might help you to see your friend.
+
+What? What it looks like. Um.
+
+It's just a time shared Unix machine that we will all use. I think there's another slide about that here in a minute.
+
+The reason I tell you this is because if you write a program and it compiles and runs correctly on demand.
+
+And it goes down in flames on auto greater. And you come to me and you say, I think there's a problem, I will look.
+
+If you write a program and it compiles and runs correctly on your laptop and it goes down in flames on auto grader, I will say I don't care.
+
+Because I can't support every machine in the whole world, but I can support him.
+
+All right. So we provided to you to provide a uniform known programing environment.
+
+It's running exactly the same software stack that the graders will be running for you to develop and debug your code on.
+
+Um, you will also program in the C programing language, which you do not know.
+
+Learning the C programing language. Teaching it to yourself is a course objective.
+
+One of the required readings that we give you is in Ritchie the C programing environment, as you may have a copy of K and R with them.
+
+Of course you do. Why would you lie to me?
+
+Um. I'll mark this down for later.
+
+So the point of that I want to show you is a tiny little book. Right.
+
+It's like this thick. Everything you need to know about C is in that book.
+
+This book is so good. It is objectively an excellent book.
+
+It is so good that the other kind, of course, that it is assigned in other than computer science courses.
+
+Technical writing courses. As an example of what your technical writing should look like.
+
+That doesn't mean it's necessarily easy to read all the time.
+
+But it has a lot of really good information in an approachable way, in a small amount of space.
+
+Read it. When you don't understand.
+
+Which there will be things you don't understand. Ask us questions.
+
+We're here to help you through it. We're not here to teach you everything that's in that book.
+
+Because we gave you the book.
+
+We're here to help you understand what you read in the book, because learning the C programing language will be a valuable thing for you.
+
+Not just knowing C, which may or may not be valuable for you,
+
+but teaching yourself a programing language because you are going to learn over the course of your career,
+
+many programing languages, and for most of them you will not have a Paul or a Jess here and Eric or whoever
+
+standing at the front of the room telling you how the language is going to work.
+
+You're going to have some pile of internal documentation for a language that's only used inside your company.
+
+That was written in 1977 by somebody who not only retired, but it's also dead.
+
+Right and go learn it right. And as you learn to read these documents, starting with a really excellent one.
+
+You'll build the skill of sort of teaching yourself these things and growing your own horizons, right?
+
+But if you have questions, ask us. That's what we're here for.
+
+We will teach you a little bit about some of the more surprising things about see, but we're not going to spend a lot of time on it.
+
+We'll just expect you to pick it up along the way. Um, I already said all these things.
+
+Uh, you will access him on via a protocol called SSH. There are instructions in at eight on Piazza for how to do that.
+
+Um, ssh is a command line remote access protocol.
+
+So you will be dropped into a command line where you will type Unix commands.
+
+Learning something about how the command line works is a learning objective for this course.
+
+Again we're not going to spend a lot of time teaching it to you, but we will at many points in this course.
+
+For example, lab one has a bunch of this say, here's some things you need to do.
+
+Here's how you do them. The next time we need you to do them, we'll just say, go do it.
+
+We're not going to tell you how to do it. You can go back and look at lab one, right.
+
+If you have questions. That'll happen many times throughout this course. We'll teach you the debugger.
+
+We'll teach you a build system, will teach you some other things, and then expect you to refer back to that throughout the course.
+
+Uh, I think I already said this, but your teaching assistants will be your primary source of help for your programing projects, labs, etc.
+
+It's for the simple reason that there's so many of you and so few of me and Carl.
+
+Um, they're just more they have more time to spend with you one on one.
+
+But if at any time you need help from me or from Carl, from a faculty member comes to us, right?
+
+Either comes. He has an open office hours. I will have office hours this Wednesday morning.
+
+Uh, I think Carl also has office hours this Wednesday morning, starting on Wednesday.
+
+Um, come see us. Or if you can't make those office hours or you have another question, send an email and we'll do our best.
+
+When you do come see your teaching assistants. This should say student assistants, not teaching assistants for.
+
+Reasons. Um, when you do come see your student assistants for, uh, help, please do your due diligence.
+
+If you show up and say. I said it doesn't work.
+
+They're going to say, wow. I'm sorry to hear that. Next. Right.
+
+If you show up and say, I tried this, I got this result.
+
+I don't understand why I didn't get this other result. They'll say, oh, let me help you figure out why that is right.
+
+You need to give them something to work with. Again, there's 400 of you.
+
+We can't, like, sit down and debug everybody's project, right?
+
+There's 400 of you. But if you give them something to work with, they will work with you.
+
+They will give you better answers.
+
+We will, throughout the semester, talk about how to ask good questions, how to parse the answers, and how to get the information you need out of it.
+
+Now this is the ugliest thing I'm going to talk about so far. I may have talked about some ugly things before, but I didn't mean to.
+
+The ugly thing I'm going to talk about so far. We had a significant budget trim this semester.
+
+Coming into this semester, I was given approximately two thirds.
+
+Of the support budget to provide student assistance for you that I would normally get in a fall semester.
+
+We have to run a certain number of laps. We have to have Tas in those labs, etc., where there's not negotiable.
+
+There's a number of other things we have to do. We have to grade the final. We have to grade the midterm.
+
+What in my budget is flexible. The number of office hours I can provide.
+
+So we had to trim office hours. I don't like it, but I also can't do anything about.
+
+Ordinarily, my Tas sit around bored for about the first week of the project.
+
+Well, the same four people show up on the first day, ask their questions, right, and then rocket.
+
+Then nobody shows up for the first week or so, and then at the last minute there's lines all the way down the hallway.
+
+Because everybody just finally got around to starting their project. I am telling you that this semester that line will wrap around the building.
+
+Because I don't have as many Tas holding as many office hours.
+
+Please. Start early. Figure out where you're having struggles and ask your questions in those first few days.
+
+You don't have to ask all your questions in the first few days,
+
+but anything you can knock out of the way in the first few days is one fewer person standing in that line on the due date,
+
+and you don't have to stand in line for that question on the due date, right?
+
+So please plan ahead. I'm telling you right now, this semester is going to be ugly in office hours.
+
+Be nice to your student assistants. They didn't make the budget.
+
+I didn't make the budget. I don't know who made the budget.
+
+Let's blame Kathy. If you don't live in New York.
+
+That's our governor. Um, okay.
+
+I don't care. You're going to be asked to edit source code in this course.
+
+I don't care what editor you use as long as it is a real programmer's editor.
+
+It better not be friggin Nano or Notepad Plus plus or whatever, right?
+
+It needs to be a programmer's editor. I am going to ask you to try Emacs.
+
+Emacs is a particular editor that is used by a lot of people for systems programing, and is installed on demand.
+
+It is the only editor that we will support you using.
+
+If you're using anything else, that's fine. You're on your own. You absolutely may not.
+
+Under any circumstances. I will find you.
+
+Run Visual Studio Code on Imam.
+
+And you may not use Visual Studio Remote Access on iMap.
+
+And that's not because Visual Studio is a bad editor. It is.
+
+But that's not why I make that rule. It's because there's 400 of you.
+
+In every instance of Visual Studio that you start uses two gigabytes of Ram.
+
+And if you multiply two gigabytes by 400.
+
+The metric unit for what you receive is a [INAUDIBLE] ton. And we don't have that much.
+
+And so the computer crawls to a halt and we have to reboot it. And everybody's sad.
+
+And it's the day of the deadline and, you know, whatever. And I don't want to deal with it.
+
+So you may not run Visual Studio Code on Iman. You won't run on your own computer.
+
+That's between you and your God. But you don't run it on my computer because that's between you and me.
+
+Uh, I recommend you at least try to use Emacs if you don't like it, fine.
+
+Not everybody likes everything. Uh, we have other editors installed on, uh, Imaan.
+
+Um, um, vim and neo vim. I don't know what else there's a number of things installed on.
+
+Is that it? I mean, that pretty much covers any error that anybody has any business using.
+
+Okay. Cocoon and helix or I can. We can discuss that. All right.
+
+Uh, so please use a real editor.
+
+Um, and we will, if you want to use one that we're going to help you with, you will use Emacs.
+
+Here's what I need you to do right now. We have passed out.
+
+Programing. Assignment zero. Lab one.
+
+Several videos and a quiz.
+
+Maybe two quizzes. I think two quizzes. I think there's a quiz for programing Assignment zero and a quiz for the academic integrity policies.
+
+Go do those things by your lab this week.
+
+Make sure that you can log into Riemann. Did you have a GitHub account?
+
+You can log into it and you know how to clone repositories from it.
+
+Right. Uh, and that you've watched the lab video and looked over the lab handout.
+
+That's all I ask you to do before lab. Read the syllabus at your earliest opportunity.
+
+Ask any questions that you have. If you have any conflicts. If you have to.
+
+You know if you need to work through like, um, accessibility resources or anything like that, right?
+
+That all that information is in there and make sure you deal with those things, uh, and make sure you get started on your programing assignment.
+
+Zero. Now, I will tell you now there is like two minutes left.
+
+Why is everybody stand up? I will tell you right now.
+
+Auto lab is down. I know that the machine that it is running on is currently doesn't exist or something I don't know.
+
+I don't know. I know, and we'll deal with that if it comes to it.
+
+My every hope is that it will be up by the time you would have lived this week,
+
+but you will not be able to make sure you can connect to all the lab and stuff necessarily.
+
+If you can't get to the lab, it ain't you. It's us, right? We'll let you know when Auto Lab is back up.
+
+Um. All right, now you can get ready and go. I look forward to seeing you all here on Wednesday.
+
+Ready to go?
+

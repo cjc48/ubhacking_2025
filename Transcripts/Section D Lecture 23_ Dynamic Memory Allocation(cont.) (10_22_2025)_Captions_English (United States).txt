@@ -1,0 +1,765 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+I'll just wait for people to face the front of the room. Okay.
+
+Um, so we left off on whatever day we were here last.
+
+I feel like that was Monday. Yeah. It's Wednesday. Okay, good.
+
+We left off on Monday talking about, um,
+
+the sort of ideas behind the standard allocator and how the standard allocator fundamentally works and what it does.
+
+Right.
+
+Um, so we talked about the fact that the operating system gives these large chunks of memory that are not sort of broken up in any useful fashion.
+
+And when you allocate them, you can only allocate them at sort of the end of your heap, and you can only free them from the end of your heap.
+
+But we want to be able to call malloc, allocate memory free it, and then reuse it again later,
+
+regardless of whether it's in the middle of our heap at the beginning of our heap at the end of our heap, or whatever.
+
+And we want to be able to allocate in free chunks of memory that are smaller than, um, four kilobytes, because four kilobytes is fairly large, right?
+
+Four kilobytes is not a lot when you're talking about storing like your your totality of your application data,
+
+but frequently the data structures in which you store your application data will use a lot of allocations that are much smaller than four kilobytes.
+
+So we talked about the example of a linkedlist node that is, you know, a dozen bytes or a couple of dozen bytes, right,
+
+as opposed to four kilobytes in the amount of overhead that that would entail if all we could allocate was, um, four kilobytes.
+
+Chunks. Um.
+
+What we're going to talk about today is how that allocation works and what that interface looks like, and how we provide something like malloc.
+
+Um, and we're also going to take some time and do some top hat questions.
+
+Uh, about integers. Uh, because we were going to do those last time when we finished integers.
+
+But if you recall, Amazon had craft itself.
+
+And so therefore Top Hat had abdicated all responsibility of providing the services that we paid for.
+
+Um, so today we'll do the questions that we would have done on Monday.
+
+So I'm not going to do that right now because as you see, like this massive empty area in the middle of the room, I am a kind and benevolent leader.
+
+And so I will allow the people who are too lazy to come to class on time,
+
+a few minutes to get here before we do our topic questions, but, you know, do like 6 or 8 of them today.
+
+6 or 7 of them, right? Uh, okay.
+
+So this is where we, I believe the exact slide that we left off on. The next thing I want to talk about is, uh, metadata.
+
+So. Metadata is data about data.
+
+The data in an allocator is the memory that the application author wants to use in order to solve whatever problem their application is solving.
+
+So if your application is a movie player,
+
+the data is the actual frames of video that you're going to play in the incoming mPEG stream or whatever that you're decoding it from.
+
+If your application is a spreadsheet, the data is the actual numbers that are in the cells of the spreadsheet.
+
+Metadata is data about that data.
+
+And in the context of the allocator, the metadata is the data that allows us to track the individual allocations that the user makes.
+
+When the user calls malloc, we give them some memory when they call free.
+
+We have to be able to put that memory back on the heap so we can use it again later.
+
+And we need to know something about that memory that we gave to the user in order to put it back on the heap.
+
+So we store a little bit of information about the memory that we gave to the user.
+
+That information is metadata. It's data about the user's heap data.
+
+Um, how we store that data and how we manage that data can and does vary between implementations of allocators.
+
+And this is the fundamental reason. That given a pointer, only a pointer.
+
+To a region of memory allocated using Malik Malik a reality.
+
+You cannot find out how much memory was was requested at allocation time.
+
+Because the allocator in the C API that's standardized in the C library is not required to tell you that information.
+
+And even though it may or may not store that information, is metadata, it absolutely does not have to store that information, its metadata,
+
+in any way that is predictable or something that you could understand, because every allocator can store its metadata however it wants.
+
+And every time you run your program, you could be running it on a different computer with a different allocator on the same computer,
+
+even with a different allocator, maybe you updated something in between. And so.
+
+The allocator chooses how it's going to store that data, and it chooses how it's going to store that data for its own purposes.
+
+According to the kind of system that it's running on,
+
+according to the kind of data that it expects you're going to use according to whatever its own lights are.
+
+It will decide what melody to store and where distorted. We are going to see in this course.
+
+Uh, three, maybe four different. Broadly similar, but three or maybe four different methods of storing that metadata.
+
+We're going to talk about one in class, probably before the end of this class period.
+
+You are going to implement one in programing assignment for one programing assignment four comes out and they will be different.
+
+And if you read the required readings in K and R when program assignment four comes around.
+
+There is an example in k and R of storing metadata for an alligator.
+
+That's different. Yet if you have access to uh, computer systems or programing perspective, there's yet another allocator in there.
+
+And the reason that there is not agreement in all of these examples is because it is actually a reasonable
+
+thing for there to be many different allocators that do their allocations for different reasons.
+
+We'll talk about why.
+
+So assume that the dynamic allocators job is fundamentally to allocate blocks of memory for the user to use to serve the allocations in their program.
+
+But in addition to whatever memory the user is going to use, the allocator may need to store some metadata,
+
+so the blocks of memory that the allocator creates will have a little bit of metadata, and they will have whatever memory the user asked for.
+
+The collection of those blocks. Which may be free and available for the user if the user called malloc,
+
+or they may be allocated, the user called Malik and we gave them a block of memory.
+
+The collection of those blocks makes up the heap. So we know that the heap is stored in memory between the top of the bus and the system brake.
+
+And we know that notionally the heap consists of the memory that the user has dynamically allocated.
+
+In their program using Malik Malik in reality. But the specific structure of the heap is that it is blocks of memory managed by the dynamic allocator,
+
+which are stored in the address space between the top of the bus and the system brick.
+
+Right. The whole point of this lecture from here on out is what are those blocks and how do we manage them?
+
+So if we have an allocator that uses what we call explicit metadata, which we frequently do.
+
+Then it is commonly the case that we store the metadata for a block of memory as actual data stored in memory.
+
+It typically adjacent to the memory that the user is asked for when they call Malik.
+
+So the user calls Malik. They ask for 72 bytes of memory.
+
+You give them an allocation area that has at least 72 bytes of memory, and somewhere immediately beside it you store a little bit of information.
+
+You save just a little bit of information. But says, hey, I gave the user an allocation of whatever size I gave them.
+
+Maybe it's not 72 bytes. Remember that the, um, contract that malloc gives you is when you call Malik,
+
+you will receive at least the number of bytes that you ask for or not, which says I couldn't do the allocation.
+
+So when you call malloc 72 I could give you 128 bytes.
+
+That would be fine. The user has to assume it's 72.
+
+It's at least 72. But the allocator could have chosen more, right?
+
+And then whatever metadata that the allocator needs to be able to free that memory later,
+
+which probably in this case would say, hey, this is 128 bytes. I give these 220 bytes.
+
+Yes. So the question is, is that why you don't always get a crash immediately, like if you overrun the allocation or something?
+
+That is one of the several reasons, is because you might actually have received more memory than you asked for.
+
+In particular, if you override an allocation by just a couple of words of memory,
+
+it is very commonly the case that you didn't actually leave the practical allocation that you asked for.
+
+Yes. No.
+
+And why not? I already told you. Why this lecture period. Was the last sentence on this slide.
+
+So even if I know that the allocator stores its metadata immediately beside my memory and that it's immediately before my memory,
+
+I don't know how big it is. I don't know what format it is.
+
+I don't know how the information is stored there. And I also the specific question we ask is.
+
+How much memory is requested in allocation time.
+
+Even if it's true, even if I know exactly where it stores it, it frequently is the case that it doesn't tell me how much memory was requested.
+
+Allocation time. It tells me how big the block is that it used to serve the allocation,
+
+which might be two different things because it can give me more memory than I for. So no, you cannot.
+
+Just because you have an inkling that it might be there, you cannot assume it's there.
+
+You might be using a different allocator. You it could change in any time.
+
+It is not part of the API that is guaranteed you. All right, let's do some top hat.
+
+It's quarter after. So even the laziest of people have wandered in by now.
+
+That's not true. Can you imagine along with clicking on ads?
+
+What if you paid $100 a lecture for a course and then you just didn't go?
+
+Or you came in late or you left early? This is why kids these days can't have.
+
+Can't purchase homes. It's avocado toast and not going to lecture.
+
+All right. I think we're actually going to do the questions that I had queued up for.
+
+Yeah, for the 20th. These questions are going to be about integers.
+
+Yeah. There were some people in my last lecture who were really upset about that, actually. Uh, here's the deal.
+
+These integer representation things that we go over are.
+
+Not the hardest things we're going to do in this course by far, but they're fairly abstract and mathematical.
+
+Which many of you, when you're in a programing course, you don't like to think about abstract and mathematical things.
+
+You like to think about programing things. And we did them immediately after the midterm.
+
+Which means the maximum period of time between when I told you about them and when they will appear on the final.
+
+And so that's one of the reasons we want to do a fair amount of practice now.
+
+And so that hopefully you get it in now before you've forgotten that we even talked about integers when the final rolls around.
+
+So we're going to do like six questions. Well, I mean, it's we do them more than once or whatever, but.
+
+All right. What is the value of the binary number?
+
+Not. Complement. Not ones. Complement. Just binary number.
+
+110. What is the value in decimal of the binary number?
+
+110. If you don't know, think back to the summation.
+
+You have one minute you can calculate it out longhand. Base two means binary.
+
+All right. Here's my magic trick. Oh, it didn't work in this lecture either.
+
+I'm so proud of you guys this semester. This is, honestly speaking,
+
+one of the best semesters I've had in a long time for people like paying attention
+
+and asking questions when they need to ask them and really just doing their best.
+
+So thank you. Frequently I'll say something like, the answer is six.
+
+And then I give the question, and then it gives me an opportunity to give my speech about like, why are you here?
+
+Which I kind of already gave earlier about the $100 thing. Right? But, um, you guys don't need it.
+
+Right? So in case you do need that speech and like, you're feeling like maybe next time you're going to be flagging, just pretend like I gave it.
+
+But y'all did a great job, and I'm really proud. You wouldn't think that at the college level that you would make an instructor proud by.
+
+They tell you the answer and then you just give it back to them. But you like Matt, you've all had like pathways and stuff, right?
+
+And you've met like the other students. So you understand. Okay.
+
+The value 1011. Is a four bit two's complement number.
+
+It's stored in two's complement representation. What is its value?
+
+I have some questions.
+
+Um, so remember how to compliment works if it's a four bit two's complement number, that means it consists of exactly four bits.
+
+The bottom three bits are calculated exactly the same way that we calculate unsigned integers.
+
+Right. So the 011 is just two to the zero plus two to the one plus zero times two to the two right which is three right.
+
+So this 011 on the end is three. The top one, the first one in a signed twos composite number.
+
+Is worth two to the minus one negative.
+
+Right? So instead of being two to the W minus one which would be four.
+
+Three eight. Uh, because w minus one is three, so 2 to 3 is eight.
+
+Instead of being eight it's negative eight. So we have negative eight plus three which is five.
+
+So we have one times two to the negative three plus zero times two to the two
+
+plus one times due to the one plus one times two to the zero negative five.
+
+I don't know where. Negative four. I know where that comes from.
+
+For I is for is um, using thinking that what does comboing is a verb in all confusing it from one's complement.
+
+So negative for is the answer for one's complement, right? If it were, one's combo would be negative four four is confusing that it's a verb.
+
+The others I'm not sure. Um, so I'm not going to ask you to explain it to me right now, but I am going to say if you don't know,
+
+if you don't understand why the answer was negative five and you answered something that was not negative five, then ask, right.
+
+You want to ask right now? You can if you want to, but ask yes.
+
+What is the base tin value? Of 1011 when interpreted as a four bit wide two's complement number.
+
+If it was based. I do see what you're saying.
+
+But like base ten modifies value. So that's where the -1989 comes from.
+
+Right, because that would be if we had a that would be a tens compliment number.
+
+Right. If it was a Tens compliment number, it would be -99.
+
+Yes. If it was once carboy, it would be negative seven plus two plus one, which would be negative four.
+
+Because the first bit is negative seven instead of negative eight, and one's complaining because it's negative two to the w minus one plus one.
+
+The other bits are the same. Yeah, just like they would be for an unsigned number.
+
+Yeah. All right. Last question. This is a tricky one.
+
+It's going to require you to think about the facts that I have told you.
+
+What is the value expressed in base ten? So the answer is in base ten.
+
+If 110 is a base three number.
+
+Base three. Which we didn't do.
+
+But the rules are exactly the same. Talk amongst yourselves.
+
+And you know what they said to me? It's raining. That is beautiful.
+
+No, it's absolutely not. I want to go.
+
+Do you walk slower in the rain? You have to leave early.
+
+All right. Let's look at the answers. Uh, is in fact 12.
+
+Which is 1100 in binary. But I asked for base ten.
+
+Uh, don't know what the other things here are. Again, if you don't understand, after I go to explanation, please ask me.
+
+So we do the same summation, right, that we would do for a base two or a base ten number.
+
+Remember that every position is multiplied by the base to the power of the location.
+
+So we have zero times three to the zero,
+
+which is zero plus one times three to the one which is three plus one times three squared, three to the two which is nine.
+
+So we have nine plus three which is 12. All right.
+
+Uh, that's all I want to do about integers right now. I've actually got two more of them here, but I kind of am tired of this, so I want to move on.
+
+Are there any questions before we move on? Are you going to give. I, uh, am unwilling to answer that question at this time.
+
+All right. So let me put that back on a different desktop.
+
+And. All right.
+
+So once we create these blocks of memory that have metadata stored them in them or whatever,
+
+a very common thing to do is to store the blocks of memory that are not currently allocated by the user, that the user.
+
+So when the user calls Mallick, I give them a block. That block is relatively uninteresting to me because I can't do anything with it.
+
+I can't change it, I can't move it, I can't do anything with it because the user is actually storing data in there.
+
+And because in C, when I gave the user that block, I gave them the memory address at which it's stored.
+
+If I do anything at all with that memory, the user can see it, right.
+
+The user will know I can't move it, I can't change it. But I will have some blocks that are not currently being used by the user.
+
+I may have some blocks that are not currently being used by the user.
+
+It is a very common thing to do to take those blocks and put them on some kind of list.
+
+So that when the user calls Malik,
+
+I can look through that list and see if I can find a block of memory that's reasonable to give to the user to serve the current.
+
+Allocation. Um. So very commonly, what an alligator looks like is I create blocks of memory, and I put some sort of metadata on the front of them,
+
+and I give the user those blocks of memory for their allocations and any blocks of memory that the user is not currently using.
+
+I put on a free list.
+
+When the user calls malloc, I go to the head of the free list or some notional equivalent thereof, and I start walking through the free list,
+
+looking at every block that I have available to me and asking, is this a reasonable block to use to serve the user's allocation?
+
+And what reasonable means depends on my allocator, right? There are many different ways to call a block reasonable.
+
+Right. Maybe it's just it's at least as big as the user asked for,
+
+and I'm going to cut it into more than one piece and give the user the one that's closest to the size that they want.
+
+Or maybe I want to find a block that's already the right size to give to the user.
+
+Or maybe like it doesn't like the rules there up to me.
+
+Right? As the implementer of the allocator, I guess I'm just a software developer.
+
+If I'm writing the allocator, I'm just a software developer. I can choose the algorithm that I want.
+
+It is frequently the case when we do this that some of the metadata that we require, we only need when the block is free.
+
+For the same reason that I mentioned before.
+
+When I give the user a block, the user calls malloc and I allocate some memory and I hand them a pointer to that memory.
+
+That memory is dead to me until they call free because I can't do anything with it.
+
+It doesn't belong to me. I gave the user that memory and I said, you may do whatever you want.
+
+They said, Malik n bites. I said, here's n bites of memory.
+
+You can do whatever you want with those invites of memory. So I can't store any data there.
+
+I can't move it. I can't change its properties in any meaningful way.
+
+I just have to let the user use it. Until they eventually call free, at which point, as the allocator.
+
+I get it back. Now it's mine. The user has said, I'm not going to use this anymore.
+
+And I can do what I want with it. So while it's allocated frequently as the system allocator, I don't even keep track of it.
+
+The user calls malloc. I give them the memory. I don't even remember that I gave them the memory.
+
+Because it's theirs. I can't do anything with it.
+
+And in C, unlike other programing languages, if the user loses track of that memory, it's just gone forever.
+
+When they called malloc, I gave them a pointer. They use that pointer, they store some data and then say it was stored in a.
+
+Local variable in a function and the function returns. That memory is just gone forever.
+
+We call that a memory leak. Right. It has leaked. Because I don't know that the user no longer has a pointer to that data.
+
+Because as the system allocator, I don't know what data structures the user is using.
+
+I don't know if there's a pointer to that data somewhere or not, I can't tell.
+
+And if I do anything at all with that data and the user still has a pointer to it, then that's going to be bad.
+
+So I just have to assume that the user is taking care of it.
+
+And that's how memory leaks can allow a program to grow and grow and grow is because the user lose track of that pointer they never call free.
+
+And then next time they call malloc, they just allocate more memory.
+
+They never call free. They call malloc. They never they never call free. And then the program just grows and grows and grows.
+
+And pretty soon it's electronic. Um.
+
+This is not true on languages that don't give the user pointers.
+
+Because if the user is not allowed to have a raw memory address.
+
+Then I can keep their use of references to memory that I give them.
+
+Through whatever my reference mechanism is. And I can say, oh, the user actually doesn't have a reference to his memory anymore.
+
+I can free it for them. Right. And then I need to keep track of it.
+
+But in C because I gave them a pointer. They may not even have a pointer to the exact address they malloc.
+
+They might have a pointer or something in the middle of that block of memory. It's still theirs.
+
+I can't touch it. Right? It doesn't belong to me anymore.
+
+So what this means is. Allocated blocks are of no interest to me.
+
+I need very little metadata to keep track of an allocated block.
+
+All I need is enough information to be able to put it back on a free list when the user is done with it.
+
+Right. I don't need any other information. Free blocks, on the other hand.
+
+I need to keep track of. I may want to put them on a free list.
+
+I may want to store them and other some other kind of data structure. I may want to be able to do various manipulations of that data.
+
+Because a free block is of interest to me as the allocator.
+
+I can break it into multiple blocks. I can join blocks together.
+
+I can put them on a list. I can put them in a tree. I can sort them.
+
+I can juggle them, right? I can do whatever I want with them. They're mine.
+
+And so I may want to store more metadata about a free block than I do about an allocated block.
+
+And in particular, if I'm using a free list, I may put my free blocks on a list and not store my allocated blocks on any list whatsoever.
+
+And that's reasonable. However, maintaining that list requires memory because in order to build a list,
+
+I need to be able to store previous and next pointers and things like that.
+
+So I need memory to store those pointers in.
+
+Because of the fact that we're talking about a memory allocation that has memory that is by definition, unused when it is free.
+
+The user calls free on it. It goes on to the free list.
+
+The user is not using that memory as the allocator.
+
+I can reuse that space and store part of my metadata, and I can take those previous and next pointers forever, for example,
+
+and I can store them inside that application memory that if the user called Malik would belong to the user, but the user did not.
+
+The block is free, so I can use it. And so in that way, that data can do double duty.
+
+When the memory belongs to the user, it stores the user's memory.
+
+When the memory belongs to the allocator, it stores the allocators memory.
+
+Does that make sense? Yes. When the user calls malloc.
+
+Will it prioritize freed memory over getting new memory from the operating system?
+
+Typically, yes.
+
+You want to reuse memory if you can because, uh, any memory that you ask for from the operating system is memory that another program can't use.
+
+Right. But sometimes you for convenience reasons, you may ask for more memory even though you have some memory.
+
+What you don't want to do is have tons of available memory and just go ask for more, right?
+
+Yes. It's likely bigger than what you requested.
+
+Yes. The entire thing?
+
+Yep. Yep. And then possibly put metadata inside it or do whatever it does with it.
+
+Yeah. Well, it has some metadata already. Probably. Right.
+
+So the question is what is the metadata? And the answer is it could be absolutely anything.
+
+Typically it's just enough information to be able to free the block when the user gives it back to you.
+
+So we go and we'll talk about why here in a minute. We want to keep a little information as possible.
+
+And we'll talk about why here. It might literally be the next slide actually.
+
+You don't know. There's no way to know what actual information that is is not part of the C standard, right?
+
+So any given allocator can store whatever information it wants and different allocators will store different information.
+
+Yep, it is literally the next slide. So, um, all of this metadata.
+
+Is what we call overhead. And there's another kind of overhead, which is fragmentation that we'll talk about here in a minute.
+
+Overhead is all of the memory that the allocator uses that is not storing the user's data.
+
+It is also all of the computation that the allocator does on behalf of the user.
+
+The user does not want your allocator to do computation.
+
+The user does not want your allocator to use any memory.
+
+The perfect allocator would use zero memory.
+
+Zero metadata. Zero fragmentation. Zero extra data anywhere in memory and would use zero processor cycles.
+
+Zero computation time in order to do what the user wants.
+
+Because the point of the allocate the alligator isn't doing anything towards solving whatever the user's problem is.
+
+It's just bookkeeping. The memory. So the ideal allocator uses no memory and no computation time.
+
+That's not practical. Right. The allocator is going to have to keep some data, and it's going to have to do some computation.
+
+But it's your job if you're implementing an allocator to use as little computation time as you can
+
+reasonably manage and store as little metadata and as little extra data as you can possibly manage,
+
+so that the user can maximize the resources of the computer for solving whatever their actual problem is.
+
+Right? They're writing this program for a reason. That reason is not because they like to call Malik and free, right?
+
+They're doing some computation. You want 100% of that memory of possible to be used for the copy computation.
+
+In practice, that's not possible. Right. And so you use as little overhead as you can get by with.
+
+So the other type of overhead that we didn't talk about is fragmentation.
+
+Fragmentation is memory used by the allocator.
+
+No. Not used by the allocator. Memory allocated in some fashion by the allocator that is not being used by either the allocator or to the user.
+
+Sometimes we will include metadata in internal fragmentation, which we'll talk about here in a second.
+
+But in general, we think of fragmentation as the memory that nobody is using.
+
+It's just a byproduct of the way the allocator does its job.
+
+And we'll talk about how that happens here in a minute. There are two kinds of fragmentation.
+
+So like everything else in this course. Does this come up yet?
+
+Is this the first time? If I tell you there are two kinds, or later on I will say there are five rules, or I will say, oh, we have done it.
+
+There are four ways to get a valid pointer. You should know the four ways to get a valid pointer.
+
+You should know the two kinds of fragmentation. Right. Like if I tell you like this is it.
+
+This is the kinds of fragmentation. That's all of them. Just learn them.
+
+Internal fragmentation and external fragmentation. Internal fragmentation is memory inside one of those blocks of memory.
+
+That is not being used by the user.
+
+So for example, the user says malloc of 72 bytes.
+
+And the allocator gives the user a 100 bytes of memory.
+
+Post metadata. The difference between 72 and 100 is internal fragmentation.
+
+Because the user has to assume that it got exactly 72 bytes because you asked for 72 bytes.
+
+The contract with Malik is you get back at least 72 bytes in memory.
+
+It could be exactly 72. So you have to assume the minimum.
+
+It's exactly 72. So the user can't use the rest of that allocation block.
+
+The alligators are not going to eat. You're probably right. It gave the user 100 bite mark and not a 72 bite block for some reason.
+
+And so the difference in there is internal fragmentation. It's just leftover memory.
+
+Frequently this. This happens essentially for the same reason.
+
+I guess there's a whole slide on it. We'll talk about it here in a second. Uh, no, I'll, I'll go ahead and I'll go to that slide.
+
+This happens essentially for the same reason that we have packing in structures.
+
+The packing in structures is not memory that's used for anything that anybody cares about.
+
+It's just there because of the way the computer works. There's a reason that it's better for us to have just a little bit of wasted space.
+
+In a best case scenario, we would never do that.
+
+But for practical reasons related to the way the architecture of the computer works, etc., it just happens.
+
+Internal fragmentation tends to be approximately for the same reason.
+
+And in particular, if you remember, we put padding at the very end of a structure in order to preserve alignment.
+
+Putting padding at the very end of a heap allocation block in order to preserve alignment is a common thing to do,
+
+because if you remember when we talked about the app, the API for malloc way back in, you know, the dawn of time, like three weeks ago or something.
+
+We said Malik doesn't know what you're allocating, so it has to give you an address that is maximally aligned for this architecture.
+
+That's aligned to the largest possible piece of data that you could store on this architecture.
+
+Which means that if you ask for one byte of memory and then later on you ask for, you know,
+
+a larger piece of memory, say, I'm allocating a character array or just a single character, right?
+
+Or whatever, one byte of memory. And then later I allocate eight bytes and it's a character array.
+
+Well, I can put those eight bytes anywhere, but later I allocate eight bytes.
+
+And it's a float that has to be aligned and malloc doesn't know.
+
+So what it's going to do when I ask for the one byte is it's going to say, fine, I'm just going to give you eight.
+
+Because on this platform I need to align my next allocation to that eight byte boundary.
+
+Right. And you'll get that little bit of extra memory at the end as internal fragmentation.
+
+It is also frequently the case that allocators will not make allocations of any arbitrary size.
+
+They will have fixed sizes, or not necessarily fixed sizes of discrete sizes,
+
+quantized steps that they prefer frequently things like multiples of A and an integer, right.
+
+Like only multiples of 64 bytes, right. Or something like that, or powers of two.
+
+The allocator that you're going to implement is going to be powers of two or something like that.
+
+Um, and these are for implementation reasons. Remember I said there's two kinds of things that we worry about an overhead.
+
+Well, there's two kinds of memory overhead, right. There's fragmentation and metadata.
+
+But the other kind of overhead that we worry about is how much computation time the computer has to do in order to do the allocation.
+
+So I'll frequently say, hey, if I chunk these blocks up into like fixed sizes that are known to me a priori,
+
+I can write a faster algorithm and I can use less computation time to serve the user's allocations.
+
+So I waste a little bit of memory in return for Malik and free being really fast.
+
+Right. And that's something that you're going to do in your pay for when I hand out your.
+
+The other kind of fragmentation is external fragmentation,
+
+and external fragmentation is space between blocks of memory that cannot be used to serve a user allocation.
+
+So consider this heap here. Suppose that the user calls.
+
+There's 160 bytes available, which is not a lot, but I have a microprocessor.
+
+I think I have it in my office that has 128 bytes of Ram. So like it could happen.
+
+The user allocates 32 bytes of memory. Then they allocate 32 bytes of memory.
+
+Then they allocate 64 bytes of memory. Then they free the second 32 bytes that they allocated.
+
+So we wind up with 32 bytes of memory and 64 bytes of memory.
+
+But there's two holes where there's free memory and they're both 32 bytes in size.
+
+Now the user comes back and says, can I have 64 bytes of memory?
+
+Do you have 64 bytes of memory? Yes.
+
+Can you give the user 64 contiguous bytes of memory? No.
+
+Because you have external fragmentation.
+
+The space between the blocks of memory that you have allocated to the user is not large enough to serve an allocation.
+
+Now in this scenario, if I really honestly only have 160 bytes of memory in my whole system, I'm done.
+
+I return null. If I have more memory in my system and it's just not on my heap.
+
+Then I go to the operating system and say, can I have more memory? And I serve that allocation.
+
+But either way, I'm not going to be able to use that 32 bytes of memory in the middle of my heap.
+
+Right? It's fragmentation. It's external fragmentation.
+
+This happens because of the pattern of allocations and frees, typically that the user makes when they're running their program.
+
+And so in some sense, there's not a lot you can do about it as an allocator implementer.
+
+On the other hand, some allocation strategies are more prone to external fragmentation,
+
+and some allocation strategies are less prone to allocate to external fragmentation.
+
+The one that we will look at, NpF4 has particular properties with respect to internal and external fragmentation
+
+that when we get there you should think about like what are the tradeoffs here? What decisions were made?
+
+Why were they made? Yes. They're free.
+
+Yeah, 64 bytes is free. But if the user says Malik 64, there's not 64 contiguous bytes of memory to give back to the user.
+
+Because they're in different places, right? And in C, we have no way to express here because malloc returns one pointer.
+
+I have no way to say here's 32 bodies and here's another hundred. You bodies put half of your data here, but half of your data there.
+
+Some languages can do that. C cannot. All right.
+
+Um. I think. We'll do this on Friday.
+
+Um, so everybody have a great couple of days. Hope lab exam is going well.
+
+I'll see you on Friday. Oh, yeah. That's tonight. Once it's free.
+

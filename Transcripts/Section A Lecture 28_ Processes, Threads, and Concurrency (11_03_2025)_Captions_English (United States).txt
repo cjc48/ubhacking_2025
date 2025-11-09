@@ -1,0 +1,853 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Uh, and we're going to start talking about concurrency and actually running more than one program at the same time.
+
+And then we are going to, um, continue that theme in the next set of lecture slides, which we'll do probably start on Friday.
+
+And finish up maybe beginning of next week. And then we're going to finish out next week and maybe even into the week after doing some live coding.
+
+Um, about concurrency.
+
+Right. Running more than one process at the same time, then that will be just in time for your par four to be over and par five to come out.
+
+Um. And it will be about concurrency.
+
+That's what the topic of your par five, uh, will be.
+
+So that's our schedule for the next, like two and a half weeks probably.
+
+We will then after that, move into some more, um,
+
+deeper systems kind of things and talk about the relationship between the operating system and that once we have a process model,
+
+the relationship between the operating system and the process model, um, and then um, the.
+
+Barrier that protects the different programs from one another and things like that.
+
+And then we're done. Right. We only have four weeks left.
+
+Uh, four weeks of classes left. So that's pretty much the end of the semester.
+
+So we're in the homestretch. This projector is now on, uh, this set of slides is, uh, as I said, a little more abstract.
+
+The next one's a little more abstract. The one of that's very concrete.
+
+And then it's more abstract from there on, uh, out.
+
+So today, what I want to start talking about is, um, concurrency.
+
+And concurrency is when we have more than one process or more than one thread of control.
+
+And we'll talk about the specific details and the terminology we're going to use running in the system at the same time.
+
+Um, obviously this is something that modern machines do all the time.
+
+We run multiple programs at the same time. That's just how we do, uh, computation.
+
+But up until this point, it is not something we've had to think about very much.
+
+As I said earlier in the semester, that dedicated machine model. Right.
+
+The idea that your program is the only thing running,
+
+you don't have to worry about what's happening in the rest of the system is valuable enough to us that you've been able to get,
+
+you know, three major programing classes or more into your curriculum before you have to start thinking about, uh, multiple processes and concurrency.
+
+So in CSE app, which is our optional textbook, um, that probably most of you don't have because it's crazy expensive, which is why it's optional.
+
+Um, they define, um, a logical control flow,
+
+which is a term that we're going to need to talk about concurrency as a series of program counter
+
+values that correspond exclusively to instructions contained in a program's executable object file,
+
+or in shared objects linked to it dynamically at runtime.
+
+So, um, the program's executable object file is the actual program that gets dropped on disk when you compile.
+
+Right? That's your a dot out sort of file. And the shared libraries that it talks about are things like the C standard library.
+
+So you didn't write printf. Printf is not in your program.
+
+Printf is made available to your program by sort of the rest of the system.
+
+And there's lots of libraries like that. We use those libraries for um, graphics operations and for encryption and for,
+
+uh, reading and writing different file formats and for, um, you name it.
+
+Right. There's libraries. So when we did the, um, par three, the thing that let us draw the, you know, sort of entry box,
+
+the bottom of the screen and then have other stuff at the top of the screen.
+
+That was a library, right? It's called in curses. Um.
+
+And they define this logical control flow very specifically as a series of program counter locations.
+
+If you remember, the program counter was that thing that we pushed down onto the stack when we call the
+
+function so that we knew where to go back to when we were done with the function.
+
+And the program counter always contains the sort of instruction that is currently being executed by the processor.
+
+So you are adding two numbers together. It's a particular processor instruction that saved an executable file.
+
+It lives somewhere in memory that somewhere in memory has an address.
+
+The value in the program counter at that point in time is the address of that, you know, instruction that adds two numbers together.
+
+And then as that number executes, it will become the address of the next instruction that it's supposed to run.
+
+When you do a branch, when you do a jump for an if or an else or a call or another function or whatever,
+
+then you're just changing that address to a new location.
+
+So we can define the execution of a program as essentially what instructions did it run when it ran.
+
+And we're calling that the logical control flow. So it runs one instruction after another.
+
+And that sort of path that it takes through the program defines what the program did when it ran and that list of things that it did.
+
+We call the logical control flow.
+
+Every program on our system is provided with the illusion that its logical control flow is running on a dedicated computer,
+
+and the only logical control flow running at that time in that computer is its own logical control flow.
+
+This is what we've sort of talked about from the beginning of the semester.
+
+Starting today, we're going to break that open and we're going to say, what if there was more than one logical control flow?
+
+Concurrency. We define as a situation where there is more than one logical control flow present in the system at the same time.
+
+We define concurrent logical flows as logical control flows whose executions overlap in time.
+
+That is to say, one logical control flow begins while another logical control flow is running in the system and has not yet ended.
+
+Um. It turns out we can have concurrent logical flows even if we only have one processor, even if we can only run one instruction at a time.
+
+And we'll see how that works. Uh, later in probably this class period.
+
+Uh, but we can essentially slice between more than one program and do a little bit of work on, run a little web of work on another,
+
+and just skip back and forth and make it appear as if there's more than one program running at the same time, even if there's actually not.
+
+Um. Mhm.
+
+Do I want to go through this definition now or do I want to go through it when I get to it later. I'll go through it now.
+
+Um, so I guess instead of saying later in the lecture, I'll say, I'll do it right now.
+
+So, um, there's a term that we will use called multitasking.
+
+We're going to talk about multitasking multiprocessing in there. We are going to use them differently.
+
+But I'll talk more about that in a minute. Multitasking is when we do exactly what I just said.
+
+We want to run program for a moment.
+
+Then we take what is called a context switch, and we switch from running one program to running a different program.
+
+We run that program for a moment, and then we do a context switch, and we switch to another program, and eventually we ideally come back to the first.
+
+So in order to think about these things, we are going to talk about an abstraction.
+
+Logical control flows are an abstraction, but they are extremely abstract.
+
+We're going to talk about an abstraction which is somewhat less abstract, which is a process.
+
+And we already talked about processes when we talked about the anatomy of a process.
+
+Right. And we talked about the fact that it is the memory that the program uses and the files that it has open, and all of those things.
+
+Right. So this is the same term with the, um.
+
+Added. Clarification, that process is going to execute a logical control flow.
+
+So the set of instructions that it has are one thing, but it is actually going to move through that,
+
+through those instructions in a logical control flow and run them in some particular order on our operating systems.
+
+That process is entirely sort of bundled up and put in a safe,
+
+dedicated computer that appears to be the only thing that is running on the computer at a time for that process.
+
+And the we said that that's it.
+
+That's all it can see. But it turns out that it can in fact interact with the outside world.
+
+It can, in fact interact with other processes. And it can be made aware that there are other logical control flows in the system,
+
+but it can only do that by interacting through the operating system.
+
+So in order for two processes to interact, they have to have sort of a mutual agreement arbitrated by the operating system that says,
+
+I would like to be aware that there are other programs running in the system.
+
+And if both programs say, I would like to be aware that there are other programs running in the system and the kernel agrees that that's okay,
+
+then we can break down the dedicated computer model a little bit,
+
+and we can allow more than one logical control flow to run visibly on the computer at the same time.
+
+The reason we want this to be sort of a two way, arbitrated, consensual process is so that when you write a program,
+
+unless you really want to worry about what the other programs on the computer are doing at the same time, you don't have to.
+
+But in the event that for some reason you wish to do more than one thing on the computer at the same time,
+
+you may ask permission and be granted the ability to do that.
+
+Yes. Like we're all like.
+
+So, um, the question is, is this similar to parallelism?
+
+I am going to get very lawyerly on you right now.
+
+And ordinarily I don't like lawyers.
+
+Um, but in computing, we specifically parallelism means a very specific thing.
+
+Uh, which is not exactly the same as concurrency, which is what we're talking about right now.
+
+But I think the question that you're asking is, is this when I have more than one processor running programs at the same time?
+
+And the answer to that question is yes. What I'm objecting to is the term parallelism.
+
+I don't want to talk about that anymore. But there's a great talk by a man named Rob Pike.
+
+Uh, we've talked about Rob Pike before. I recommended, um, the practice of programing by Brian Koenig and and Rob Pike,
+
+and I recommended the, um, Unix programing environment, also by Brian Koenig and Rob Pike.
+
+So Rob Pike has come up before, but he has a talk called concurrency is not parallelism.
+
+That is a really excellent talk that I recommend to anyone who's interested in why I'm lawyering on that particular word.
+
+Yes. Move your hand off your mouth so I can hear you.
+
+Uh, no. Yes and no multiprocessing.
+
+We'll talk about that in a minute.
+
+The question is, does this have to do with the number of cores in the CPU, which is kind of related to her question,
+
+which is, uh, is it actually when multiple things are running at exactly the same time?
+
+And the answer is yes and no. We can have concurrency without multiple things happening at exactly the same time, uh, due to multitasking.
+
+Okay. Other questions. All right.
+
+So there is a second model that we are going to talk about.
+
+No, we're still in the introduction. We're just introducing the ideas that we're going to talk about in more details later.
+
+Uh, there is a second, uh, model that we're going to talk about to do with, um, concurrency, which is threads.
+
+And a thread is conceptually similar to a process, and that it includes a logical control flow in the resources that that logical control flow uses.
+
+But whereas two processes on the computer each get their own dedicated machine in the sort of dedicated machine model, two threads do not.
+
+They share a dedicated machine. Two threads run within the same dedicated, uh, machine.
+
+Um. In particular, they share memory.
+
+So when you change memory in one process we talked about what the virtual memory subsystem.
+
+We talked about with the virtual memory subsystem, how, uh, two processes can have the same address and have different data at that location.
+
+If two threads have the same address, they have the same data at that location.
+
+Um, it is possible that a single process may have multiple threads inside it.
+
+So you may have a set of threads that are isolated from the other threads on the system within a dedicated machine.
+
+But collectively they share a dedicated machine. We'll talk more about this, uh, in excruciating detail later.
+
+Um. I don't think I want to do that. Do we do on Friday?
+
+Okay, fine. There we go.
+
+I couldn't remember if we did or not. All the days are the same to me.
+
+Just like everyone under the age of 30. All right, assuming Top Hat gets this crap in a pile on a reasonable period of time, we will do one.
+
+Right now, I want to point out that in classic web developer fashion, just look at this.
+
+There's like random CSS on my screen right now.
+
+Like, what is up with this? Do they not have software quality control people?
+
+It's just there. Do you have it, too? Yeah.
+
+You're great. Yeah. They gave an intern the keys to the workshop.
+
+Has to go on like this.
+
+It's broken. Yeah, and I couldn't because the CSS was messed up.
+
+I finally got in. I'm in. But the menu wasn't working for me.
+
+I had to reload. All right.
+
+Today's the third. It feels like the third, right? Yeah.
+
+Yeah, let's do this one. I don't think I've done this question before.
+
+The memory for an array is guaranteed to be a contiguous block in.
+
+What? Address space. While you answer this question for the next 45 seconds.
+
+Uh, I'm going to take a quick moment and plug you be hacking, which is this coming weekend.
+
+It is November the 9th. Uh, registrations are still open.
+
+However, it is filling up fast. If you haven't registered and now's the time, because you be.
+
+Hacking is so much fun. So much fun. Right.
+
+I like. There's free food all weekend.
+
+I have that hat. I have that hat. Yep.
+
+I wore that hat in. Montenegro.
+
+So my heart's been places. All right.
+
+Talk amongst yourselves. Just a few seconds. We'll do it again. Yeah, even with questionable.
+
+It's exactly right. I mean, you didn't. Where?
+
+Are you? I don't know.
+
+Yeah, I'll be there. Is that the question? Yeah.
+
+Like. Well, we can talk about that later. You know, my likeness is copyrighted.
+
+All right, let's do it again. So anyway, sign up for Uber hacking if you haven't, it's going to be a great time.
+
+I love it. It's my favorite. What's the worst? We.
+
+So Matt Stark and I, who you guys don't know, have put together a, um, programing challenge,
+
+and we're going to have a little lab that you can come in and do your programing challenge in.
+
+And our talk is going to be introducing like the tools that you'll use and stuff like that.
+
+It's going to be fun. Yeah.
+
+The talk comes before the challenge. Yep. You don't have to do the talk to do the challenge, but.
+
+All right, let's see the answer. Good job. It is, in fact, the virtual address space.
+
+Remember that every address in your program is a virtual address.
+
+The virtual addresses may be mapped to arbitrary physical addresses.
+
+And if you remember, we have this drawing on the board.
+
+I think I did it on the middle board where we had several sort of pages of virtual memory, and we saw that in physical memory.
+
+They were in weird places, right? They weren't necessarily necessarily contiguous.
+
+Okay. Uh, this goes to desktop three and we continue here.
+
+All right. So I mentioned multitasking. And I said that you can do.
+
+You can have concurrency even if you only have one physical processor in the machine capable of running only one instruction at a time.
+
+So let me talk very briefly about the sort of terminology and the way we think about processing power and, and places that we can do processing.
+
+So there's a bunch of terms that we use. We say CPU, we say core, we say processor, we say all these things and they mean slightly different things.
+
+But essentially all of them are talking about the actual hardware in the computer that can remember the diagram.
+
+We have the CPU right, with the ALU inside it, and the registers the actual part of the computer that can do computation that knows how to do math,
+
+that knows how to do logical operations, that knows how to run executable code.
+
+Um, modern CPUs. So the CPU is sort of the physical package, the hardware device.
+
+Right? Modern CPUs, um, typically have more than one core inside them, and a core is a bundle that has some registers and ALU,
+
+maybe some cache, things like that, and sort of is capable of being an entire CPU.
+
+But our typical CPU in modern, you know, architectures, you have multiple of those cores inside of it.
+
+And so your your processor can run multiple programs at the same time.
+
+So like on this computer, um, well, that's not at all what I wanted, but okay.
+
+Um. If I do. Look at my, um, CPU on this computer.
+
+Uh, you can see that, um, I have it says processor zero and then processor one, processor two, etc., etc. down here to processor seven.
+
+I have eight cores on this computer and they have different characteristics.
+
+So um. Can we tell that?
+
+Yeah, well, we can't really because this is terrible if you do it on x86 machine.
+
+It gives you a lot more detail. No chance.
+
+Yeah. Nice.
+
+So here it says, okay, I have 15 zero through 15.
+
+So I have 16, uh, sort of execution units that can do things at the same time.
+
+So as it's an Intel processor, it's a Xeon Silver 4216 running at 2.1GHz.
+
+And it has all this information. And like this down here is the kind of things that it can do.
+
+Um, so it's um, has a floating point unit.
+
+You can do floating point computation. It has virtual memory extensions of some kind.
+
+What are these things? Uh, has this I think has to do with, um, virtualizing hardware, uh, as does this has to do with virtualizing.
+
+That's page table extensions. I don't know why. I don't think we care about that.
+
+We're running 64 bit, uh, what else is in here? This has to do with virtualizing hardware for sure.
+
+Memory type. Range register. Um.
+
+These are vector operations. Right. So it says I can do vector operations with.
+
+That's parallelism. When you asked about parallelism vector operations or parallelism.
+
+Uh it has a system call interface um, which we will talk about later in this semester.
+
+Anyway, this is all the sort of things that that individual processor can do. But the point is there are, uh,
+
+16 of them and you can get some information about what they look like and the kinds of things that they're capable of, uh, doing on this laptop.
+
+Uh, it essentially gives me some more information. It's just that it's a lot less detailed.
+
+Right? Part of that is because Arm64 is a much newer architecture.
+
+It's much more tightly defined. It doesn't have to have this whole huge list of things that it's capable of,
+
+because many of those that were in the list for the Intel processor, just every Arm64 processor has.
+
+So you don't have to say that. Right. It's just it's obvious that it has it. Um, I don't know what all of these things even are.
+
+This is a floating point unit for sure. This this is these are encrypted.
+
+Uh, these are encryption, uh, operations.
+
+It has an, uh, crypto accelerator, um, atomic operations, which we'll talk about next to the lecture slides.
+
+Anyway, you can look for your own processor. It's kind of fun. You can look up what those things do, but the point is this laptop has eight of them.
+
+Eamon we just saw had 16 of them. I think you might actually has 24.
+
+But they only let us use 16 of them. They leave eight of them for other people.
+
+So I had a question. So.
+
+How related is this to the amount of. Programs that can be drawn at the same time.
+
+Well, and that goes back to the slide that I was on. So the question is how what does this have to do with the price of cheese in China?
+
+Um, and the answer is that. I've got too many keys on my keyboard.
+
+Okay. Um. And the answer is that, um, I can run eight programs on my CPU at exactly the same time.
+
+They can all be running at exactly the same time because I have eight cores in my processor.
+
+Iman can run 16 programs at exactly the same time because it has 16 cores and its processors.
+
+So 16 different programs can be making progress executing instructions at exactly the same time.
+
+But even if I don't have that, I can still run concurrent logical flows by slicing between them.
+
+So in this diagram, time is down here and the processes are at the top.
+
+I have processed A, B and C, and what I can do is I can run A for a little while and then stop running A, and then run C for a little while,
+
+and then stop running C, and then run B for a little while, and then stop running B, and then come back and run A, etc.
+
+Right. And in this case, maybe C starts running and stops running.
+
+Right. There's no down arrow on that, right? It starts running at that line.
+
+It stops running at that line. It's done. And it ran briefly.
+
+While A and C were also both present in the system, even though they were not actually executing at exactly the same time.
+
+But on the other hand, on my laptop that has eight cores, I can actually run X, Y, and Z at exactly the same time at this instant in time.
+
+Right. This band of times right here, X, Y, and Z are all doing some kind of computation at exactly the same time.
+
+Over here, they're overlapping in time, but at any given instant in time, only one of them is actually doing computation over here.
+
+All three of them are doing computation at exactly the same time.
+
+We in this class call that multitasking in this multiprocessing.
+
+Now here's a big. Warning for you. This is not agreed upon.
+
+Terminology. There are definitely people that will call this multiprocessing or this multitasking and that multiprocessing,
+
+or they will make no distinction between the two terms or whatever, right?
+
+In this class, if I say multitasking, I mean switching between multiple processes one at a time or maybe several at a time.
+
+We'll talk about that in a second. But switching between them, if I say multiprocessing, I mean running more than one task at exactly the same time.
+
+But be aware that that terminology is not universal. We do not have good, tight, crisp language for those things.
+
+And anywhere you see these words used, they'll have to give you some context and say,
+
+this is how I'm using this word, and this is how I'm using that word, right?
+
+So, um, in a multitasking environment, concurrent flows do not necessarily executed exactly the same time.
+
+They are present in the system at the same time, but they don't necessarily execute at the same time.
+
+However, from the point of view of any one of those flows, the other flows are executing at exactly the same time.
+
+And we can see this by thinking about this as a sort of a thought experiment.
+
+If I have some process a that is running and it is executing instructions, right.
+
+And maybe in some instruction it observes what process B is doing.
+
+And then at location PC location L because remember our flow is defined by a series of program counter locations.
+
+When it is executing instruction at PC location L, the operating system stops it.
+
+Switches over and runs B for a little while. And then after it's done running, B, it stops and it goes back to process A,
+
+and it starts at location L plus one and continues executing what A was doing.
+
+And then A observes process B, so a observe process B was stopped, B ran for a while, and then a observe process B again.
+
+From A's point of view B ran at exactly the same time that A was running,
+
+because it doesn't know that it was stopped at location L and restarted at location L plus one.
+
+A cannot tell that the operating system hides that when you write your process, do you ever think about the fact,
+
+hey, the operating system is going to stop my program and then restart it again somewhere else?
+
+Now of course not.
+
+You don't think about that, but it happens thousands of times a second while your process is running that the operating system will stop it,
+
+go do something else and then come back and continue running your program. So from A's perspective, B was running at exactly the same time.
+
+So whether we were multitasking or multiprocessing does not matter from the point of view of the program.
+
+The concurrent flows were running at the same time. And this is an important observation for understanding how in particular.
+
+Before we had multi-core CPUs, we could run more than one program on a computer at the same time.
+
+We faked it, but we faked it in such a way that the individual programs couldn't tell.
+
+Um, in a multiprocessing environment. However, those programs can actually run at exactly the same time.
+
+A and B can both be executing instructions at exactly the same time.
+
+But note that if A observes B, run some instructions and observes B again.
+
+Still, it's exactly the same.
+
+Scenario B appears to have done something in between those two points, which you can't tell the difference between multitask and multiprocessing.
+
+Um, we note that on modern systems we typically use, uh, multiprocessing and multitasking at exactly the same time.
+
+So if I go over to my terminal over here and I, uh, look at the processes on my system, there are 234, well,
+
+233 because there's one line of header, there are 233 processes running on this computer at the same time, 233 programs running.
+
+I have eight cores. I can only run eight of them at the same time, like actually at exactly the same time.
+
+But the computer will switch between all 233 of them by sort of multiplexing them across those three course.
+
+If I go to Yemen. Uh, actually, we'll see if it has more processes or not.
+
+Or will we? What are you doing?
+
+It says it has good network. There we go. 1085.
+
+1084. Processes at the same time. Right?
+
+Multiplexed across those 16 course. And furthermore, if we look at those processes.
+
+We'll see that. Okay. A bunch of them are route. There are all kinds of different users, right?
+
+Some of you are probably that left column is usernames.
+
+Some of you are probably listed in that those user names along the left right, like dozens of us are using this computer at the same time.
+
+Right. And it's switching rapidly between our different programs.
+
+But when you run your program, you don't stop and worry about whether someone else might be running a program on the computer at the same time.
+
+Right? It hides all of that from you. It hides the fact that there's 16 processors, and it hides the fact that you're processed,
+
+that your process is being started and stopped over and over, maybe even hundreds or thousands of times a second.
+
+Okay. Uh, wall gallery. Mom. Um,
+
+so it's typical for modern systems to use both multiprocessing and multitasking
+
+so they can run up to some number of processes at exactly the same time,
+
+but they also switch back and forth between an even larger number of processors.
+
+Right. As we saw perhaps even as many as dozens or hundreds of processors per actual core, and the system runs fine.
+
+Right. It runs as if it's, you know, unloaded. Um.
+
+The operating system and the operating system kernel and the virtual memory subsystem,
+
+and more things that we're going to talk about later, work together to preserve the illusion that, um,
+
+those processes, each one of them gets to pretend that it's running on the machine all by itself,
+
+unless it asks otherwise, unless it asks to be aware that there's other processes running on the machine.
+
+Are there any questions? Okay.
+
+Cool. Because would have a program that's like.
+
+Super. I be able to actually.
+
+If so, let's, um. Lock this down even further and say that you have eight programs.
+
+Seven of them don't want to do anything at all.
+
+And one of them wants to do all the things you will effectively without techniques that we haven't talked about yet,
+
+only be able to use one eighth of your computer at that time.
+
+That one process will run on one of the course, and the other seven cores will sit there with a process that doesn't want to do anything.
+
+Right. And so you'll only use one eighth of your computer.
+
+Uh, now, if you had eight Perl processes that all want to do all the things, then you would run all eight cores at full bore.
+
+And you've probably actually seen this in action.
+
+Um, if you are, you're using your laptop and all of a sudden it starts to sound like a jet plane and wants to take off,
+
+and like you can feel a hot air blowing out the back of it. That's because multiple processes are all trying to do things at the same time, right?
+
+Usually it's either you know why? Because like you're playing a video game or something or you don't know why,
+
+but it's actually your web browser and you close it and it gets over it or whatever, right?
+
+Um, but that's because lots of processors are actually trying to work at the same time.
+
+But the fact of the matter is that on most of our computers, most of the time,
+
+most of the processes are not even trying to do any work because they're waiting for us.
+
+And we as people are extremely slow from the computer's perspective.
+
+Like if it's waiting for you to type,
+
+it's literally doing nothing at all because you press a key once every few million to a billion instructions that it can execute.
+
+Right? Because we're just slow, right? Yes. Uh.
+
+Uh. Yes.
+
+Yeah. It's the same term. So the question is, I said multiplexing, uh, processes across, uh, CPUs.
+
+And the question was, is that related to multiplexer is in the hardware device multiplexer.
+
+It's the same term used in the same meaning, which is to say in the case of a hardware multiplexer,
+
+you have like one resource and you select among multiple candidates to use that resource at any given point in time.
+
+Or you have, um. The.
+
+It's essentially the opposite of that, right?
+
+Uh, in this case, we have one processor, and we have multiple possible processes that could be utilizing at any point in time.
+
+So in that sense, it's exactly the same term. Multiplexing is a term that comes up a lot both in software and in hardware contexts.
+
+Yeah. Can. Are you seeing? Yeah.
+
+See? And people will have heard this term. Or if you haven't yet, you will.
+
+As soon as you take 241, uh, computer science people, you won't hear it again,
+
+probably till you take, like, networking or operating systems or something.
+
+So, um, when we have multiple logical control flows running in a computer at the same time, we have multiple concurrent logical flows.
+
+Then they can have a lot of possible relationships to one another.
+
+You could run the same program more than once,
+
+which means it's running exactly the same code in two different parts of the computer at the same time, maybe in isolation from one another.
+
+So, for example, if I open more than one terminal, then I have two copies of the terminal software.
+
+I have two copies of my shell, I have whatever. And so these programs are running from the same code base.
+
+They were designed as the same piece of software or they were compiled into an executable.
+
+I'm running an executable.
+
+They're doing exactly the same logical operations as one another, but they are probably not actually trying to interact with one another.
+
+They just happen to both be running on the computer at the same time.
+
+On the other hand, I can have, uh, two different processes that are were written in entirely different code bases that are entirely different
+
+pieces of software that are actively trying to work with one another to solve some particular task.
+
+So, for example, when you ran the um, server for programing assignment three.
+
+That server is written in Python. You ran your client, which is written in C.
+
+They're completely different code bases. A student you know from CSC 220 wrote.
+
+One of them, a different student from CSC 220, which is you wrote the other one and I wrote part of it and whatever.
+
+Like there's all kinds of different authors in here, but when you run your program, it connects to that.
+
+I am server and actively communicates with it, sends it messages and expects replies.
+
+And so these two programs are running on the same computer at the same time,
+
+written by different people at different points in time, using different programing languages.
+
+And yet they are cooperating to achieve some particular task, which is to provide an,
+
+uh, interface for you to communicate with other people on, uh, the computer,
+
+when you run a web browser, every tab in your web browser on any modern web browser is a separate program,
+
+but they are working together to even draw in the same window, right?
+
+To provide a unified, uh, user interface to all of the different tabs of that, uh, web browser.
+
+And there's all kinds of ways that these processes can share things or compete for things or can, um,
+
+individually use things that they don't want other processes to have access for, do or whatever.
+
+In the case where we talked about the two terminals in the two shells or whatever,
+
+where you're running several programs on this, uh, computer at the same time, and they don't care about each other.
+
+When you run a command in one shell, you don't want it to change what's happening in another terminal window, right?
+
+So maybe you're editing code in one terminal window and you're compiling and running your program in the other.
+
+If your program crashes, you don't want your editor to crash, right?
+
+You want your editor to keep running so that you can, you know, continue to do whatever it is you're doing.
+
+In that case there's dedicated computer model is beautiful.
+
+It allows us to run our programs in isolation, to not think about what else is happening on the computer,
+
+to sort of easily develop, maintain and provide correct software.
+
+But in the case, for example, of the instant messaging application that dedicated computer modules kindly kind of inconvenient
+
+because you want me to be able to see you send a message and it to show up on your screen.
+
+You want those two processes to be able to, to sort of access each other's resources in some way.
+
+And in that case, it gets a little more complicated.
+
+And as we write our programs, we have to think about different things.
+
+Now, the next set of slides have a bunch of examples of how these various, um, dimensions can be the same or different.
+
+We'll go through a few of those, um, and that will probably close out our period for today.
+
+Um. Is that true? Maybe it's not.
+
+Maybe I took those slides out. So, um.
+
+There's a lot of reasons to actually say, hey, I want to break down the dedicated computer model,
+
+and I want to acknowledge the fact that there are concurrent flows present in my system at the same time.
+
+And I want to use concurrent flows as a part of my software design.
+
+The most common reasons are, uh, exactly what Caden asked about where I have more than one process processor in my computer,
+
+and I want to use more than one of them at the same time, I don't want to be stuck using one eighth of my computer, right?
+
+So I want to actually have more than one program, or I want to have one program that's capable of using more than one eighth of my computer.
+
+Right. And so I will break it up into multiple logical control flows.
+
+And I will say, run this one on processor zero and this one on processor one and this one on processor two.
+
+And now I can compute three times as fast as if I only ran on one of those three processors.
+
+Um, another is when you have a program that has some sort of timing constraints where you don't want to wait to notice that something has happened.
+
+And so you dedicate a logical control flow to just watching something and waiting for something to change.
+
+This happens a lot in embedded systems.
+
+It happens a lot in real time systems, where you dedicate some logical control flow in your program to reacting to some particular event.
+
+So for example, suppose I'm in a factory and I have a robot that is moving a car chassis around or something that's very large and heavy, right.
+
+And it's moving it from one place to another. It will have sensors to detect if it's about to, for example, imminently run into something.
+
+If it takes you 100 milliseconds to realize that you're about to run into something and try to start stopping this car chassis,
+
+frequently, you're going to run into something before you get it stopped.
+
+Right? Because it's that's that's a long time, right? A 10th of a second is a long time.
+
+Uh, and so you might dedicate a process to just watching for, uh, something that you might collide with and raising the flag immediately saying,
+
+hey, we've got to stop the motors right before something bad happens.
+
+Or, uh, at the extreme, maybe it is a, uh, nuclear power plant and it's the control rods, right?
+
+Like you don't want to wait to decide to lower the control rods, right?
+
+Or if you're sure, noble to raise the control rods. And we saw that worked out.
+
+Um. And then the other time that we will frequently use model logic control flows is when you want to do something that is going to,
+
+um, be stopped and have to wait for something, but you also want to achieve progress at the same time.
+
+This comes up a lot. For example, in um, when you have networked applications like your web browser, for example,
+
+because you'll spend a lot of time waiting for a web server to send you a page, but you want to be able to react to the user at the same time.
+
+Maybe the user wants to stop. Maybe they want to switch to another tab, they want to do something like that.
+
+And so if all you can do is one thing at a time, you're waiting for the other server to send you data.
+
+You can't react to the user. And so you'll create multiple logical control flows and say okay well user you interact
+
+with this one and I'll wait for the web server over here because the web server, like the user, is slow.
+
+We're talking about operations that take measurable fractions of second to multiple seconds to complete.
+
+At the extreme, you know, you just bought a brand new Triple-A game.
+
+It's release day. You paid $50.
+
+No. What are they these days? Like $80? You paid $80 for it.
+
+It comes on a Blu ray disc. You even have disc drives anymore.
+
+You're installed on your computer. It takes two hours to install.
+
+You hit play, and it says you have to download 14 gigabyte update before you can play your game.
+
+Right. And it's going to be an hour because everybody else is doing it at the same time, right?
+
+Um. Okay. That's all I want to say about that for now. We'll pick up there when we come back on, um, whatever day we come back.
+
+Wednesday.
+

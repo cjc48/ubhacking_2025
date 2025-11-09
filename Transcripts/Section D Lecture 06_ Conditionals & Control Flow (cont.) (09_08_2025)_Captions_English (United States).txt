@@ -1,0 +1,673 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Uh, anyway, so, um, the computer doesn't understand the programing language,
+
+so you have a piece of software that understands the programing language and it emits as its output something that the computer does understand.
+
+In our case, that's the C compiler, right?
+
+The C compiler understands the C programing language and it understands whatever language it is that the computer does understand.
+
+It reads in the C programing language, it transforms it into whatever it is the computer does understand and emits it.
+
+Now, uh, the thing is that what the computer actually does understand,
+
+as we talked about way back in the first or second lecture, is extremely, extremely simple.
+
+Add two numbers together, look at two numbers, determine if they're the same.
+
+You know, uh, ask if a number is greater than or less than zero.
+
+Right. Things like that.
+
+Write very, very simple questions and then also jump statements that say stop what you're doing here and go do something over there.
+
+Typically there are jump statements that have encoded in them some kind of question, stop what you're doing here.
+
+If something a particular condition is true and go do something over there.
+
+Otherwise just keep going, right. Don't don't jump over.
+
+Um. So what we're going to do is we're going to look at some example output of some code that the compiler actually wrote.
+
+Now, before I show you that code, I have a warning because students panic.
+
+This is not an assembly language programing course. Is not intended to be an assembly language programing course.
+
+That's just not something that we're even supposed to talk about in this course.
+
+You will learn assembly language when you take 341.
+
+If you are a computer engineering or if you should choose to take 379 for 79, you will spend a lot more time with assembly language.
+
+However, at several times during this course, I'm going to show you some assembly language.
+
+I'm going to walk you through what it does and I expect you to follow along.
+
+I will never ask you to synthesize any assembly language.
+
+I'm never going to ask you to write assembly language on a homework exam or anything.
+
+And I will never give you assembly language and ask you what it does.
+
+Because I'm not teaching you assembly language.
+
+What I will do is expect you to a follow along when I explain the assembly language to you and ask questions if you have them,
+
+and be understand the kinds of things that the assembly language statements can do.
+
+The kind of very, very simple building blocks that the computer is actually capable of execute.
+
+And I give that disclaimer because invariably, otherwise, after class, five people call up and ask if they'll have to write assembly language.
+
+If I give the disclaimer, only three people will come up after class and ask if they.
+
+So here is a very simple function. Well it's not super simple.
+
+It's got a couple of things going on in it so that we can look at the implications.
+
+Uh, this function uh, does has essentially three lines of code, right?
+
+So if argc is equal to two, and the first character of the second argument passed in argv is a minus sign.
+
+Then it prints something. Otherwise or afterwards depending.
+
+It just returns zero from this function and the function happens to remain right.
+
+So this is the only thing this program does.
+
+So what that means is if I compile this and I do a dot out space and then some say number,
+
+if I type a positive number it's going to do nothing at all. And if I type a negative number it starts the minus sign.
+
+It's going to print the word negative. Doesn't actually look at the rest of the number.
+
+I need it to be very simple and fit on one slide. Yes. Yes, it returns zero always because like it's not there's no error.
+
+Right. It just it's always done. And it did what it's supposed to do. It either printed negative or it didn't.
+
+That's just a convention, though, right? That we return. Okay.
+
+So when I compile this, when I pass it through the C compiler, this is what it gives me.
+
+So what I have here is on the left hand side before the semicolon.
+
+Semicolons are comments in the assembly language syntax that we're using.
+
+Uh, on the left hand side, I have I actually compiled this program.
+
+I took the C compiler, I compiled that program, and I pruned out everything that was not interesting to us,
+
+because it emits all kinds of crap that we don't care about right now. Down to just the logic of the program.
+
+And then I took and I read every line of code and I carefully commented on the right hand side.
+
+What does that line of code do. So we can talk about it.
+
+So this is the actual code emitted by the C compiler when we compiled that very simple program.
+
+So on the very first line, you'll see why are you flickering?
+
+You'll see it says, uh, compare the long value which on our system, a long value means it is a four byte or 32 bit integer.
+
+I don't want to talk about integer sizes yet. We will definitely cover that later in this.
+
+Compare the long value to the dollar sign means the actual number two.
+
+Not like the address two or something located at the address two.
+
+Like the actual number two. Uh, with the contents of the register.
+
+I. Now, we'll talk more about this in the very next set of lecture slides.
+
+But every computer, um, has some number of what we call registers inside the processor.
+
+A register is just a special memory location that is inside the processor that is very, very fast to access.
+
+On the architecture we're using x86 64.
+
+There are 16 of these, what we call general purpose registers.
+
+The first eight are named. And because they ran out of creativity, the second eight are numbered.
+
+So the first eight registers are axb. And then I don't remember the order of the rest, but d, s, C, S, sp and.
+
+BP, I think. Uh, so there's eight of those, and then after that we have our 8 or 9 or 10 or 11 through our 15.
+
+Um, and when I say Eddie, I. What I'm saying is the 32 bit portion of that register.
+
+Because remember I said compare long compares 32 bit value.
+
+So I'm saying take the register die and take 32 bits of it and compare it to the number two.
+
+That's it. Just compare it to the number two. And then what the processor does is it remembers certain facts about that comparison.
+
+Was the number two greater than or less than the value that I compared it to in the was where they,
+
+the same uh, was the value in EDI in some cases not in this case positive or negative.
+
+Um, various other things about that comparison.
+
+And it just notes them down in another special register called the status register.
+
+We don't need to worry about that right now. Just notes them down somewhere, like on a piece of paper.
+
+Then the very next instruction says G jump if equal.
+
+If the last time you compared two things together, they were the same.
+
+Then don't run the very next instruction instead.
+
+Jump in this case to label eight. Local label eight.
+
+Jump GDL eight. Jump. If the last comparison was equal to label eight.
+
+So if. It turns out that Eddie stores the first argument passed to a function, which in this case is arg c because we're in main.
+
+If arg c is equal to the value two, it continues at label eight.
+
+Otherwise it just continues a label four as if nothing happened.
+
+Right. If it continues a label for, then it takes the value stored in a different register as.
+
+XOR it with itself and scores the result in AKS.
+
+We haven't talked about XOR yet, but if you go through the truth tables and XOR of any value with itself is always zero,
+
+so effectively it's setting the value ax to zero.
+
+And then it returns from the function. Note that it doesn't return zero.
+
+It sets the register ax to zero and then it returns.
+
+The processor doesn't know anything about functions.
+
+All it knows is that it should stop doing what it's doing now and go back and do whatever it was doing before it was doing what it's doing now.
+
+The fact that we want to return a value is encoded by a value in a special register.
+
+That as humans, we have agreed, will store the return value of the function that registers a.
+
+So this brings us to an interesting fact. In C there is a function return type.
+
+Void. The way returning a value from function works is you store a value in the register ax and then return.
+
+If that fact is true, is it possible to not return a value from a function to return no value from a function?
+
+When you return from the function, does the register actually exist?
+
+Yes. Does it contain some patterns of ones and zeros?
+
+Yes it does. So every single function returns a value in that there is some value stored in a.
+
+What void says is not. This function does not return a value.
+
+What it actually says is this function does not return a meaningful.
+
+Value. So if you as the programmer try to set int x equals some void function, the compiler will say, what are you doing?
+
+X is a void function. Storing the value that it returns is nonsensical.
+
+But the processor can't tell the difference. It doesn't know.
+
+There's always a value in access, and it has no idea whether that value in Ax is a meaningful value to return from your function,
+
+or is just whatever crap happens to be an ax. Because it always contains a value.
+
+Some set of ones and zeros are stored in that. All right.
+
+So now we have gone through. If argc is equal to two.
+
+If it was not. We immediately return zero.
+
+If it was, we jumped over the return zero and continued.
+
+We're going to continue with checking argv sub one.
+
+Sub zero. Right. So note that here it looks like we check argc is equal to two.
+
+And then if it's true we puts negative in somewhere else there's going to be a return zero.
+
+But when the compiler compiled it. It put the return zero first.
+
+Before the puts negative. Because the compiler is not obligated.
+
+To do exactly what we asked in exactly the sort of layout, the structure that we asked it to do.
+
+It's obligated to do something that is semantically equivalent to what we asked it to do.
+
+It can do it in a slightly different order. It can. Instead of checking equality, it can check inequality and do the opposite.
+
+Because the double negative makes a positive, right. Things like that.
+
+And it will regularly do things like that right for its own internal reasons.
+
+So then, assuming that we did not, that we did jump to LA, that we found that Argosy was equal to two.
+
+We then load the address of RV sub one.
+
+Sub zero. Into the register at.
+
+All right. So we go find argv some one sub zero. And this syntax here with the move q 8% c etc. etc.
+
+That is essentially just how we get the second element of the array whose address is the second argument to this function.
+
+Don't worry about how that works, right? It doesn't matter. The point is we go find the address of the second that's, um,
+
+stored in the second element of the array that was passed in as the second argument to our function.
+
+We then compare the bite stored at that location. So we go to the address stored in a.
+
+It get a byte. Compare it to the integer 45, the decimal number 45.
+
+If we looked at the Ascii table, I'm sure we would find that 45 is the minus sign.
+
+So we go to a particular place in memory. We get a piece of data. We say, is this data equal to 45?
+
+If it is not equal to 45, we back up and return zero.
+
+Remember. The only returns zero in the function we wrote was at the bottom.
+
+But now we just backed up and returned to zero from the top again.
+
+It doesn't matter as long as it does logically what we asked it to do.
+
+It can lay it out in whatever order it wants to lay it out. So if.
+
+It was the case. That we found that minus sign.
+
+Then we do some more stuff with some more registers,
+
+which turns out to be located loading the address of the string negative into a particular register.
+
+What register are di di registered di.
+
+The first hour. Puts takes one argument. The first argument we store into de main accepted two arguments when we wanted the first argument.
+
+Where do we look for it? The very top of the program.
+
+And the register dot. Now we call the EDI an RTI for various reasons.
+
+Right. But it was the registered Di. The first argument to a function, it turns out, is always stored in the register di.
+
+The second, argued into a function it turns out is always stored in the register.
+
+C the return value for a function, it turns out, is not always, but usually put in the register as.
+
+That's just how the computer works. As a superhero.
+
+I need to know that. Absolutely not. The compiler knows.
+
+I asked her to compile a C program. It knows those things and it laid this program out like.
+
+After I put that argument in the register, did I jump to the function put?
+
+I don't call the function puts with arguments. I jump to the function puts.
+
+B is branch. Oh no. Call. I'm sorry, I use call.
+
+I call the function. Um, I don't pass arguments because the computer doesn't know anything about functions or arguments.
+
+All it knows is executing a series of instructions or not.
+
+The where the arguments go in the fact that I have functions that have arguments is an artifact of the programing language.
+
+It's encoded in the software, not in the hardware of the.
+
+Any questions?
+
+Uh, so in the code, if we checked argv sub zero sub or sub one sub zero first, then what would happen was if we only gave it one argument,
+
+if we didn't pass an argument to the program, the only thing that the program had was its name.
+
+It would crash. So it's important that we do it in that order.
+
+We have to do it in that order. Yes.
+
+Um, so what they're what it does have a concept of is not a function, but as a concept of go there and remember where I'm coming from.
+
+I'm going to want to come back later.
+
+So it's not a function in the sense that it doesn't have any arguments and it doesn't return a value in the hardware, but it is a call with return.
+
+To your question. So different architectures have.
+
+Some architectures don't even have that. They don't even have a call with return.
+
+They only have a go somewhere else. And you would have to manually say, this is where I want to come back to when I come back.
+
+Yeah. So the question was, what if I did this in the other order? I can't do this in the other order.
+
+I have to check RC equals to first because the rules of C say I have to check
+
+RC equals to first because it's on the left hand side of the double ampersand.
+
+But the question is can they, could I or the compiler just turn that around and actually check them in the other order?
+
+And the answer is no. The rules of C say I can't. And the reason the rules of C say I can't is because in this case, if I check the second one first.
+
+So if argc is equal to one and I try to compare to that minus, then my program is going to crash because our v sub one doesn't actually exist.
+
+And when I try to access it, my program will crash. So short circuit execution is like a blessing for us here.
+
+We require short circuit execution so that if that is the wrong value, I don't try to access the argument that will make my program crash.
+
+Does that answer your question? There was another hand back here? Yes.
+
+Yes. Uh, the compiler converts T to assembly.
+
+What is the point of writing assembly? In 2025, you usually don't write assembly.
+
+In 1985. You wrote a lot of assembly because compilers weren't very good.
+
+And the reason compilers weren't very good is because writing a good compiler A is hard.
+
+And we didn't know how, like there's ever been research done in the intervening years.
+
+But B it also requires a lot of computation time. It's slow.
+
+Um, so a very, very so the original C, the oldest secret power I personally have ever used is the C compiler that came with Unix version 6 in 1975.
+
+I have a PDP 11 at home, which is the computer that C was designed on.
+
+Um, and I've run Unix version six on it and I've used the C compiler.
+
+Hello world takes 45 seconds to compile.
+
+And that compiler just goes through and converts every line it doesn't like, try to do any optimizations, it doesn't try to do any.
+
+And it takes 45 seconds to compile hello world! If you had a smart compiler that wrote really, really good assembly code.
+
+It'd take a lot longer than 45 seconds. Computers have gotten a lot faster,
+
+so now we spend a lot more time on optimizers and improving the code and rearranging things and making it perfect inside the compiler.
+
+So now we don't write a lot of assembly code.
+
+Back then, you wrote assembly code because the compiler, quite frankly, emitted crappy code that was slow and inefficient.
+
+And so if you really, really cared, you would write some assembly. There are still places that we write assembly code.
+
+Let me tell you a little story. So some of you may have used a program called FFmpeg.
+
+Uh, it's used if you do a video transcoding and things like that or if you ever.
+
+Sail the high seas of. The internet and find videos somewhere that like you need to.
+
+Changed their format for some reason. You might use something like ffmpeg.
+
+Um, so the f in f, mPEG stands for Fast Fourier.
+
+There is a mathematical transform called the Fourier transform.
+
+Um, FFmpeg doesn't use a Fourier transform, but it uses something that's very closely related.
+
+It's called a discrete cosine transform. And there is a, um, an algorithm for, for performing a discrete cosine transform, um, very quickly.
+
+That is called a fast Fourier transform.
+
+Um, and there is a library that implements the fast Fourier transform called FFT, or the fastest Fourier transform in the West.
+
+Lib FTW has a bunch of hand written, hand tuned assembly language code in it.
+
+Because when you are trying to do something like transcode a video file from one format to another,
+
+um, in real time, it matters that your code is really, really stinking fast.
+
+And so a human sat down and read all the manuals and understood all the possibilities,
+
+and wrote some very carefully fine tuned code, and benchmarked it and improved it and eventually said, this is the best.
+
+The fastest Fourier transform in the West. I can produce.
+
+And some human did that for, uh,
+
+32 bit x86 processors and 64 bit x86 processors and 64 bit processors that have a 2 in 64
+
+bit processors that don't have a two and Mac and one processors and oh M2 processors,
+
+because they have a slightly different and like just every possible CPU out there.
+
+Right. And really, really hyper optimized it. So what happens?
+
+You still do it sometimes in 2024. But usually the compiler is just fast enough and we don't do it anymore.
+
+Is that more answer than you signed up for him, but hopefully it answered your question. Um.
+
+I felt like there was something else in there that I wanted to say. Yeah.
+
+Uh, dash. Capital S, I think, and it will emit a file that is called S, like if you have flukey,
+
+it'll make a few little s, and that few little s will contain that assembly code.
+
+I think it's capital S. Yeah.
+
+So Emacs can actually do something cooler. Um.
+
+The answer is always Emacs can do something cooler. Um.
+
+Come on. The C compiler is written in C, uh.
+
+Uh, which is interesting. And that's called um, bootstrapping.
+
+Uh, because the compiler pulls itself by its own bootstrap bootstraps, like, you know, to bootstrap, like an actual bootstrap.
+
+It's like this little thing on the back of your boot that you used to pull your shoes up so you can pick yourself up by your bootstraps.
+
+You can't actually do it with a compiler, does it? It compiles.
+
+C uh, C compiler is written in C, so you use the C compiler to compile the C compiler, which means that somewhere you have to have a C compiler.
+
+That like before you have C and anyway it's called bootstrapping.
+
+It's kind of it's a fun concept. So at any rate in um Emacs I can do this.
+
+There's a mode called Rmse, which you won't have installed.
+
+But if I run Rmse bolt, uh, it shows me there's my C code, and there is the function that I call on the right.
+
+And if I go and I, um, move my cursor through the program, it shows me exactly which lines of um C correspond to which lines of assembly code.
+
+Uh, on the right. No, but you can install it.
+
+If you go to at nine and you go to the Emacs documentation, it tells you how to install packages.
+
+And if you and just install the package arm bolt, then it will work.
+
+Um, and it's called Rmse bolt. Um, it's named that after a guy.
+
+There's a fellow named Matt Godbold, um, who wrote a program which some of you may or may not have seen at some point called the Compiler Explorer.
+
+Um, and he hosted on God bolt.org, which was his website.
+
+And everybody, instead of calling it the Compiler Explorer, they called it God Bolt.
+
+Um, and so it's Rmse bolt Rmse being Richard Stallman, the guy who originally wrote Emacs.
+
+Um, Matt. God, bolt. Fun fact he's a super guy.
+
+Uh, over Covid, we were all online. He, uh, gave a talk to the UBA, ACM, uh, a live talk on like zoom.
+
+And we chatted with him and it was just it was really a super, super chat.
+
+Uh, he's a really interesting guy. Really, really cool guy.
+
+And very, like, was perfectly happy to just talk to students about whatever it is that he does.
+
+And he actually talked about Compiler Explorer. I don't know if there's a video of that up somewhere.
+
+Uh, but it was a lot of fun. The, uh, UAB chapter of the ACM student chapter of the ACM, I believe, hosted that.
+
+Anyway, it was a lot of fun. There were very few things during those dark years that were fun, but that one was.
+
+Uh, I don't want to talk about that. I will give you the short answer.
+
+Um, so when we said the string negative, when we put it in our C source.
+
+What the compiler did was it has a table somewhere in memory of strings.
+
+Um, that are, um. Like every string you use in the entire program, it just puts into this massive table, and then it stores a, um.
+
+Uh. Pointer to that table of.
+
+It's called relocation. There's a what they call a relocation pointer that helps you find that table and other things.
+
+Um, and then L0 is not included on the screen,
+
+but somewhere it set the value L0 to a particular address that was the offset into that table where it would find the string negative.
+
+And what that line there does is it goes R.I.P is the address of the table, L0 is the offset in that table where we would find the string negative.
+
+Basically why it's like that and how it works is like way out of scope for this class.
+
+I'm happy to talk about it offline, but that's essentially what it's doing. It's just finding some data that the compiler saved for it.
+
+I said I wouldn't answer, and then I gave more. Answer than I intended to, but hopefully that made some sense.
+
+You will. Absolutely. We will talk a little bit more about that later when we talk about, um, program sections,
+
+which is like maybe first thing after the midterm, last thing before the midterm.
+
+And if you take compilers or, uh, programing languages, you will definitely see it again.
+
+All right. So what's the point of all this? Why are we talking about it? So note that the structure of our program was lost.
+
+We did some positive comparisons. The compiler turned them into negative comparisons.
+
+It ripped off returns zero up before the um, the puts, even though in our code the puts was before the return zero, etc. etc.
+
+Right? Um, the point is that the compiler is free to arrange the code in whatever way makes the most sense for the computer,
+
+not for the human, but for the computer. As long as the code that it writes does what we ask the computer to do.
+
+So it is the equivalent of saying, I need you to put some water in my water bottle.
+
+Um, take this stuff to the copier and bring me back four copies.
+
+Whether the compiler puts the water in the water bottle first or makes the copier copies first doesn't matter.
+
+Or maybe it starts to compile the copies and then fills the water bottle.
+
+And whether it fills the water bottle at a office cooler, or at a drinking fountain or at a sink like I, it doesn't matter, right?
+
+Like I just said, fill this water bottle. It just figures out a way to do it right.
+
+And then eventually, it brings me back a bottle of water in four copies,
+
+and I can't actually tell in what order it did it or where it got the water from or whatever.
+
+Right. The heart. That's exactly what the compiler does with your code.
+
+You say do these things. It does something that is semantically equivalent to what you asked it to do,
+
+but it may rearrange quite exactly the order in which it does it and etc. now it can't do that in any way that you can tell it's required to be.
+
+If you look and observe at any point what it's doing within the C programing language,
+
+like you print an intermediate value or whatever, it's required to actually produce that intermediate value and print it.
+
+But if you don't observe what it's doing, that it can go off and do whatever it is it wants to do.
+
+So the point is. That all the computer really knows how to do.
+
+Is those very, very simple things like adding two numbers together, comparing them to each other, etc.
+
+And everything else is in software. So if you go into a drawing toolkit and you say, please draw a rectangle on my screen.
+
+You better bet that that CPU has no idea how to draw a rectangle onto the screen.
+
+It might not even know how to put a single pixel on the screen.
+
+That's probably a software construction. But there's software somewhere that knows that if I put pixels in particular places,
+
+that they'll show up on the screen in a way that meet eyeballs will see as a rectangle.
+
+And that if it sets certain sets of those pixels in a certain order, it will appear to the user to be a rectangle, and it will do that.
+
+But the CPU, the inner core of the computer. All it knows is that it moved some numbers around, right?
+
+It doesn't know that they were a rectangle. It doesn't know where they put them. It doesn't know they showed up on the screen.
+
+Everything else. Is just software. All right.
+
+I think that's the end. No. Okay, there's a couple more things.
+
+Excuse me. So, um, if we had an else clause.
+
+Then it would effectively be like the if and we would the compiler would choose.
+
+Do I do the else? Do I check for the false and do the else, and otherwise do the if.
+
+Or do I check for the true and do the if and otherwise do the else?
+
+And do I put the else before or after the f in the code and like it gets to
+
+choose all that stuff as long as semantically it does what we're asking for.
+
+Now syntactically, there's another interesting thing about else in the C programing language.
+
+Which is a real gotcha for, uh, Python programmers and particularly for Python programmers who are not using a good,
+
+high quality programmer's editor, which is that you might write code that looks like this.
+
+And when you look at this, you say, well, it's obvious.
+
+That if modify X is true, then I run what's inside the if statement and then if modify x is false, then I'm going to run the else.
+
+But the C compiler does not care what you think is obvious, because in the C world, else always binds to the closest.
+
+If so, what it will actually run is this.
+
+If modifier X is true, then I have any if else. Which is different right from what you wanted.
+
+What you wanted was this, and what you got was this.
+
+So the solution to that is just use your curly brackets. This is broadly true in languages that use curly brackets in these ways.
+
+Uh, you just want to use the curly brackets where they are, uh, available to you.
+
+Now occasionally you'll have like a whole string of if cell shifts or whatever, where each solution is just one line.
+
+So you have if something the result semicolon else if something the result semicolon.
+
+You know without curly brackets just banging all together like fine stylistically that's that's maybe a thing you want to do.
+
+Um, but broadly speaking, I suggest you use the curly brackets so that you don't get yourself into trouble,
+
+particularly if you are of a pythonic state of mind.
+
+All right, now, the last thing I want to do before we go, because we do have a few more seconds.
+
+Remind you to go to make open source.org. And then. Um.
+
+Let's do a top hat. And this is people's second favorite kind of top hat.
+
+Their favorite kind of top hat is in the middle of the class period.
+
+Their second favorite kind of top hat is at the end, because they've gotten here by then.
+
+Their least favorite is at the very beginning when they're not here yet.
+
+So sorry I didn't do it in the middle. Oops.
+
+All right. What does this code print? Note that, for example, the I is underneath the percent D, the bang-bang ai is underneath and x percent D,
+
+etc. that's to help you figure out which argument is going to print and which place in the output.
+
+So when I run this code, what is it going to print?
+
+Doesn't matter. It doesn't matter.
+
+Discuss with your neighbors. 30s. What do you think the answer is and why?
+
+All right, let's do it again. Somebody just had an epiphany over there.
+
+Yeah. We're not going to have time to go over the answer right now, because I won't let you go on time.
+
+Um, I will show you the answer. And if you have questions, work through it.
+
+If you have questions, ask. We'll be happy to answer you. All right.
+
+The correct answer is a, um, if you have questions about that, please ask.
+
+Otherwise I will see you on Wednesday. Thank you very much.
+

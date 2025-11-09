@@ -1,0 +1,629 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Yeah, I think it's okay. All right.
+
+Can you guys hear me? Everyone hears me. Good. Awesome.
+
+All right. Uh. Hi, guys. I'm a through how and part of the ACM board.
+
+I'm also Ethan's favorite extra 20 students, so, you know, it varies.
+
+Again. Again. Um, I'm here to announce an event that we're doing this Wednesday at Davis 101 at 6 p.m.
+
+Um, so Dan Starner here he is. Very stacked, very gifted.
+
+Um, he worked at Bloomberg, Rise, Heroku, and now he just got his recent software engineering job at stripe.
+
+So he's going to be coming in person. He's going to be like their live guys.
+
+Um, so he will be there to share his strategies on, like what helped him break into tech.
+
+And yeah, we're going to have a live Q&A on his journey from like UB.
+
+He was an ACM alumni before and now he's working in the sweet industry.
+
+This is like a great like opportunity if you ask me to like, connect with alumni.
+
+Right. You'll be alumni who are as talented as this man is.
+
+Um, he will be sharing all his strategies. And that is my discord showing up.
+
+Okay. Um, but yeah. So I hope to see you guys there.
+
+There will also be pizza and drinks so you can find this information at shameless.
+
+Plug here UVA Sam Morgan events. So we always have our events up here.
+
+So you can take a look at that as well if you need to. Does anyone have any questions or anything.
+
+All right. Awesome. I hope to see you guys there. Thank you.
+
+Thanks, Ethan. Yeah.
+
+Dan, uh. Graduated maybe immediately pre-COVID or something like that.
+
+So maybe 5 or 6 years ago. But he's a good guy. He has some, usually has some interesting things to say.
+
+And, um. Has been there, right? And has seen how this stuff works.
+
+So come see him. Come see the ACM. My Farrugia does good work.
+
+She's a good kid. If you see her, you should tell her she's a good kid. All right.
+
+She did break my display somehow. Look at this. What is this, like, eight pixels?
+
+I'm just gonna plug a plug back in and see if it gets better. Yeah.
+
+That's better. Okay. Uh. All right, let us.
+
+Start with alignment. Now we left off.
+
+On Friday. Um.
+
+Yeah, just before we talked about this, um.
+
+What if you showed up? Yeah, just before we talked about this.
+
+So I'd like to start here. So, um.
+
+Your midterm is a week from Wednesday. Right. So a week and two days from now.
+
+Uh, we are going to finish up alignment today. And we will probably start the next set of lecture slides, which is called layout.
+
+The title is or the layout dot pdf. Uh, the title is, um, Process Anatomy.
+
+Uh, our intention is we reserve the right to change our mind on this as the midterm gets closer, if, like, circumstances warrant.
+
+But our intention is that that will be the last set of lecture slides that will appear on the midterm.
+
+So we may start a new set of lecture slides like at the end of this week, but we won't finish it.
+
+And so it won't appear on the midterm. Right. So, uh, process anatomy will be the last set of slides that will appear on the midterm.
+
+This one will process anatomy, the one we're starting today will, um, and then whatever comes after that probably won't.
+
+Monday, one week from today will be a mid-term review session, uh,
+
+where we will review sort of quickly the things that we've talked about so far this, uh, semester.
+
+And then Wednesday in class in this room will be your midterm. We'll talk more about that, uh, as the time gets, um.
+
+Closer, but that's basically here too. Middle of next week, right?
+
+Right. That's what's going to happen. We're almost halfway done guys. You're almost halfway through.
+
+That's we're really more like a third of the way through right now. But by the time you're done with a midterm, you'll be like halfway.
+
+So. Okay. We left off before we talked about this slide.
+
+Uh, last time, the slide before this is the one with the structure that was 206 bytes, right?
+
+Um, so this function right here that we have called dump mem, uh,
+
+dumps the values of the individual bytes of a region of memory to the output of a program.
+
+So if you read through this code, that's that's what it does.
+
+And it prints each individual byte in hexadecimal.
+
+Hexadecimal as base 16.
+
+Um, we will talk more about hexadecimal later, but essentially it's a convenient way to represent a byte of memory in exactly two characters.
+
+Right. And those characters range from zero through nine and A through F.
+
+So, uh, that's what this function does. We give it a void start pointer to the beginning of a region of memory.
+
+We tell it how many bytes we want to see, and then it prints it.
+
+Now I want to look at some of the individual lines of this function and talk about what they are and why they're there.
+
+So the first line of this function says const care star buffer equals mem.
+
+Now if we look at this function mem is a void star argument to the function that is passed in to this function.
+
+And then I create a pointer to buff or buffer to buffer.
+
+And then everywhere in this function that I need to access that memory I use buffer y.
+
+Yes. Let me stop you there. You're absolutely correct. Let me start with that part.
+
+The argument is void star and I want to access that memory.
+
+I can't access void Star because if I try to access it, as you said, I'm going to get errors, right?
+
+I'm going to get compiler error so you can say you can't access void star. So in order to access it, I have to access it as something else.
+
+Now the first part of your answer was I chose care because I wanted to read it one byte at a time and write that out as those hexadecimal values.
+
+And it turns out that he cares how many bytes. One, right?
+
+So I can't use Void star. There are ways that I could access through the void star pointer.
+
+That's a thing that I could do, right?
+
+But in this case, I'm going to want to access every single byte of this memory, one byte at a time, as a character, right?
+
+Or as a byte right. In our case, care as a byte. And so the easy thing to do is just create a new pointer pointed at the same address.
+
+And use that pointer, but make it of the type that I want, which is care in this case, which is what you said, but backwards.
+
+Right. So I want to start with the why not void star and then move to why care?
+
+Right? Why not just leave it? Void star. Okay, I can't do that. Why care?
+
+Why not? You care. So perfect answer. Love that answer. Probably you guys can't hear it.
+
+It won't be on the recording, but trust me, it was a perfect answer. So it says we're going to use this pointer mem as an array of bytes.
+
+Right. Because I'm going to access every byte individually. So then I have this line right, which is kind of complicated.
+
+And it's right here inside this loop. So once for every byte, I run this.
+
+Uh. If state. What does that if statement do and why would I have it there?
+
+Anybody else. You guys to fight.
+
+I used to when I was on. It was Covid, right? And Covid was terrible and we were all in our basements.
+
+So I would go and people would ask questions and they would like interrupt each other or whatever.
+
+I would try to get them to fight. You know, I was like, we'll just go to a park.
+
+You guys can fight just for something to do during Covid. And they the students for some reason, seemed to think this was inappropriate.
+
+But at any rate, we're right here, right now. You guys want to fight? No.
+
+All right, hit me. Gavin's ready to fight.
+
+The. So the hypothesis is about padding.
+
+I'm going to say no. In this case, it's not. Yes.
+
+Does it say after every gay characters? It does, but every after every eight characters.
+
+Except. It's every eight characters, except it's going to also trigger on the very first character, which we don't want.
+
+Right? So the answer is after every eight characters except at the very beginning of the output, I print a new line.
+
+So what I'm going to do is I'm going to print this percent O to X line right eight times in a row, and then I'm going to print a new line.
+
+And then I reprint eight characters and I'm going to print a new line. Right. So this is just putting one word on one line.
+
+Right. So I print out a 64 bit word, eight byte bits at a time.
+
+Right. So eight bytes in a row, eight bits at a time. And then I go to the next line and then I print out another 64 bit word.
+
+Right.
+
+So this is just to make it easier to understand the output for me as the programmer on this particular platform on padding was a good hypothesis.
+
+But in this case, it's not because we have been talking about padding, but in this case it's not.
+
+Uh, print new line after every eighth by accepting the first. Where are we going through this exercise?
+
+Why did I just show you a function and say, quick, what does this function do?
+
+It will not be on the midterm. This function won't be on the midterm.
+
+This function might not be on the midterm. It's not going to be on Top Hat.
+
+It might not be on Top Hat. Nope.
+
+Has nothing to do with me examining you on anything. Teaches how to read code.
+
+It's important to look at a function that you don't know what it does,
+
+and be able to form a hypothesis for what it's doing, and then work through what it's doing and answer your hypotheses.
+
+Is it doing that? Sometimes the easiest way to do that is just frigging run it and see what it does, right?
+
+But again, before you run something to see what it does,
+
+you should have an idea of what you kind of expected to do so that you can compare what it did with what you expected, right?
+
+It's just an exercise. Uh, no, I don't want to talk about the last thing, but it does have a thing here for sign extension.
+
+So this function, what it does is it goes through and it prints a region of memory,
+
+one byte at a time, with each row of its output being a 64 bit word, eight bytes.
+
+Uh, and just shows you the data that's in memory.
+
+We're going to call this function here in a little bit on some memory, and look to see what is stored in that memory.
+
+And then after the midterm we'll actually do that a lot more. So we'll come back to this function in the future.
+
+All right, so, um.
+
+When the whole thesis of the first part of this lecture is that when we put stuff in memory in C, there are some rules we have to follow.
+
+And it turned out that in those rules we wasted some memory.
+
+We didn't waste it in the sense that it was necessary for the fast and correct functioning of our programs.
+
+But we wasted in the sense that we weren't storing anything there that we actually cared about.
+
+Right? So it had value to us, but its value was not in the amount of space that it occupied.
+
+Right? It occupied, in fact, more space than we would have liked.
+
+But I said before, and I will say again, that there are times where you actually don't want.
+
+To occupy more space, right? When that value that it's giving us is no longer the most important value that we could be considering.
+
+So, for example, if I have this structure here, which has four bytes of padding, this is essentially exactly the same as our struct analyst, right?
+
+We have a four byte integer and then an eight byte long.
+
+But that's effectively the same as when we had a four byte integer and a byte pointer.
+
+Right. It's the same thing. And so there's four bytes of padding right.
+
+So we have four bytes of integer, four bytes of padding and eight bytes of uh long.
+
+And if I have a billion of these things. Then that's four gigabytes.
+
+Right of data that I'm not using.
+
+It's just wasted. And if I'm putting that in memory.
+
+That's AXA. The access to that four gigabytes is going to be very fast and convenient.
+
+And that might actually be valuable to me, right? I just put it in an array.
+
+Right. And I access the values and that's fantastic. But if for example, I'm saving it on disk or I'm transmitting it to someone else,
+
+I know right off the top of my head, I have four gigabytes of data here, and I only need three of them.
+
+And I could leave out that extra, you know, gigabyte.
+
+And that has value to me. So suppose it's for a mobile network, right?
+
+Like a cellular style mobile network. How long does it take to download a four gigabyte file on your cell phone?
+
+Like a minute, right? And also, depending on where you are and what kind of service you're using or whatever, you might pay for it.
+
+Right. And so if I can save that gigabyte, I should.
+
+Or maybe I'm storing it on disk. Or maybe I have, you know, a thousand files like this.
+
+Now we're talking four terabytes. I'm saving a terabyte. I can buy a cheaper disk if I only need if I can save a terabyte.
+
+Right. Um, and so suppose that I actually only want to communicate the 12 bytes of the structure that have meaningful data in them.
+
+Well, I can't do that, declaring there is no layout of a C structure that I could put in an array and get rid of that extra gigabyte.
+
+I just can't do it. But I can because I have pointers.
+
+Calculate locations in memory where I can store all of the values that would go into those.
+
+You know, 12 bytes per structure and store these data structures 12 bytes at a time.
+
+Right. I could do that. I just can't do it by declaring a structure.
+
+But what I can do is I can use void pointers to do that.
+
+When I do that. If I store my data as a sequence of bytes of known definition, we call that serialization.
+
+Serialization like putting them all in a row, like a serial comic or a serial TV show.
+
+Right? Or as I said in the last class, because I couldn't call for an example, a serial killer.
+
+Um, but then Sarika saved me and was like, what if we said cereal comic?
+
+Sounds like it's a good point. Um. Now I want to say something here.
+
+I said this once before in this class. Once before in this class. I said, don't Google this and go to StackOverflow.
+
+You're going to get the wrong answer. What was that instance? Size of what?
+
+An array size of an array. Stack overflow is going to tell you it works and it just doesn't.
+
+There's another thing that you can Google. And look up on StackOverflow, and it's going to give you the wrong answer.
+
+And that serialization, if you Google what is serialization? Stack Overflow is going to take you to a page that has a cut and paste unattributed,
+
+stolen from the Microsoft Developer Network that describes what serialization is in the C-sharp dot.
+
+Net runtime. And how the C-sharp dotnet runtime serialize these objects for later.
+
+Restoration. Which is serialization, but it is not the serialization we're talking about here.
+
+How do I know this? Several semesters ago, I gave an exam.
+
+And I asked what is serialization? And a student wrote down the definition of serialization of an object from the dotnet runtime.
+
+And I was like. That's strange. And I graded some more exams and I saw the same definition again.
+
+And I was like. That's really strange. So when back to these students and I was like, what is going on?
+
+And the student said, here's my notes. And showed me the definition of serialization of objects in the.
+
+Net runtime written down in three colors. And their notes.
+
+And I said, where did you get that? And they said, Stack Overflow.
+
+And I said, there's a slide that says serialization is the storage of data into a byte sequence.
+
+Why didn't you write that down? And they were like, I don't know.
+
+I didn't know the answer, so I googled it. This student.
+
+I'm proud of this student in some sense because they learned something.
+
+In fact, they went to a lot of work to learn something. They looked it up, they wrote it down.
+
+They memorized it so they could write it down on the exam.
+
+But it was wrong. So I'm proud of them for having done work, because kids these days, it's hard to get them to do their work.
+
+But on the other hand, it was dumb because it wasn't useful.
+
+So the moral of the story is, if you want to know what something means.
+
+And it's related to this course. The first place you should go is the slides. You don't find in the slides, you go to the required readings.
+
+If you don't find the required readings, you can ask us. Right?
+
+Because in many. Areas of computer science, computer engineering, electrical engineering, related all the related fields.
+
+There will be terms that are used. The same word is used by different people at different times to mean different things, right?
+
+They're usually related. Serialization of C-sharp dot net objects is the same kind of serialization that we have here,
+
+but the definition and the mechanism by which they go about it is very specific and not relevant to choose one.
+
+Right? So when you're trying to understand something, make sure that you use the resources that are appropriate for the topic at hand,
+
+because it's often the case that there are perfectly valid, correct answers out there that are not the answer to the question that you have right now.
+
+Right. All right. That's the moral of that story. It was it was never having any semester before.
+
+It has never happened any semester since. But that's how these things go.
+
+Like every semester, there's something that we've never seen before that comes up.
+
+And it's like, where did this come from? That was that semester's example.
+
+Okay, so serialization, storage of data? No by sequence. I can serialize this data that I have right here into a byte sequence.
+
+So if you recall when we malloc we might like a certain number of bytes.
+
+In this case I happen to know that the amount of actual valid data that I want to store in this struct is 12 bytes.
+
+So I can malloc 12 bytes. Now it gives me back a pointer.
+
+That pointer is the type that comes back from malloc is void star.
+
+In this case I'm going to store lots of different things in this location, not one specific type.
+
+So void store is fine. I save it into a void store point. Now here I said malic 12.
+
+If I were writing a program, should I ever. In a million years.
+
+Right. Malik 12. No.
+
+If there's no, why not? It's not a random number.
+
+It's a magic number, right? Where did 12 come from?
+
+What should I do? Define it somewhere.
+
+Give it a name. Why is it 12? Right.
+
+Where did that 12 come from? In this case, I can't just take size of the struct.
+
+Size of the struct would be great because then if I change the struct, it would actually just.
+
+Always be the right answer, but in this case, it's not the right answer because I want the stroke minus the padding.
+
+So I could, for example, add up the size of of all the individual members of the struct or whatever.
+
+But still, if I change the struct, I would have to change that number.
+
+Right or change the members that I added up. So what you should do is wherever you declare the struct right beside it.
+
+You should put the calculation and the value and give it a name.
+
+And then here you should say the name right as a matter of style,
+
+because later on down the line you're inevitably going to add a member to that struct.
+
+And then this is going to be wrong. And then, you know. Cats and dogs lying together.
+
+Whatever that Ghostbusters thing is. Uh, that Ghostbusters.
+
+That's before your time. Okay, so, um, anyway, I said 12 here because I'm on the slides and I don't care.
+
+So then the very next line says, okay, star in star P.
+
+What does that mean? It says I have a pointer P. Pretend.
+
+That the type of that pointer is in stars. This is called a cast.
+
+I have a pointer P. It's a void star. I cannot dereference a void star. The compiler will say, no, you can't do that.
+
+So I have a pointer P pretend that it's an int star. That's what the star, the type in parentheses says.
+
+Pretend it's this type. The star before that says go to that location.
+
+Assigned to that location. Inconvenient at four bytes. So I go to the structure.
+
+I pull out this integer value. I go to the location p and I store an integer at that location, a four byte integer.
+
+The very next line says take the address p and add four to it.
+
+Now, we said that in our compiler, void star is defined by fiat to have a stride of one.
+
+So P plus size event means exactly four bytes after the variable p the address p, right?
+
+So at four bytes after the address p, I find another address.
+
+It's p plus four. I didn't say for I said size event, because if I'm on a different kind of platform, it might not be four bites on my performance.
+
+Four bites at people size event. Pretend that that location stores along.
+
+Long star in parentheses. Go to that location.
+
+That's the dereferencing start before. And assign there the value that you find in this long over here.
+
+Right. That long over there. Inconvenient. So I have now written 12 bytes in a row.
+
+No padding. Then has a pointer and then along.
+
+Now I violated the rules of alignment when I did that. On our platform, this code will run slowly.
+
+If I'm serializing a bunch of data, it's probably not the slowest thing that I'm doing, so it's probably fine, but it's going to run slowly.
+
+That's why the C compiler doesn't do that automatically. Um, on other platforms, it might crash.
+
+So you would need to know, is this a thing I can do? If it's not, we would have to be more careful about how we did it.
+
+But I don't want to talk about that right this particular minute. Does that makes sense?
+
+Are there any questions? We really struggle with the HDD today.
+
+Are there any questions? No. Okay, let's do it.
+
+Um. So suppose. That I have a similar situation, but kind of different, which is where I have some structure.
+
+That is not actually representable in the C type system.
+
+So the C type system says that every structure must be of a constant size, where that size is known at the time the program is compiled.
+
+So if I describe a structure here and I say, hey, I have a variable that tells me how many entries I'm going to find in an array.
+
+And then after that I have an array that's of that size.
+
+And then after that I have a string, and that string is going to be null terminated.
+
+This is not something I can declare as an array and see or is a structure in C, because how big is the structure?
+
+Well, it depends on an entries and the length of the string.
+
+So when I try to define this and see it's going to say ah, you can't do that right.
+
+This is not a legal structure definition. I can't malloc one of these.
+
+I can't dereference one of these right. But this is a perfectly reasonable thing to lay out in memory.
+
+It's perfectly reasonable to put a long and then some number of integers and then a string after that.
+
+Right. That's a perfectly reasonable thing to do. So I can do that.
+
+But I have to do it in code. So suppose that this is the data that I want to store.
+
+I have an ID entries that equals three and then I have three integers.
+
+I have 42 31337 and 01701D.
+
+Then I have a name. It happens to be Imogen Temple. And then what I want to do is I want to lay all of those things out in memory like this.
+
+As if this structure were how those things were defined.
+
+So I have, uh, along. I have three integers, and then I have a string that is null terminated.
+
+So I can write code that does that. The first thing I do is I need a memory in which to store that data.
+
+I can use malloc for that.
+
+While the size of these things was not known in such a way that I could declare the structure by the time I want to store exactly this data,
+
+by the time I will know what the data is, I know exactly how much memory it's going to take up.
+
+It's going to take up in entries plus and entries times size of int plus the length of the string plus one byte for the null terminating character.
+
+Right. And I can just add all those things together. That gives me a number. In this case it's I actually don't know what it is, but it's a number.
+
+It's certainly a number. And I can malloc that size. And malloc gives me back a void star pointer.
+
+I name that pointer in this case buff. And the very first thing I do is I create a new void start pointer and I name it cur for cursor.
+
+And the reason I do that is I'm going to take the cursor. Cursor color is a classic name for a pointer that moves through memory in some way.
+
+Sometimes we call it current depending on what it is that we're visiting or like if we're visiting, um, members of a list or something like that.
+
+We think of it as current. If we're visiting some, um, like locations in memory, we frequently call it cursor.
+
+Um, but either way is spelled c, u r, uh,
+
+and it's going to move through memory and at each location that it occupies, I'm going to put something there.
+
+Right. But when I'm all done, I want to know where the beginning of my structure was.
+
+And when I'm all done, I'm over there somewhere. Right? I've written a bunch of data.
+
+So the easy thing to do is just remember where you started from, right?
+
+A bunch of stuff, and then just return wherever it is that you started from.
+
+Right? So that's what I do. I allocate some memory, I remembered the memory that I allocated.
+
+And then I'm going to use this cursor to move through memory.
+
+So the first thing I do is I say go to the location that I allocated.
+
+Pretend that at that location there is a size T store to that location, the value in inventories.
+
+So I write eight bytes right there. Boom. I then say take this cursor and move it forward in memory.
+
+By the size of size T, which is eight. In this case, it's going to move it forward in memory eight bytes.
+
+So now buffer points to some address and CR points to that address plus eight bytes.
+
+I then say for each integer in this array that I want to store,
+
+go through and store each of those values one at a time, and then move past them by adding four to my cursor.
+
+Do I say four? No, I say size of int by moving forward by size of.
+
+And then I say, take the string that I have here for you and up to and including the null byte.
+
+Write that data into memory. Right.
+
+And I write that whole data into memory. And I poke the null byte at the end and I am done.
+
+So then if I dump that using dump mem, this is what I see in memory.
+
+First we have a three because I had three entries.
+
+That three occupies eight bytes of memory because that's how big a size T is.
+
+After that I have a 42 to A in hex.
+
+It turns out is 42 in decimal. Uh, after that, I have.
+
+313373 31,337.
+
+Right. And then after that I have 1701 D.the orders a little weird.
+
+We'll talk about that later, but it's there in memory.
+
+And then, uh, I assume that if I looked at the Ascii table, I would find that 49 is a capital I,
+
+and six d is a lowercase m, and 60 f is a lowercase o, etc., etc.
+
+Right? That makes sense, right? Because d to f is two, m to o is two, right?
+
+So that's probably what I'm looking at. Eventually I have that zero byte at the end.
+
+So even though I couldn't declare that structure, I could put stuff in memory in that layout and it made sense.
+
+All right. Any questions? Great.
+
+That's it for alignment, padding and packing. There's nothing else to say.
+
+I think it wants me to a lecture question, which I'm not going to do. And then that's it. By the way.
+
+Uh, that summary slide. Right.
+
+Um. We'll talk about this more later. But this is what you should study, right?
+
+You go to the slide, and for every bullet that's there, you ask yourself, um.
+
+Do I know this fact? If the answer is no, go learn it.
+
+If the answer is yes, you ask yourself, why does Ethan think that this was an important thing to put on the summit?
+
+Summary slide.
+

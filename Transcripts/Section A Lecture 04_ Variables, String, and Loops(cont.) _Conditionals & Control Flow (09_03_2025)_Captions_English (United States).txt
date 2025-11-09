@@ -1,0 +1,897 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Audio today. I don't know if you saw on, um. Friday.
+
+There was no video on the lecture video for this class.
+
+It was just a green screen and on in my other section there was audio, no audio.
+
+There was video, but no audio. So you can like, treat it like a badly translated foreign film and like watch the video from one and the audio.
+
+They don't line up. We talk about different things, you know? I apologize for that.
+
+Um, okay. So I want to continue live coding here.
+
+There's a few things I want to get through.
+
+I hope we get through them all before the end of the period, and then we'll start the next set of lecture slides.
+
+The way it's going to work in this course is, um, the lecture slides will not correspond to like a day of lecture there.
+
+Most of them are somewhere between one lecture and two.
+
+They tend to run longer than one, but not quite two.
+
+And so whenever we get done with one set of lecture slides, I'll just pull up the next one and keep rolling.
+
+I will try to get them put up on the web page ahead of time.
+
+So like today, um, conditionals, which is the next set of lecture slides, is up on the web page already because I hope we might get to it today.
+
+If we don't, we'll start it on, um, Friday.
+
+But that'll give you that gives you a chance to look and see. Hey. What readings? Um, should I be doing and how should I plan ahead, you know, etc.
+
+Um. So. Okay. Uh, we left off at the very end of last lecture.
+
+We had written a minimal C program.
+
+We had, uh, printed some, um, text on the screen.
+
+We looked at compiler errors. We talked about reading and interpreting compiler errors.
+
+Uh, we talked some about directory navigation.
+
+Um, we talked about the return value from a C program, a whole variety of things that aren't necessarily,
+
+uh, a lot of them are not necessarily the direct topic of this course,
+
+but there are things that the better you understand them, the more you spend some time with them,
+
+the easier you'll find it to complete this course, the easier you'll find it to complete other courses that use Unix like systems.
+
+Right. So you'll be, uh, you'll see them again. Absolutely.
+
+In, um, anything you take with Chris Schindler in, um, 365, which is computer security in operating systems,
+
+networking, distributed systems, like you're going to see these things over and over again throughout your career.
+
+So we talked about, um, just some ways to, to, um, that these things work, right.
+
+To get you a little more comfortable with the systems. Uh, nobody has read at seven or at nine yet.
+
+And I can tell that because when you ask questions, you don't follow the very, just mind bogglingly simple instructions.
+
+And at seven, you can't handle that. Uh, and I don't pick any on anyone when I say that,
+
+because I think literally no one this semester yet has followed the instructions
+
+for how to show me a command that you ran that didn't do what you wanted it to do.
+
+It's not hard. It's an apt seven.
+
+Reading and following simple directions is, in fact, one thing that we hope you will develop over the four years you spend here at Be.
+
+Um uh, nine has a bunch of help for a Unix stuff.
+
+A lot of the questions we're seeing about zero and, um, lab one are essentially how do I do simple Unix things?
+
+It's all in at nine. It's all there. You can ask on Piazza.
+
+We'll answer. But then you have to wait for us to get to it.
+
+If you just go look at the documents, you'll find that a lot of the answers are there.
+
+And again, you'll be more comfortable with how to proceed in this course.
+
+So I highly recommend that you read out seven before you ever make a piazza post.
+
+In fact, you are required to read at seven. But unfortunately, all piazza that can make you do is click on it.
+
+It can't make you actually put the words in your brain.
+
+Um, and then I recommend that you read some of the tutorials and at nine in particular,
+
+the Free Software Foundation tutorial, I give you just a few sections that you should read.
+
+Go read those sections. They will help you. Uh, okay.
+
+That's all I want to say. Let's do some live coding. So the next thing I want to talk about is, is printing values.
+
+And I think someone asked me actually on Friday about the difference between puts and print.
+
+And I said, we'll get to that later. I want to get to that now. I want to talk about, uh, formatted printing.
+
+So we saw puts. We use puts to do hello world. Puts is put string.
+
+It takes a string. Um a C string.
+
+We'll talk more about the structure of C strings shortly. It takes a C string.
+
+Uh, and it just writes it to the output of your program on Unix.
+
+By default, the output of your program is the terminal. So when you run the program, you see the output, um,
+
+you will see in the makefiles that we give you in the, uh, accessory scripts that we give you for things.
+
+And if you should for some reason read something from at nine, that there are many things you can do with the output from a, with uh,
+
+from a program that are not just printed to a terminal that may in fact be useful to you,
+
+but for now it's going to print to your terminal or in my case, an Emacs buffer.
+
+Um, but all it does is outputs what you give it. So if I puts.
+
+Um. X is equal to.
+
+Uh, percent x. And we'll see this when we get to.
+
+It's going to make more sense when we get to print f uh, when I say x is equal to x.
+
+Um, and then, uh, that's not at all what I wanted. That's what I want.
+
+Uh, so now if I, um. When I print out, see, when I run it, it's just going to print out X is equal to.
+
+I put the semicolon inside my. It's just going to print out x equals print percent x, which is fine.
+
+That's what we expected to do, right? We give it something and it prints it out. Print F stands for print formatted.
+
+Print F is capable of printing out a formatted string.
+
+And if I use print F instead of puts. And I give it that ax.
+
+I don't want percent. Actually, I want percentages real percent D.
+
+And I run it. What it prints out is not percent D, but rather the value of the next integer argument that I give it on the command line.
+
+So I said print out an integer in decimal format, and it printed out the number x in decimal format.
+
+And x, as you see at the top was set equal to 42.
+
+Well, I can also ask it to print out in other formats, and I can also ask it to print out other types.
+
+So for example I can print f. I was.
+
+This is what I had before. And it prints out to a I said print out percent X and I gave it the value 42% x says print this number in hexadecimal.
+
+We will talk about hexadecimal later and how to read hexadecimal.
+
+But essentially what this says is I have two sixteens and ten ones.
+
+So two times 16 is 32, 32 plus ten is 42.
+
+So two A is the hexadecimal equivalent of 42 decimal.
+
+I can ask it to print things out in a whole variety of formats.
+
+There is an exhaustive vocabulary of ways to ask you to print out, for example, floating point numbers.
+
+How many digits do I print before and after the decimal point? Do I print leading zeros?
+
+Do I print trailing zeros? You know, things like that. So let's print out a floating point number so you can see how this works.
+
+Uh. So I've heard about floating point number by default.
+
+It gives me the decimal point and some number of trailing zeros. I'm sure it's looks like it's six trailing zeros.
+
+And I don't know off the top of my head whether that is eight digits of precision or
+
+six trailing zeros or like I don't know what the default format is if I if I care,
+
+there's ways for me to tell it. Hey, I want exactly I'm doing dollars and cents.
+
+Give me exactly two trailing zeros right. Or whatever. Um but another thing that I can do.
+
+And this. Is a very important lesson in sea.
+
+I can print out a an integer number x as an integer as a float actually is a double.
+
+So something strange and unexpected yet is going to happen. So I say print out the value of x as am I.
+
+Compiler cried. It's like you gave me an int. I wanted a double, right?
+
+It knows that this isn't a great idea, but it does it anyway.
+
+And when I. But.
+
+I accidentally exited my iMacs. Is that what happened? All right, somebody get a look at the video and see what it says.
+
+I pushed, uh, let me give this a different value, because I really did not expect that to be what happens.
+
+Yeah. So x is equal to 26 but it prints out 42.0000.
+
+Why? I did what's called undefined behavior.
+
+I said, take this integer treated as a double.
+
+It turns out it's not a float, it's a double is the different type. And then print it out.
+
+And the C compiler helpfully said, hey, you probably don't want to do that.
+
+C it says percent, F is a double and X is to it.
+
+Right. And then it says you probably want percent D, right.
+
+You're probably printing the wrong value. You want percent De but it compiled it anyway.
+
+And when I ran it, it just grabbed some garbage from memory and printed the value of that garbage.
+
+It turns out that the garbage that it got, I'm guessing, is, um, the value, the last value of f, right.
+
+Because it says 42. Um, on our architecture, floating point numbers and integers are stored in different registers on the processor.
+
+And so probably it grabbed the first floating point register and it just still had the value f in it.
+
+Right. But if I did this in a different way. So for example, if I come over here and I say, uh, say I do this up here.
+
+I will probably get a different value every time I run the program.
+
+Why you got to be like this? Is it my network? My network is cool, right?
+
+I have three bars. I could have more bars. That would be okay. Uh.
+
+Are other people. Animal. Is it sluggish? No.
+
+So it's me. It's probably my network. Bear with me momentarily.
+
+Oh, it did it. And I'm going to try a different computer.
+
+There's reasons why I believe that trying a different computer might be fruitful here.
+
+But are you going to work for me now? But. Yeah.
+
+Okay. So it's still crying.
+
+Now, if we notice that X was 0.0 right the first time I printed it as a double, it says 0.0.
+
+If I run this a few times, I would not be at all surprised to find out that it gives me random junk.
+
+Why you got to be like this? All right, let's see if this behaves better.
+
+Uh. Okay.
+
+Sorry for the delay. So now, if I run this a few times, uh, it's getting easier every time.
+
+Uh, it's undefined behavior, right? Undefined behavior means the seat of power could do whatever it wants.
+
+Because I said, here, take this thing that is not a double. Use it as a double, and the Z power can do whatever it wants.
+
+I wanted something more dramatic than just zero. Uh, last class that I did this in it.
+
+Print it, which was the, um, you can see it in silent film on the recording from Friday.
+
+It's like a different number every time I run it. Right? It just gives me a different number every time I run it.
+
+Um, I don't know why it's not doing that now, but again, it's undefined behavior error.
+
+The compiler is allowed to do whatever it wants, right? So this is a pitfall in C, c, as um, Dennis Ritchie said, um, who was the inventor of C?
+
+Uh, C is strongly typed but weakly enforced.
+
+If you say take this thing that is not one of those and treat it as one of those, C is like, oh, you probably know best and it does it.
+
+Now, it did complain, right? When I compiled it, it said, I don't actually think this is what you want.
+
+Sometimes it doesn't even complain. It just silently does the wrong thing.
+
+So you have to watch your types. This is one of the advantages of using a language that has stronger type systems.
+
+I don't know if I've said this in this class yet.
+
+There are many jobs for which C is not the right answer, and one of the reasons is that it does not have a very strong type system, and it does not.
+
+There are a lot of, as we say, foot guns in C, which are prepared to shoot you in the foot.
+
+Right? There are languages that have fewer of those.
+
+One of the things that they can do is they can have a stronger type system. If you need the things that C does, you should use.
+
+See, if you don't need the things that C does, then probably you should use a language that has stronger types or dynamically cast
+
+types or something that would so that this would always print the right value,
+
+right? Instead of oh look now at zero, now it's 42.
+
+But the entire time X was 26, right? Let me make it more clear exactly what happened by pulling out the extra print statements.
+
+Oops. Uh. So I printed x, I printed f, I printed x.
+
+The first time I printed x, I got zero. The second time I printed x, I got 42.
+
+X never changed. It was 26 the entire time. But x is not a double and I pass it to a function that accepts a double.
+
+Why am I using print F? To show you this? I was specifically using print F because print f has particularly weak type checking.
+
+Other functions would be like no, it would either fix the problem for you in some cases or be like,
+
+no, you know, that's definitely not what you want and refused to run in some cases.
+
+Uh, but print F has particularly weak type checking.
+
+The lesson you take away from this when the compiler says something like this, take a minute, figure out what it's trying to tell you.
+
+I'm passing X in, which is an int to a function that expects a double.
+
+And if I wanted to use an int, I should use percent d. Right.
+
+It's very helpful. It's not always that helpful, but try.
+
+Okay. Any questions about printing values?
+
+If this is in Qatar, it tells you how to use printf, tells you all kinds of information about how to use this.
+
+All right. What do I want to talk about next? Oh.
+
+Um, what's the first way to float in a double? They're both floating point values.
+
+A double has more digits of precision, so if it floats and doubles are both stored in effectively something like scientific notation.
+
+And so when you choose scientific notation, you choose how many digits of precision you use for both the mentis and the exponent.
+
+Floats have fewer digits of precision than doubles. 42 is the same in a float in a double.
+
+But if you had a number that had very, very infinitesimally small digits that you cared about, float will run out of digits before double does.
+
+Thank you. Of course. It's a good question.
+
+All right. The next thing I want to talk about is command line arguments. Are there any questions? No.
+
+So here in this main. You see that I did not leave its arguments empty.
+
+I gave it two arguments int arg c and care star arg the square brackets.
+
+I do not want to talk about the star just yet.
+
+But what I'm going to tell you is that arg v, the type of arg v, the logical type of arg v is an array of strings.
+
+Argv is an array of strings. By the time by the end of next week, or maybe the week after, you'll know exactly why it's care.
+
+Star arg v square brackets. For now, arg v is an array of strings, and so argv sub zero is a string and arg v sub one is a string.
+
+Because there is no number in the square brackets, I don't know how many of them there are.
+
+There are zero or more strings in the array argv in the C programing language.
+
+Again, the whole point of these lectures where we do live coding, is to teach you the things that are different between C and the other languages.
+
+You're likely to know in the C programing language, there is no way to ask the language or the compiler how many entries are in this array.
+
+It's impossible. I just have to know how many entries are in that array.
+
+Main therefore takes two arguments. ARG c is the count of the number of arguments that are in the array argv.
+
+So argv has argc entries in the array.
+
+If I did not have argc, then I would have to have another way to figure out how many entries are in argv.
+
+There is no Len. There is no length. There is no like collection size type arguments in C whatsoever.
+
+I can never ask how big an array is. Later in this semester I will tell you this multiple times.
+
+Later in this semester. Some of you, instead of using the materials that we give you, are going to Google.
+
+How do I find out how big an array is?
+
+And you're going to land on StackOverflow and it's going to tell you you can use size of the array divided by size of the size of the elements,
+
+and you're going to bang it into your code. And it's going to say eight.
+
+And I don't say aid is like an arbitrary number. Like it's literally going to say eight.
+
+You'll have an array of 72 elements and it's going to say eight. We will talk more about that later.
+
+Just be aware there is no way in C to find out how big an array is.
+
+Stack overflow is just flat out lying.
+
+And there are hundreds or thousands of people that will look you right in the eyes and tell you that.
+
+That will tell you how big an array is. And C because they don't know C well enough.
+
+They know C well enough to right a StackOverflow post. They don't know C well enough to tell you how big an array is, right?
+
+So don't fall for that trap. We'll talk about that later when we talk about the size of operator.
+
+Yeah. Why is that?
+
+I mean, ask him. It's an art. I know, it's just it's always.
+
+There's always one. There's like it maybe a different one every time.
+
+Why? Because the people who answer questions on StackOverflow are people who know the answer to the question.
+
+There are people who got it to work. And sometimes that calculation gives you the right answer.
+
+But unless you know when it gives you the right answer and when it says eight, you can't use it because sometimes it's going to say eight.
+
+And you can never change that single line of code. It never changes.
+
+Today it says 72. Tomorrow it says eight because you changed code somewhere else in your program.
+
+So it's never, ever safe to do. Yes. You have to have it given to you or have a way to tell.
+
+So we'll talk about see strings, how we know how large they are, their arrays.
+
+We'll talk about how we know that, how large they are here in just a minute. Okay.
+
+So. Yes. No, there are no collections.
+
+No, like more complicated types whatsoever in C.
+
+You have simple race, which you can't know how large they are and they have to contain all.
+
+Every item in the array has to be exactly the same type. And you have scalars.
+
+And that's basically it. There are structures where you can have what we'll talk about that later.
+
+They're kind of like tuples in Python. You must.
+
+We'll talk about that later in this lecture. In fact, we're going to write a string lakes method later in this lecture.
+
+Because strings have a special property which allows us to figure out how big they are.
+
+All right. So I am going to write a loop. And I'm going to show you how we write an idiomatic for loop in C.
+
+What's happening? Why are you doing this to me?
+
+Oh, push the wrong key. That's why.
+
+I have two keyboards here that have the same key layout, but the keys do different things and it's really troublesome for me.
+
+Uh print f. Argv sub percent d equals.
+
+So we talked about format of printing.
+
+My print f here says print out the string r v operate square bracket, and then replace this percent d with an integer that I will give you.
+
+Equals. And then that backslash quote says print a quote character.
+
+If I just put a quote character there without the backslash, it's going to end the string, right.
+
+The string is going to end there. So backslash quote says put a quote actually into this string.
+
+This is one of the many things that's in at nine also that nobody has read.
+
+I weep every night because no one has read at nine.
+
+Also because I can't breathe in the middle of the night lately.
+
+But. Hopefully that's transient.
+
+Every semester when I meet students, I get some sort of disease. All right.
+
+Now I'm going to run this program. Now, something you should do?
+
+You can't do this yet because I haven't given you enough information.
+
+But every time you compile and run your program, you should ask yourself, what do I expect this program to do?
+
+So that when you run it, you know whether it did what you wanted to do or not?
+
+That helps you with when you go to debug.
+
+If it doesn't do what you want to do, it's much easier to figure out what it should have done if you have some expectation for what it should do.
+
+So I'm going to tell you a couple of things that I'm going to ask you what this program does.
+
+So args C tells me the number of arguments that were passed to this program on the command line.
+
+Arg v is those arguments.
+
+It is an array of strings. Each string in that array is the arguments that are passed on the command line.
+
+The first argument to the program is always the name of the program.
+
+In C arrays. Start with the zero index. Zero with index is always the name of the program.
+
+The first argument to the program, the thing that would come after the program on the command line would begin with the first argument argv sub one.
+
+So how many lines is this program going to print and what are they going to say?
+
+It's always going to print whatever the name is.
+
+If I run it just like this. Uh, just. Our.
+
+That's. Argument zero is not out, is that it?
+
+I will run. From what to what? I will. 0 to 1.
+
+And then at one, it will break out of the loop without running the body loop. But yes, 0 to 0.
+
+Right. Excellent. Perfect. That's exactly what we expect. Let's run and see what happens.
+
+That's what happens. Argv sub zero is not out.
+
+Now if I run this program with additional arguments.
+
+The shell will break those arguments up on whitespace and pass them to my program as individual arguments to my program.
+
+So we say dot slash. We see argv zero still as dot slash.
+
+Else name of the program argv sub one as these arguments of two as are more arguments, etc. till we run out of arguments.
+
+So arg arg c in this case was five.
+
+12345. There are five arguments. Zero through four.
+
+Zero is the name of the program and the other four arguments, one through four are whatever I put on the command line after the name of the program.
+
+Right. This is exactly what you're doing in our old code, right?
+
+You're looking at archives of one. To get the argument that you need right, which is a string which you then iterate through.
+
+Okay. All right. Now, I said that each one of these are strings in C.
+
+A string is just an array of characters with one special property.
+
+The very last character. Has the value Ascii character zero.
+
+Ascii stands for American Standard Code for Information Interchange.
+
+In our case, it's actually a UTF eight zero. But I don't wanna talk about the difference.
+
+C was originally designed on systems that used Ascii character sets.
+
+Not all systems do use Ascii character sets.
+
+Our particular system uses a superset of Ascii. It's Ascii plus some other characters.
+
+But essentially. And we'll talk more about this later.
+
+Every character in the computer is just a number, right? We talked about the fact that all we have is just numbers, right?
+
+Patterns of bits, and we assign certain patterns of bits to have certain values inside the computer.
+
+And so for example. If I put care the letter A.
+
+Uh, let me also put care. Don't worry about the details here.
+
+Backslash n, which is a new line. If I put care of the letter, I get exactly the letter A and nothing else.
+
+But it turns out that the letter A is just a number.
+
+Now I happen to know. That its number is 65.
+
+So if I put care the number 65, I get a capital A.
+
+If you are working on your old code. This is a property that you've already exploited, right?
+
+Because the digits have certain numeric values, right?
+
+And you can use those numeric values to your advantage.
+
+When the computer is designed, when the operating system is designed, when the software stack is built, somebody has to say,
+
+well, if some meat person wants an A, how, what bits am I going to use to represent the A because the computer doesn't care.
+
+It's just all bits to the computer. It doesn't care. Doesn't know anything about it, can't read any.
+
+It doesn't know what name means a is only meaningful to you or I because we happen to know the Latin alphabet, right?
+
+We happen to know a language that uses the Latin alphabet. Um, now, uh, I should say if we were using a language that did not use the Latin alphabet.
+
+So if we were speaking or writing our code using, um, Chinese or Arabic or Korean or, um, any number of,
+
+you know, Urdu, uh, any number of other languages, we would need characters that are not in Ascii.
+
+Ascii only has Latin unaccented letters.
+
+Actually, even if we were just doing French, there's no scintilla. Saadia.
+
+I don't know how the French say it. I'll speak French. The little C with a tail.
+
+There is no one of those in Ascii. You can't type that.
+
+You would have to use a different set of characters. But again, you just agree with the computer.
+
+Hey, when I give you this bit pattern, give me a C with a little ridiculous tail and then it will do that.
+
+Uh, okay. So what this means is I can put care.
+
+Hi. Or I can put care.
+
+It's, say, 72. And then.
+
+Maybe one on nine. Let's try one on one and see what happens. That seems too high.
+
+I made a mistake. I said instead.
+
+So, uh. Maybe you want to go for.
+
+One, two, five. Yeah.
+
+There we go. I can print high either as characters or I could print it as, um, numbers.
+
+Right. And then the numbers will be interpreted as those characters. In fact, it turns out that backslash in the new line is just ten.
+
+It's just typed. Um, so a string therefore, is just an array of these numbers.
+
+So if I have the string. Hi. What I actually have is.
+
+See, it's not my computer, it's the network or something.
+
+This is exactly equivalent to.
+
+Uh. And then at the very end, I have to have a special character.
+
+Backslash zero. Remember, though, I said that a C string is an array of characters ending in the Ascii zero or the null byte.
+
+We called a null byte in u l capital n capital u capital L.
+
+Those two lines, high and high chairs are exactly the same.
+
+They mean exactly the same thing. The string notation with the quotation marks is just what we call syntactic sugar.
+
+Syntactic sugar is something that the compiler provides for us to make our program look a little sweeter, but it doesn't do anything.
+
+The program is exactly the same whether I type quote hi or whether I typed curly brackets h comma I comma backslash zero.
+
+Right. It's exactly the same. The string just makes it easier for us, right?
+
+It's easier to program. If you wanted to print out a long message.
+
+You don't want to do it one character at a time. That's terrible. Right?
+
+You want to just put it in a string? So the compiler provides us with strings.
+
+Now, coming back to the question of how do I then have a Stirling function that knows how long a string is?
+
+I look for that backslash zero. I iterate over every character of the string until I see a backslash zero.
+
+When I see a backslash zero, I know I've arrived at the end and I should not print anything else.
+
+Yes, I've got a good array. It's not nothing.
+
+By default it does. Any time you do a double quoted string, the null terminated character is inserted by the C compiler.
+
+Yeah. So I want to. I want to write this function CSS Stirling.
+
+This function. Counts the number of characters in the provided string str.
+
+And returns as an integer. The the number of characters that it found, so it behaves exactly like the C library Stirling function.
+
+How would I write it? I'm not going to write a single line of code.
+
+You're going to tell me what to type and I'm going to type. What do I need?
+
+Yep. A while loop I can use a while loop.
+
+While. What? Well it's not.
+
+Okay, well, something that we will need to determine.
+
+It's not equal in all white. While what is not equal in all white.
+
+What index? Do I have an index? I could use an index I you want and I would get, you know, get care reads from the input of the program.
+
+I'm actually reading from an argument right from this argument right here.
+
+Right. So I can say in I where should I start.
+
+What should I start as. I equal zero.
+
+So while I is not equal to the zero one. While the ice character of the string is not equal to zero.
+
+What do I do? Put it in here for a loop. Don't want a while loop or four loop?
+
+No. You are another variable.
+
+What type of what do you want to call it? Although like this.
+
+Okay. Return.
+
+What? I have been teaching this class.
+
+For something like 16 semesters. Multiple sessions per semester.
+
+I probably taught this class 35 times. This is always what we arrive at without fail.
+
+This is what we arrive at and I will tell you this.
+
+Let's run it. Let's see what happens, right? How many characters in the word hello?
+
+Five plus the no. But we it turns out we don't count the knoll which we don't want to.
+
+Five. It gave me the right answer. Is this good code?
+
+This terrible code. And I say that now because we wrote it collectively.
+
+So I'm not judging any one person. As a class.
+
+This is the code we came up with. This is terrible code. Makes you want to cry on the inside.
+
+Because this code was approached sort of one item at a time.
+
+What do I do next? What do I do next? What do I do next? Which I led you into, right?
+
+I carefully led you into writing it that way, which is why it's always written this way.
+
+Rather than sitting down and saying, what problem do I have?
+
+What resources am I going to need? How am I going to structured structure them?
+
+We said, what do I do next? What do I do next? What do I do next? And we wound up with code that gives us the right answer and it's terrible.
+
+First of all, when this loop exits, what is the value of I.
+
+We do know. Oh, well. Five. Is the value of land?
+
+Five. Why do I have I n Len? Every semester you have AI and Len, right?
+
+Every semester. But you don't need it, right? You don't need an AI and a Len, right?
+
+So I can make it better immediately. By just not having an eye.
+
+All right. So if I then compile this, I run it.
+
+I get the answer. Now I ran this on hello. And I got the answer five.
+
+Does that mean my program is right? No, it means I ran it once on the word hello, and it gave me the answer I expected.
+
+Right. Because I asked you what do we expect? Right?
+
+To actually test it, I would need to run it on like, a lot of different arguments and make sure that it actually gave me the answer I wanted.
+
+Students frequently run something once it seems to do what they want and it works fine.
+
+The problem is that the one thing they fed it is the one thing that they were thinking of when they wrote it.
+
+You really have to go back and look at the requirements and say, what are the possible things that could appear here?
+
+And is it right for all of those? Right. And then choose some arguments appropriately.
+
+So now this code is much better. But I would say this is not what I would call idiomatic C.
+
+So when we speak a human language, we frequently use idioms.
+
+An idiom is a particular word or phrase that we use in a particular place,
+
+because we know that that's where it belongs and it has the meeting, the meaning that we want.
+
+So, for example, kids these days like to say I'm cooked, you're not literally cooked in an oven.
+
+You just have brought some stupidity upon yourself by not planning ahead or whatever, right?
+
+Uh, we will say things like, um, when we depart from someone in English, we say good bye.
+
+What does goodbye mean? Does anybody know? God be with you.
+
+God be with you. We don't think about that when we say goodbye.
+
+Goodbye is just what you say. When someone parts. You say, God be with you in the Middle Ages because like,
+
+probably they're going to get bubonic plague and die before the next time you see them, right?
+
+Tomorrow. Now we're not thinking about that, right?
+
+We're not thinking about that when we say that, uh, word.
+
+I don't even know what Halo means. I don't know.
+
+I'm sure it has some. It's just the idiomatic way to greet someone in the English language, right?
+
+Programing languages have idioms, too. And those idioms are things that when we write them,
+
+other people who are fluent in idioms classically are difficult for people who are not fluent in the language.
+
+We say things that don't actually mean necessarily exactly what the words mean, but everybody who's fluent, the language knows,
+
+and second language speakers you can attest if you have your second language speaker in any language that people say stuff and you're like,
+
+why would you say that? That makes no sense.
+
+And then typically, if you ask the speaker of that language, they think about it for a minute and they're like, I don't I don't know why we say that.
+
+That's just what we say, right? It's just how it is, right?
+
+Idioms in programing languages are sometimes that way too. This is not idiomatic.
+
+This is not how an experienced C programmer would write this. Does that mean it's wrong?
+
+No. Does that mean you shouldn't write it? No. This is good, right?
+
+This is a good implementation. Now that we've removed that extra variable.
+
+But in idiomatic implementation would look like this. For.
+
+Len equals zero. I would call this an idiomatic implementation.
+
+And the reason I want to lead us to this and talk about this idiomatic implementation is I think it's a little bit surprising, right?
+
+I write a for loop that starts from I equals zero,
+
+and it counts up through the character of the string until it gets to the end and inside the body of the for loop.
+
+What does it do? Nothing.
+
+Absolutely nothing. It does. Semicolon. The empty statement. It does nothing.
+
+Because what I actually want is the side effect of the for loop.
+
+I don't actually want to do anything in the loop. I just want to count the index.
+
+Right? Now, there's a lot of ways I could write this and still have an empty body.
+
+In the for loop, I could put the semicolon on the same line as the for statement, but then it's easy to lose.
+
+I could write empty curly brackets, but then you wonder yourself, did he mean to put something in those curly brackets and he just forgot?
+
+But as a C programmer, if I go to the next line and I put a semicolon on a line by itself,
+
+the next C programmer who's experienced who look at this code will say, ah, that for loop is being used for its side effects.
+
+It doesn't need a body. Ethan intentionally put a semicolon at the end of that and didn't give it a body.
+
+It's not a mistake. It's not a bug. It might be a bug I might have missed. I might have made a mistake.
+
+But if I did make a mistake, I'm. That's what I wanted to do.
+
+I just didn't think it through well enough. Right. Like, my intention was that this for statement would not have a body.
+
+Right. All right. Um, I'm going to move on very quickly to the next set of slides, uh, for this, um, semester.
+
+Um, because there's a couple things I want to blast through, am I.
+
+I am. I want to blaster some of the early materials.
+
+Uh, if I can. Um.
+
+Because I want to, I want to. I mean, I just want to keep rocking, basically. That's it. I want to keep rocking.
+
+Uh, so we'll only do 1 or 2 slides here, uh, for the rest of this semester.
+
+I'll probably just do this slide for the rest of the semester. At the beginning of many of the decks of slides, there's going to be advice.
+
+This advice is not about CSS 20. This advice is about how you can be a better student, how you can be a better computer scientist,
+
+a better computer engineer, a better scientist, a better, um, planner.
+
+Right? Just generally like life skills.
+
+Sometimes we say soft skills, but some of them are pretty crunchy, actually. One thing you should be aware of.
+
+The Carnegie rule. This is how we decide how much homework you should do for a class.
+
+We don't just make it up. Actually, there's a there's a calculation, uh, and it comes from Andrew Carnegie of Carnegie Mellon University's name.
+
+Right. Which is to say that you should do 2 to 3 hours of homework outside of class for every credit out.
+
+So CSC 220 is a four credit hour class, which means we spend four hours talking to you.
+
+And you spend, uh, whatever, 8 to 12 hours every week outside of this classroom working on CSE.
+
+220 now, because you have a lab, one of those hours is your second hour of lab, where we're intending that you work on your lab and assignments.
+
+This is why 12 credits is full time. Because if I take 12 plus two times 12, I get 36 plus three times 12, I get 48.
+
+Is that right? Yes. How many hours a week is a full time job?
+
+4012 credits is a full time job, right?
+
+That means that you should be working 9 to 5 every day. If you have a 12 credit, if you have a 12 credit course load.
+
+Now many of you have 20 credits or, you know, whatever, some ridiculous number.
+
+Do the math. How many hours do you need to be working to be a successful student?
+
+Now, the secret is we all know that when you take certain classes.
+
+Geology, for example. You're not going to spend 12 hours on that class, right?
+
+You're just not going to spend 12 hours on that class. But other classes like this one, you're going to spend 12 hours.
+
+Plan to spend that 12 hours. Don't do it accidentally.
+
+For every hour, we have a lecture schedule on your calendar.
+
+An hour and a half outside of class where you are going to work on CSC.
+
+220 do the same thing for 250.
+
+Do the same thing for 331 you know, whatever other big heavy classes you have and make sure you work on them, all right?
+
+Your life will be easier. All right. We'll pick up there on Friday. Sorry for keeping you over.
+
+Yeah. Yes.
+
+Um, and so I was when I was reading chapter one and round up here, that confused me a lot of what we see in the street right here.
+

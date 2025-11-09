@@ -1,0 +1,997 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Got to turn my mic on so people can actually. Watch those videos.
+
+So what I was going to say is, um. Like I said, I'm going to turn my mic on before I say this.
+
+Felt like, what was I going to tell you? I mean this work.
+
+No, that was just me preaching like I had something you needed to know.
+
+I already have the answer for the test that you can't. Question three on the exam, I don't I don't play that game.
+
+Uh, okay. So, uh, I don't remember exactly what I was going to tell you.
+
+Uh, it'll come to me. Um, of course, the midterm is a week from Wednesday, right?
+
+It's a week from Wednesday. Um. And so.
+
+Oh that's it. What's going to be on the midterm. So we're finishing up alignment padding and packing today.
+
+Uh, over the next week. Uh, this week we're going to do the lecture that's called layout.
+
+We'll hopefully finish it or start it today. Uh, process Anatomy is the official title.
+
+And then, um. On. Uh, Monday next Monday, a week from today, we'll have a review session.
+
+And then of course, Wednesday will be the midterm. So our expectation is we reserve the right to change this until, you know,
+
+we get up to the midterm and we know exactly where things are going to land.
+
+But our expectation is that this lecture will be on the midterm. The next lecture module layout will be on the midterm.
+
+And then that will be the last lecture module that you're responsible for for the
+
+midterm if we start one after that but before the midterm we aren't going to finish it.
+
+And so it won't appear on the exam. Right. Um, so we will start the last lecture module that will be on your midterm um, today.
+
+So we'll finish this one off. It'll take a few minutes and then we'll start the next one. That's what I want to say.
+
+Okay. So, um. We spend all this time talking about, um, alignment.
+
+And, um. How do we put data into structures and that we need this padding right, to,
+
+to make structures, um, to preserve the alignment of the members of the structure.
+
+And something that came up, uh, like several different people asked in different ways about this idea of, well, what?
+
+So padding seems bad, right? Like, when do I want to optimize for it?
+
+How do I optimize for it? Like when, when should I care or you know, etc. and the the answer that I gave is, you know,
+
+this whole, you know, three step process, make it work, make it good, make it fast.
+
+Right. And this falls under make it fast. Um. But it turns out that there are times where we actually really care about those extra padding bytes,
+
+or just generally the efficiency of the way that we store, uh, data or the predictability.
+
+Right, because padding bytes are unpredictable. We talked about that.
+
+And when we do that, um, when we care about stuff like that, we have to think carefully about what data are we storing, where are we storing it?
+
+How are we, um, managing it. So this structure here.
+
+Um, is essentially the same as when we said, uh, our list,
+
+right where we had an integer value and then a pointer after that, and it's got four bytes of padding in the middle of it.
+
+Right. So we have a four byte value. We have four bytes of padding.
+
+And then we have an eight byte value. And so there's 12 bytes of data in this structure that I care about.
+
+But the structure occupies 16 bytes of Ram.
+
+And um. One of the examples that I gave before, in the example we're going to use now.
+
+And this is not the only time that I care about this, but the example we're going to use now is,
+
+what if I have like a billion of these and I want to communicate them across the network?
+
+Right. So we are talking about a 25% larger file size, right, to store the 16 bytes versus the 12 bytes.
+
+If I have a lot of these and 25% longer for a network transfer is like a meaningful amount of time, right?
+
+It depends on your network connection, depends on where you are, what you're doing,
+
+etc. but if you are in a rural area, if you are on a mobile link, if you are, you know,
+
+whatever like that, can you know, if you have a file that's a few gigabytes in size you can be talking about,
+
+I'm waiting like a while for this file to come down.
+
+And so in that case, um, it would be really convenient if we could just send only the 12 bytes that we actually care about out of the structure,
+
+rather than sending the whole thing.
+
+Um, and so a way that we can do this is we can essentially use void pointers and copy the data out of this structure and pack it carefully into,
+
+um, memory without any padding, and then transfer the data that has without the padding.
+
+And then on the other end, unpack it back into the in memory structures that have that extra, um, padding.
+
+We call this serialization. Now, this is the second time in this course that I'm going to tell you that if you Google this and go to StackOverflow,
+
+you're going to get the wrong answer.
+
+What was the first time? Eight was what you would get.
+
+But what was the circumstance under which you. If you Google like how do I find out how big an array is?
+
+Right? StackOverflow is going to be wrong. This is the second time, um, I had a student number of years ago who, in an exam,
+
+wrote down this long and complicated definition of what serialization was.
+
+That was just completely wrong. Um, and I was like, wow, that's weird.
+
+And then I got to another exam where a student had written down this long and complicated definition of serialization that was also completely wrong.
+
+And I was like, hmm. This is more than weird.
+
+This is something's going on here. And so I went and I googled what is serialization?
+
+And I, um, found that on StackOverflow someone asks what is serialization?
+
+And there's a StackOverflow answer that is a copy and paste with no attribution of the definition of the serialized,
+
+serialized, uh, mechanism in um, Microsoft dot net.
+
+It's out of the Microsoft Developer Network is where the original documentation is from, and it explains very carefully.
+
+The serialization is when you have a dot net object and you do blah blah, blah, blah blah with it and you know, etc. and both of these students,
+
+and I am not joking here, had independently,
+
+rather than going to the slide that defined what serialization was, where there's one sentence right up there.
+
+So serialization is the storage of data into a byte sequence. They were like, I don't know what serialization is.
+
+It's in the slides. I need to know this. Let me Google for it. Copy that definition into their notes and studied it for their exam.
+
+And then wrote the wrong answer on their exam. Like they went to a lot of work to give me the wrong answer on the exam.
+
+Which I respect, that they did the work because like young people these days can be hard to get them to do work.
+
+But that's dumb, right? I'm giving you the definition.
+
+It's right there.
+
+In general, in this course, when you're like, wow, I don't know what this thing means, the first thing you should do is go to the slides.
+
+Then you go to the required readings because if it's in the slides, I can save you the trip to the required readings, right?
+
+Then you go to the required readings. Then you ask a question.
+
+Because a lot of these terms in computer science and you'll find this in computer
+
+engineering and you'll find it in electrical engineering and all the adjacent fields.
+
+Depends on who you ask, what a term means because they're context dependent, right?
+
+It depends on what your context is, what how we use that particular term in this case.
+
+So anyway this is a long story. That's a long story about how should you study and how should you work and etc.
+
+But in this case, if we have a data structure and we want to place it into, uh,
+
+and we want to turn into a sequence of bytes where it turns out later, uh, the order of the bytes can matter also.
+
+So so that's part of serialization, but we want to place it into a sequence of bytes such that we know exactly what every byte represents,
+
+and we know exactly how it's represented so that we can, for example, communicated to someone else.
+
+And then they can, you know, interpret it in exactly the way that we intended for it to be interpreted,
+
+that taking of some sort of higher level data and turning it into a sequence of bytes,
+
+we call serialization serial as in one after another, as in a serial killer or not breakfast cereal.
+
+Right? There's probably a better example for serial than serial killer, but it's really not cumbersome to register your second.
+
+Huh? A serial comic? Yes. A seer or a serial.
+
+If you, uh, watch the BBC, that's what they call like a show that has more than one episode.
+
+They call them serials, right? I mean, I think generally just in British English, but certainly, um, if you watch any of the BBC shows, um.
+
+Yeah, this. It's way better than serial killers. Thanks. Um, but here, rate is one after another.
+
+Um, so if we take this data structure, we can take this data structure and we can serialize it.
+
+And when we serialize it, we can choose whether we want to have those extra four bytes in there or not.
+
+We can say, no, I actually don't want those extra four bytes in it.
+
+And so here is some code which reads the um C data structure using seed syntax, which will automatically skip over the padding.
+
+Right. So when I read the members of a data structure I never get the padding.
+
+The padding is never, um, part of the data that I read when I use the members of the data structure.
+
+Right? Um. But then when I write the data that I read out using the C syntax, I'm going to write it using a void pointer.
+
+And I place that void pointer at very specific places in memory,
+
+so that I can read and write from exactly the locations that I want to use to store the data.
+
+So in this case, I take my four byte value.
+
+I take a void pointer. Why void pointer?
+
+Because it doesn't have a type, right? It's just an address.
+
+I assign to it some memory that is of the size that I wish to store.
+
+Note that in this case, we didn't use size of. We didn't use size of.
+
+Because of the size of my structure, I'm going to get 16. And that's what we want, what we want.
+
+We only want the part of the data structure that contains information that we care about.
+
+So we have to calculate that. Now should I use 12 in my source code.
+
+Never. What should I do? I'm just like a waiter.
+
+I wait until you start to to take a bite. Huh?
+
+Say you would give it a name. Give it a name. Yeah. That's right. You would give it a name.
+
+Uh, and then you would define that,
+
+and you would hopefully arrange for such a way that you can ensure that it's exactly the right size to actually store the members of the structure.
+
+Right? In some fashion. Yes. Structures are representing convenience for us.
+
+Yep. I. So the thing is that what I'm about to do here.
+
+So the question is if the structure is representative inconveniently, why don't we just not do that?
+
+The structure is represented inconveniently because that what's inconvenient for size is convenient for performance and correctness.
+
+So the structure using the structure the way it is in memory will be much faster than doing what we're about to do.
+
+And on some platforms this is going to crash on our platform.
+
+It won't. It's going to run just fine. But on some platforms going to crash.
+
+And you have to know that ahead of time if this would crash on our platform, we have to do it's like not easy.
+
+Two lines of code, right? It's like more lines of code to make it happen, right.
+
+In order to make it not crash.
+
+So the answer is that, um, C does it the way it does it for considerations that are just different from the considerations we have right here.
+
+Right. It's solving a different problem. So they rate our malloc 12 bytes I assign this void star pointer to that 12 bytes.
+
+But you cannot dereference a void star pointer. So now I have this p that I can't use directly.
+
+Right. Because I don't know what it points to. I don't know what kind of type it is. So what we do is we cast P.
+
+This is called a cast. So I say I have a variable called p in parentheses.
+
+I put before to type that says pretend that p is actually an int star, not a void star.
+
+Pretend that it's an int star. Go to that location.
+
+Assign into that location this value.
+
+Right. Then I say take this.
+
+This address p. Add to it the size of the int that we just stored.
+
+So four bytes. So this is actually essentially p plus four.
+
+Pretend that that address at people's for is a pointer to long.
+
+Go to that location. And assign into that location this long.
+
+All right, so I've now packed four bytes of it and eight bytes of long into memory, with no padding in between and no gap in between.
+
+This assignment on our platform is very slow.
+
+I probably don't care. Right? It's very slow. But like, if this is performance critical, I'm doing it wrong.
+
+Right. So this is not performance critical part of the program. On some platforms this is going to crash, which is going to be a problem.
+
+And you'll have to handle it in a different way. But our platform is just slow. Um, we've now taken those 12 bytes.
+
+We put them in a memory. They just take up 12 bytes. Make sense?
+
+It's not a question. Yes. Of. Yes.
+
+This isn't that. We just wrote. Right. We write in, and then we jump over it.
+
+Right. People sides of it. And then we write immediately after it.
+
+Eight more bytes. Make sense? Why would I not just use an array for everything?
+
+This is the same. The backwards to the same answer to his question is, uh, if I want an array, I should use an array.
+
+But if array doesn't have the semantics that I want, then I shouldn't use an array.
+
+And if in this case I use an array of longs, for example, I could assign an int add along to a long.
+
+I'm still wasting four bytes, right? So an array gives me no way to store multiple items of different sizes.
+
+So the answer is sometimes that's exactly the right answer, but not here.
+
+Uh, so the question is, can I write platform specific code in C by checking what platform I'm on?
+
+Yes. Down that path lies madness.
+
+You can, but the problem is that you can't predict all possible platforms, right?
+
+For one and for another. Um, there's just so many of them.
+
+What you can frequently do is say, hey,
+
+does this platform have this particular property that I care about and then take a choice and do one or the other.
+
+And normally you would do that not in C itself but in the preprocessor which you saw very, very briefly I think in lab two.
+
+I think there was some preprocessor stuff in lab two, but we kind of gloss over it for most of the semester.
+
+But it is certainly a thing you can do. And there are two kits that are designed exactly for that.
+
+So for example, the new project new is the G is hard G and you like a yak, right.
+
+Uh stands for is not Unix.
+
+They have a tool that is um, called Autoconf that its whole job is to analyze your platform and figure out stuff like, can I do this or not?
+
+And then give you a variable that you can check to find out whether you're allowed to do it or not.
+
+So you can make that decision. But it's like. If you work on kernel code, you will absolutely do that at some point in your career,
+
+but you will restrict that to as few lines of code as you can, because it makes testing and correctness very, very difficult to determine.
+
+Great questions, great questions, you guys. I love your questions. I think I said that last time.
+
+All right. I don't love this.
+
+Okay. Um. So another use of void pointers.
+
+And are not just void pointers, but pointer math in general,
+
+of which void pointer void star is normally the type that we use to do pointer math is when I have, uh,
+
+a data structure that I want to store in memory, but I don't know how big it's going to be,
+
+and I don't know exactly how it's going to be laid out because it's dependent on the actual data that I'm story.
+
+So if I describe a struct here, if I say that I have a struct, uh, that has a variable in entries,
+
+and then it has a number of entries, that it is an array that is the number stored in the number of entries field.
+
+Right. And entries. And then after that I have a string and it's null terminated, but it has some arbitrary length.
+
+And then there's a null.
+
+I don't know how big the structure is because it depends on the value of an entries and how many bytes I want to put in the string.
+
+And so this is not a type that I can declare in C if I try to define this data structure this way,
+
+the C compiler is going to say I don't know what it's going to say, but it's not going to be happy, right?
+
+And it's going to refuse to do it because in C, every structure has to be of a fixed size that is known at the time that the the program is compile.
+
+But as you can imagine, frequently we want to store data where we don't know how much we're going to need at the time the program is compiled,
+
+and we already saw a way to do that, which is to use malloc and allocate how much memory we need, and then put our data inside that memory.
+
+And there's other ways to represent this right that don't require us to have to um.
+
+Have a variable size structure, but they have other again, other trade offs.
+
+Right. They have other, um, limitations and they work in different ways.
+
+So um. But what if I wanted to create this in memory?
+
+I wanted to create a layout exactly like this in memory. Say I am going to transmit it across a network wire.
+
+Right? I'm going to communicate this with another computer. And so I want to say, hey, here's the number of entries that I'm going to send you.
+
+And then here's all the entries. And then there's a string.
+
+And then there's an all at the end, so that the computer on the other end can say, okay, just read my data, read the data that you have to send me,
+
+and then I will interpret it using these rules that we have mutually agreed upon, you know, a priori or whatever.
+
+Um, so suppose that I have, uh, this data and I want to store this data.
+
+So I have three entries, and it's the numbers 42 31337 and 01701D uh, and then I have a string.
+
+And that string is going to be a name. And the name that I want to store is Image in Tamil.
+
+So what I can do is I can add up how much space all of this is going to take, which I knew on my previous slide.
+
+Right? I know once I know what data I want to store, I know how much space is going to take up till I know what data I want to store.
+
+I don't know how much space is going to take up, but once I know what I want to store, then this is just a matter of sterling and size of right?
+
+So then I can then Malik size of a size T for my N entries and entries times size of int right for the number of entries that comes after that,
+
+and then the length of the string plus one byte for the null. That's how much memory I would need to store this.
+
+I then. So I assign that into a void star pointer, because this doesn't point to any particular type that I can easily reference, right?
+
+Then, for convenience reasons, I'm going to create a cursor. As in cursor.
+
+Right. I'm going to create a cursor that I'm going to move through memory. And I'm going to use that cursor to store data into memory.
+
+And the reason I created a cursor is because I would like to sort of store something and then move past it, store something, and then move past it.
+
+But when I'm all done, I need to know where I started. So I keep track of where I started, and then I create a cursor and I move through memory.
+
+And what I've done, where I started starting at that point is going to have this data structure.
+
+So then here's some code. That does that.
+
+So I say go to the address that my cursor is pointing to, which is the beginning of this memory that I just clicked.
+
+Pretend that what you find there is a size T and poke into that location.
+
+In this case, the number three. Write the number of entries that are going to be following.
+
+Then go, uh, take the cursor and move it past that size T.
+
+Turns out that the size is eight bytes long on our platform, so it's going to move forward eight bytes.
+
+Uh, and then for each entry and entries do essentially the same thing.
+
+But this time poke an int, not a size T, right?
+
+Stick three ints into memory in this case is three ints.
+
+Then when I'm done, copy the bytes of the string. Uh.
+
+And I said less than or equal. So we copy the null byte as well.
+
+All the bytes of the string, including the no byte.
+
+I'm done. I've created that variable size structure in memory. I couldn't declare it.
+
+I had to do it programmatically. But I could create that layout in memory.
+
+And I did it using void pointers and a little bit of pointer math. Now, why do I teach you all this?
+
+We're going to look at the result here in a second. But why do I teach you all this? Uh, you're going to have to do this.
+
+In this course. You're going to do it in the Pointer Math Lab, which is this week.
+
+You're going to do it in programing assignment three, which will be released after the midterm.
+
+You're going to do it in programing assignment four, which will be after programing time at three.
+
+As these things go. Um, and then there's one more lab.
+
+We are going to do it right.
+
+You're going to use void pointers and you're going to put stuff in memory and you're going to read stuff back out of memory using those void pointers.
+
+Okay. So come back to these slides. Look at these. Make sure you understand it.
+
+If you don't understand it ask questions because it's coming up. Uh, you'll be asking questions during your pointer math lab this week.
+
+All right, so now remember that dump memo that I wrote.
+
+I can use that dump mem to to dump the values of the bytes of memory, um, from where I stored this.
+
+And then this is the values of the bytes of memory that I get when I am done.
+
+So, uh, there's our three. We have three entries. Um, there's our 42.
+
+This is our 31337 is in hexadecimal. And we'll talk more about why it's the way it is later.
+
+There's ah 1701D uh, and then this presumably is a capital I, little M etc., etc., etc. down to our null byte.
+
+Right. So we took that structure. We started in memory. There's no padding.
+
+There's no the structure never existed. But we can find all of those bytes that we just stored.
+
+Cool. Questions.
+
+All right. Um, I'm not going to do that.
+
+I'm not going to do that. Okay, so that's it. Uh, let us start.
+
+If there are no questions. Uh, with layout.
+
+Okay, so our, um, usual advice.
+
+We're running to the end of the advice. There's this. And I think maybe one more lecture and then there's no more advice before lectures.
+
+I will have told you all the things you know, need to know about being a student at that point.
+
+That's not true. But like all the things I'm going to tell you, uh, at that point.
+
+So, uh, this is a rather famous this particular rendering is not so famous, but this is a rather famous, um, sort of image concept we're on.
+
+We have it's really hard to see in here. I don't know if the projector is dim or the lights are too bright or what.
+
+But we especially we have a cylinder and there's two lights shining on a cylinder, one from this direction and one from this direction.
+
+And so the light that shines on the round end of the cylinder casts a circular shadow, and the light that shines on the, uh, long end.
+
+The tube side of the cylinder casts a square shadow.
+
+And if I look, if I can't see the cylinder. But I can only see one of these shadows.
+
+Then I'm going to say, oh, I have a round object or oh, I have a square object, right.
+
+Depending on which shadow I look at. But if I can see both of those, then I can say, ah, I must have a cylinder or some yet more complicated shape.
+
+There's an even more complicated version of this where,
+
+like the cylinder is pinched on one side and there's a light from above and there's a triangle on the floor.
+
+Right? Depends on how many angles you want to get from it. Of course, this is how we do architectural drawings.
+
+When we draw architectural drawings,
+
+we or um or CAD drawings like frequently we have just some flat views of something with some, you know, layouts and dimensions.
+
+And then from there a, an architect or a or um, a builder or a machinist or somebody can like make one of those things.
+
+Right. But the point is that if I only look at this from one direction, I cannot really get a good picture from what I'm actually seeing.
+
+When you write. Programs when you work on programs when you work on code.
+
+You will find that you metaphorically have exactly this problem, and in many cases, it's because you cannot look at a program, at the whole program.
+
+There is no way to do it like it doesn't exist.
+
+It's not a thing that can be like, you can't pick it up and like, turn it around and look at all the different parts.
+
+There's no way it doesn't exist, right? It's just a concept.
+
+It's a concept for which we have created a language to describe the kinds of things that a program would do.
+
+In fact, we've created dozens and dozens of languages, right, to describe the kinds of things that a program can do.
+
+But all of those things are sort of a sequential representation where I can really only look at one part of it at a time.
+
+If I have a program that is, you know, something like Firefox.
+
+Or Chrome or, um, you know, the.
+
+Unreal Engine or something like this. These are millions of lines of code.
+
+You can't just read them all. Understand what they did and then go make a change.
+
+Right. It's not practical. It's just you can't get it all in your head. You only have time to read them all, much less.
+
+You know, once you did, would you have any idea what you would just looked at?
+
+So instead, what we have to do is try to come up with ways to think about the logical behavior of some portion of a program.
+
+Compare that to the code that we're looking at. Decide whether they match and make sense, and then figure out, oh, I need to make a change, right?
+
+I'm adding a feature, or I have a bug and I have what's going wrong or whatever,
+
+and figure out what it is we're actually seeing from these shadows on the wall.
+
+Right? I can read the documentation. I can look at a small chunk of the code.
+
+Maybe I can run it and observe the output, but I can't really understand the entire thing in its totality.
+
+It's not practical.
+
+Um, so when you're writing code, when you're debugging code, when you're working on code, try to arrange to give yourself several of these views.
+
+Because if all you have is the function I'm looking at right now that I'm trying to debug, it's very hard to really understand what's going on.
+
+Would we give you an assignment? We give you some views, right?
+
+We give you a handout. It has some requirements in it. Maybe we give you some tests.
+
+Maybe we give you some given code, you know, etc. And then you take those and you create more views of the code.
+
+Maybe you write some pseudocode. Maybe you draw some diagrams.
+
+Maybe you, um, start to write more of the actual implementation.
+
+Right? When you get stuck, when you're trying to understand, when you're trying to make progress, when you're not sure sort of what's going on.
+
+Don't limit yourself to just what's in this function. I'm going to look at this function.
+
+Go back and look at your pseudocode. Go back and look at your diagrams.
+
+Read the requirements in the handout. Look at the tests. Look at the code that's part of the picture.
+
+But look at these other things and try to ask yourself how do these things fit together.
+
+Does this pseudocode pseudocode describe the code that I'm actually seeing?
+
+Does this code actually do what the diagrams say they should do?
+
+You should all have watched the video. By now.
+
+Right. One of the things that I do in the video is I say, I don't remember exactly how it goes, but I have, you know, a list and I say,
+
+or I have a Q and I add an item to it and I draw them in a different color and I say, hey,
+
+you know, when you're writing this code, every one of these lines, there's a different color.
+
+If you can't find the line of code that makes that line, you're missing something, right?
+
+Your code is not yet complete, right?
+
+So you can take those diagrams and you can deliberately color them or mark them, or annotate them or stage them in such a way.
+
+Maybe you have a sequence of diagrams and so that you can say, okay,
+
+this line of code is that this line of code is that this little function over here does that.
+
+Okay. You know, I'm done, right? I've done the whole thing or up.
+
+I don't see anything that makes this line. My code must not be complete, right?
+
+I need to do a little bit more. Um, and then when you're done or when you're stuck, compare these things against each other.
+
+Did my pseudocode actually capture the requirements? Look at the handout.
+
+Look at the pseudocode. Does my code actually do what the pseudocode says?
+
+Do I believe that my code actually does what the requirements asked for?
+
+Right. Compare them against each other. Because where you find discrepancies, you've either found a misunderstanding of the problem or a bug.
+
+Now, ideally the bug is not in your code. The bug is in some documentation somewhere and you just fix the documentation and you're done.
+
+But sometimes that means that you misunderstood the problem,
+
+or you have a bug in your code and there, you know there's something that you need to fix.
+
+All right. Are there any questions? That makes sense. Yes. Pseudocode is a fairly.
+
+So the question is how do you suggest we set up the pseudocode for the recording,
+
+um, that people will be watching starting Wednesday midterm Wednesday, Tuesday.
+
+Um. That's a personal thing.
+
+Like people have different styles for pseudocode.
+
+Um, for me, I normally only write very, very high level pseudocode and very, very low level pseudocode.
+
+I really don't write a lot of code pseudocode in between.
+
+I allow things and what I mean by what I mean is when I start a program,
+
+I might have a paragraph description of like what an entire subsystem of the program is going to do.
+
+I'm going to read in some files, I'm going to set up some data structures, I'm going to grind across them and produce an image, right or whatever.
+
+Right. Very very high level.
+
+And then when I get down into, say, you say I'm producing an image and it's a very fiddly binary format with lots of fields that mean specific things.
+
+I'll have a little, you know, block of comments typically that is going to say like the like exactly what data needs to be there in the end.
+
+And then some notes on like where I get those values from.
+
+Right. Very very low level. Like this is literally going to be like one line in this comment is going to be a line or two of code, right?
+
+Almost exactly one for one and very little in between.
+
+But that's a personal thing, right? That's personally how I like to view my pseudocode.
+
+So it's either a broad description that I can go back to and say am I actually doing this?
+
+Or it is detailed instructions where I work out all of the offsets and all the specific values,
+
+and where do I need to find the information that I need,
+
+etc., sort of document it, and then I just write the code that corresponds to exactly what that pseudocode was.
+
+Uh, many people like to write code at more levels than that.
+
+One of the examples that I give at some point, maybe I've already done it, maybe it'll be later, is you can write like, uh,
+
+one sentence that is a very high level description, and then you take another pass and you say, well, what are the steps to accomplish that sentence?
+
+Then underneath that, like outline style, I do these steps and then okay,
+
+well what are the steps to do this next thing outline style and just keep expanding it until you have like an outline.
+
+And then the individual bullets of the outline are lines of code and the like.
+
+The inner bullets and the outer bullets are like functions and files.
+
+Right. So you've sort of sketched out the structure of your entire program. It's a valid way to do it.
+
+Um, but as a personal thing, it's what works for you. What helps keep you on track for writing your program.
+
+And I suggest you try some of the things like I just mentioned, but talk to other people too,
+
+or try some out things on your own and find what works for you. Everybody's brain works in a different way, right?
+
+I have a huge capacity for stupid little details.
+
+And almost no ability to remember. Like.
+
+Mid-level concepts, which maybe means I should write my pseudocode at mid-level, like the part that I don't write.
+
+Maybe that's the part that I should write, right?
+
+It's easy for me to remember that the third bit of this structure over here is determines whether you know it's a vertical or horizontal first layout,
+
+right? Or something like that.
+
+Like, I'll remember that for 35 more years, and then you'll ask me like, what was the name of the file type you implemented?
+
+And I'm like, I don't know. Like, I don't know. There was a manual.
+
+I think I read it right. Um. But other people work in different ways, right?
+
+And they might be like, I can never remember that third bit's meaning or whatever, you know?
+
+But I remember that it was a Tiff image. It was definitely a Tiff image or, you know, whatever.
+
+Um, so find what works for you. Try different things. There's maybe some things to get started with, but talk to other people too, right?
+
+Talk to other. I mean, the when you have someone who teach you something about programing, say,
+
+hey, can you show me some examples of the kind of pseudocode you would write? See what they write?
+
+Try it. See if it works for you. Those have.
+
+Do you know what books I mentioned? The.
+
+Clean code. Okay. Yeah. Okay. That's a good list. Yeah. So, um.
+
+It was so the art of programing. Uh, um, the art of computer science.
+
+The art of performing. Uh, I'm not sure. Um, the art of computer science is not what you want in this case.
+
+Um. So the Pragmatic Programmer is excellent.
+
+The Pragmatic Programmer is, um, it's a little higher level.
+
+It's more about like, how do I go up the development process and less about how do I write individual bits of code?
+
+Um. Maybe it is the art of programing.
+
+Koenig and Pike. Yeah, Koenig and Pike. Maybe it is called the Art of programing.
+
+Um, is a really excellent book that kind of goes through, like, how do I structure my program and, like, the kinds of things.
+
+Like what kind of pseudocode? But you know, broadly speaking, that's a really at the level you're at right now.
+
+Like if you're only going to read one book about programing, the art of programing or the Again and Pike book.
+
+The practice of programing. Yeah, the practice of programing. Uh, that's the one you should read, right?
+
+Read the practice of programing. It's really. It's really actually Kern again is in K and R, right.
+
+The same k is occurring again as in CR um and Pike is Rob Pike, um, who was also at AT&T Bell Labs.
+
+Uh, back in the Unix days.
+
+Um, but the practice the programs are really excellent book clean code uh, and the Pragmatic Programmer or like kind of at a higher level,
+
+clean code is more of a like rulebook for how do I write code that's readable and maintainable?
+
+Uh, the Pragmatic Programmer is more of like high level.
+
+How do I structure my working environment and the, uh, processes I use to produce my code?
+
+Both excellent books. Um. Feel like there's one other in this area.
+
+Oh, um, the mythical man moth. Um, which is so sort of like the practices of programing.
+
+Another excellent book, kind of in that area.
+
+But if you're only gonna read one, the practices of programing, it's it's the it's probably a good answer to your question also.
+
+The school. Did I answer questions? Okay. All right.
+
+Um. All right, other questions. All right.
+
+So. This isn't what I expected to see next, but it makes sense.
+
+When you've taught this course enough times, you get confused on which slide sets or which slide sets, or where we introduce things.
+
+So, um, the first thing I want to talk about is when we run our programs, um, sort of what do they look like and what happens.
+
+And that's what this is all about. That's what this lecture is all about, is what does our program look like?
+
+When it's running definition.
+
+Uh, what is a process? Because we're gonna talk about Unix processes.
+
+A process is an instance of a program execution.
+
+So you write a program in C. You compile that program and it produces an executable on disk.
+
+Write a file on disk. Your. Out file as it were.
+
+You run that program.
+
+The operating system copies that program into memory and then causes it to actually do whatever it was that it was asked to do and when it's running.
+
+So that program is that, you know, executable on disk, right.
+
+Um, when it's running, then it requires a bunch of other stuff other than just the executable, the instructions that it's going to run.
+
+Right. It uses some memory. It has some input and output files.
+
+It, uh, does some computation. It requires a CPU to run on.
+
+You know, it has registers that it uses. It does whatever. Right. The process is like all of those things put together.
+
+So the process is not something that I can like write down.
+
+The process is a thing. Right.
+
+That is so I can write down the program. Here's the instructions you should take.
+
+I can't write down the process, right? As in I can write down your name, but I can't write down you as a person.
+
+Write the name stands for you, but it is not you write the program is the person.
+
+Right? In this case that's actually doing whatever the instructions say it should do.
+
+Um. I said these things. We also said in one of the various.
+
+A process is, um, the first or the second because you have to, like, plain text.
+
+Like a piece of trash. All the other things that are inside it.
+
+If I asked on the midterm, you can just give me the short sentence.
+
+But if you gave me a more complete definition, as long as it was accurate, that would be fine.
+
+But the sentence is what we would look for when in. We'll talk about this at some.
+
+But on the midterm. Every question that we ask, uh is two words.
+
+Two sentences, two paragraphs. Depending on how much we tell you.
+
+We want to ask that we want as an answer, not, you know, two pages, because I just have to read it.
+
+If you write it down. And that's not cool, right? So two words lean towards the two words.
+
+Right. Two words. So the one sentence would be perfect.
+
+I'd rather see that in the border. Good question. All right.
+
+So, um.
+
+As we said, and like the one of the very first lectures, I think we actually said it in on the first day of class or maybe the second day of class.
+
+And then we said it again, a tour of computing systems, uh, on a unique system.
+
+A program is, um, protected from all of the other programs that run on the system at the same time, and vice versa.
+
+Right. They're all protected from that program. And that process appears to, uh, run on a dedicated machine that has its own CPU.
+
+It has its own memory, it has its own input and output, the other system resources that it requires,
+
+um, to run later in this, we'll see how some of this, um, happens.
+
+Um, but in particular, this whole setup requires that the hardware participates in the maintenance
+
+of that program environment or the maintenance of that process environment.
+
+When your program tries to access memory that doesn't belong to it, something has to stop it that something is dedicated hardware inside the computer.
+
+That sort of provides bounds for what your process is and is not allowed, um, to do.
+
+And in particular, one of the things that that hardware does is it lays out and maintains the address space of your process.
+
+So we said earlier on that the address space starts at zero and it runs up to 2 to 64 minus one.
+
+And that notionally your process has access to all of that memory.
+
+Right? All of it belongs to your process.
+
+And we'll see later how that's possible, because that implies that like your program can access all the memory.
+
+But we also said there's other programs on the computer and you're protected from them. And how does that work, blah, blah, blah.
+
+We'll talk more about that later. Um, but the virtual memory subsystem is the answer, the short answer to how that, um, happens.
+
+So that virtual memory subsystem is going to set up a process environment that, in fact,
+
+does go from zero to the top of memory and is allocated just to your program
+
+and is maintained and protected for you by the hardware inside the computer.
+
+And at the bottom of this address space, we have, you know, certain data that has certain properties.
+
+And as we move upwards through the address space, we have different data that has different property, like to larger addresses.
+
+We have different data that has um, different properties.
+
+And.
+
+Understanding this layout helps you understand what your program is doing when your program runs, and in particular when you your program crashes.
+
+It tells you something about what it was doing and what it was doing it with and what it was accessing.
+
+And you can ask questions like, should it have been accessing that? Right.
+
+When you see, um, what it's what it's doing,
+
+if you understand where things are later memory and what their relationship to one another should be and things like that.
+
+So these lower sections, we'll talk about this more here in a moment with these lower sections from base on down.
+
+So from some address to the bottom of memory all come from the executable file on disk.
+
+When you compile your program all the information is required to create those sections of memory is read from the file on disk.
+
+Now as your program runs, they may be modified, but when the program starts right, they're read in from a file on disk.
+
+The sections in the middle of the heap and the process stack are created when your program actually runs.
+
+They don't exist until your program you until your program becomes a process.
+
+They are not in the execution dish disk. They are an artifact of the process that is actually running.
+
+Then we have other areas of memory that aren't anything at all. And if you try to access those, what do you get?
+
+Segmentation fault. Core dumped. Right.
+
+So when you get a segmentation fault, it's because you tried to access some of this memory that says unmapped here on this, uh, on this layout.
+
+Right. And the hardware, the, the mechanism that enforces all of this memory stuff says, I actually don't know how to do that.
+
+You asked me for an address and I don't know what should come from there.
+
+So here. No. Arrow, right?
+
+Um.
+
+In particular, this area right down here at the bottom on systems that have enough memory is always on maps, so that when you try to access a null.
+
+Pointer. Your program will crash immediately. Right.
+
+To prevent your program from crashing on systems that do not have a large address space, this was not the case.
+
+The bottom of memory was not necessarily unmapped. And on those systems, accidentally accessing a null pointer could corrupt your memory.
+
+But on our system, normally your program will crash because there's about four megabytes actually down here at the bottom.
+
+That's up. Not valid. Right. The hardware mapper will not allow you to do it.
+
+You will get a segmentation.
+
+So as I said, these lowest data down here at the bottom, the BSS data and text sections are known at the time that you compile your program.
+
+And they're stored on disk in the file that is the executable, right?
+
+Your dot out or your whatever your executable is, name the information that belongs to is actually just stored in that file.
+
+And when you run your program, the operating system just copies that data out of that file and puts it into, uh, then starts your, uh, program.
+
+The text section is the actual executable code. What? The text section.
+
+Historical reasons. Right. Um, it's not text.
+
+It's not something you can read. It's not like we think of text as being like a text book.
+
+Right. Or text is being like strings or whatever. It's not. It's the machine instructions.
+
+Right. But we call it the text section. Immediately above that we have the data in the BSS.
+
+The data section is actually what's written on the label. There's data stored there, right.
+
+Turns out that there's also data stored in the BSS. The BSS also has a name that is a historical accidents called a block started by symbol.
+
+It's called the block started by symbol because in uh, some IBM.
+
+System. Something one of the old IBM's in like the 1960s.
+
+Their machine language had a special assembly language instruction base block started by symbol, and everything that came after that was data, right.
+
+Um, but and for some reason, we still call this section the base,
+
+even though we aren't writing for that IBM system, and it's never been a block started by symbol, ever.
+
+That was a metaphorical thing. And but we still call it the base. It also stores data.
+
+The reason we have a bus and a data is that the data section stores data where the initialization
+
+value the value should have when your program starts is defined in the source code.
+
+The bus does not have a value defined in the source code, and it just all starts out with a value of zero.
+
+Um. I'm going to end right there.
+
+We'll pick up right there, uh, on Wednesday and continue from there.
+
+Thank you. Yep. Thank you for having, I say, YouTube.
+

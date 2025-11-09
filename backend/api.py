@@ -55,7 +55,7 @@ def create_profile():
         result = profileMain.main(
             mentor_id=mentor_id,
             description=description,
-            rules_json=rules,
+            rules=rules,
             files=transcript_files
         )
 

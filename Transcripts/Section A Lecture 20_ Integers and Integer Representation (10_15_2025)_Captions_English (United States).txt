@@ -1,0 +1,923 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+The percentage grade that you received, uh, overall over the components of the course would you could pretty much calculate at this point,
+
+but we will be issuing the percentage grade as we have it. Uh, including 5% for, uh, attendance.
+
+It's out of ten for the full semester.
+
+We're about halfway through, right, 5% for, um, labs, which is about ten out of ten, but we're about halfway through, right, etc.
+
+So everything's scaled to 50%. Um, I think it turns out to be 45% of your grade total,
+
+because the midterm is worth 5% less than the final, but you have have had 15% projects so far.
+
+And you will have. 20% remaining, right?
+
+20% for your final 5% attendance 10% lab exam 5%.
+
+Labs. And then that's 105% right, or something like that.
+
+Uh, at any rate. So then that will be divided out. You will be receiving a midterm satisfactory if you got 70% or better.
+
+Amidst some unsatisfactory if you have below 70%.
+
+Uh, of course, this doesn't mean anything as far as your grades.
+
+Um, but what it does mean is that if you are, uh, in that unsatisfactory bracket, um, someone from.
+
+CS will be reaching out to you. Um.
+
+For advisement, right? To talk to you about what you can do to try to bring those scores up.
+
+Please, if you fall into that category, consider actually engaging with them.
+
+It's not too late for almost anybody in this class right?
+
+To do fine. But we're running out of time, right?
+
+A few more weeks if your grade, if your grade isn't what you want to be and it's not improving in the next couple of weeks,
+
+then it's going to rapidly be there's too many percent, you know, under the boat.
+
+And we can't just can't do anything about it now. Right?
+
+So, um, if you get that unsatisfactory, if you're if you don't like the percentage that you're at, now's the time.
+
+Right? Now's the time.
+
+That said, I am way behind on meeting people because everybody decided that now's the time, starting about a week and a half ago or two weeks ago.
+
+And so I'll do my best to work through people as quick as I can.
+
+Um, okay. Any questions about that stuff or can we talk about material?
+
+So we're not going to finish up the Prague Prague lecture that we started last time.
+
+Today I hope to finish it a little bit later. I want to get in on, uh, dive into integers.
+
+There's a couple things I want to get out of the way. Um, uh, so that we have them in time for you to use them.
+
+And integers is one of the things we need to cover. So, uh, if you remember, way back in tour of computing systems, we talked about integers,
+
+and we talked about the structure of integers, and we talked about the fact that they're finite, etc.
+
+Um, we have also talked about the fact that there are different sizes of integers, uh, in the system.
+
+So a care is just a one byte integer. There's a short which is a two byte integer, int is four bytes, and uh, long is eight bytes on our system.
+
+Right. So and that's uh 816, 32 and 64 bits.
+
+But I now we're we're going to start talking about today is what how do we use those bits and what do they mean.
+
+How do we use them to represent, uh numbers.
+
+So recall first of all, what it is to be an integer.
+
+So an integer is whole numbers positive or negative and zero.
+
+Whether zero is a whole number or not is a philosophical question.
+
+And in the area of mathematics, you will find people who get very passionate about whether zero is a whole number or not.
+
+So we just go ahead and say, and zero. This is true in any numeric base.
+
+So whatever your numeric base is, an integer is essentially increments of that base, right.
+
+Or multiples of that base as whole numbers and zero.
+
+So if we're in binary that's 011011100101, etc.
+
+Right. We can count in binary. If we're in base ten, that's 123456789 ten.
+
+And then when you get to 99 you go to 100, right? You add another digit.
+
+Every time you get to the end. Um.
+
+If we think about what that means in base ten and what it means for the structure of a number.
+
+If I have a multiple digit number in base ten, then I can break that down into.
+
+Powers of ten times whatever the digit that they're associated with.
+
+So this number, 1038 is eight times ten to the zero.
+
+Right. Because it's in the last position three times ten to the one zero times ten to the two, and one times ten to the three.
+
+Of course, ten to the zero is one because to is anything to the zero is one, ten to the one is ten, ten to the two is 110 to the three is a thousand.
+
+Right. So we just keep adding a zero as we move on out.
+
+It turns out that this is true in every base, in every base, in numbers represented in that base.
+
+You add a zero every time you move from one one base position to another.
+
+So in binary, two to the zero is the first digit, two to the one is the second digit, two to the two is the third digit right.
+
+Just instead of tens they're twos. And so the multiple the powers of two become 110 100, 1000, 10,000.
+
+Right. And so that has the values one, two, four, eight, 16 the same as it becomes one, ten, 100, 1000, 10,000 in.
+
+Decimal, right? This is just a universal property of, um, integers as numbers.
+
+Now, uh, it's not a coincidence that we made you work this out on, uh, zero.
+
+Right. We made you parse numbers, and we made you think about the fact that hopefully, everyone ultimately arrived at the fact.
+
+That you can, uh, parse the number one digit at a time by saying, okay, I have eight.
+
+I'm sorry, I have one, right? Well, if I see a zero after that, then I multiply my one by ten and I add zero.
+
+Now I have ten. If I see a three after that, I multiply my ten by one, which is 100, and I add three.
+
+That's 103. Take my 103. I multiply that by ten, I add eight.
+
+I have 1038. Right. So we can go one digit at a time.
+
+It's not an accident that we did that for zero. It's because we're going to talk about exactly that structure.
+
+And we want to get you thinking about those things. But you.
+
+So this seems like it should be simple. You really can't be any simpler than integers and still be numbers.
+
+You started working with integers in kindergarten, maybe in preschool if you took preschool, right?
+
+Certainly if you had a pre-K preschool, you were working with integers, maybe counting, maybe starting to add small numbers together.
+
+Right? Doesn't seem like this would be hard.
+
+The real issue comes in not because integers are complicated or difficult, but because the machine on which we are representing them is finite.
+
+So it is fine to say, hey, we have this abstract notion of whole numbers, positive and negative and zero, but there exists no machine in the world.
+
+That can represent all of the whole numbers, positive or negative and zero.
+
+Eventually you run out of storage space to store the next number, right?
+
+No matter how much you have 16GB of memory, fine. 16GB plus one bit, you can't store it, right?
+
+It's too big. Practically speaking, that number is too large.
+
+Nobody cares. But it does mean that whatever size we choose to represent our numbers creates
+
+a boundary beyond which normal arithmetic is no longer how we do things right.
+
+And so we have to understand how do we do the arithmetic on the particular, you know,
+
+range that we've created of things that can be represented in the amount of space that we've decided to set aside to store an integer.
+
+So computers are finite. They decide on some finite representation of integers.
+
+And different computers use different finite representations to store integers.
+
+Maybe it's simply a difference of how many bits do they store to store an integer?
+
+So when we say we have a 32 bit computer, we have a 64 bit computer.
+
+What we really mean is one of these computers uses 32 bits to store an integer,
+
+and the other one uses 64 bits to store an integer, which means that the range of integers that they can store is different.
+
+Typically on modern systems, as we move from one class of computer to another, we double the number of bits that they use to store an integer.
+
+So in sort of the. X86 series of computers.
+
+The original well. The 8080 was not x86, but the 88 was eight bit.
+
+The 8086 was 16 bit. The 8386 was 32 bit.
+
+And then somewhere along the line we had AMD 64 which is 64 bit.
+
+So it was eight 1630 to 64 a 16 bit computer.
+
+Can store as many times more integers than an eight bit computer as an eight bit computer can store,
+
+because two to the 16 is 2 to 8 times two to the eight.
+
+A 32 bit computer can store as many more integers.
+
+As a 16 bit computer can store integers because to the 16 times to the 16 is 2 to 32.
+
+So a 16 bit computer can store 65,535 integers, or 536 if you count zero.
+
+A 32 bit computer can store 4 billion integers.
+
+Right. We went for 65,000 to 4 billion.
+
+When we went from 32 to 64 bit, we had a similar multiplication in the size of the space that we can use to represent integers.
+
+I don't know what the maximum. Integer on a 64 bit.
+
+So system is but it's like quintillion or something right.
+
+Like it's really, really large. Yes. What you're witnessing.
+
+Mhm. So the values.
+
+Yes, there is a constant in C int underscore max which is in std mh which is uh different value depending on what computer you're on.
+
+Right. And it tells you the maximum possible integer that you could store. There.
+
+I wouldn't say wrapper class. Just that terminology I wouldn't use.
+
+But when you say int, if I say int on a, you know, 16 bit processor, I'm going to get a 16 bit integer.
+
+If I say int on a 32 bit processor, I'm going to get a 16 or 32 bit integer depending on the architecture.
+
+If I say int on a 64 bit processor, I'm going to get a 32 or 64 bit integer depending on the architecture,
+
+and it just is a different size on those different architectures.
+
+And the int max constant will change with them. Did.
+
+That is your question. Um.
+
+So then it gets even more complicated when we want to talk about negative numbers and like other things that we might want to talk about.
+
+Uh, and so it turns out the integers are in fact, not that simple.
+
+They're kind of complicated. And what we're going to talk about over the next probably two lectures.
+
+So today and Wednesday maybe spill into Friday is those representational issues.
+
+So if we want to represent non integers. So numbers that are not just whole numbers, positive and negative and zero,
+
+it gets even more complicated because of notions like, um, how do I represent a fraction?
+
+Using an underlying representational system that has no.
+
+That there's no notion of a fraction. Um.
+
+Then there are mathematical complications,
+
+such as the fact that computers are binary and the set of rational numbers in base ten is larger than the set of rational numbers in binary.
+
+In base two, there are more rational numbers in base ten than there are rational numbers in binary,
+
+you might say, but even there's an infinite number of rational numbers.
+
+Yeah, but not all infinities are created equal. There are more rational numbers in base ten than there are in binary.
+
+I think actually, mathematically speaking, there's the same number because infinities do have equivalence classes,
+
+but because ten is divisible by two and five and two and five are relatively prime to one another.
+
+I can create more ratios if I use sort of a fixed number of digits right with base ten, than I can with base two.
+
+And so this again complicates how we think about numbers on computers.
+
+Uh, then we have the problem that rational numbers find. Rational numbers are innumerable.
+
+Irrational numbers. Real numbers are not innumerable, right?
+
+You cannot count all of the possible irrational numbers.
+
+They are uncountably infinite. So clearly they cannot be represented on a finite system at all.
+
+There's no way to represent irrational numbers are not irrational to represent.
+
+Um. Real numbers, uh, on a countably, um, finite representational system.
+
+Right? And again, the only underlying thing that we have is integers.
+
+And so therefore everything is countable in a computer in the sense of countable like you talked about.
+
+191. Right. We won't talk more about non-integer representations in this class.
+
+We will. At the end of this lecture, we will briefly do some thought experiments about non integer representations.
+
+You will dig deeply into non-integer representations. In 341.
+
+You'll spend more time with non-integer representations.
+
+But understanding them will depend heavily on having understood integer representations into 20.
+
+Right. So we're going to talk a lot about hexadecimal.
+
+We've seen hexadecimal already this semester. Where do we normally see hex.
+
+Ascii. We have seen Ascii constants in hex.
+
+Where. Addresses. Pointers. Write the values in pointers.
+
+Is where we normally see hexadecimal numbers,
+
+and the reason is because hexadecimal numbers are very convenient to represent binary numbers, numbers that are actually in base two.
+
+And we'll see why. So hex is based 16 essentially, the reason is that 16 is a power of two.
+
+That's the reason. But we'll see why that works out on our system.
+
+Uh, hex is base 16. So hex digits therefore have the integral values of zero through 15.
+
+Because that is inconvenient to write down. We write them down as zero through s a being ten, b being 11, etc. this shouldn't be new to you.
+
+Um, I recommend. That you memorize these.
+
+Uh, I'm not big on memorization. I don't memorize well.
+
+In fact, today if you asked me what is the decimal value of hex?
+
+Hexadecimal d, I don't know the answer.
+
+But I know that C is 12 and D is 12 plus one, so it must be 13 right?
+
+So I definitely know A, C and F and the others can be derived from those.
+
+Right? I just know them immediately. I recommend that you memorize these.
+
+They will serve you well in this class. You're not necessarily going to need it.
+
+You can work it out. You can always work it out.
+
+But as you go through your career, you're going to see a lot of hex numbers and it's worth learning them.
+
+It's also worth learning your powers of two. I know my powers of two through, um, I don't know, at least two to the 20.
+
+Maybe a little higher than that. All of them. Right. And then sporadic powers above that.
+
+It's worth learning them. It's worth your time to learn them.
+
+Um, one thing for powers of two to keep in mind, this is not on the topic of hex or integers,
+
+but like it will be helpful to you when thinking about integers and when doing some of the conversions.
+
+Two to the ten. Is approximately ten to the three.
+
+So ten to the three is 1000 to the ten is 1024.
+
+So when you see someone says, for example, a 32 bit number has a range to the 32.
+
+Well, that's approximately 4 billion.
+
+And you know that because two to the ten to the two to the 30 is approximately three,
+
+ten to the threes or ten to the nine and ten to the nine is a billion.
+
+Right because you can quickly do those conversions if you know that equivalence.
+
+Why do we care about ten to the three? Because in scientific notation and the way we name our numbers, that's where we move to a new word, right.
+
+So ten to the three 1000 times ten to the three is a million times ten to the three is a billion times ten to the three is a trillion.
+
+Right. So two to the ten is approximately 1000.
+
+Two to the 20 is approximately a million, to the 30 is approximately a billion, etc.
+
+Right. So like for because of the way we learned how to count, those are convenient to us.
+
+If you learned how to count in a different counting system, for example, there are counting systems that tend to run by the ten thousands.
+
+Then it would be. Then you might have different equivalences that will be valuable to you.
+
+But in English, because of the way we typically count. Uh, that's a convenient equivalence.
+
+No. At any rate, memorize these. It's worth your time.
+
+Yes. So, uh.
+
+The answer to that question is you can represent any number in any base.
+
+The question is how many digits do you want to give it? So I can represent an arbitrarily large number in binary using just zeros and ones.
+
+I can represent arbitrary low long pointer in hexadecimal using just zero through f.
+
+It turns out that 64 bit is already at the length where reading out that address is inconveniently long,
+
+32 bit is about the length where like that's tractable.
+
+And after that it's like, I don't know, it's a big number, which is unfortunate, but that's the reality we work in now.
+
+There was another hand somewhere. No.
+
+Okay. All right, so why do I care about hexadecimal?
+
+The reason I care about hexadecimal. Is that one hex digit?
+
+Because 16 is exactly two to the four is exactly four bits.
+
+And so if I have a 32 bit number. It divides cleanly into eight hexadecimal digits, because eight times four is 32.
+
+Very cleanly. I can take four bits at a time. Convert them into a hexadecimal digit.
+
+I can take a hex decimal digit, convert it into four bits, and just iterate and build out the whole number.
+
+Contrast this to base ten. Ten is approximately three and a half bits.
+
+So if I want to convert a binary number to decimal or a decimal number to binary,
+
+I cannot just chunk it into a set of an integral number of bits and convert one digit at a time.
+
+I have to do arithmetic if I want to convert a binary number to hexadecimal.
+
+I don't have to do any arithmetic. I just take four decimal bits.
+
+This pattern is this hex digit. Next for decimal bits, this pattern is this hex digit.
+
+Vice versa. If I have decimal number and I want binary one hex digit, write down the four bits.
+
+Next hex digit. Write down the four bits in decimal.
+
+I have to keep track of my running total and then add the next digit in arithmetic after doing the conversion for that digit.
+
+It's much more complicated to do, right? So we use hexadecimal when we want to represent binary.
+
+And we aren't necessarily concerned about doing arithmetic, but we're concerned about the magnitude of the number.
+
+I if I read to you a 32 bit address and I read you another 32 bit address, and I ask how they're different in bits.
+
+You'll be like, I don't know. There's just a lot of ones and zeros.
+
+But if I read you a 32 bit address in hexadecimal and another 32 bit address and hexadecimal,
+
+you'll be able to immediately say, oh, those are the same or those are different, right?
+
+Because you've reduced it to a number of digits, that you have a prayer of being able to keep in your head.
+
+Right. If I read you a hexadecimal number and another hexadecimal number of a reasonable size and ask you,
+
+do they have the same number of digits, you can quickly say yes or no.
+
+If I read you out a long binary number, in that long binary number,
+
+you have to very carefully count the digits on your fingers, right, to make sure they have the same number of digits.
+
+So hex is more convenient, just representation because it reduces the number of digits by a factor of four.
+
+And the conversion is very easy. Here is the conversion.
+
+I want you to note a couple of things about this table. Uh. First of all, this is how we count and binary, which probably you all know.
+
+But here it is on the slide. Right? 110111001011101111, etc.
+
+Second of all, every pair of numbers. The last number flips, every four numbers.
+
+The second number flips every. Um.
+
+This is. Know every number.
+
+The last number flips, every pair of numbers. The second number flips every four numbers.
+
+The next number flips every eight numbers. The next digit flips right.
+
+This makes it very convenient to ask yourself little questions like is the last digit a one or a zero?
+
+If I give you a hexadecimal number, you can very quickly tell me is the last bit a one or a zero the final bit?
+
+Is it a one or a zero? Because if it's an even number.
+
+Even being 2468A, c e the last number is a zero.
+
+It was an odd number being 1359B, the f the last digit or the last bit is on one.
+
+Likewise, if I ask you, is the first bit a wonder is zero?
+
+If it's zero through seven, the answer is at zero. If it's eight through F, the answer is it's one.
+
+Why do you care about these things? When you're doing conversions between bases.
+
+When you're doing calculations of integer values, of decimal values of numbers.
+
+When you're asking yourself about the fundamental properties of numbers as stored.
+
+You frequently want to know what the values the individual bits in that number are.
+
+The most common bits that you want to know about are the very first bit.
+
+And the very last bit. Right. So if you know your hex table, you can very quickly say, is my first bit a zero or a one is my last bit is 0 or 1.
+
+First bit is more important than the last. So this hexadecimal notation is convenient for us for a lot of representational reasons.
+
+It is not fundamentally how computers do arithmetic.
+
+It is not fundamental to the way computers store integers.
+
+It's more that binary is just two many bits for our primitive meat brains to handle.
+
+But by reducing that by a factor of four, we can do much more useful work with it.
+
+Doing arithmetic in binary is very, very easy for a human.
+
+Like adding numbers together in binary. For example, it's very easy for a human.
+
+Doing arithmetic in base ten is very easy because we have a lot of practice at it.
+
+Doing arithmetic in hexadecimal is a pain in the ass because we don't have practice and there's too many values, right?
+
+It takes a lot of time. It's difficult to do. We don't normally do arithmetic in hex.
+
+We do representational things in hex. Are there any questions?
+
+Yes. That's a good question.
+
+So the question is was hex created because we do binary? Um.
+
+Uh, probably not probably. There were other reasons for hexadecimal to exist.
+
+Um, so certainly mathematicians had looked at base 12 with some, um, interest.
+
+Prior to computing. Um, the there's a lot of reasons for that.
+
+It plays nicely into circles and degrees and things like that with 360 degrees and etc.
+
+Um, also, of course, there were several historical cultures that worked on base 12 or on base 60.
+
+So, uh, Babylonian, I think math was based 60.
+
+Um, and uh, like some of the messo in South American math was base 12, like the Mayan calendar, right, is famously cycles of 12.
+
+Um. I don't know about 16, but I would be surprised if it hadn't come up at some point.
+
+Certainly the reason we care so much about it now is just because of computers.
+
+But mathematically, historically. That's an interesting question. I don't know the answer.
+
+If we had spent any time with it, I would be surprised if somebody hadn't. But not nearly as much as when we not like base 12 or 360, right.
+
+Or like things that had like other reasons to be interesting, um, where a lot of time was spent.
+
+I would be surprised, um, if base 16 was before the computing era, but it'd be interesting.
+
+Now, if you find out, I'd like to know. It's interesting. Yeah.
+
+Other. I've asked you.
+
+It's like characters. Human languages.
+
+Uh, yeah. So, uh, the question is, um, and this is sort of off topic, but it's also representational.
+
+So it feels very relevant to me. We'll go through it very briefly. Uh, English is lucky.
+
+We have 26 letters. We can easily put an entire usable character set in seven bits.
+
+That's what Ascii does. Seven bits. 128 possible values.
+
+In fact, we only use about 64 of them. Uh, for.
+
+The the basic character set, right. Just like fundamentally the letters that we use.
+
+Um, what do languages that where that's not the case.
+
+What do they do? So, uh, ideas, graphic languages, um, anything that uses the Chinese hanzi writing system or some derivative thereof.
+
+So Japanese kanji or Korean. I don't know what the word.
+
+They use hanja. I think, um. There's thousands to tens of thousands of those characters, depending on the language that you're talking about, right?
+
+Um, even languages like, um, Russian Cyrillic, the Cyrillic alphabet does not have 26 characters.
+
+It has 33 or something like that. I don't remember exactly. Uh, characters.
+
+They it's harder to fit them. You have to give up some punctuation, basically, to be able to get all your characters in.
+
+And then what if you also want to use Latin characters, right.
+
+Then there's languages like, um, Arabic where there's not an enormous number of letters, but they're combining forms are very complicated.
+
+What a letter looks like and how a letter is drawn and, um,
+
+sort of interpreted depends on what other letters it's adjacent to is at the beginning of the word is at the end of the word.
+
+Right. Um, Arabic and Hebrew and several of the other Semitic languages have this thing where you have a basic alphabet.
+
+Um, and then you use a large number or a, you know, moderate number of, um,
+
+diacritical marks to indicate things like vowels and glottal stops and things like that, that you then add to the letters that you've already written.
+
+Right. Languages that have adopted Latin characters, like, um, Vietnamese, for example,
+
+uses Latin characters but has a lot of phonemes that don't exist in the, uh, Latin language.
+
+There are tons of diacritical little commas and apostrophes and back ticks and front ticks and dots and things like that.
+
+Over and under and around letters. Polish has this L with the slash through it.
+
+You've probably all seen. Right. How do we represent those things? There's two answers to that question.
+
+One is historically, how do we represent them? And the answer is badly and one at a time.
+
+So for example, uh, it used to be that among the European languages, which mostly have very moderate numbers of characters,
+
+you would choose the language you were using and then use a typographical set that had those letters in it.
+
+And if you wanted to use a different language, you just couldn't.
+
+So, for example, you could not have Greek and, um, extended Latin, uh, diacritics in the same.
+
+Character set, or maybe even Greek and Latin letters in the same character set.
+
+Um. Eastern languages that had, uh, idea graphic characters you essentially just couldn't represent on early computers.
+
+It was very difficult on early computers. Uh, what came along then, at some point was we started combining multiple bites together.
+
+And so, um, if you look at the by the 70s, probably by the end of the 60s, but certainly by the mid to late 70s, um, the.
+
+Japanese, Chinese and other very large character sets had been written out by just saying, hey, listen, we give up.
+
+We can't do eight bits per character. We're going to have to use 16, right?
+
+Or more in some cases, right. And they use different encodings to be able to accomplish that.
+
+But again, you probably couldn't write Chinese and Japanese in the same document.
+
+You would have to pick which one are you going to do. Because while the there's a huge overlap in the set of characters, they're not the same, right?
+
+And there's thousands of them. Now we use an encoding called Unicode unit being one the one encoding.
+
+Every modern language is representable in Unicode.
+
+There are two to the. 23.
+
+I think. Something like that. Um, possible characters in Unicode.
+
+Like an enormous number of possible characters. Um.
+
+And we use in various encodings that allow us, if we are lucky, and we speak a non diacritical Latin.
+
+Language, which is basically just English. Um, we only have to use one bite per character.
+
+But if you have more complex characters, they just use progressively more bytes in an encoding called UTF eight.
+
+More answer than you signed up for. But it's interesting because it is.
+
+That gets down to this fundamental problem of like it's a finite encoding, there's only a certain number of code points that we can use.
+
+How do we use them in a valuable and expressive way?
+
+Other questions. All right. Carl is going to hate me when I get behind.
+
+Okay, so you should know these things. Um, on our platform.
+
+Integers, shorts, characters, etc. have very specific sizes and meanings.
+
+But the C programing language. Is not that strict.
+
+And so if you use a different kind of platform or even a different compiler or a different operating system on the same platform,
+
+the sizes of these things, the ranges that can be expressed by the various different types of integer, for example, may be different.
+
+It is always the case that, uh, a care.
+
+Is well, a care is whatever the platform is capable of expressing as a single.
+
+Character. And by character, we typically mean an Ascii character that may be more than eight bits,
+
+but the intent of a care is that you can story single Ascii character in eight bit value,
+
+and on some platforms it may actually be one that used to be.
+
+Historically it could be as few as six. But that's pretty painful because if you do the math on that, uh,
+
+six characters only gives you 64 possible code points if you have 26 lowercase letters and 26 uppercase letters and ten numbers,
+
+and maybe a couple punctuation points, you already have a problem, right?
+
+Um. A short is an integer that is not very large, that does not need to store a lot of data.
+
+An int is an integer that is convenient for the current platform to express.
+
+By convenient, we usually mean fast fast for it to store and do calculations on and transfers, memory transfers and such.
+
+Uh, a long is no longer than an INT, and a long, long is really long,
+
+which means that there are larger than a long, long is guaranteed to be, uh, longer than, uh.
+
+And it. Um, we can form these into a partial ordering, which does occur.
+
+As I've seen, 99 is at least eight bits. A short is at least as long as the care an end is at least as long as a short,
+
+as long as at least as long as an inch, and a long, long as at least as long as a long.
+
+And we can progressively represent potentially larger values here.
+
+As we go down this list. And furthermore there are minimum sizes, so a short must be at least 16 bits and an it must be at least 16 bits along.
+
+Must be at least 32 bits and a long, long must be at least 64 bits.
+
+So if we put these partial orderings together and there are some other rules, we arrive at this list of possible sizes for each of these types.
+
+But they admit several possibilities.
+
+So for example an int, if you say in a platform int x you might get a 16 bit number.
+
+You might get a 32 bit number. You might get a 64 bit number.
+
+All of those are reasonable and possible on our particular operating system using our particular processor.
+
+It will be 32 bits.
+
+But if you compile that same program, that same C source code program on a different computer, you might get an integer of a different length.
+
+Which, as we'll see, has representational meanings.
+
+That means that you may or may not be able to do the calculation you want to do on a particular platform.
+
+So yes. Why would anyone bother using a long, long on a 16 bit computer?
+
+A long, long is probably a 64 bit number. That's a long on our computer.
+
+On our computer, long, long is probably not useful to us on a 16 bit computer.
+
+Along long is useful to us because 4 billion is a number like you might want a number larger than 4 billion, and that's all you can get in 32 bits.
+
+So moving to that 64 has value in our system as long as 64 bit.
+
+So we're already done right. We don't need that long long. But the ontology is here for systems that.
+
+May not look like the system that we're all. All right.
+
+You should know these things.
+
+Furthermore, you should know the specific sizes of care short and long on our platform, which is 1862, 16, 32, and 64 bits 18 eight.
+
+Eight, 1632 and 64 bit eight bit care 16 bit short, 32 bit and 64 bit long.
+
+You should memorize those numbers or be able to derive them.
+
+They're just. I keep adding multiplying by two, right?
+
+816 3264. When we declare an integer, we can put modifiers.
+
+On that declaration, which you haven't seen yet except cast, which is a different kind of modifier.
+
+Uh, but in particular we can um, the keyword int can be given a length modifier.
+
+So you can say short int or long int. And you can also declare whether you want it to be signed or unsigned.
+
+So I can say signed short int or signed long int or signed int, unsigned int unsigned care etc.
+
+Right I can. Put these things in some combination.
+
+By default you can leave out the key word int and you can leave out the key word signed.
+
+So when you say int, you're saying signed int when you're saying long, you're saying signed long int.
+
+Right. And you can leave those other keywords out. The exception.
+
+To leaving these things out is care. Yeah.
+
+It's on this slide. Okay. Every unmodified type name so short and long, long, long are signed.
+
+If you want an unsigned number, which means it cannot represent negative numbers.
+
+You have to use the key word unsigned. The exception is care.
+
+Whether care if you just say care whether that is skin care or unsigned care is, um, implementation dependent.
+
+The compiler and the platform between them will decide, and it must be in the documentation for your compiler.
+
+When you say care, is it signed or unsigned on our system?
+
+Care is signed. Which means that it runs from some small negative number to some small positive number.
+
+If it were unsigned, it would run from zero to a slightly larger positive number.
+
+The reason this is important, and this is a great sort of microcosm for why this representational kind of thing is important.
+
+Computers go in and out of cycles of how we do our design of the CPUs and the memory and the representation we use within
+
+them based on usually what makes the most sense to get the most processing power in terms of speed of computation,
+
+or the least amount of power in terms of electricity out of the wall outlet,
+
+because electricity out of the wall outlet in a computer is turned almost exclusively into heat, and heat is what keeps us from going faster.
+
+Effectively, our machines get too hot and they.
+
+Um, fail. Right. And so the, the real limitation, the amount of computation we can do is how much heat do we produce while doing the computation.
+
+So if we can arrange to use less power and produce less heat, we can compute faster.
+
+Um, there are other limitations as well capacitance and inductance and other things that slow us down.
+
+But the heat is a is a big, um, driver.
+
+So as we learn different ways to solve different problems, we will learn that we can do something a little bit better,
+
+a little bit faster, a little bit more efficiently, use a few fewer transistors,
+
+produce less heat, and then we'll say, okay, well, if we change our processor to behave slightly differently,
+
+the programmers can just compensate and our computers can go faster.
+
+Well, there was a long period of time where all of the processors that were being designed
+
+were designed in such a way that their fundamental eight bit type was signed.
+
+Like ours is. Our integers are signed or our cares are signed rather.
+
+Um, and then in the mid. 90s or so, probably the early 90s.
+
+Actually, the early 90s or so, a couple of processors came out where,
+
+for whatever reason, the processor designers had said, it's going to be easier for us.
+
+We're going to be able to build a faster CPU, use our transistors for something else, whatever.
+
+Some fundamental hardware design reason. That our cares are going to be unsigned are eight bit values, will be unsigned.
+
+It's going to make our lives easier to make them unsigned. One such processor became very popular, the PowerPC.
+
+Famously in, um, 1995 or so, I don't know.
+
+The Macintosh switched to the PowerPC processor.
+
+Before that, they were on the Motorola 68,000 series. They switched the PowerPC, and then after that they switched to Intel.
+
+And now they're ARM, right. So we've had different processor sequences on Apple Macintosh computers.
+
+The Macintosh switched to PowerPC. PowerPC has an unsigned care.
+
+Okay, fine. 2001.
+
+Apple releases Mac OS X. At the time it was not ten.
+
+We weren't allowed to say ten. Or maybe you had to say ten. You weren't allowed to say X, I can't remember.
+
+Anyway, there was an ad thing for marketing thing, Mac OS, what became the Mac OS?
+
+The modern Mac OS, it's just Unix. Well, it's next, but it's basically Unix.
+
+So all of a sudden,
+
+a bunch of people took their Unix software that had been running on skin care systems for decades and ran it on an unsigned care system.
+
+It crashed all over the place. Because they made assumptions.
+
+That when care overflowed, it became negative, or that they could store negative numbers in cares or etc. because they didn't know the standard.
+
+They didn't understand the language they were using or they became complacent, said every machine I've ever used has assigned care.
+
+Care, and what they meant was assigned care.
+
+So the moral of the story is a lot of the stuff that we teach you, it's like, well, but you just said, all computers are like this today.
+
+That doesn't mean tomorrow will be like that. The fundamental issues remain the same, but the decisions we make from day to day can change.
+
+And in our industry, a generation is like two years, right?
+
+Uh, Intel processors, right? A generation somewhere between 1 and 2 years.
+
+Right? Processor. Entire life cycles come and go.
+
+In ten years, a processor appears. It's installed in millions of computers, and then they stop making it in a decade.
+
+Right. So these things change. All right, that's enough preaching.
+
+Let's do a top hat. Is the sun shining on it?
+
+Oh, your computer screen. Well, that sounds like you.
+
+Problem. Dude, could you try doing this? Just turn it away from the sun.
+
+Yeah. That's why they pay me the big bucks.
+
+They don't pay me the big bucks. Hang on.
+
+We had a break. I got to log in again. Okay.
+
+We're a section stop. Was the 15th.
+
+All right, let's do a live review question. Uh.
+
+By the way, what if I said this the other day, for the first time in the history of me teaching this class?
+
+We took the midterm last Wednesday. No one has resigned from this section and everyone showed up for the midterm.
+
+So good for you guys. We had no no shows for the midterm. I just.
+
+So I went to taekwondo on Wednesday and the Grand Masters you do in my class looked at me after taekwondo,
+
+my hair sticking up all over, my beards all messed up and he said, you look like something I would pull out of my Roomba.
+
+And I was like, all right, I'll cut my hair. About my example.
+
+I was. Resignation letter. I was am one one.
+
+We don't have a huge number of resignations yet. Even people who resign courses usually don't do it until the resigned date because they're students.
+
+So. All right, talk amongst yourselves.
+
+And we'll ask it again. The.
+
+You know. All right.
+
+This is a. Suit again.
+
+Oh, no. I showed you the answers. How about the point?
+
+Us. I don't really have a residence.
+
+And stay the same where? I live.
+
+All right. The code itself that the program is running is in the text segment, not in the on the stack string literals.
+
+No. We think of as in the data segment we have seen. They can also appear in the text segment.
+
+The return address, the arguments to the function, and any saved registers are three of the things that we do save on the stack.
+
+All right. Thank you very much. Um I will.
+
+See you all on Wednesday or on Friday. Um, we will get the I am server on Eamon started probably sometime today.
+
+So those of you who are making progress on P3 can connect to the class server C Friday.
+

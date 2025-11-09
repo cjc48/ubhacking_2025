@@ -1,0 +1,1061 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+I can't tell you I don't. To.
+
+All right. We're going to pick up right exactly where we left off last time.
+
+I should have gotten to this landslide last time. I didn't even look at it.
+
+I should have been like, oh, what's the next slide? Obviously. Hopefully, if you had lab this morning, you went to it.
+
+Uh, but labs do start today. We will have labs this week and in every week following.
+
+Um, administratively, I think we are.
+
+Now everything is rolling. Of course, auto lab had an outage.
+
+And so you all didn't have all the lab accounts. And then once all of that was back up, it didn't have, um, like,
+
+it couldn't actually grade projects, etc. but as of this morning, I think everything is working.
+
+If you signed up, if you enrolled in this course before Monday, by Monday or before,
+
+you should be on Piazza and in auto lab and everything should be working.
+
+If it's not, let us know. Right now is the time that, like, everything should be working.
+
+If you enrolled after Monday, then, um, I will get you in.
+
+In the next couple of days. We'll run the roster every few days, uh, until, um, drop AB.
+
+If you haven't had lab yet, um, please do go to your lab this week.
+
+If you have a lab already. Hopefully you were able to get through lab one.
+
+Obviously. I hope all of you have looked at lab one. It's not like you literally created two line text file, right?
+
+Like lab one is trivial, but what is going to take many of you some time is figuring out how to get all of the parts put together,
+
+how to get connected to the machine, make sure that your network is working.
+
+You've got a terminal that's working. Set up your keys. You know, there's a lot of like infrastructure that goes into lab one.
+
+The lab itself is not a big deal, right?
+
+But it's our way to hammer out and make sure that everything you need to be successful in this course is in place in week one, right?
+
+So that you're not, you know, coming up on a deadline and you're like, well, actually,
+
+you know, I like I can't connect to something or I can't get something working.
+
+By the time you're done with lab one, you will have, um, used all of the basic tools that are required for the rest of the semester.
+
+Right. That's the point of lab one. So. Okay. Um.
+
+I think that's all I want to say. Uh, for about that for now.
+
+So, um. We have just a couple more slides, like 2 or 3 more slides of, um, sort of syllabus material.
+
+And then we're going to start talking about, uh, systems programing.
+
+Um, one thing you should be aware of is you should read your syllabus.
+
+The syllabus is online. It's on the course web page. The course web pages link from you B learns.
+
+Or if you just Google UX 220, you'll find it. Um.
+
+There are some extra conditions in the syllabus. We do have lab exams.
+
+There will be three lab exams this semester. Um, I don't remember exactly what weeks they're in, but they're in the syllabus.
+
+We will ask you to do things that are essentially like the things that you do in labs.
+
+There will be simple programing assignments.
+
+Um, they're all programing assignments that are, you know, intended to be completed all in, say half an hour.
+
+We give you two hours to do it. Many of you will take a significant chunk of that two hours to do it for a couple of reasons.
+
+One, um, it's your first time doing it right.
+
+And so things take longer when you're a sophomore than they do when you're, you know, farther in your career.
+
+Uh, two. Oh, [INAUDIBLE]. It's a lab exam.
+
+I only have two hours. I only have two hours to get this done. And you lose 30 minutes to, you know, the stress of the lab exam.
+
+So I'm just telling you up front, they are all intended to be very complete.
+
+In the two hours you were intended to have plenty of time to sit, think, draw it out, think about it, make a plan, and then do it.
+
+Um, and you will actually take less time if you do that than if you panic and,
+
+you know, just start grinding on it to hope that you can get it done in the two hours. Right.
+
+So plan ahead for that. Um, you do have to achieve a minimum score on those lab exams, 60% average across the three exams.
+
+So you can bomb one completely and be fine. Or you could do mediocre on all three and be fine.
+
+But you do have to get that 60% lab exam across 60% average across those exams.
+
+Uh, we will also have one midterm or one final. You have to get a 60% average across your midterm in your final.
+
+That is curved average for those. So whatever the class curve is, you have to make at least 60%.
+
+Um, it is common that the class average for the exams in this course is something like 60% Uncurved.
+
+Uh, and then we curve it up into a more reasonable range. Um, so your curved average for your, uh, midterm or final,
+
+you also have to come to at least 60% of the core of the class sessions in which we do lecture activities.
+
+So be aware of those things and plan for them.
+
+If you fail any of those, it doesn't matter how well you do in the course, the grade that you will be assigned is an F.
+
+Um, don't panic about that though. It's going to be fine, I promise.
+
+The syllabus has the rubric for what everything is worth. Most of the programing assignments are worth 5%.
+
+One of them is worth 10%. I think the midterm is like 15 and the final is 20 or something like that.
+
+I don't know what's in this whole this um, please consult that.
+
+Okay, now we start talking about systems programing. Are there any questions about the logistics of the course before I move on?
+
+That's a about. There's only one lab quiz.
+
+Uh, for lab one, there's a quiz for lab one. There are quizzes for every handout.
+
+Or. I'm sorry, for every programing assignment. The programing assignment quizzes will be in the rubric for the assignment.
+
+It will tell you how much it's worth. It's typically 10% of the assignment except for I think um par four I think it's only 5% of the assignment.
+
+Um, so you literally get let me I cannot stress this enough.
+
+You will get a 10%. 10% of your programing assignment credit for reading the handout,
+
+reading the given code and taking the lab the handout quiz in the first three days of the assignment.
+
+10% free. Don't not do it right.
+
+Don't not do it. Um, but, uh, lab one is the only one that has.
+
+Of course, the other ones walk with us. Other questions?
+
+We just have a quiz for every lab. But then there were so many deadlines in the course that people were like, missed a lot of them.
+
+So we've tried to simplify it. You will have a programing assignment deadline roughly every second Thursday.
+
+One of the one of the assignments is three weeks. And then there's like Thanksgiving and stuff that shakes that up.
+
+But you have a programing assignment do roughly every second Thursday you will have a lab do every Monday,
+
+and the third the week in which you do not have a programing assignment do you will have a handout quiz do on I think Wednesday.
+
+Right. So like once a week you have something for a programing assignment. Once a week you have something for a lab.
+
+That's it. That's your deadlines for this course. Um, and that seems to work for people.
+
+All right, so why are we doing what we're doing in this course?
+
+We're going to learn the C programing language or we're going to learn the Posix API, which I told you before.
+
+We would talk a little bit more about um, these things were not chosen accidentally.
+
+Right. We carefully chose C as our programing language, and we carefully chose the Posix API as the environment in which we're going to learn C.
+
+There are, however, other reasonable choices.
+
+We chose C because we think it's a good choice to solve this problem, but it's just a programing language.
+
+And there are other programing languages in there, other programing languages that we could have used.
+
+The reason that we chose C is that C is a high level language, in the sense that it has loops and conditionals and functions,
+
+and like all of the building blocks that high level languages have, does not have objects,
+
+it does not have inheritance or polymorphism or, you know, uh, complex collections, for example,
+
+but it does have the basic sort of flow control and the structure that a high level language has.
+
+But it's not a very high level language in that it exposes to you the architecture of the computer that is running underneath it.
+
+So in most programing languages that you would use these days, and in most programing languages that we use in production environments,
+
+you cannot, for example, ask where in memory is this object located?
+
+Not that the runtime won't tell you or whatever, that it's a secret or that it's,
+
+but there's just no concept within the language of a physical location in the realm of the computer where you would store an object,
+
+you just have an object and it behaves like an object.
+
+So in Python, for example, if I create a class and I instantiate that class and I create a new object in Python,
+
+it exists somewhere inside the computer. It has to exist somewhere inside the computer.
+
+But the language Python has no way to express that location.
+
+Which is great because you can't mess it up. But if you're trying to learn about how systems work, that's one thing we can't look at.
+
+We can't talk about that kind of thing.
+
+If you have a number in many programing languages, you cannot ask how many bits of storage does this number occupy?
+
+Does it overflow? Does it underflow? In C numbers can overflow or underflow.
+
+You add one and all of a sudden it's zero again. Right. Or it's some large negative number or something like that.
+
+And it's important to be able to see those things, to be able to learn about the system that is underneath the programing language.
+
+That is why we've chosen C, so that you can see those things and we can talk about them.
+
+Um, most operating system kernels are still written in the C programing language today.
+
+The Linux kernel is almost entirely C.
+
+They just admitted the second language to the operating system kernel within the past like three years, two years.
+
+Um, and it is rust. Rust is the other language that is admitted into the Linux kernel.
+
+Um, the, uh, operating system that runs under Mac OS, the kernel that so Mac OS, the kernel is the inner core of the operating system.
+
+If you, um, were to say that an operating system is a single program.
+
+That program is the kernel. Now, the rest of the operating system is the thing that gives you all the interfaces that you use, right?
+
+So the windows that you can click on in the terminals you can type into and the like, there's a lot of um, the files on your disk, right.
+
+There's a lot of other parts of the operating system.
+
+But that single inner core, the inner core on a mac in Mac OS, it's called X and you, it's written in C.
+
+Now it also uses some C plus plus, but the inner core of it is written in, uh, C.
+
+It's based on an operating system out of uh, Berkeley in the 1980s called Mark that it was written in C windows.
+
+We don't know. Somebody knows. I don't know because it's not open source.
+
+Right. We can't look at the source code for the windows kernel, but I can tell you that the inner core of it is written in C, right.
+
+Because that's just how it's old enough that that's definitely what it's written in.
+
+Uh, and we believe, uh, I mean, I think Microsoft has been pretty clear that there's also a chunk of it that's written in C plus.
+
+Plus, like the Mac OS. Um, kernel C plus plus is an extension of the C programing language.
+
+We're not going to do anything with it this semester.
+
+But like the inner, the core of C plus plus is also essentially C a any valid any correct C program.
+
+If you put it inside a statement that's called extern C in C plus plus,
+
+it will compile and run correctly as if it had been compiled with the C compiler, whether that compatible.
+
+Um. Runtimes of virtual machines tend to be written in C.
+
+So when you run a Java application, that Java application is run under the JVM, right?
+
+So if those of you who took 116 here, you've dealt a little bit with the JVM, you've seen the JVM.
+
+The JVM is written in C.
+
+Uh, if you run a Python program when you run the Python executable and it gives you that prompt, the Python interpreter is written in C.
+
+The C compiler is written in C. Um, the Dalvik virtual machine that I.
+
+I'm not sure actually the android uses Dalvik anymore.
+
+It may use a different virtual machine now, but for a long time it ran under Dalvik is written in C.
+
+Right. This is how we write the systems, the things that we write. We write them in C.
+
+So it's an old language, but it's still a relevant language.
+
+Now you are not going to sit down and write a desktop application in C today.
+
+Probably there are better languages for that tool, but if you are sitting down to write a system, you might very well write it in C even today.
+
+Um, and then of course, it has had a huge influence on many other languages,
+
+as you will learn, as you learn C, if you know Java, you'll be like, this looks like Java.
+
+No, Java looks like C, right? C was, um, standardized for the first time in 1989, but it has been around since 1974 or 1975, something like that.
+
+Uh, maybe even a little bit earlier than that, certainly in Unix version six.
+
+In 1975, there was a version of C that is very recognizable, uh, as what we would call C today.
+
+Uh, Java didn't come around until the mid 1990s, right?
+
+Uh, C plus plus again is built on top of C, um, Objective-C.
+
+If you've done any older Mac and, uh, Mac OS development, obviously the C in Objective-C is C.
+
+Um, it has had a lot of influence on a lot of languages. So it's still relevant.
+
+It allows us to look at the things that we care about. And it still exists and is used today.
+
+Are you going to use it again in your career? Maybe.
+
+Maybe not. You may never write another line of code after you leave this course. Right.
+
+And that's okay. It's not ideal, but it's okay. Uh, but, uh, it is.
+
+It will still be relevant to you in many ways. So.
+
+Writing an effective C program, unlike the languages that you have probably learned previously,
+
+requires that you master some level of detail of how the machine actually works,
+
+because many things that are papered over for you by other programing languages are exposed directly to you in C,
+
+like that question of where is this data stored?
+
+I can ask the C compiler where in memory is this data stored?
+
+And it will tell me and I can use that information.
+
+I can use that information to write my program, to make my program better, etc.
+
+You also have to be so that you can kind of choose to be aware of.
+
+You kind of have to be if you need complex data structures you can choose to be aware of, but there are other things that you must be aware of.
+
+So, for example, the way that the numbers are represented on your computer becomes relevant to you when you write in the C programing language.
+
+If you're in Python and you wish to store a number which is larger than your computer can conveniently represent.
+
+Python will just handle that for you. It will use more memory.
+
+It will do some computational tricks. It will just give you a number that's larger than your computer wants to deal with.
+
+C will very quietly and silently just do the wrong thing because it says, well, you're the programmer.
+
+You asked for 32 bits. I'm giving you 32 bits. If you need 33, that feels like it's on you.
+
+Right? And we'll talk more about what that means later in the course.
+
+The particular, uh, version of C that we will be using is C 99.
+
+The 99 is 1999. It was standardized in 1999.
+
+C has subsequently B been standardized in 2011 and 2020.
+
+However, the differences between C 11, C20 and C99 are very, very small,
+
+and there are very few C compilers that implement C 11 and C20 completely because nobody cares.
+
+That was a bit of a bold statement, but like it wasn't a huge stretch. Nobody cares.
+
+See, 99 is sort of the relevant standard for us. So we're going to use C99.
+
+You can use a later. If you write a C 11 or C 20 program they'll run fine and see 99.
+
+There are some corner cases in C 99 that it does not specify that if you really,
+
+really, really need to know what happens when I do this particular thing,
+
+you need to use a C, C11 or C 20 compiler and it will do the right thing in the C 99 compiler might not.
+
+But they are not going to come up in Q1. It's not going to be a problem.
+
+The difference will not matter. What will matter to you is that Kerrigan and Ritchie, the C programing language is C 89.
+
+It is not C 99. It is a previous revision of the C programing language that almost never matters.
+
+There are a few places during the semester where we will do something that actually doesn't work in.
+
+The clerk or worker will do something that doesn't quite compile right on our C programing language, uh, in C99.
+
+I will tell you where those places are. Right. We will see those places and we will talk about those differences when they become relevant.
+
+Um, the compiler that we will be using is GCC, the new compiler collection.
+
+It is a compiler. It was first written in the late 1980s to early 1990s.
+
+Somewhere in that time frame, uh, by um, it was started by a man named Richard Stallman,
+
+who is a deeply problematic individual for a variety of reasons these days,
+
+but nonetheless, uh, did some seminal work in, um, open source, free and open source software.
+
+It's a completely open source compiler. You can open it up and look at all the code and see how it works.
+
+I don't recommend that you do that in this course because it is a very large, very old and very complicated piece of software.
+
+Uh, you'll just cry, right? It's I don't look at the inside of C of GCC if I don't have to.
+
+Right. But it is open source and it is something that,
+
+that you could at some point in your career after this course, maybe, uh, take a look and see how it works.
+
+Uh, we are not going to teach you. See, um.
+
+We are going to expect you to teach yourself c, but we are going to give you a variety of languages.
+
+And I will tell you this now, by the end of the semester, you won't believe me.
+
+And you will have forgotten I said this. But this course is not actually about C.
+
+It's not even about programing and C it's about systems.
+
+C is simply the tool that we're going to use to explore those, uh, systems.
+
+I will teach you concepts in lecture,
+
+and then I will give you labs and programing assignments where you will write programs that expose the things that we talked about in, uh, lecture.
+
+So I will tell you, hey, integers in C have these properties.
+
+And then I will give you a program where those properties are relevant to you.
+
+Right. Um, sometimes the connections are a little abstract, but I promise they're all there.
+
+I'm not going to teach you the C programing language. I'm not going to teach you all the details of C.
+
+I will cover the key ideas and teach you some of the most important syntax,
+
+in particular where it has surprising differences from the languages you've already learned
+
+so that you don't spend a bunch of time tripping over your feet while you learn C,
+
+but K and R is what you will use to learn, uh, the C programing language.
+
+We will also give you raff loads of code in the form of the given code that we give you with assignments,
+
+and you should read it, and you should try to understand what it is and how it works.
+
+Um, there are what are called man pages on Unix, uh, systems.
+
+Um. Is that font big enough?
+
+Can you guys see that? Where's my cursor?
+
+Is that? Can it? Can people read that? You guys can't see it at all, right.
+
+Yeah. That I hate this classroom. I apologize for that. Um, I'll make it bigger for next time, because that feels a little small to me.
+
+Uh, but at any rate, um, so there are man pages.
+
+Oops. Uh, man is a program that you can run.
+
+I'm going to run, man. Man.
+
+Which is going to tell me about the man's for manual, which is going to tell me about the, uh, how I would use the man command.
+
+We will in frequently in assignments and in labs.
+
+There will be a little bit in the lab that says if you need information,
+
+more information, see man something or see something with a number in parentheses.
+
+Uh, I believe this is in the handout quiz. Actually, it comes up for, uh, zero.
+
+You can run the man command then and read about those things.
+
+The Unix manual is all online. It's available on demand. You just run the man program at the uh, command prompt on, uh, email.
+
+Um. So that is another resources available to you.
+
+Uh, and then there are also, um, other online resources that we may talk about, like,
+
+uh, commands on the system that you may use as we talk about it, uh, over the semester.
+
+Um, there the one thing that's not on here that I will mention to you is the the C programing language standard.
+
+The actual standard that describes C 99. You're welcome to use.
+
+I don't necessarily recommend that you do. It's a little hard to read. Uh, it's not written for you.
+
+It's written for someone who's writing a C compiler. Right.
+
+Or for someone who has deep questions about, like the actual operation of some internal part of the C language.
+
+It's not written for somebody who's like, I want to write a C program, and this is my first day learning C, um, but it is available to you.
+
+CPP reference.com has a, um, a version of the online main or of the online standard.
+
+We'll talk more about that later. Okay. Um, so before I go on, I'm about to use a symbol on one of my slides.
+
+Is this little guy right here that is called a pill crow. The paragraph symbol.
+
+Uh, I will put pill crows on my slides in various places where I am essentially lying to you, where I am telling you something that is not fully true.
+
+Um, and the reason for that is that we're going to talk a lot about a lot of things where, to quote Jack Nicholson in A Few Good Men.
+
+You can't handle the truth, or that's not really true, but like, there's no point.
+
+So, for example, when you took physics in high school, they probably told you that gravity is 32ft per second squared.
+
+And if I drop this wrench, it's going to fall at 32ft per second squared, right?
+
+That's gravity. Well, if I'm on the moon, whose gravity?
+
+32ft per second squared. No. What if I'm at the top of Mount Everest?
+
+Is gravity 32ft per second squared? No, it's actually slightly less the top of Mount Everest than it is right here.
+
+Right. And if I go to Amsterdam below sea level, it's slightly more.
+
+But when I'm dropping this wrench, do I care? No, I don't care.
+
+So everything I tell you is going to be true enough for what we're doing.
+
+But there might be a little pill beside. So if I say the equivalent of gravity is 32ft per second squared, I'll put a little pill crow beside it.
+
+And if you really want to know, you can come see me and I'll be like, let's talk about relativity, right?
+
+But you don't need to know it for this course.
+
+Uh, in a few cases, I have put it there specifically because I know there's at least one person in this room who knows that I'm lying to you,
+
+and I don't want you to be like, oh, no, either I can't trust Ethan.
+
+He lied to me or, oh, no, I don't understand this thing I thought I knew.
+
+Just say, oh, I happen to know more information about that.
+
+And if I want to know why Ethan put a pill crow beside it, I can ask him, right.
+
+So it will come up in this course starting on this slide.
+
+Uh, so this right here says I make the statement data is stored in memory at accessible addresses.
+
+That's not fully true. Data may not be stored in memory at an accessible address.
+
+But I am telling you that at any point in CSC 220,
+
+if you ask the compiler at what address is this data stored, it will give you an answer that you can use.
+
+I happen to know that there's times that's that's not true.
+
+If you've done any work with compilers, you may know that there's times that that's not true.
+
+But I don't care because for 220 it's going to be true enough.
+
+So when we write a C program, uh, the language exposes a particular model of how computation works.
+
+And that model is that data stored in memory at accessible addresses,
+
+which means that every piece of data that I use lives inside the computer in the memory of the computer,
+
+and that it has an address, in fact, a unique address where that data is stored.
+
+And I can ask what that address is, and I can look at that address and I will find the data that I was looking for.
+
+The programs that we write are executed by a CPU, the central processing unit.
+
+We'll talk a little bit more about computer architecture in just a few lectures.
+
+Uh, and that CPU manipulates that data that is stored in memory.
+
+I write programs which become program code that is also stored in memory,
+
+and the CPU will run the program code that I write to manipulate that data that is stored in memory.
+
+Right. So as we continue to talk about this,
+
+we build up this model that's really built around a computer that has an execution unit that can manipulate memory.
+
+We'll talk more about what's in that memory, why we care about memory, and what it means to have memory as the course goes on.
+
+But that's the model of the C programing language is giving us.
+
+We run the C programing language on top of an operating system or some sort of system.
+
+Uh, in our case, it is a, uh, Posix system.
+
+Uh.
+
+And the Posix system provides a, um, an illusion that every program that we write is the only program running on the computer at that point in time.
+
+So if you think about this, this has been true for your entire career.
+
+When you when you programed in your previous classes, at any point, did you say to yourself, okay, I am writing this assignment for 115.
+
+I need to figure out whether the user is also running the web browser.
+
+Because if the user is also running the web browser, that's going to change how my program runs.
+
+Or I need to find out if the user, um, has multiple monitors and might be running a zoom meeting on the other monitor,
+
+because that's going to change how my program runs. No, you don't care, right?
+
+You assume that your program would start at the beginning and it would run through to the end,
+
+and it was the only thing happening, and it would just do its thing.
+
+And you didn't have to worry that there's an entire operating system with other programs and other activities,
+
+and maybe there's music playing and maybe there's video in the background and, you know, maybe they're actually playing Half-Life or whatever.
+
+Sapphire still exists. Yeah. Okay. Um.
+
+So this has been true of every system that you've used so far. And it turns out that it's true of essentially every modern operating system.
+
+All modern operating systems provide this illusion that every program runs inside a dedicated computer,
+
+and allocated to that dedicated computer is the CPU that runs the program.
+
+Some memory in which the program and its data are stored, and then the other input and output and other facilities that the program uses.
+
+So you print an output. That output goes somewhere where the user can see it, the user types on the keyboard.
+
+That input somehow comes into your program, right? Um, it this isn't true.
+
+It's just not true. Right on this computer right now I am running.
+
+Uh. It's not actually going to be a huge number of programs because I just booted this computer 238.
+
+Programs. There's 238 processes running on this computer on my other laptop that I that I normally use.
+
+Um, it's usually something more along the lines of 500, right, 500 programs running on this computer.
+
+And if you looked on your computer, you would see a similarly similarly large number.
+
+But the operating system pretends for every one of those programs that it's the only this the only program on the computer,
+
+so that the programmer who writes the program doesn't have to care about those 237 other,
+
+well, 236 because there's a top line that like that was a header.
+
+So there's it said 238, but there's actually 237 programs. So you don't have to care about the other 236 programs on your computer.
+
+Uh, all right. Any questions so far? So when I write a C program, I write it in the C programing language.
+
+I ask the compiler to compile it, and the compiler translates that program into machine instructions.
+
+Those machine instructions will be executed by the CPU in the computer in the order that they are described.
+
+Um, I say, you know, allocate a variable x, assign five to x.
+
+Uh, allocate a variable y, assign four to y.
+
+Add x plus y a sign that to z. And in that order x will appear it'll have the value five, y will appear.
+
+It'll have the value for z will appear. It will have the value not right or whatever.
+
+I just said I may have gotten that wrong.
+
+Um, the individual instructions that the computer is capable of running are very, very, very small and simple things.
+
+Things like set a value in memory to zero.
+
+Take two numbers stored in memory, add them together, compare one number to another number and tell me if they're the same.
+
+They're very, very simple things. They are not things like draw a window on the screen or even read a file from the disk.
+
+Those kinds of things are far too complicated for the CPU to actually do.
+
+Instead, when we write our programs, the compiler turns an operation like draw a window on the screen,
+
+or read a file on the disk into hundreds, thousands,
+
+or millions of instructions that run one after another doing very,
+
+very simple things to produce the effect of a window appearing on the screen, or a file being read from the disk and stored in memory.
+
+Um. We will talk more about what those instructions are, uh, as the semester goes on.
+
+And one of the things that we will see is that all the computer can really do is store bits, ones or zeros in memory,
+
+in certain locations and with certain patterns that we as human beings choose to interpret as meaningful things,
+
+like words on this slide or a video game or a movie, or the source code for the program that we're writing.
+
+The computer doesn't know and it doesn't care. For example, on this slide, this white right here is just a very big number.
+
+When I take a very big number and I put it in the right place in memory,
+
+there's a piece of hardware that communicates with the projector over there and says, make some white.
+
+This black right here on this text is just a very small number.
+
+Essentially that number is how bright should this location be?
+
+Not very, very somewhere in between.
+
+Right. It turns out we break it down into red, green and blue.
+
+So this has more of the red and green or, I'm sorry, more of the blue and green and less of the red.
+
+So it appears blue, but it's just a number, right?
+
+That's all the computer knows how to deal with. Uh, sure.
+
+Let's do a practice top hat question. Um, so.
+
+We will use top hats throughout the semester. Again, you all should be able to just log in to Top Hat because the university purchased a, uh,
+
+site license for, uh, Top Hat, you should be able to just log in to Top Hat and, um, interact with it.
+
+And you should, as of yesterday, all be added to the course.
+
+I got to get logged in though, so I didn't log in ahead of time. Yeah.
+
+So what section is this? This is a section, right?
+
+So we will throughout the course at several points in time.
+
+Uh, not probably every lecture, but most lectures.
+
+At some point we will, um. Yeah.
+
+Okay. This one appears to be like syllabus stuff. Uh, we will run a top hat question.
+
+You will answer it in class. This was for your, uh, lecture participation in terms of that portion of your grade in the course.
+
+It will also count as your attendance.
+
+Y'all over here and right over here are going to suffer a little bit because I think the questions don't show up on your device.
+
+I think they only show up on the screen. So I will try to read them to you.
+
+There will be times where there's information up there that you're just going to want to see.
+
+So you may want to step back where you can actually see it.
+
+Um, but for now, for example, this question says which of the following resources are permitted for individual work in CSS 220.
+
+When I hit start, it should show up. The answers should show up on your computer or your phone or, um, whatever.
+
+And this is just a practice question. We will not, uh, the question that we asked today will not become part of your grade.
+
+Uh, Monday, I think, is the first day next Monday, or maybe next Wednesday is the first day it will become part of your grade.
+
+But if you have any technical difficulty getting it working in the next couple of days, then that's something that we need to resolve.
+
+Uh, by the time that that time comes around. This took long enough that I'm only going to do one question now.
+
+We will typically, uh, I will give you a question. I will give you 30 or 45 seconds to discuss it with your neighbors.
+
+And then I will give you the same question again so that you can, you know, choose a different answer if you want to.
+
+Yes. I'm not. And you were here the other day.
+
+You've been enrolled for a while. Yeah. Send me an email or make a post on Piazza, and we'll get that.
+
+I'll have Carl look into that. Is there anybody else who's not in the course right now?
+
+When did you enroll? Like not yesterday.
+
+Okay. Anybody else? Yeah. Okay. If you're not in Piazza.
+
+If you're not in it right now. Uh, go make a post on Piazza to all instructors and say Ethan told me to make a post.
+
+I'm not in top hat. And we'll we'll figure out what the commonality might be and see if we can get that fixed.
+
+Are you computer science majors or computer engineering? Computer engineering.
+
+Are you a computer science or computer engineering? Okay.
+
+Occasionally students who are like in a different major don't show up on the roster or whatever.
+
+So if you're all computer science, computer engineering, I don't know. We'll figure it out. Don't worry about for now.
+
+It won't affect your grade, but will we need to get that fixed before the beginning next week?
+
+All right. Uh, so what are the answers?
+
+Uh, we'll normally go through this. I'll hit correct. We'll talk about the answers.
+
+So which of the following resources are permitted? I'll hit.
+
+Correct. There we go. Uh. Of course. Textbook.
+
+Course staff. And the optional textbook. Um, classmates.
+
+Chegg. Uh, StackOverflow.
+
+And so to do the course in the past semester are all explicitly in the I video quiz or syllabus as things that you absolutely may not use.
+
+If you use them, you fail the course with an F not because we hate you,
+
+but because we really want you to learn the right things in the way that we need you to learn them.
+
+I will repeat it once again. I said it the other day,
+
+we do not ask you to do these things in CSE 220 because we don't know how to do them and we need someone to do them and we just need a result.
+
+We ask you to do them because you need the practice.
+
+We know how to make sure that we're not giving you an answer that robs you of that practice, right?
+
+If you go to somebody else, you may be robbed of that practice. And that is a problem for us and in the future for you.
+
+All right. The Vietnam.
+
+Okay. Um, so what I'm going to do now, uh, is I'm going to go back to my terminal that I had, uh, over here and we are going to log into,
+
+um, Imaan, as you normally would, and we're going to write the Hello World program, uh, together.
+
+And we're going to discuss what we're doing and why we're doing it that way and how that works.
+
+Um. Or something else I want to say about that.
+
+Yeah. I don't know. Let's do that and it'll come to me if it's if it's important.
+
+So, um, this is the. I'm logged into my laptop right here.
+
+This is the terminal in my laptop. The prompts probably doesn't look like your prompt, but this is like the regular Unix prompt.
+
+As you saw, I ran some Unix commands before, and I will do as you would do.
+
+Um, actually, let me just make this font bigger. Do we agree that this should be bigger?
+
+Um. Oh, we make it like 18 points and see what happens.
+
+Uh, okay. Close enough. So, um. Uh, I am just going to run.
+
+SSH. Eamon, actually, let me show you what you would do. You would run ssh username at Eamon.
+
+Okay. Buffalo. Uh, path. Oh, boy.
+
+Laszlo ado um and then mine is just going to.
+
+Oh it's going to want my. One moment, please.
+
+You're just going to ask you for your password? Probably might ask me for my passphrase.
+
+I don't wanna talk about the difference between those right this particular minute. Uh, but I log into, uh, I'm on you see, on the prompt there.
+
+Now, it says E Blanton at Inman dollar sign.
+
+Uh, your prompt again may look slightly different, but it's going to be essentially that.
+
+Right? It's going to be something like that. E Blanton is my username. Inman is the computer I'm logged into.
+
+Uh, the little twiddle there that we call it a tilde.
+
+Tilde e, the tilde indicates that the current location that I am, that my shell is running in on the filesystem, on the computer is my home directory.
+
+Everyone has their own, uh, home directory.
+
+Mine is home CSC faculty E Blanton or something.
+
+Yeah. Home CSC faculty e Blanton.
+
+Yours will be home XD or Ken Dewey, depending on whether you're computer science or computer engineering and then whatever your,
+
+uh, upbit, um, username is, uh, and so now I'm connected to him on and it is ready to run programs for me now in this course.
+
+This is maybe the first time that you will be explicitly thinking about,
+
+I am running a program on my computer, or I am running a program on another computer somewhere else.
+
+You, in fact run programs on other computers all the time.
+
+Every time you load a web page, every time you, you know, play a multiplayer game,
+
+etc., part of the program that you're running is running on some other computer, right?
+
+The web server or the other players, computers or whatever.
+
+But in this case, you are explicitly going to do what I've done, which is log into Inman.
+
+And now every time I run one of these commands, these commands that I'm running are not running on my laptop.
+
+They're running on a computer in a machine room in Davis Hall.
+
+The reason this is important is, for example, if I create, move, rename, etc., a file here, that file is not on my computer, it's on import.
+
+If I want to get it to my computer, then I have to do something to copy it to my computer.
+
+We're not going to do that today. Uh, but it's discussed in uh, at eight.
+
+Uh, and I think it's covered just a little bit in, um, lab one in the lab one.
+
+Uh, handout. So now, if I were.
+
+I should have plugged a full sized keyboard into this, but we're going to stumble through this.
+
+Um. Don't do that.
+
+Just got some. Child left over from last semester.
+
+Um. So I'll make a directory. I'll change it to that directory.
+
+So I said before that this thing on my prompt shows me what directory my program is running in.
+
+Uh, here it now says tilde, which is my home directory MTA c2 20,
+
+which is a subdirectory slash hello, which is a directory that I just created and changed into.
+
+You are going to as I as I said, learning something about the command line as part of this.
+
+Course part of your learning objective.
+
+In this course, you're going to need to learn to keep track of things like where am I when I'm running a command,
+
+etc. you'll you'll like run an SCP command and will say that file doesn't exist.
+
+And you're like, I'm looking at it. It's right there. Well, what directory is it in?
+
+Right. How do you get to it? You want to start thinking about those things. It'll become natural as the semester goes on.
+
+So now that I'm here, I wish to edit and create a C file.
+
+Now, uh, you're required reading for, uh, this lecture for for the C intro lecture is chapter one of K and R, the C programing language.
+
+Hopefully most of you have actually read it by now. If you haven't you're behind right?
+
+So get get going right start start with your serious coursework.
+
+I will say that several times in this first work, first couple of weeks I will make a declaration.
+
+Say, if you haven't done this, you are behind. Uh, I am not saying that to make you feel bad.
+
+I am not saying that to Lord over you or show you that you know somebody is doing better than you.
+
+I'm showing that to help you internally calibrate and set the pace for how you need to be working in this course to be successful by the end.
+
+So you should all have read chapter one. It's only like 15 pages long or something, right?
+
+You should have read chapter one by now, or at least started reading chapter one.
+
+One of the very first things they do in chapter one is they walk you through writing a hello World program.
+
+However, they say something like use your editor.
+
+Your system administrator will show you how or whatever to create the Hello World program we are going to today.
+
+Do it using Emacs. So in. So if I look in this directory there are no files.
+
+In this directory I ran ls which lists the files in the directory and it did nothing.
+
+It just gave me the prompt back immediately because there are no files in this directory in the in Unix.
+
+So in many programs that you use, what you do is you start a program and then you do file new and then you create some
+
+file and then you file save as and you give it a name and you save it to disk.
+
+In Unix generally that's not how we do things. Instead we just open a file that doesn't exist and start using it.
+
+And the first time you save it will create it if it needs to.
+
+So I'm going to use the Emacs editor. Uh, and I'm going to edit hello.c.
+
+I don't know why that took so long. Um, so I have now created a new file called Hello.c.
+
+Now I want to show you a few things about my Emacs. Your Emacs will look a lot like this, but may not exactly the same.
+
+Uh, so for a couple of reasons. One is I've changed the fonts in the contrast so that you can see it better on the projector.
+
+Um, another is that I have set it up so that you can see what I am doing better.
+
+So if you look in the top right hand, uh, corner, it says that I pushed to control Z,
+
+which is CSC suspend or undo, uh, and it took me back to the prompt.
+
+Right. But as I type, uh, things, it will say in the top right corner, uh, I ran self insert command four times.
+
+Right. So Asdf was self insert command. When I hit backspace it will run the command C electric backspace.
+
+It is telling you the key that I pushed and what function in Emacs it actually performed.
+
+I do not expect you to follow that while we're just sitting here in class.
+
+They're going to fly by way too fast. But if you ever are like, what did he just do?
+
+I want to do that. Just go hit the video and look and see what keys I push to to make it happen.
+
+Right. That's the reason that that is, uh, there. So I've opened up a new file, and this new file is completely empty.
+
+If you look at the bottom left, it says, I'm editing Hello.c.
+
+It's got some other information over here that you, you use as it's a Unicode file.
+
+Don't worry about that. The double star says that it's actually edited.
+
+It's been edited since the last time it was, uh, saved.
+
+I typed in text and then I deleted it again. Right. Uh, then there's a bunch of crap here that you can mostly just ignore.
+
+Uh. For now. At the top it says again, Hello.c.
+
+Yours won't have that. That. That's okay. Um, so I'm going to now write the classic hello world.
+
+So the first thing I do is I write include. Uh stdio.h a c header file.
+
+So the H is a header file, is a file that contains a list of declarations that tell the compiler these variables and functions exist.
+
+It doesn't define them. It doesn't say what they do or how they would be used.
+
+But it says hey, C compiler. When Ethan tries to use one of these stdio.h answer standard IO input output.
+
+When Ethan tries to use one of these standard input and output functions, I promise they exist.
+
+Let him use them. Don't print an error if I don't include that.
+
+When I do something like a puts to put a string, it will say puts.
+
+I don't know this function, right? This function doesn't exist.
+
+Are you sure you really wanted to use it? So by including stdio.h I'm saying hey, puts exists, please let me use it.
+
+This is somewhat like an import statement in Python, right?
+
+Or something like that. It's not exactly the same, but it's somewhat like I'm now going to define a function.
+
+That function is called main. And it returns an integer.
+
+This is the first place, I think, where k and r uh departs from C99 in um c 89.
+
+If you do not give a return value to main, it assumes it is int and doesn't complain.
+
+In C99 it assumes that it's in, but it complains.
+
+So what I've declared here is that I wish to create a function. I want to call that function main.
+
+And when I'm done with that function, it's going to return a value.
+
+And the type of the value that is going to return is int.
+
+You will often see in the parentheses uh variable or yeah two um formal parameters arg c and arg v.
+
+Uh which we will talk about later. I'm not going to talk about them right now, but you will see them in the parameters.
+
+You can leave them out. Uh, and it's okay. So then in my main function I'm going to say puts.
+
+And then as we do I'll come on. In my defense, this is the keyboard that I'm using.
+
+It is very, very small and it is missing a bunch of keys, so I'm still learning to use it.
+
+I'm doing my best. Um.
+
+Stop. I don't know why this is so slow.
+
+It's probably the Wi-Fi. Actually, usually the Wi-Fi melts down in the first, like, week of school, and then it gets better later.
+
+We're probably suffering the Wi-Fi. Um, so I say puts, and then I string in parentheses or in quotation marks.
+
+Hello, world return zero.
+
+Um, this is my whole program. It's going to print out the message hello world.
+
+And then the program is going to return zero in the Unix world.
+
+In the world. Traditionally, a program that runs correctly returns the value zero from the entire program,
+
+and a program that encounters an error or returns not zero from the entire program.
+
+So I know we're running over, so I'm just going to real quickly compile it and run it so you can see that happen.
+
+Maybe I'm not. So the thing I was going to show you is, uh.
+
+I'll just tell you in K and R it says, do this.
+
+And then at your command prompt, type a dot out and hit enter.
+
+If you do that it's going to say bash colon a dot out colon command not found or no such file or directory or something like that.
+
+You need to run dot slash a dot out. Uh, I think I've lost my network connections.
+
+What's happened here? Um, you need to run dot slash dot out.
+
+That's a little departure in the way Unix works from how it worked in 1989.
+
+All right, thanks a lot. I will see you on Friday, and I will try to let you go on time on Friday.
+
+All right? Yes.
+

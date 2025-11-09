@@ -1,0 +1,893 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+For whatever reason. So we'll see what, um. With that.
+
+Where did he did this one? All right. We already talked about the Carnegie rule, and I think I've said everything I need to say, uh, about this.
+
+Um, the important thing we said at the very end is schedule some time for all your courses and work a little bit every day.
+
+Right. You'll be happier. You'll get better grades. You'll do better.
+
+Uh, 90% of a project that you actually did is better than intending to do 100% of it in the last eight hours and only getting 20% done, right.
+
+So budget your time wisely. The next public service.
+
+And, uh, no, there's another public service announcement that I want to give before I get to this.
+
+So, uh, GitHub classroom has been giving us a lot of trouble.
+
+Um, there's reasons for that. I don't want to talk about them right now.
+
+Um, we have a rhythm by which we are dealing with the problem, but it does require, uh, human intervention.
+
+Right? It does require manual intervention. Um.
+
+Please if you have problems. If you can't get to your GitHub repository, make a piazza post.
+
+There is now a category which is like GitHub repo issue or something like that, right?
+
+Put it in that category and tell us your unit name, your GitHub username and the assignment that you cannot access.
+
+So part one or lab two or whatever. Right. So that's one thing.
+
+Two thing is yesterday. Between like.
+
+4 p.m. And midnight. There were a large number of students who were like, oh, I can't get to my zero.
+
+It was due yesterday. If this wasn't you.
+
+By the way, I will say many things in this class.
+
+And say, don't do that. And if it's not, you just say, oh, he's not talking to me, right?
+
+But if it is, you don't say, oh, he's being mean to me.
+
+Say, oh, this is something I should work on.
+
+If that was you. That's not a path to success, right?
+
+So the secret is now the zero deadline is passed. I can tell you it was a three day project.
+
+It is not a two week project is the three day project.
+
+And the reason is because you can legitimately sign up for this class on Tuesday, which was the last day of drop had, and it's still due on Thursday.
+
+That gives you Tuesday, Wednesday, Thursday to finish your project right.
+
+The three day project. The next project is a two week project.
+
+Even if you got the three day project done in that last four hours, you're not going to get the two week project done in the last four hours.
+
+Right. So please. Don't do that.
+
+It makes us all very sad. Uh, mostly because it's a lot of work.
+
+It's a lot of work to help a panicked student at the last minute who has painted themself into a corner.
+
+It's a lot easier to help someone who's actually trying to understand the material the week before,
+
+than it is to help the student who just wants an answer right now because they don't have any points.
+
+Um, so please start early, get those points. Work diligently.
+
+Don't be telling me at the last minute if it two Fridays from now,
+
+you're like two Thursdays for now or whatever, you're like, I need access to my pa1.
+
+I'm just going to be like, I'm sorry for your life. Right?
+
+I mean, I'll. I'll enable it. But at that point it's it's on you, right?
+
+So don't do it again. Um. Now I'll talk about this.
+
+Okay. So. As I said, there's advice at the beginning of all of these lectures.
+
+We had some advice at the beginning of the last lecture. There's advice, uh, or I think we started the the last lecture.
+
+There's some advice. This lecture, um, the next one I want to talk about is, uh, two dos.
+
+And a lot of this advice is not. So I'm going to give you a ton of advice for how to structure your student life.
+
+Not all of it works for every person. Everybody works differently, right?
+
+And that's okay. But if you're struggling, try these things and see which ones might work for you.
+
+Right? Most of them are things that have worked for me or have worked for specific students that I know have struggled,
+
+and one of them works for me, although I don't do it because I.
+
+I don't know why I don't do it, but I don't do it. Uh, which is to keep it good to do.
+
+So that I. You always know what to do next. And the reason is that it's easy to lose a lot of time to figuring out what you should be doing,
+
+rather than actually doing the thing that you should be doing.
+
+It's like a productive procrastination trap that you can fall into, is, let me let me think about what I should work on next.
+
+30 minutes goes by and you haven't actually done any work, right?
+
+Or you sit down to work and you're like, oh, I don't know what I should do next.
+
+And so you just flip on the TV instead, right? Um, people don't have TVs anymore, but whatever it is that you watch.
+
+Um. So the antidote to that is to keep and curate A short To-Do of things, that you can just do things that you know how to do.
+
+You have the resources at hand to just start and do the things on the to do.
+
+Um, so for example, we just handed out part one.
+
+Read the handout should be on your to do right now right read part one.
+
+And when I recommend you do is you set aside a specific time every week where
+
+you spend 15 minutes or half an hour and curate that who to do to look at it.
+
+Spend some time thinking about have I already done these things? Do I need to add more things to it?
+
+Are these reasonable goals?
+
+Sometimes you put something on the two to thinking you know how to do it, and then at some point you're like, actually, I'm not ready for that, right?
+
+There's some tasks I need to do first, right. Put those on your to do.
+
+Um, so spend some time every week curating those things.
+
+And then when you have time to work, pull your To-Do out. Look down the list for something you know how to do, and just do it.
+
+And when you're done, look at your to do. Go down the list, find something you know how to do, and just do it right.
+
+You will be shocked how much work you get done when you work that way, when you get down to having just a couple of things on your to do, stop.
+
+Take that 15 minutes or half an hour and consciously come up with a list of things that you can work on,
+
+but you want to be careful that all of those things that you can work on are things that you can do.
+
+Um, in just a few minutes, right?
+
+15 minutes, half an hour or something like that, you don't want to put, for example, part one on your do, because part one is going to take you hours.
+
+And when you sit down, you look at your two two and it says one, you're no better off than if you didn't have a tutor.
+
+You already knew you needed to do part one. Instead,
+
+you put read the handout on page one and then maybe after read the handout you have
+
+look through the requirements for two items and you go through the requirements.
+
+You say, well I actually know how to write that function and I actually know how to do that thing.
+
+And I need to figure out how to do that other thing. So make that a two item, right.
+
+Figure out how to do this one thing that's in section three. You know, make that a two item.
+
+P1 is not A22 item. It's a life goal, right?
+
+Like and over the course of two weeks you want to succeed at P1.
+
+You're not going to sit down and do it tonight. Um, is there anything else on this slide?
+
+No, that's a great that's a great line. Any questions?
+
+I saw your performance, by the way. Who? Who else was with you?
+
+And. Yeah. Yeah, okay.
+
+So did. So did Emily. I've got some people for you.
+
+Yeah. Yeah, they got a kick out of it. They got a real kick out of it.
+
+I got a photo of the bouquet and a video out of it. Yeah.
+
+Um. You had a question, though. Um.
+
+What is? Yeah.
+
+Okay. Yeah. So every project, uh, you have an auto grader that is worth some number of points, right?
+
+It is not worth 18 points. Every project you'll do, except I think par four is worth 18 points.
+
+And then two points for the handout quiz for a total of 20 points. Um, and what we say to you is if you get 100% on the auto grader that we give you,
+
+when you we assign you the project, then you're guaranteed you'll get at least 60 or 70% of the final score.
+
+But we aren't guaranteeing you that because you got 100% on the initial auto grader, you'll get 100% on the final project.
+
+And the reason is that when we do that and we'll get to that here and maybe the next slide.
+
+No, it's a slide after that. Um, when we do that, then people just continually submit to the AutoTrader until they get their hundred points.
+
+They don't actually think about what they're trying to solve, right?
+
+So instead, what we say is, here's enough to show you that you're definitely going in the right direction.
+
+But we're going to give you additional tests after the deadline, right?
+
+And so, um. The question is what are these other points?
+
+It's all requirements in the handout. Everything is requirements in the handout.
+
+But if you look at the things that we tested and you look at the things that are in your make test, that's the kind of test we run.
+
+Like what's in the make test right. So now you've seen makefiles.
+
+Right? Because that was your lab too.
+
+If you have it, you'll see by the end of the day today, you can read the makefiles and see what tests we were running and how we were running them.
+
+Right. It also requires some stuff that's in at nine, which maybe you can read that too.
+
+Um, but just generally, you know, we run some tests and then we determine whether your program behaves if the way we want it or not.
+
+And the difference between what we test before the deadline and what we test after the deadline is how carefully do you read the requirements?
+
+Basically. No.
+
+Uh, so we don't look at efficiency in this course, except there's 1 or 2 ways where I tell you we're going to you have efficiency requirements.
+
+Uh, but we mostly don't look at efficiency in this course because, um, there's a, an adage.
+
+Right. First make it work, then make it correct, then make it fast.
+
+We are in the working correct stage of your career. Fast comes later.
+
+Now in 250 you'll talk about computational complexity, which is different from make it fast in some sense, right.
+
+But in terms of optimizations and etc. In this course.
+
+Don't. Don't sweat that. Right. If you look at something, you're like, wow, that's really ugly and painful.
+
+I think there's a better way to do it. It is fine to spend a little bit of time trying to find that better way, because that's a good exercise.
+
+But don't say, oh no, I went through this string twice. I'm sure I could do it once.
+
+Ethan's going to do three points. I never am right, like, I don't I don't care if you go through it a million times now, we might need to talk, right?
+
+Your test or timeout or whatever. Um, but it's just the requirements in the handout.
+
+It'll tell you exactly what the requirements are. If you met them all, you'll get all the points.
+
+If you met most of them, you'll get all the points on the initial grader and you'll drop a couple of points on the final grader.
+
+Yes. Yes, the final grader will give you some feedback.
+
+It doesn't always give you all the deep details, but it should give you enough. Give you enough to help you understand where the problem was.
+
+Yeah. And what will happen is, after everyone has turned in the project and I've had the time to deal with it, I.
+
+Because I have to remove the auto grader that's on there.
+
+Now install a new and reconfigure it and then regrade everyone's project, which is not hard to regrading is not hard.
+
+I just click re grade for re grade, but it takes a while, right?
+
+And so I schedule it for when I actually have a while to sit and watch for it to be done.
+
+Because inevitably what happens is I hit re grade and about 45 seconds later I start getting emails.
+
+I saw that you regrade the project. My final score isn't on your buildings yet.
+
+What's what's the problem? And I'm like, well, I haven't seen your final score yet.
+
+That's what the problem is. Put your britches back on. Um.
+
+So I try to schedule a time when I can sit down and do it.
+
+It's usually like a week after the project has turned in or something like that, and you'll get, you know,
+
+when you get a school project, there's there's discourse, like when you look at it, it shows you the scores that you got in like a row.
+
+If you click on those scores, it shows you the actual output of the auto grader and the test that it ran and what the results were.
+
+Good questions. Other questions? Yes. You guys are so much more.
+
+Warmed up. Then my other. I say any questions in my other class and they're just like.
+
+What are you waiting for? We're not going to say anything. It's 1:00.
+
+You read the syllabus to. Go ahead.
+
+That's correct. And the reason for that is, uh, that the, um, we try to prioritize this like whatever is currently do.
+
+But the way the course is set up like that, one day after the deadline for the late deadline, you'll probably get help.
+
+It's going to be fine, right? Because we don't have deadlines that overlap each other.
+
+You're welcome to come back and ask. But if you come back and there's a queue, they're going to say come back later.
+
+Right. So if you have questions about stuff that's already past you, like at the beginning of the project when nobody's in office hours.
+
+Just because we want people to pass the class, right? We want you to understand all the details.
+
+But if you understood enough to get it done. We want to help other people who don't have that much yet, right?
+
+Okay. Other questions. All right. Administrative stuff.
+
+Deadlines are imminent. They're now actually. Was due yesterday.
+
+We already talked about that. Don't start the last minute. Uh, lab one and the eye quiz are due tonight.
+
+Uh, reminder that you must have 100% on both of those in order to pass this class with any grade other than f.
+
+Um, I will run that check. I don't know, probably this weekend sometime.
+
+And anybody who doesn't have them, Don will be getting an email from me that will not make them very happy.
+
+Right. So make sure that you've done lab one. I quiz and check the syllabus to make sure that you're on top of all of your things.
+
+If you're not current on your readings, you're behind. We have done, uh, two full lectures and started a third one right now.
+
+I believe you were supposed to have read all of chapter one in the majority of chapter two in K and R by now.
+
+If you haven't read those things, you are behind. You are setting yourself up for a bad time in this course.
+
+It's not too late. It's week two, right? But make sure that you get on top of those readings.
+
+Um, if you're struggling. If you had trouble getting your stuff in for the deadline, if you need help.
+
+Um, if you haven't, ask for help because you're too shy.
+
+You think that, you know, you should already know this. And, like, these aren't questions that you should have to be at.
+
+Just stop. Come ask. Right. We're here to help you. It's our job, and we're all here because we enjoy doing it right.
+
+We enjoy helping you learn these things. These things are hard. We'll talk more about that in a minute.
+
+They are legitimately hard. If you have questions, come ask them.
+
+Come ask them now. If you come in in week two and you say, I'm really struggling and I need some help,
+
+then we talk about how we can get you into a better position, and you can do well in this course for the semester.
+
+If you come in in week 12 and you say, I've been struggling since week two, we have a very different conversation.
+
+It's more about what we can do next semester so that it goes better than this semester did, right?
+
+We don't want to be in that position. As soon as you feel like you're falling behind.
+
+Come ask. Right. Come see us. We will. I promise we will help you.
+
+Um, on that same topic. I want to talk for a moment about imposter syndrome.
+
+Does anyone not know what imposter syndrome is? A few.
+
+Okay. We're getting better. It used to be that everybody put their hand up. But we're trying to tell you earlier in your career.
+
+Uh, thank you for being honest enough to raise your hand. And for those who didn't raise their hand, that's fine too.
+
+Uh, who might not know? Let me define it.
+
+Um, imposter syndrome is the feeling that everybody else knows what they're doing and is doing what they're supposed to do,
+
+and you don't, and you suck and you don't belong. That's imposter syndrome.
+
+It's the feeling that the people around you are just not having to work as hard as you are, and they're getting better grades,
+
+and they seem to be successful and you don't know where to start, and your project doesn't work and you're never going to get it.
+
+And should you really be here? Should you be thinking about changing your major?
+
+Should you? Are you really going to pass this course as your course load to heavy?
+
+It seems like it's a regular course load. Other people take it right. That's imposter syndrome and it's real.
+
+And it happens to all of us. Happens to me. We'll talk about that here in a minute.
+
+Uh, it happens to all of us, and it will happen to you. I'm sorry to probably be the first one to tell you this.
+
+It will happen to you for the rest of your career. You're going to live with that feeling.
+
+And the reason is that what we do is actually hard. There are many studies.
+
+It is scientifically shown in ways that are approved of by the IRB.
+
+That Stem majors. Work longer hours, do more work, and get poorer grades than other majors.
+
+It's not because all the dumb people go into Stem, right?
+
+It's because we actually do hard work.
+
+Many of you may have friends who are, for example, not Stem majors.
+
+Not that there's anything wrong with people who are not Stem majors,
+
+but you're looking around at your friends who are in business and nutrition and you know, whatever.
+
+And you're like, they party six days a week and then they sleep it off on the seventh.
+
+And I am just working. What's wrong with me? You're actually working harder than they are.
+
+You actually have more work. The reward is that you're learning something that is useful and valuable, and will serve you for the rest of your career.
+
+The prices that you're going to work hard, and you're going to feel like you're not cutting it sometimes.
+
+But you are. It's fine. You're doing fine. The difference between me and you is that I've been doing this for.
+
+A few years. And when I hear that voice that says, you suck, you're not good enough.
+
+I know what it is. And I say, no, actually, I'm going to be fine.
+
+Take a back seat. Um.
+
+I'm very good at what I do. I there are probably not five people, maybe ten in the state of New York,
+
+who know more about the way that certain parts of, um, the internet networking stack work than I do.
+
+And that's just a fact. Part of it's because I wrote the standard.
+
+And so like the other authors are on that list, but they're not in New York.
+
+Um. But yet when I was doing private contracting, which I did for a while, even when I started working at Uber, I was still doing private contracting.
+
+Every time I would have a contract in front of me that says, I'm going to do some work for some company,
+
+and they're going to pay me some stupid large amount of money to do it, you know, tens of thousands of dollars to do it.
+
+There's that little voice saying, can you do this? Do you actually know how to do this?
+
+Could they find somebody else who could do it cheaper than you can or do a better job?
+
+Are you defrauding these people? Are you stealing their money?
+
+And I would say to that voice. Hang on a minute.
+
+I've got a paper sign. And I would sign the paper and I would send it to them because I know what that voice is.
+
+It's always there. And it's wrong. Is there somebody who's better at this than I am?
+
+[INAUDIBLE], yeah. There's somebody who's better at this than I am. Are they so much better than me that I'm a fraud to be in this field?
+
+No. That's stupid. Right? Is there somebody that could do that for any given task?
+
+Is it possible that somebody else would solve it faster than I would?
+
+It would cost less money, of course. But what I solve in a reasonable amount of time for an amount of money that people should be willing to pay.
+
+Yeah, it's going to be fine, right? Tell that voice to shut up and move on.
+
+The second lesson, which I just learned last fall. About imposter syndrome.
+
+Is that immunity to imposter syndrome, as I have in my chosen field, is not universal.
+
+You have to go through this for every new thing you do. If it's hard.
+
+I found this out. I do taekwondo. Gavin, I've talked about this.
+
+I kind of suck at taekwondo. I mean, I'm okay, but I'm 45 years old and I'm moderately flexible, right?
+
+And so I look at these 18 to 22 year olds, like you guys who have been doing it for 15 years.
+
+And they're superhuman, right? They're doing things I can't dream of doing.
+
+And I sit there and I'm like, I am just literally never going to be able to do that.
+
+They're just better than I am. And I gave this talk in this class.
+
+And like the next day I went to taekwondo and this moderately superhuman 18 to 22 year old was sitting in the front standing of the front room.
+
+His name is James. And he said, you're standing there in the sitting there.
+
+We were sitting. He was standing. You're sitting there right now thinking, I suck.
+
+I because we done something particularly hard, I suck, I can't do this.
+
+I'm never going to be able to do this. Why does James do it? And I can't. And he said, I've been doing it for 15 years.
+
+Of course you can't. I don't think he's actually been here for 15 years, but most of his life.
+
+Of course you can't do it. And I was like, oh, I just gave this speech yesterday.
+
+And it occurred to me that this happens every time you do something that's hard.
+
+Every time you do something you don't know how to do there you go through that
+
+experience of being sure that everybody else can do it and you just suck.
+
+But you don't. It's going to be fine. And if you listen to that voice, you will suck.
+
+Because you'll never do the hard things. You'll never push through it.
+
+You'll never ask the questions, right? So push through it.
+
+Do the hard things. Ask the questions. We will help you. And you will get past it.
+
+But that voice isn't going to go away. You just learn what it is. As time goes on.
+
+All right. The last thing I want to say.
+
+I don't ever ask if there's any questions about impostor syndrome directly, because people are often embarrassed to say anything.
+
+Uh, I will say, if you do have questions, you can ask them all answer questions in a minute or, um, come see me in my office,
+
+write or shoot me an email or talk to Carl or one of the student assistants, your student assistants.
+
+They're just a few years ahead of you. They've already internalized a lot more of what it means to overcome those things.
+
+Right? Believe it or not. So ask them. They can help you.
+
+Um, last thing I want to say is that if you already knew how to do these things, we wouldn't ask you to do them.
+
+It would be a waste of your time. We are absolutely asking you to do things that you do not know how to do, and things that you don't know how to do.
+
+Always feel hard, even if that's something that you can just learn how to do right.
+
+You don't remember the last time in your life that you learned so many things that you don't know how to do in such a short period of time,
+
+because you were like three. As what you're going to learn in the four years you're spent here.
+
+Uh, that you'd be. All right. Are there any questions?
+
+Yes, sir. I want to stop you right there.
+
+This man read the man page. Give him a hand.
+
+Now ask me your question. Most people didn't.
+
+That was not sarcasm. Like, I'm so glad you read the man page. Uh huh.
+
+Oh, okay. Yes. So, um. It's okay if you check to see if put care fails.
+
+But it's okay if you don't. Um, in this course, for the most part.
+
+Um, if there are fundamental operations that we need you to make sure that they actually succeeded,
+
+we will tell you to make sure that you check for them. Right?
+
+Um, it's fine to check. It doesn't hurt anything, but it does add a few lines of code every time you have to do it.
+
+So in this case, the the the intuition here is.
+
+If put care fails. That means that your program is cannot.
+
+Right? What are you going to do to, like, fix that problem?
+
+It's a mac. Um, what are you going to do to fix that problem?
+
+Right. There's nothing you can do to fix it. So if you don't check for it, fine, I don't care, right?
+
+What you should always check for is the things that the requirements tell you you need to do.
+
+And anything that the handout says, you know, be aware that this can fail, particularly when we get the memory allocation allocation can fail.
+
+And we'll talk more about that when the time comes. But that's great if you check for it.
+
+But like, you don't have to be digging into every page for every function you've ever used to see if there's a corner case.
+
+You know, like you don't. You don't have to work that hard. Other questions.
+
+All right. What else do I have to say? All right. I'm tired of public service announcements.
+
+Almost half an hour of, uh, don't abuse things.
+
+Don't abuse semen. Don't abuse auto lab.
+
+Don't abuse your student assistants. Don't abuse.
+
+There's a new baby red panda at the Buffalo Zoo. If I see you abuse a red panda.
+
+We're gonna have words. Because it is the cutest thing that's ever happened.
+
+Go to Buffalo Zoo web page. You can see the new baby red panda.
+
+I don't think it's out to be viewed yet, but don't abuse red pandas. They're so cute.
+
+Um. In particular, Imaan, as I've said before, is a shared machine and has 300 and like 50 us on it between you and the Tas.
+
+Uh, be kind to him on don't do don't run web browsers on it.
+
+Don't run vs code which is just a web browser on it.
+
+Uh, don't, you know, do things that, you know, are going to use a ton of resources because we do have to share it among.
+
+All of us. Uh, there are some protections in place.
+
+There are some things that it won't let you abuse, but there are other things that can be abused.
+
+So be careful. On the other hand, don't be afraid to do things we've asked you to do right.
+
+But don't you know? Just be careful. Uh.
+
+Auto lab. Auto lab is pretty quick these days. Um, it only takes a few seconds to do the grading.
+
+Uh, a few years ago, it took several minutes.
+
+Like it was going to be a minute or two before you got any response back from Auto Lab, but we've upgraded it.
+
+It's much faster. Uh, but nonetheless, if you're sending more than about five submissions for a project in Audio Lab, you're not doing it right.
+
+Right. At some point, you're no longer.
+
+What you should be doing is saying, okay, I submitted all lab because I thought my project was in a good place.
+
+All the lab said I missed something.
+
+And then you go back and you think about what you missed, and you read the requirements and you look at the output of the auto lab.
+
+You guys are killing me. You look at the output of the auto lab and you look at your code and you think about where there might be bugs,
+
+you go over all of it, you fix some bugs, you test it yourself a few times.
+
+And then you resubmit to auto app. And then you're done.
+
+You only needed two, right? Or three or whatever.
+
+If you're submitting 15, 20, 25 times, you're not doing that.
+
+You're just doing something, flinging it all lab and hoping it sticks.
+
+And I will tell you a parable of a student who's not the same student as the last parable.
+
+Back when all the lab took about three minutes to grade a project, I had a student who submitted over 200 times.
+
+If you do the math, that's five hours. It's more than five hours.
+
+Actually, it's a little over six. Hours of waiting.
+
+No. It's ten. Right.
+
+Two times three is no. 500. No. 300 is five hours.
+
+It's like 7.5 hours or something. Of waiting for Auto lab to tell him whether his project was right or not.
+
+Do you know how much debugging you can do in seven hours? All of it.
+
+You could just rewrite the project in seven hours. Try again.
+
+That's stupid. It's a waste of your time. Don't do it.
+
+Now you can't. It now limits you to, like, 50 or something. Because the auto out in menswear like this is dumb.
+
+And they made the max submission. Like I can't make it.
+
+I maybe I can make a higher than 50. I don't think I can. I don't want to anyway.
+
+So be careful of just a few submissions. If you see yourself doing a lot of submissions, you're not doing it right.
+
+Come see us.
+
+Say, I don't know how to get past this except fling crap at auto lap and we'll help you figure out how to write tests, how to test your code.
+
+You know, how to read your code and figure out what the problems are. Office hours.
+
+As I've said, there are a few office hours this semester compared to normal. Normal semesters.
+
+Um. Get in there early. Have a question?
+
+If you come in at the last minute and you just say, my crap doesn't work, it's going to be a bad time for you and everybody else, right?
+
+So don't do that. The questions.
+
+Let's talk about, uh, systems programing. I mean, those.
+
+Oh. Come on. Yeah. Okay. Um, those things are actually systems programing.
+
+Well, as we've discovered over the years, um, one of the biggest things that students actually need at this point in their career is, um.
+
+Maturity as a student. Like more than you need programing.
+
+You need maturity as a student. It's just the way we get it into you is we beat you with programing until you have to either become mature or.
+
+Take the course again. Don't tell him I said that.
+
+All right, this is the fifth, but I don't like the questions that are on the fifth. So I'm going to do a question that we should have done last time.
+
+All right, here's some code. What will it print before the new line character?
+
+When it is run, it will print some characters that will print a new line. What characters will it print?
+
+Now this is the first top hat we're doing that's going to actually count, right?
+
+Um, so you'll be able to see the code on the screen. You'll be able to see the answers on your computer or your mobile device.
+
+Eight. What does Sterlin say for that stream?
+
+Hurt over here somewhere. Seven. It counts the valid characters in the string.
+
+Write the characters that are not the Terminator. Um.
+
+So we run this loop, and we run from zero. As long as our index is less than Len by two.
+
+So we do 0 to 4, six, then eight.
+
+It terminates the loop for each of zero, two, four and six.
+
+It prints the character that is at index 0 to 4 and six arrays in C or zero indexed.
+
+So the zeroth character is A, the second is C, the fourth is E.
+
+Etc. Right? I guess there's only one more. So I should say at the sixth is G right?
+
+So it prints, uh, a c e g.
+
+Then the loop breaks and it prints the new line. Does that make sense?
+
+Are there any questions? Yes, we will in fact learn why Ray started zero.
+
+Yeah. When we talk about memory layout. Well, we'll talk about the reason that Ray started there.
+
+That's not true in all languages, right. So Lua for example, which also is written in uh array started one.
+
+Right. I think Matlab arrays start at one. Um there are Python or not Python Pascal.
+
+When you declare an array, you declare what you want the first index to be. So you can say this array runs from 7 to 14 or whatever.
+
+Yes. Oh great question.
+
+So this is care Star. My string. Uh care is the idiomatic string type in C, it's a pointer to a character.
+
+We have not talked about characters yet. Care.
+
+Square brackets is an array of characters in memory.
+
+They are exactly the same. The data that is stored in memory is exactly the same.
+
+In this case, where that data is stored in memory will be different places like at what address it's stored will be different places.
+
+We'll talk about that later in the semester for now. Don't sweat it. Uh, for us, they're equivalent right now.
+
+By the end of week 5 or 6, you'll know exactly what the difference is and why you would use one and why you would use the other.
+
+The answer is pointers, which we haven't gotten to yet. I saw another hand.
+
+No. Okay. Great. Beautiful.
+
+I'm not going to do the live coding right now. Um, I'm just gonna talk about the slides.
+
+Yeah. Just go to our website. So, um. As I said when we started talking about C, we're not teaching you all of C,
+
+but we're going to talk about the things that are unusual in C and maybe different from other languages that you know.
+
+One is that C's boolean type is just a number.
+
+So this is not true in Python, is not true in Java. Um, and in fact, Python and Java will both refuse to use a number as a boolean type.
+
+There are other languages like JavaScript where there is a boolean type and it's not a number, but JavaScript will use anything as a number.
+
+It doesn't care. It'll do its best. It'll figure out what or is a boolean. It'll figure out something to do with it.
+
+There's a great like joke post of like all the things that are true and false in JavaScript.
+
+Like parentheses, double equals. Parentheses is true, but square brackets are legal.
+
+Square brackets. It's false. Right. And like crack crap like that. Um.
+
+And see. Boolean types are just numbers. And the rule is.
+
+The number zero is false. Any other number.
+
+Is true. So one is true, but so is two and so is -14.
+
+65,535. True. So a 65,536.
+
+Right. Anything that's not zero is true. And this is fine.
+
+Until you go to compare to true to values to find out if they're both true and use double equals.
+
+And it says no, but they're both true because one of them's one and one of them's true, and one is true, and two is true.
+
+But one does not equal two. Right. Um, there are boolean expressions which we'll talk about here in a moment.
+
+And there is a true constant and a false constant.
+
+The true constant is exactly one, and every Boolean expression returns exactly one or exactly zero.
+
+The false constant is exactly zero. But any number that is not zero is true.
+
+We've also talked, um, a little bit about control flow.
+
+We talked about the for loop in C. And of course you've all seen control flow in many languages.
+
+You've seen if for a while you've seen list comprehensions, you've seen collection iterations.
+
+You've seen all kinds of control flow. Right.
+
+Um, so we're going to talk about if but the way we're going to talk about it is not to say this is what if does because you know, right.
+
+You don't need my help to understand what it does. It's rather to say, what does if actually do inside the computer?
+
+How does the computer understand if and else?
+
+Right. And so we'll talk about that later in the. So she has, um.
+
+Five Boolean operators, three of them on this slide to on the next slide.
+
+Um, the two on the next slide are equality operators. These three are um, uh.
+
+True Boolean operators not which says if I have a one true, give me a false, and if I have a false, give me a true.
+
+And which says, if I have two things and they're both true, say true.
+
+If either of them is false, say false. And or which says if I have two things.
+
+If either of them is true, say true if I if they're both false, say false.
+
+Right. This is you know, this, right? This is simple. Logic.
+
+It turns out that in C we also have another set of operators that we call bitwise operators, which are spelled slightly differently.
+
+So in C and as in Java is spelled ampersand.
+
+Ampersand. Double ampersand. The reason is that there is an operator single ampersand.
+
+That does not mean and. Well, it does doesn't mean logical.
+
+So just be aware. Trap for new programmers.
+
+Um, when she calculates Boolean logic, it does a thing which again, many languages that you've used have done,
+
+but you may not have ever really thought about her, discussed it, which is called short circuit evaluation.
+
+Given a Boolean sentence of arbitrary length.
+
+C will calculate the minimum amount of that sentence,
+
+starting from the left and working towards the right to determine whether it is necessarily true or false,
+
+and then it will immediately give you the answer without calculating the rest.
+
+So for example, if I'm using the Or operator.
+
+And I have some expression that evaluates to true or some other expression.
+
+As soon as it figures out the first expression is true,
+
+it'll stop and it will never even calculate the second expression because the Or operator is true, right?
+
+Any true or absolutely anything is true, right?
+
+So it'll stop immediately. Five and and expression.
+
+Something or something else. It calculates the first thing, and if it's false, it'll stop immediately and it will never calculate the other part.
+
+Because anything zero and anything is false.
+
+It can never be true. The thing about C in about many programing languages is that this is not just a thing that it does,
+
+that it might do to optimize your program or whatever. It's a rule that it follows consistently.
+
+It calculates every Boolean operator. From the left.
+
+To the right. Calculates the left.
+
+Do I know the answer? If the answer is yes, I'm done.
+
+If the answer is no. Calculate the right and do the operator right.
+
+It's called short circuit evaluation. Yes. If you want to know if Y is false, and you also want to know that X is false.
+
+Then if you use or. In parentheses with a knot.
+
+It will do what you want. If you say x and y.
+
+And then go to the else you don't know. Because if X was false, it didn't check.
+
+Why? Does that make sense? Okay?
+
+Yes. Yes.
+
+Yeah, exactly. So the question here, if why is never evaluated and why had a bug.
+
+Does that mean my program might run normally even though there was a bug? Yeah.
+
+Absolutely. And we take advantage of this. We'll start out talking about that in the next lecture.
+
+Sometimes you have something that you can only do if something is true.
+
+And so first you check the thing and then you do the thing right intentionally.
+
+And we do this all the time with if guys you've got two more minutes.
+
+You do this all the time with if and else right. You expect the if to run and not the else or the else to running off the.
+
+If it's just that when it's in a single expression, it's a little more surprising.
+
+Yeah. There was one more him. Yeah. Okay, I use the bitwise or operator for my P0 and it worked.
+
+Yes, the bad thing about the single character operators is that sometimes they work.
+
+And then sometimes they don't.
+
+Or is pretty safe, actually, or almost always does exactly what you want and is not, but or almost always does exactly what you want.
+
+So you shouldn't worry too much. But you know, you can have a little bit of fear in the back of your mind.
+
+That's okay. All right. I'll see you all on Monday. Have a great weekend. Yeah.
+

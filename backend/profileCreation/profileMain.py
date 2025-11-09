@@ -9,6 +9,7 @@ from .tagCreator import createTaggedChunks
 
 
 def main(userFiles, userDescription, userRules):
+    print("MAIN HAS BEEN BECKONED!!!")
     userId = str(uuid.uuid4())
     formattedData = formatUserData(userFiles)
     chunks = createTranscriptChunks(formattedData)

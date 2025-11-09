@@ -8,8 +8,8 @@ import logo from './Assets/DoppelLogo.png'
 
 // 1. Use the full, absolute path for each navigation segment.
 const MentorList: Navigation = [
-    { segment: '/mentor/socrates', title: 'Socrates', icon: <PsychologyAlt /> },
-    { segment: '/mentor/plato', title: 'Plato', icon: <PsychologyAlt /> },
+    { segment: '/mentor/ethan', title: 'Ethan', icon: <PsychologyAlt /> },
+    { segment: '/mentor/paul', title: 'Paul', icon: <PsychologyAlt /> },
 ];
 
 const appTheme = createTheme({

@@ -1,0 +1,1013 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+So that's on the recording. You don't have any homework for 220 this weekend.
+
+Now, I mean, you should look at you. I don't necessarily.
+
+We don't expect you to work on the weekend. Right. We've set the course up so that you can do your work during the week.
+
+But I realize that many times you want to do other things during the week, and you want to work on the weekend.
+
+That's fine. Um. That's fine. I mean, I said, you're adults, right?
+
+Make your own schedule. You're adults. Make your own schedules.
+
+Um, but basically for 220, you have a few days here where you have less work than you would normally have.
+
+And so I wish to introduce you to a dear friend of mine.
+
+Does anybody know who my friend is? That's a good guess, huh?
+
+Hand out is also my friend. That's also a good guess. You guys are calling for some great answers,
+
+and you're just assuming that nobody is familiar with Emacs or the handout or the textbook, and that those are good assumptions.
+
+But no, it's at nine. I am increasing and this happens every semester.
+
+You all are not like I'm not getting down on you. You're not like poor at this or anything.
+
+But every semester there comes a point in the semester where I start getting more and more questions,
+
+where the answer is I can tell you the answer to this, but if you had read at nine, you would already know it, right?
+
+Um, and the problem is,
+
+the bandwidth stacks up of waiting for someone to tell you the thing that's already in at nine that you could have known if you had looked.
+
+As the semester goes on, you spend more and more cumulative time waiting for information that actually we have provided to you.
+
+So please, if you have a few moments this weekend because you're not doing your lab and working on your pa1,
+
+just go peruse a couple of the links that we provide you.
+
+And at nine, I'm not asking you to learn everything and all of the links,
+
+but if you're at least familiar with the kind of information that you can find there,
+
+then you will be able to, you know, use your time more wisely in the weeks ahead.
+
+This is going to continue to pick up, right? It's not like Unix is going to become less relevant to this course.
+
+As the semester goes on, it becomes nothing but more relevant.
+
+Okay, so please read out nine. That would make me a happy person.
+
+Uh, honestly, I'm kind of indifferent to it because I get paid the same no matter what grade you get.
+
+But my bosses would be happier if you read at nine.
+
+All right. Um, so we've been talking in our little before lecture material chats about, uh, asking questions.
+
+Right? We talked about how asking questions, asking the right question is hard.
+
+And then after that, we talked about ways to ask a good question when you're trying to understand concepts and like how to proceed with something.
+
+But another thing that comes up frequently in a programing class is that you have written a program,
+
+and that program does not do what you want it to do, and you wish to know why it doesn't do what you want it to do.
+
+And just like I gave you a series of questions to ask about how do I proceed with this conceptual, you know, thing that is stumping me?
+
+I'm going to give you a series of questions to ask about how do I figure out why my program doesn't work right.
+
+And first, I want to give you a mindset to go in with.
+
+Frequently. Uh, and this is natural. It's normal.
+
+Uh, in programing, when a, particularly a novice programmer or a student finds that their program has a bug.
+
+It immediately feels as though that bug has descended from the heavens lit upon their program.
+
+And this program is no longer an artifact of their mind, and they have no idea how to proceed.
+
+But what you have to remember is you wrote that program. If there's anything in that program that is wrong, you did that.
+
+And if there's anything in that program that is right, you did that.
+
+It didn't come from nowhere. There is no generative spirit of programs.
+
+The AI people really want you to think that there is, but they're just telling you right now they're lying.
+
+There is no generative spirit of programs like you wrote that program.
+
+And so getting in the mindset of I know what I did, or at the very least I know what I meant to do.
+
+Because usually when you have a bug, the problem is that what you actually did, what you meant to do, weren't quite the same thing.
+
+Sometimes you did exactly what you meant to do and you didn't understand the problem.
+
+Which is also the more complicated the program is, the more often that comes up.
+
+But you often you knew what you meant to do, and you just didn't quite do what you meant to do.
+
+But if you sit back and you ask yourself, as the first question says, what did I do?
+
+So at some point you either didn't have a program and then you wrote something,
+
+or you had a program and it was doing something that you thought you understood, and now it's doing something that you think you don't understand.
+
+You're not sure why it's doing it. So you ask yourself, in between those two points, what did I do?
+
+What did I change? Why did I believe that this program, when I ran at this time, was going to be different from the last time that I ran it?
+
+Or if I didn't change the program, maybe I gave it a different input. How?
+
+What input did I give it? Right? And then ask yourself when I run this program.
+
+After I do what I did. What do I expect that this program is going to do?
+
+The very first time we ran a program at the terminal in live coding in this class.
+
+You guys are done flirting. We have class. Uh.
+
+The very first time I ran a program, I said, what's going to happen when I hit the enter key, right?
+
+And that that's a habit you should get into when I run my program. What is going to happen?
+
+And think about that. What did I do? And what do I expect that what I did.
+
+What is the outcome going to be? This second question what did I do is usually fairly straightforward to answer frequently in our world.
+
+You can literally just go to GitHub and look and see what lines of code you changed, right.
+
+Or do it in the command line with a git diff or something. So what did I do is relatively easy to answer.
+
+What do I expect to happen is harder. What?
+
+When I run this program, do I expect it to print something? Do I expect it to write a file?
+
+Do I expected to create a window? Do I like what do I expect it to do?
+
+That can be harder to understand because it's not enough to say.
+
+Do I expect it to print something? You should kind of have an idea of what you expect it to print.
+
+I expect it to print the next generation. Of this particular iteration of the game of life.
+
+Well, what was the previous generation? What is the next generation? Where do I expect the live cells to be?
+
+Right. It can take a minute to ask this question and to answer it. After you answer that question, you ask yourself, what did my program actually do?
+
+We wouldn't be here if it actually did what you expect it to do. You wouldn't be asking any of these questions.
+
+The problem is that it didn't do what you expected to do. Maybe it crashed.
+
+Maybe it produced output and the output was not correct. It wasn't what you expected it to be.
+
+Uh, maybe it didn't produce any output at all. It just, you know, blank screen, you know, went to the next prompt, right?
+
+What did it do? And the witch is easy to answer, right?
+
+So the first question what did I do is relatively easy to answer. The second question is can be quite difficult to answer.
+
+The third question, again, is relatively easy to answer, but it may require a little bit of legwork.
+
+Right? Sleuthing. The fourth question can be quite difficult to answer.
+
+What is how are what I expected? What actually happened different?
+
+And not how are they different? Like, oh, it didn't print the right thing.
+
+That's not useful. What was it supposed to print?
+
+What did it print? And how are those things? Why would they be that?
+
+Why would the wrong answer have come out? What wrong answer came out is part of it, right?
+
+Is part of it wrong, etc.? And I assert to you with.
+
+No. Um, evidence or scientific method whatsoever that is totally made up numbers 20% of the time.
+
+By the time you get done with what did I do? You will no longer have a bug because you'll know what the problem is.
+
+You'll look at what you did and you'll be like, I don't know why I thought that was going to work.
+
+Let me just not do that, you know? And then you're done, right?
+
+You're done. 20% of the time when you start writing out and I mean write out, just like last time, get out a piece of paper.
+
+What did I do? Write it down. If it's a or something like, you know, summarize what did I expect to happen?
+
+Write down a few bullet points. Like this is what I expect to see. This is the kind of output I expect.
+
+I expect the values to be in this range, you know, whatever. 20% of the time when you start writing now, what do I expect to see?
+
+You'll be like? I don't know why I expected that. That's not that's really not what I should expect based on what I did.
+
+This isn't what I expect. Like there's another step that I just haven't done yet that I'm going to have to do or.
+
+Well, that actually that I did is not. Now I'm thinking about what I expect to happen.
+
+I expect it to print exactly what it printed, and that's just not the right answer, because I didn't do the right thing.
+
+Right. Or what, 20% of time. So we're up to 40% of the time. You already know what your budget's.
+
+The next step. What actually happened?
+
+Probably 50% of the time when you get through, if you do them in order, when you get through what actually happened,
+
+by the time you're done figuring out what actually happened, you'll be like, oh, well, I know what this is.
+
+I forgot to calculate, you know, whatever. Okay, fine.
+
+I fixed my book. So we're up to like 90% of the time we're done.
+
+And we haven't even gotten to the last step, which is the really hard step of how are they different?
+
+Because just by thinking through the process, you realize that, oh, well, I know how my program works because I wrote it.
+
+I know how it works. Right? Um, the key to this whole process is avoiding my.
+
+When I was an undergraduate, uh, the fellow who lived across the hall from me, his name was Jeff.
+
+It still is, Jeff, in fact. Jeff was a physics major.
+
+Was that is past tense because he changed his major to, uh, better align with.
+
+Just generally being a good and valuable person. He changed it to computer science.
+
+And, um, that's not true. I love physics majors.
+
+I don't know if I know any, but I'm sure if I did, I would love them. Um.
+
+But he used to talk about what he called programing by Brownian motion because he was a physics major.
+
+Brownian motion is a physics thing, right? So if you have a fluid, a gas or a liquid, or the molecules in that fluid move randomly all the time,
+
+that's sort of the definition of a fluid versus a solid where they're fixed in some kind of matrix.
+
+And that random motion is unpredictable. And it just sort of the fluid gradually morphs from one topology to another.
+
+And you can see this like if you drop food coloring in water, it just sort of like spreads in these weird swirls and, you know, whatever.
+
+That's maybe not actually Brownian motion, but I think it's related. Um, I'm not a physics major.
+
+And he called this burger programing on Brownian motion because you're just making
+
+frequently what students are doing is they make random changes to their program,
+
+and then they look to see if it fixed it right, like, oh, this isn't working.
+
+What if I well, I didn't work. So what about I plus one.
+
+Well I plus one didn't work. What if it was J plus one right.
+
+You know and you just keep trying stuff to see if it works. Right. Maybe I need a new line at the end of this.
+
+Right. Um. And just like if you have a glass of water.
+
+Which is a liquid, which is a fluid. And so the molecules are moving by Brownian motion.
+
+There is some configuration of those molecules that forms a stable matrix and would be ice.
+
+The only difference between water and ice is that in well there's an energy difference.
+
+But as you reduce the energy, the water molecules fall into the stable matrix and form ice.
+
+There's no reason that room temperature water couldn't fall into that same matrix and form ice.
+
+Instantaneously. It's just that the probability of that happening is so infinitesimally small that we
+
+will see the heat death of the universe before your glass of water ever turns to ice.
+
+So just like that glass of water, when you're changing your program randomly,
+
+instead of fixing the bug, just like the glass of water doesn't turn to ice,
+
+the glass of water gradually reverts to room temperature and maybe gets a little dirty as dust falls into it.
+
+Your program gradually reverts to room temperature, and little bits of dirt fall into it as you make changes, and you don't fix your bug.
+
+But if you follow something like this and you get to a point where you say,
+
+I think I know what the error is and you make a change that you have, real belief might actually fix the problem.
+
+You may not be right. But you have a real probability of being right, as opposed to just let me change something in submit to the order,
+
+or let me change something and run, make test and see if it got better.
+
+The icing on the cake is that if it doesn't work and you're still completely stuck.
+
+If you bring us those questions and the answers that you wrote down, we will be able to help you in an instant.
+
+Because we can say, oh, well, what you expected is not right.
+
+And here's why. Or what you did is not going to accomplish it.
+
+And here's what you need to think about or whatever. Like we know what your thought process is.
+
+We know where you are and we can answer it very quickly. All right.
+
+That was way longer than I should have on that. Any questions? Learning to program.
+
+Is one of the hardest things that you will do in your degree here.
+
+Not learning to write any given program, but learning to program.
+
+And we cannot teach that to you. At least we don't know how.
+
+What we can do is show you some of the tools and make you practice.
+
+But we can't teach you how to do it. You have to do the practice.
+
+You have to do the thinking. You have to work through the bugs. And if you do that, you'll get better.
+
+You'll get a lot better.
+
+You'll look back at what you were doing, what you were struggling with in 115, 116 to 20 when you graduate and be like, why was that so hard?
+
+I know how to do that, right? Okay. Questions.
+
+This is not true. Good lab exam ones this week.
+
+Hopefully you all know that. Um.
+
+So we're going to move with so far everything we've done and see we've done with very, very simple, rudimentary bits of C.
+
+Um, because we're learning the language, uh,
+
+and because they're the next things that we're going to learn about are substantially different from what you've learned.
+
+Not substantially different. They have differences of what you've learned before, that we sort of want to take it one step at a time.
+
+So everything we've done so far, we did without allocating any memory and without using any complex data structures,
+
+we've used only primitive types and arrays. But as we build more and more complicated applications in sea, we wind up.
+
+Having to create more complicated data structures.
+
+And as I said in one of the earlier lectures, unlike higher level languages like Python and Java and,
+
+you know, other languages that you may have had exposure to.
+
+There are no collections in C, there are no iterators in C,
+
+there are none of these high level sort of interfaces to my data that are just already done for me.
+
+Uh, instead what we have is we have aggregate types like arrays and structures, uh, which we'll talk about this is in this lecture structures.
+
+Uh, and we have pointers and we use aggregate to get data types and pointers to create data structures that we use to store the data in our programs.
+
+Now there are libraries of data structures that someone else has already written that we can use,
+
+but they're not a part of the language like they are in languages like Java or C plus.
+
+Plus.
+
+The standard library for C does not contain a wide collection of data structures as it does in Java or C plus, plus or Python or something like that.
+
+The way we create these data structures is we use a, uh, an aggregate data type called structures that is provided by the C programing language.
+
+And we use memory allocation. We create memory or we ask the operating system for memory.
+
+We uh, and then we create use pointers to create data structures of arbitrary complexity.
+
+This includes things like lists and trees and graphs and things like that.
+
+Now in this particular course, we will never use a data structure substantially more complicated than a simple linked list.
+
+Um, of course you may. If you write programs use arbitrarily complicated data structures,
+
+but because many of you have not yet taken or are currently taking CSC 250, which is data structures, we that's not our emphasis.
+
+Our emphasis is on the parts of the language that are. Not like other languages, and that doesn't require us to use complicated data structures.
+
+So we will stop with like effectively glorified linked lists.
+
+So, um, the aggregate data, there are two aggregate data structures.
+
+Well, there's kind of three, but one. One I'm not going to talk about. There are two aggregate data structures in C.
+
+One of them we've already seen which is the array. And an array is a number of data items of the same type that are stored together in memory.
+
+And we do reference arrays with square brackets and a number. Right. We've already seen this.
+
+Uh, the next aggregate data type is a struct,
+
+and the difference between a struct and array is that a struct aggregates multiple data items that may be of the same type,
+
+but they might be of different types. And instead of.
+
+Naming them by their location, as we do in an array.
+
+We give them names and we name them by their member name.
+
+So structs and C look an awful lot like objects in Python or C plus, plus or Java or other programing languages.
+
+Except that with objects we have a way to associate code with the data type, uh, to associate methods with a class, for example.
+
+And in C we cannot do that. We have data structures and we have functions, but we don't have methods.
+
+There's no such thing as a method. So the individual data items that are stored in this aggregate structure are called the members of a struct.
+
+Just like the data, items that are stored in a class are called the members of a class.
+
+And the aggregate that we create is of a new type.
+
+So we can create types in C by creating structure types.
+
+Those types they're sort of equivalents. And their compatibility will be enforced by the compiler the same as other types are in C.
+
+If I try to use the wrong structure type in the wrong place, the compiler will say, hey, I don't think this is the type that you actually want it.
+
+If we choose to make these data types self-referential,
+
+then we can create arbitrarily complex data types such as trees and graphs and lists and things like that.
+
+The other thing we're going to talk about in this lecture,
+
+because it turns out to be closely related to creating more complicated, uh, data structures in memory is memory allocation.
+
+Uh, in all of the programs that we have used so far,
+
+the amount of memory that we need in order to perform our total calculation is known at the time that you compile the program.
+
+You have some temporary variables.
+
+Maybe those variables are declared as variables in your functions, and you did not need to create any memory of any size that was unknown to you.
+
+Some of you tried to do that in zero because you didn't want to read the handout.
+
+Uh, but for example, in zero, you never had to create an array.
+
+You don't have to create an array in zero. I hope everybody knows that, um, you don't have to create any arrays.
+
+And if you do after create, if you do choose to create arrays, they're very small fixed sizes.
+
+They're not arbitrarily large, right. Uh, because you can process your input one byte at a time and produce your output one byte at a time, right?
+
+So you can lose loops instead of allocation. And in part one, you do create a substantial amount of space in arrays,
+
+but the size of those arrays is known to you at the time that you create your program, right?
+
+It's grid X by grid Y or grid X plus two by grid Y plus two or whatever.
+
+And then just a few temporary variables, maybe a column of neighbors or something like that.
+
+Right. But as we write more and more complicated programs, we will use data structure,
+
+or we will want to use data where we don't actually know how much data we're going to need at the time that we write our program,
+
+because we're reading in a file and we don't know how large the file is or we are, you know,
+
+performing some calculation that is dependent on some input given to us by the user.
+
+And we don't know how much input or how large that calculation is going to be until we know what the input is or, you know, whatever.
+
+Um, and when that is the case, we have to be able to ask for memory because we cannot compile it.
+
+And hey, give me this much memory. As part of our program, we have to be able to run the program and at some point say to the operating system,
+
+I need memory in order to be able to complete. This computation that I'm doing in the languages you've used previously.
+
+This allocation is done either completely implicitly as it is in Python.
+
+When you create a member of a Python class, you don't ask for a new one.
+
+You just call a constructor and it appears out of the ether. Um, or in Java, you use an operator that's specifically built for that purpose.
+
+New, right? You say new something, right? And it gives you it allocates one, gives you one.
+
+In both cases, you never, ever think about what to do with it when you're done with it.
+
+When you're done with it, when you stop using it, it just goes away. In the C programing language.
+
+You must create it explicitly, not by saying give me one of these.
+
+Instead, what you say is give me some memory and you tell the operating system how much memory you want in terms of bytes.
+
+Like I want this many bytes. And then, as we've discussed over and over, the computer doesn't know what's in memory.
+
+It's just it's just memory. It just bits right there, either 1 or 0.
+
+You decide how you want to use your memory, and if you want to use it as a linked list,
+
+or you want to use it as a tree, or you want to use as an array or a hash or whatever, great.
+
+You do that. The operating system doesn't care. So you say, give me this much memory, I'm going to do something with it.
+
+The operating system says, here's your memory, and then you choose how you want to use it. And when you're done with it, you have to give it back.
+
+In Python. In Java. In Java.
+
+Script in. Probably almost all the languages you know, unless you know C plus.
+
+Plus. Um, when you're done with memory and you stop using it,
+
+eventually something some piece of software inside the computer notices that you're no longer using that memory,
+
+and it recycles it so you can use it again. And see when you're done with that memory.
+
+If you don't give it back, then it will just accumulate forever until your computer eventually runs out of memory.
+
+So what you have to do is when you're done with it,
+
+you have to go back to the operating system from whom you've got the memory and say, I'm done with this.
+
+Please allow me to use it again later when I ask for more memory and give it back to the operating system.
+
+Um. This is great. And it's terrible at the same time.
+
+It's great because it allows your programs to be more efficient in their usage of memory.
+
+Uh, exactly how much memory it costs you to do something like garbage collection is an academic question.
+
+Uh, and it depends on a lot of things that we're not prepared to define right now.
+
+But you should assume that if you're using a garbage collected. Language to run a program that uses, you know, a certain amount of memory.
+
+That if you used a memory, a language like C where you manually allocate your memory, you could get by with half of the memory or less, right?
+
+So you use twice as much memory to use a garbage collected language.
+
+There are sweet programs where like that's not the case because they just play right into the way the garbage collector works.
+
+And there are programs that use wildly more memory than that because they're pessimistic and how they interact with the garbage collector.
+
+But generally speaking, it's an overhead of like 100%. Which means that if you're writing, you know, a control over something like a microwave,
+
+where you want to save all the dollars you can because the expensive part of a microwave is not the keypad and the computer behind it,
+
+it's the cluster generator and the frequent.
+
+They don't have quite strong generators anymore. The, uh. The magnetic tube.
+
+I forget what they're called, right? That creates the microwaves right in the Faraday cage that bounces them around or whatever.
+
+That's the expensive part. And so if you're over there in the programing department, you're like, I need a bigger microcontroller.
+
+Then the bean counters are going to be like, no, you can't have a bigger microcontroller.
+
+We're making a microwave, right? Go use C, not, you know, node or whatever.
+
+And then you'll go you C and you won't need the bigger microcontroller. The downside is, as a programmer,
+
+what you really want is a language where you don't have to spend a lot of time debugging
+
+and figuring out what's going on in a reference or in a garbage collected language with,
+
+uh, safe references like Java or Python or whatever. When you need memory, you ask for memory, you get it.
+
+And when you don't need it anymore, it goes away.
+
+And you don't have to decide when you don't need it anymore and you never have a bad reference in, you know, etc. etc.,
+
+etc. in C you can have memory leaks, you can have crashes due to bad accesses, you can have things like that.
+
+So there's a value which is efficiency and there's a cost which is programmer time.
+
+Making sure that your program is actually correct in the way it uses its memory. All right.
+
+That is the overview. We're going to start talking about structs in great and painful detail.
+
+Are there any questions so far? A memory leak is when you, uh, ask for the memory, you don't give it back.
+
+Your program gets larger and larger and larger until eventually it crashes because it runs out of memory.
+
+Which you can't do. In Python.
+
+It's not possible. Uh, there are equivalents, but they're unlikely.
+
+So. A struct is a compound data type.
+
+An aggregate data type, just like an array.
+
+Where the values of the struct are stored in memory right beside each other, just like they are with an array.
+
+But unlike an array, they may be of one or more different types.
+
+So whereas every element of an array is necessarily exactly the same type.
+
+So I have an array of integers, an array of characters, an array of pointers.
+
+In a struct I can have an integer, a pointer, and a character all in the same struct, right?
+
+They don't have to all be the same thing. Furthermore, instead of naming those elements with an array, we named them by their index.
+
+So I have arrays sub zero and sub one and sub two in a struct.
+
+When I create the struct type. I give each of those members a name and I access them by their name.
+
+So if I have an array of three integers and I have a struct that has three integer members A,
+
+b, and c in memory, they are stored in exactly the same way.
+
+But in the array I use a square bracket zero to get to the first element and a square bracket.
+
+I shouldn't say array square bracket zero to get the first element in the array.
+
+Square bracket two to get the third element in the struct, I say s dot a, s dot b,
+
+and I named them by the names that I gave them when I created the struct.
+
+We'll talk about the syntax for that more later. To create a struct.
+
+Here's an example.
+
+Uh, I give it the name of the type that I want to create because we're creating a type, I give it the members that I want to store inside the struct.
+
+In this case, I'm creating a structure that would store a list of integers.
+
+Uh, I take that back. I'm creating a node from a list of integers from which I could create a list of integers.
+
+And it stores inside it an integer value.
+
+That's the value stored in this particular node, and a pointer to the next node in the list.
+
+You should have all seen this like structure this concept of a linked list before, right?
+
+I have a value and I have a next pointer of some prior our next reference of some kind.
+
+Right. If you're in Java or Python or whatever, uh, if you're in C plus plus you've seen essentially exactly this before.
+
+Um. Value in next.
+
+In this case, we we declare them just like we do a variable. We have a type and then a name.
+
+They are called the members of this structure. So this structure has two members.
+
+The type of the first member is int and its name is value.
+
+The type of the second member is struct. It lists star or a pointer to a struct int list and its name is next.
+
+Um, if I create a variable of type struct int list, it will contain both of these members.
+
+Just like if I create an array of two elements, it will contain two elements of the same type.
+
+So the syntax to declare a structure is this in sort of generic detail.
+
+And there's a lot more about this in your required readings in uh K and R.
+
+I use the keyword struct to declare that I'm creating a structure, and I follow that with a type name that will become the name of the struct type.
+
+After this, the name of the struct type, if I say struct structure type name, blah blah blah.
+
+I created a new type and the name of that type is struct as one keyword structure type name.
+
+Both keywords together becomes the type, right? I've created a new type.
+
+I. Then inside the curly brackets, I declare the members of the structure just like I would declare variables.
+
+Each one of those becomes a member with a type in a name.
+
+After the closing curly bracket, there must be a semicolon.
+
+When I give the example in like the first or second lecture,
+
+and I talk about the student who came in and they're like missing semicolon on line 13 and they didn't know what to do.
+
+This is specifically the semicolon that they forgot was the semicolon at the end of a struct.
+
+Um, between the closing curly bracket and the semicolon, you may optionally create one or more instances of the structure.
+
+However, stylistically I suggest that you do not.
+
+You just put closing curly bracket semicolon, and then if you need instances, declare them somewhere else because it's less confusing.
+
+It's there's there's a lot of noise in this structure declaration.
+
+And the more complicated you make it, the harder it is to understand for the next programmer to read your code.
+
+There is an exception, um, a common place to create a structure and declare an instance immediately after it
+
+is if you have something like a configuration type or a singleton of some kind,
+
+where you are creating exactly one instance of this structure.
+
+In that case, frequently you'll put it, you know, right on that line,
+
+and furthermore you'll say equals and then have an initializer and then a semicolon.
+
+Right. And there's exactly one of those. I use that a lot when I'm writing programs, um, that have some sort of configuration.
+
+If you have a program, is very small and has very little configuration, and you just create a couple of global variables, right.
+
+And that's your configuration, right? Maybe you set them with command line options or you read a config file or something like that.
+
+If you're creating a very large program,
+
+then you have a configuration API where you have like some sort of data store and the user can like set valve,
+
+set preferences and, you know, whatever. But there's this like middle size of program that you will find in your career.
+
+You write a lot of little tools that do something where you have maybe a half
+
+a dozen command line options and a few little things that the user can tweak,
+
+but not so many that you feel like you need an API.
+
+In which case a nice thing to do is create a global instance of a structure that has members for each of the options,
+
+and you set them on one place, and now you have one global variable that tells you everything you need to know.
+
+Right? That's a kind of a pattern that you see, right? So sometimes you'll use that keyword or that that instance name.
+
+But usually I recommend that you don't because it makes your program harder to follow.
+
+Um, if you don't use that instance name, then you can always declare one later by giving the type and then a variable name.
+
+So in this case the type is struct structure type name.
+
+And then the variable name is var name right? In this example.
+
+Are there any questions? Okay.
+
+So once we have a struct, we want to get to its members, as one does in many, many programing languages,
+
+which I don't think came from C, I think maybe it came from Algol, but certainly C is where it came from.
+
+In most of the programing language of the programing languages we use today, uh, is we use the dot, right.
+
+So if I have an instance of a structure and I wish to access a member of that structure, I use the dot.
+
+I use the name of the structure a dot and the name of the member.
+
+So, uh, if I declare a struct int list.
+
+I give it a name right? Struct endless node. I've now created variable.
+
+I have an instance of a structure. It's named node. And here I have a static initializer.
+
+I set it equal to the integer seven and the pointer null.
+
+If you remember it contained int value and um struct.
+
+It lists star next where its members.
+
+I can then use the dot operator and say no dot value or node dot next, and that will behave like a single variable, right?
+
+No dot value is a variable and no dot. Next is a variable.
+
+Node is the only real variable. It's one thing, but it has these two fields right?
+
+These two members value. And next. And I can access them with dot dot.
+
+This can become arbitrarily complicated. So in the example at the bottom.
+
+I have a stroke named complex that has two.
+
+Members, real and immediate. Right.
+
+And by the way, I recommend that in your code you said double real semicolon, double Im semicolon.
+
+Why didn't I do that here?
+
+Yeah, the curly bracket at the bottom or whatever that last line would fall off the bottom of the slide is why I didn't do it.
+
+But like you'll see that a lot in K and R two they write very dense C where they put a lot of stuff on one line of code.
+
+Sometimes it's because they're pages only like 56 lines long or whatever, and they want to get that whole example in When in Doubt.
+
+Spread it out, right. Um, okay.
+
+So, uh, I then can take another struct and I can put that struct in it as a member.
+
+Right. So this drug complex list contains a member that is a struct complex.
+
+And once I have one of those complex lists I can say complex list, dot complex, dot real.
+
+And just keep drilling down those dots through the members of the various structures.
+
+And this can be arbitrarily complicated. Normally it's not.
+
+This is like I think we talked about, uh, multi-dimensional arrays.
+
+Like if you have more than three dimensions, you really need to figure out what you're actually trying to do here.
+
+If you have more than 2 or 3 of those dots, you need to figure out what you're actually trying to do here.
+
+You probably rather than adding more dots, you need like an API of some kind, right?
+
+You need to write some functions and maybe an abstract data type of some sort and you know.
+
+But there is a there are circumstances where you could have a couple, right?
+
+You could have a couple of nested structures, and that's a reasonable thing to do.
+
+So it turns out that if we have a pointer to a structure, that dot becomes painful.
+
+So C has some syntactic sugar that allows you instead of using the dot to use the arrow operator.
+
+So if I have a struct int list star which is a pointer to a struct int list,
+
+which is going to be very common, we will frequently have pointers to structures, not structures.
+
+Then I can access its members using the arrow operator.
+
+And the C programing language actually just essentially converts this exactly to a star and a dot.
+
+So if I have this. Right list.
+
+Arrow. Next. The C programing language.
+
+The compiler will convert this. To star list in parentheses.
+
+Dot. Next. So list in this case is a struct int list star.
+
+Which means it's a pointer. So star list is a struct list just the same as star p if int if is a pointer to int is an int.
+
+Star list is a struct int list. So once I have a struct and list, I can use dot and then I can access its members.
+
+The problem is that an operator priority is a higher priority than star.
+
+So now I also need parentheses. So in my program, I might write something like this.
+
+Again, if you're doing this like question why you're doing it this way.
+
+Right. But I might say list arrow next arrow next arrow value.
+
+And what that means is I have a list. Right. And it has. Right and it goes on and does whatever.
+
+So if this is list then list arrow next is here, arrow next is here.
+
+And the value is there. And I get that seven right. This is a reasonable thing to do.
+
+If I wrote this using parentheses and stars, then I would write it like this.
+
+I'm going to start in the inside. So start list.
+
+Next. And then I need a star outside of that.
+
+Next. Then I need a star outside of that.
+
+Value. This and this are the same thing.
+
+I think we can agree that this is nightmare. And undeniable and impossible to tell what's going on.
+
+And this is, like, better, right?
+
+So we use the arrow. There are times that you'll do.
+
+Not this. Don't ever do this. This is terrible. There are times that you'll do something like this.
+
+The equivalent of this. But usually you're just going to use the air.
+
+Uh, so now we have talked about all of the possible ways to dereference a pointer.
+
+Remember last time we talked about the square brackets in the star? Now we've talked about the arrow.
+
+We've covered all the possible ways to dereference a pointer. Um, I think.
+
+Yeah. This slide and I think we're done with structs, right. Yeah. Okay.
+
+Uh, so the last thing about structures I want to say is that structures are a type.
+
+I just spilled water all over myself. Fortunately.
+
+Not drinking coffee. Those of you who.
+
+Take more classes with me. Usually I drink coffee, but I don't know. This semester I haven't been.
+
+I'm in drinking water. I guess it's better for me. Eventually. I spilled coffee on myself while I'm teaching, and it's just the thing that happens.
+
+Um. So, uh, structures are a type and types of operators.
+
+There are very few operators that operate on structs.
+
+There's the dot operator which gives you a member of a struct.
+
+There's the address of operator which will give you the address of a struct.
+
+And there's the assignment operator which will copy a struct.
+
+So if you have two structs of the same type and you set one equal to the other, it will copy every member over for you, right?
+
+One at a time. Um.
+
+If you have a pointer to a struct, then you can do all of the things you can normally do with a pointer, so you can dereference it with star.
+
+You can assign it to another pointer. Uh, we haven't learned about this yet,
+
+but we know about it implicitly because I said you can calculate the value of a pointer from another pointer so we can do some kind of math on it.
+
+Right. Few other things you can do with a pointer. They're not important to us right now.
+
+And you can use the arrow operator. You cannot use the arrow operator on a pointer to an int or whatever.
+
+It doesn't make sense. You can only use it on pointer to a struct. Any other operators on structs or struct pointers won't work.
+
+In fact, the compiler will normally tell you I don't know how to do that right?
+
+If you try to add two structs together. Doesn't know how to do that.
+
+If you try to compare two structure equality doesn't know how to do that, right?
+
+Um, if you want to compare two structure equality, then you have to write a function that goes through and does whatever your equality check is.
+
+So it checks, you know, member A is equal to member A, member B is equal to member B or whatever.
+
+Right. And then eventually says yes or no. Or maybe your definition of equality is more or less complicated than than that right.
+
+Um, but the compiler does not know how to do. All right.
+
+That is structs. As of right now.
+
+You know absolutely everything you need to know to do part one and part two.
+
+Are there any questions? Yes.
+
+Okay, so the question is if I take the ampersand on a struct, the address of operator on a struct, does it give me the address of the first member?
+
+And I'm going to say no. But yes.
+
+It gives you the address of the struct. So the whole thing.
+
+But the first member will be at exactly that address.
+
+So yes, it does, but only in the sense that they're the same thing.
+
+Does that make sense? The type will be the struct type, not the type of the first member, but the address.
+
+The number of the address will be exactly the same as the address of the first member.
+
+Yes, just. I don't know if you mentioned that.
+
+Usually when. But do we think? Mhm.
+
+Yes. Now I'm. The compiler.
+
+Tick tock. Yeah, this is a great question, actually.
+
+Uh, so the question is if I declare a variable of some kind.
+
+It's an int, it's a pointer, it's a whatever. The compiler has to create memory for that variable.
+
+And it allocates a certain amount of memory to store that data in. If I allocate a struct.
+
+How much memory does it allocate?
+
+To rephrase your question, how much memory is allocated? And the answer is yes to your suggestion.
+
+It is a summation of all of the memory that's inside it. But it's a little more complicated than that.
+
+We will learn how to compute that like next week, probably end of next week or beginning of the week after.
+
+We'll learn how to compute that. But it has to do some computation.
+
+But it does it when it compiles your program, not when your program runs.
+
+So it already knows by the time your program runs exactly how big those things are.
+
+Good question. Yes. No, it copies it like bit wise.
+
+So if you if you look at a struct, it has a bunch of members in it.
+
+Those members consist of a bunch of ones and zeros in memory. Right?
+
+Some of them happen to be an int, some of them happen to be a pointer or whatever. It takes each of those bits and copies it over.
+
+Right. So the other two things the two structs will be bitwise identical.
+
+If you change one the other one remains unchanged. Does that answer your question?
+
+Yeah, it's a reference. I'm sorry. It's a copy.
+
+Not a reference. It's a copy. Yes. Like the.
+
+You cannot assign arrays. You can assign structs.
+
+I'm going to give you a sweet, sweet tip that I didn't tell you for part one, because you should not do it in part one.
+
+Because down this path lies programs that crash for reasons we don't understand.
+
+If you create a struct. And you create it to have exactly one member, and that member is an array.
+
+Then you can copy the struct and that will copy the array. But you can't copy the array.
+
+And there's reasons for that that I don't want to talk about right now. The problem is when you start copying structs willy nilly,
+
+you start doing things like returning them from functions, and we start returning them from functions.
+
+Sooner or later, you run out of stack space in your program crashes for reasons that we don't understand yet,
+
+but we will learn later in the semester, so you shouldn't.
+
+So the one place that people frequently want to return an array is they want to say array equals some function and have it copy the array.
+
+Down that path lies programs that crash for out of memory errors. So that's why he doesn't let you do that.
+
+That will not be on the midterm. I was going to go off on what you said. So does the structure then need to be a fixed memory account?
+
+Because I know the linked list you could keep adding and adding. This is an extremely insightful question.
+
+Does a structure therefore need to be of a fixed size?
+
+Yes. But I thought you can create with a link list.
+
+Each individual node is exactly the same size.
+
+You just create more than one of them. So then would you just tell C to allocate?
+
+Yep. And we'll learn about that tomorrow or Monday.
+
+Monday. Yeah. All right. Other questions.
+
+Um I don't think I can do the next part uh, in the next three minutes.
+
+So instead of starting it now, we'll start it on, uh, Monday.
+
+Thank you very much for your time. Have a great weekend. Please use this weekend wisely.
+
+I suggest that you consider.
+
+You don't have to read it, but just open at nine and see how you feel about it when it's on your screen.
+

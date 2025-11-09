@@ -1,0 +1,809 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Have I ever had them call me and told me to turn on my call? I haven't right once in the other lecture.
+
+The lecture right before this. It's like three times a week. They call and they're like, Ethan, turn your mic on.
+
+That's everything. Yeah, it's every lecture, pretty much. I remembered today.
+
+But then some kid stuck his hand up and was like, did you turn your mic on today?
+
+I was like, yes, I did, thank you very much. All right.
+
+So, uh, we're going to pick up right where we left off, talking about this example of bitwise operations.
+
+Right. And so this example pulls together both our understanding of integer representations and our understanding of bitwise operations.
+
+Easy easy. And our understanding of bitwise uh operations.
+
+Um, so the first thing I want to do is take 2 or 3 minutes.
+
+Look at this code. What does it do?
+
+Just reason through it and it's going to be hard to understand and that's fine.
+
+We'll talk about that. But just look at this code reason through. What does this do.
+
+And then we will talk about it. And all the people who come in late will just wonder why we're sitting here awkwardly staring at the screen.
+
+Two. Um. Comments and variable names and function names are super important, right?
+
+So input and output here at least gives you a hint, right, as to where things are coming from and where they're going.
+
+Right. But the name of this function h to nl.
+
+What does that mean? Right. Well, it turns out it does mean something, but you wouldn't know from looking at it means host to network long.
+
+We'll talk about that here in a minute.
+
+Um, and without comments, it's really hard to get a grasp of what it's doing and why it would be, uh, doing it right.
+
+So we encourage you to write code that is committed, right?
+
+We encourage you to, um. Give good names of your variables, to give good names to your functions, etc. and you can see by looking,
+
+this is a small chunk of code, and I feel like it's a little hard to understand myself.
+
+Um. You can see that doing those things can make a big difference, right?
+
+And it matters. It will matter a lot. It doesn't matter.
+
+The problem is we can only we can tell you this.
+
+We can't really show it to you because you write code and then in two weeks you throw it away and you never look at it ever again.
+
+Right? For a really long project, maybe 6 or 7 weeks, and then you throw it away and you never look at it ever again.
+
+But when you leave here, you will end up writing code and going back and looking at it four years later.
+
+You don't even remember you wrote it. Much less what it was supposed to do when you wrote it.
+
+I cannot tell you the number of times I worked on a particular open source project for probably 12 years.
+
+Longer than that. I mean, technically I still work on it, although I don't do any work on it, but technically I'm still part of the project.
+
+Um, but anyway, like 12 years of actively, regularly writing code for this project, and I cannot tell you how many times I look at some code.
+
+I'm like, what does this do? And I don't understand and I don't know what's going on.
+
+And so I go to the git commit history. We didn't use git.
+
+We use mercurial, which is better than get in every possible way.
+
+Uh, I go to the mercurial commit history and I'm like, I'm going to ask the person who wrote it.
+
+And I look at the history and right there beside it says Elbe, like ten years ago.
+
+And I'm like, well. That sucks.
+
+Because like, I just asked me and I don't know what's happening right now, right?
+
+It happens. Uh, it will happen to you in your career.
+
+Right. So. Right. Comments. Use good variable names. Use good function names.
+
+Make life a little easier on yourself. What project? Pigeon.
+
+It's an instant messenger client. It was called game because it was a client for the AOL Instant Messenger service.
+
+Um, I am and, uh, then AOL called and threatened to sue us, and we had to change the name.
+
+We couldn't tell anybody about it.
+
+I can tell you about it now because, like, they went out of business is, as far as we can tell, like, nobody owns any of these trademarks anymore,
+
+but I, like I have a signed letter at home that's like signed by legal counsel for AOL, and that says that we won't use their name anymore.
+
+Uh, anyway. Good times. Uh, that was the 90s. Wow. That was the 2000.
+
+Early 2000. You were busy like being born when that happened.
+
+Um, anyway, so it happens. Um, okay.
+
+Now this function is called, uh, HTL, which stands for Host to Network long.
+
+So host network long takes an integer that is in host byte order.
+
+So it takes a native number as your machine would use it.
+
+And it converts it regardless of your.
+
+Um, host architecture into a big Indian.
+
+Uh, 32 bit integer. So whatever it was when you started, when you're done, it's a big Indian 32 bit integer.
+
+And the reason is that when the architects of the internet were designing the internet protocols.
+
+Um, they had to agree on the way that we write down numbers.
+
+So just like we said, you know, some computers,
+
+all computers have to agree on how we write down numbers and some computers as big Indians on computers as little Indian, some computers.
+
+It's, you know, whatever. Sometimes it's 32 bits, sometimes it's 64 bits, etc. and it doesn't matter.
+
+But you have to know what it is. Um, when you start communicating between computers,
+
+both computers have to agree on the format that they're going to communicate when they talk to each other.
+
+This is like when we. If you write a letter to someone, you need to write it in a language that they speak, right?
+
+You speak Farsi. They don't. You speak, um, you know Chinese?
+
+They don't. You speak Mandarin, they only speak. Oh, that's not a problem if you're writing it down.
+
+That's not. Um, you know, whatever, right? You have to agree on what language you're going to write in and send some way that they can understand it.
+
+Well, computers have to do that too, when they write down data to be restored by another computer.
+
+So the, uh, architecture of the internet said we will write all integers in big Indian byte order, and we call it Network Indian.
+
+In fact, sometimes because of the internet, we will write all integers and big into a byte.
+
+And it doesn't matter. That's big Indian. It could have been Little Indian.
+
+The point is that we know and we agree that it's big Indian.
+
+So if my computer is little Indian, I take my data and I put it in big any and byte order.
+
+And then I send it across the network and the computer that receives it. It doesn't matter whether that computer is Big Indian or little Indian.
+
+It knows that the packet that you just received is Big Indian.
+
+And so if it's a little Indian, it converts it to Little Indian. If it's Big Indian, it just reads it directly.
+
+Likewise, if I have a big Indian computer, I don't have to do any conversions.
+
+I just put my data in my packet and I send it out. But the to an L function, what it does is it says, I don't care what this computer's Indian.
+
+This is when I send my data to the other end, it will be Big Indian regardless of what my local, uh, now my local byte orders.
+
+So, um. It essentially says I have an integer named input.
+
+Um. And let's say that the value of that is 0X1A2B3C4D right is a 64 bit number.
+
+It consists of four bytes one A to B, three c and four d.
+
+Right. So in memory. This is stored in four different locations and one of them has.
+
+Uh, we're little Indian, actually. So one of them has four d, then three c, then to B, then one a because our architecture is little Indian.
+
+Right. So we write down the 4D first.
+
+Then the three C then the tube then the one right. So in memory this integer looks like this.
+
+Now in a register if I have a variable x x does not have indianness.
+
+X is a number and that number has a magnitude, right?
+
+But in memory when I store that x in memory, if I go look at the individual addresses.
+
+It's in little Indian byte order in memory. So then I declare an integer output.
+
+And output is also just a 32 bit number, zero x, whatever it is.
+
+I declare a pointer out be. And I point that pointer to the first bite of output in memory.
+
+Uh, is that true? Yes to the first bite of output in memory.
+
+So out B now stores eight bit values because it's A care right stores eight bit values and it effectively has an array of four eight bit values.
+
+And those are that array of four eight bit values. Is the four byte locations inside the integer output.
+
+Because I can do that and see right output is stored in an address, I can go to that address and I can look at the data that's there.
+
+Yes. Uh, if you just if you took away the cast there and you just had Albee equals ampersand output,
+
+the compiler would say assignment to, uh, from pointers of incompatible type.
+
+It would probably do it anyway. That's probably a warning, not an error, but it would warn you.
+
+It would work. Yes. On our architecture. It would work? Yes. See allows for the fact that it might not.
+
+But in our architecture, it. So then, uh, I take and I create a local variable.
+
+Uh, be in a loop. And B is going to occupy the values zero through three.
+
+Right. So over the time as our computer exec, our program executes B is going to be zero.
+
+Then it's going to be one, then it's going to be two, then it's going to be three.
+
+I then calculate a value shift and I calculate shift from B.
+
+I'm going to move this up. I'll move it back down here in a second. And shift is equal to this weird expression size of int minus b minus one.
+
+Well, size of n is four. So on the first iteration of this loop.
+
+Times eight. Sorry. Times eight. So the first iteration of this loop size of int minus b minus one b is zero.
+
+Is three. So three times eight is 24.
+
+The second iteration of this loop size of n is four, minus one is three, minus one is two times eight is 16.
+
+Then eight, then zero. So as our program executes, b will go from 0 to 3 and shift will go from 24 to 0 by eight.
+
+So it makes sense. So then what we do.
+
+Is we take the integer input, shift it.
+
+Right. By the number of bits that we're shifting.
+
+Mask off the last eight bits because we only want the last eight bits and store that into out B sub b.
+
+So I take this integer one a2 b3 c40. I shift it down 24 bits.
+
+Well, this is eight bits. This is eight bits. This is eight bits.
+
+So if I shifted down 24 bits I'm left with one a. Then I mask it off because I might have skin extended because it was in it.
+
+Right. I mask it off with the PHF. So I have the value one way and I store that.
+
+Here. Inside this output integer.
+
+I then go to position one. I shift it down, mask it off.
+
+I wind up with to be. I shift it down, mask it off.
+
+I wind up with three C, I shift it down, mask it off. I wind up with four D.
+
+I'm done. My input integer had this numeric value and was stored in memory like this.
+
+My output integer is stored in memory like this. It's big Indian.
+
+Its numeric value is whatever its numeric value is, right? It doesn't necessarily have a meaningful relationship.
+
+I mean, it does. It's calculable. But for our purposes, it doesn't necessarily have a meaningful numeric relationship to the input integer.
+
+It has a memory representation relationship to the input integer.
+
+So I started with a little Indian number.
+
+And now I have a big Indian number. And I assert to you that if my input system was big Indian,
+
+I would still I would have taken a big Indian number and I would have produced a big Indian number.
+
+And the key is that the input is treated as an integer. And the output is treated as an array of bytes.
+
+Now. Hopefully that makes enough sense that you can go home and look at this and see how this program is working.
+
+I want to say a couple of things right here. One, this right here that I drew out when I say draw diagrams and write things down.
+
+And this is the kind of thing that I do when I'm trying to understand how a program works, right?
+
+Sometimes a thing that I'll frequently do is make a table where I'll have like the values of variables,
+
+I'm sorry, the names of variables and and expressions across the top, and then line numbers down the left.
+
+And I will say, well, on this line they take on these values, on this line they take on these values.
+
+And you look for the things that change. But like this kind of thing, o.b progresses, but it only ever has four values.
+
+I can literally just write all of those down. I can literally just write down all of the values of shift, like that's a reasonable thing to do.
+
+Write them down. Then try to understand what the function does. Yes.
+
+The key is that the input is not treated as an array of bytes is treated as an integer.
+
+So if I'm on a big Indian system and I have an integer with the numeric value one a2, b3 c40.
+
+In memory. It will be written like this, but numerically it is this like this is the integer value of it.
+
+When I shift that down 24 bits, I'll still get one a.
+
+Right. So here I shifted down 24 bits. I didn't get 4D.
+
+I got one A because as an integer the value is one a2 b3 c40.
+
+Right. That's just a big number. I treat it as a number, not as an array of bytes, not as a sequence of bytes, just a number.
+
+And so the big Indian number equal to 182B3C for d is exactly the same as the little India number equal to one a2 b3 c4 d.
+
+The way we write them down down in memory is just different.
+
+It's the difference between treating it as an algebraic integer and treating it as data in memory.
+
+Does that make sense? And the reason out be turned around is because with or output turnaround is because I didn't treat it as an integer.
+
+I treat it as a sequence of byte values as locations in memory.
+
+By by accessing it through a pointer. That makes sense. Yes.
+
+There's a seat right there. Now, I know it's just because you don't like me.
+
+Okay? Okay, okay. Now, now you're just want something from me.
+
+Go ahead. Mhm.
+
+Mhm. Yeah.
+
+Um, I'm not prepared to do that right now because it'll take too much time.
+
+But that is actually a really great exercise. And if you do that, what I would recommend that you do.
+
+Is, uh, break, uh, at the beginning of the function.
+
+Uh, don't name it Ational. If you type this in and compile it, name it something else.
+
+Because H tells a C library function, it will get confused. Right?
+
+So name it. Like for example we had sterling. We name it csc underscore sterling right.
+
+So that it doesn't get confused with the library function. So name is an L or whatever break at the beginning of the function.
+
+And then um, if you do it in Emacs with the six pane view like maximize your window, right.
+
+Do it with the six pane view. Then you can see your local variables. And then the other thing you can do is as you step through this loop.
+
+So every time you get to the bottom of the loop um use the X command.
+
+And, uh, do x. Slash four B.
+
+Um. Input. And output.
+
+And what you should see is that the first time through this is just garbage.
+
+And as you. And this is whatever value you pass in. Right. Try different values.
+
+Right. This is what a value pass in. And as you go through you will see these numbers migrating into this.
+
+Value here. Like each way through. You'll see one byte being stored.
+
+And if you look at B or I'm sorry. Yeah, you look at B and look at shift and see those values.
+
+Make sure you compile with um dash g gdb.
+
+Um, so that it has full debugging information and then, uh, print those out and do the hex dump of memory.
+
+That would be a great exercise, actually. Print in hexadecimal for bytes of memory starting at this address.
+
+Right. That's what X/4B means. Yeah. Of course.
+
+That's a great question. Yeah. No, the C library would not actually do this.
+
+Uh, and the reason is that, uh, in 2025, most computers have an instruction that does this.
+
+And so the C library will use the instruction that's in the CPU to do this.
+
+And the reason in 2025 most computers have an instruction that does this is because of the internet.
+
+Right? Because you need to be able to read and write, uh, big Indian data regardless of your platform.
+
+Uh mem copy is does so notionally, yes.
+
+It copies byte by byte. In practice, it also does complicated things and probably uses assembly language because it can be much faster.
+
+Yeah. So the C library likes all these, like, a lot of the function in the C library.
+
+It's like this is dumb. This will be three lines of code. I can just write those three lines of code.
+
+But the C library does it in a way that is much, much, much faster than the naive three language lines of C.
+
+And they will have like assembly language implementations for different platforms,
+
+right, that they use, or they'll use compiler intrinsics and stuff like that. Um.
+
+This is probably a compiler. Intrinsic actually is what it does.
+
+Which means it's just the functionality is built into the compiler so it emits the right instruction.
+
+Yes. That zero five just masks it off.
+
+Because if I shift this down by eight bits, then the value that I get is 182B, three c, and I only want the three c, so I end it with 0XF2.
+
+Chop off everything that I don't want. In practice when you start to Abidal chop it off anyway.
+
+But to be safe. Has to be if.
+
+You could also say 255. Or 177 octal 0177 would work right, but it has to have the value of 11111111.
+
+In binary, yes. Yes, you always shift away the smallest bits when you shift to the right.
+
+Yep. The numerically smallest bits. I say a lot of things.
+
+Uh, it makes it 32 bit. So. Yes. And the reason is that, um, it we only store 32 bits.
+
+If it on this platform is 64 bits, then what you will get is the first 32 bits will contain the lowest 32 bits of the input number.
+
+At that address you have 32 bits that are the lowest 32 bits of the input number.
+
+If you're if your numbers were actually 64 bit,
+
+then the upper 32 bits of this number will be lost and the lower or the rest of the 32 bits of this number,
+
+the other four bits will be garbage, right? It won't store that.
+
+It won't put anything in particular in this, you probably should say in 32 for that reason,
+
+but it only processes 32 bits because it processes four bytes.
+
+There's eight bits in a byte. Eight times uh, four is 32. It says size of it, doesn't it?
+
+Then it would do 64 bits. On a 64 bit platform.
+
+No, it would actually do 64. You're right because it says size event.
+
+That's her little hurtful for me. No. It's okay.
+
+You've exposed the reality to me. That's always good. It's just you take a minute and you process.
+
+This should say in 32. It should definitely say in 30 to 30. Then everything I said would be accurate.
+
+But you're right. If it was 64 bit, it would happily swap the end of a 64 bit integer.
+
+That wasn't my intention, but that's what it would do. Yes.
+
+Yeah. That's what the N0. That's one of the things it does. Is it.
+
+I don't care if it shifts in ones or zeros because I'm going to chop them off.
+
+Yeah. I said, when I said that, I said, we will see an example where we use it later.
+
+This was the example I was talking about. Actually, don't do it.
+
+Do as I say, not as I do. Do the values just wrong.
+
+But it'll be right for a computer that of the other Indians. So if I send this from a little India machine to another machine.
+
+Now the other machine knows that it received big Indian regardless of what my sending was.
+
+So it's just an agreement thing. But if I try to read this value on a little Indian machine, the number that I get back is not a meaningful number.
+
+It's just garbage. But it could be converted back.
+
+You could write there's a corresponding function into HL, which is a network to host long.
+
+That does exactly the same thing and always stores it in a local byte order, starting from beginning of my order.
+
+Yep. Because for hardware reasons, sometimes it's better to have one and better to have the other.
+
+And when we the we are as software developers.
+
+Constrained by the hardware that were given.
+
+And the reason the hardware looks the way it looks is that those decisions are made for reasons of price and energy efficiency,
+
+mostly not for the ease of writing software.
+
+There is some reason why someone would choose bigger little Indian.
+
+Now I will tell you that the ARM platform, for example, is what we call buy Indian.
+
+It doesn't care.
+
+There is a bit somewhere in the CPU that you can set, and if it's set it's big Indian and if it's unset it's little Indian or whatever.
+
+I don't know which way it goes. Right. But you can choose whether it's Little Indian or big Indian.
+
+Um, used to be that ARM software was often Big Indian, but in 2025, almost all software is little Indian simply because x86 is little Indian.
+
+And so you avoid portability bugs by just writing.
+
+Big Indians offer rather writing little in software rather.
+
+But it's something that you can you can download install Linux, big Indian arm or Linux little Indian arm on the same computer.
+
+Yep. Yep. So your compiler may be capable of compiling both ARM and Intel.
+
+Right. But it may not. That's a relatively recent thing. So historically, uh, compilers that could target multiple architectures were fairly unusual.
+
+Um, now they're they're quite common, but you can only run one or the other on your computer if you if you have an
+
+x86 machine and you compile for ARM and you try to run it on your x86 machine,
+
+it will say, uh, I can't use I in fact, I just did it the other day.
+
+I tried to compile and run, uh, live exam two on my arm laptop,
+
+and one of the things I give you is an x86 object file, and the compiler said, I can't do this.
+
+This isn't the right architecture for this machine. Right. And I had to go back and recompile it.
+
+Yes. Yeah.
+
+You would just change the. Or you could do B from 3 to 0.
+
+Yeah. Yeah, that's, I guess, exactly what you said.
+
+Yep. You start with size event, you go down to zero. Yep.
+
+There may be some other thing that you have to take care of somewhere, right, to make sure that you don't run into trouble.
+
+But essentially. Yes. Yeah. Um, things like how you mask and how you shift and, you know, whatever.
+
+But. Yeah. Okay. That's all the time. That's more than the time I want to spend on that.
+
+But those were some great questions. Got some really great questions. Always worth taking the extra time to answer.
+
+Good. Uh, questions now. Uh, let us let us do a top hat.
+
+And then, uh, once it comes up, we, uh, after the top hat, we're going to start a new lecture.
+
+We're going to start a lecture called VM, uh, virtual memory.
+
+And I just want to tell you that virtual memory and the next few lectures are much more abstract than the lectures we've been having.
+
+They're much more like this course are called Systems Programing.
+
+And we've talked a little bit about systems, but we've talked a whole lot effectively about programing those systems.
+
+Like what do they actually look like, how do they operate, etc.
+
+VM, we're going to talk about some things that we can't see so directly that aren't necessarily available to us as easily in our programs,
+
+so it's a little bit more abstract. Um. Bear with me.
+
+We'll get through it. It'll make sense, but it tends to be a little bit scary.
+
+I won't growl. No. I growled at somebody this morning. I felt a little bad about it.
+
+Stop. You're not allowed to make that joke with your smooth cheeks.
+
+When you just learned this last week, like over time, it'll make more sense.
+
+Although it clearly you all it made sense to to you guys. Um, but, uh, I expected to be like one third, one third and one third, and it wasn't.
+
+But it wasn't this good. This is fantastic. So. Okay, uh, I will fly through it really quickly.
+
+So we have the the binary number one we left shifted by five bits, which gives us, uh, a bunch of zeros, a one and then five zeros.
+
+We then invert that. So we have a bunch of ones, a zero and then five ones.
+
+We end that with x one. And anything is the anything one and zero is zero.
+
+So we get exactly x. But we're guaranteed that that fifth bit is zero.
+
+I will say very quickly. Bit five.
+
+There's a little bit of a problem to say. Bit five.
+
+You really need to know whether the person you're talking with is zero basing or one basing their bits.
+
+We frequently zero base bits because the zero bit is two to the zero.
+
+The one bit is two to the one, etc. but that is something that you need to agree with someone.
+
+What bit numbers you're starting with and what order you're going in is the first bit, the big bit or the little bit, right.
+
+And things like that. In this case, it doesn't matter because they all have the number five in them.
+
+But if, for example, some of them had five and some of them had four, you could legitimately come up to me and be like, this question is bogus.
+
+And I would be like, you're right. You can't. I can't do that to you. Yes.
+
+Do you have a question or you just. Playing with your hair.
+
+Okay. You don't have that much. There was another hair hand somewhere?
+
+Yes. For what?
+
+Yeah. Uh, so B is here a bunch of zeros and then a one.
+
+We left shift at five. So then you have a bunch of zeros.
+
+No. I'm sorry. It's a bunch of zeros and one. We it. So you have a bunch of ones and a zero.
+
+We left shifted. And then you have a bunch of ones and then six zeros.
+
+Right. Which is not what we want. It clears the first six bits, basically zero through five.
+
+Okay. That's all I want to say about that. Uh.
+
+So I gave my little disclaimer for virtual memory. Uh, we are a little behind the other class.
+
+But I think we are not behind.
+
+Um. Carl sections. So we'll define.
+
+All right. So virtual memory I suppose. As I said, virtual memory is a little bit more abstract.
+
+Not because it's an abstract concept. It's a very concrete concept.
+
+It's a very specific thing that we're doing.
+
+Uh, but because as programmers on a system, unless you are writing the operating system, you can't really see it in action.
+
+You just have to take my word for it that it's a thing that exists and is in there and does what I'm saying, uh, that it does.
+
+So virtual memory is a mechanism by which the physical memory in the system can have a different address space from the,
+
+uh, processes from the programs that run on the computer.
+
+And we'll talk a lot more about what all those things, uh, mean.
+
+As we move through these slides. So the first thing I wanna talk about is virtual addresses and physical addresses.
+
+If you remember, we drew this diagram where we laid out.
+
+The memory of the computer, right? And we said that we start at 0X0 and we have some unmatched memory.
+
+And then we have the text and then we have the data. Da da da da da. And then somewhere up here we have zero.
+
+Well we have the address two to the 64 minus one.
+
+And I said every process has that layout. These are what we call virtual addresses.
+
+Every process in the system has an address space that goes from zero to 2 to 64 minus one.
+
+And those addresses are used in your programs. When you write programs, when you write a program, you say X is that address, whatever.
+
+That is a virtual address. There are also physical addresses in your system.
+
+The physical addresses. If you go back to a tour of computer systems, we have the, you know, the CPU and then we have this bus, right.
+
+And then we had memory over here.
+
+And the way this works is the CPU puts an address on this bus, and the address is just a bunch of ones and zeros encoded as voltages on wires.
+
+Right. So we have a 64 bit bus has 64 addresses.
+
+We put 64 ones and zeros on this bus. It goes out to the memory and the memory says, oh CPU, you're talking about this particular location.
+
+Here is the data that's at that location. It puts those ones and zeros on a bus.
+
+They go back to the CPU. That address is what we call a physical address,
+
+where literally physically in the transistors and capacitors and whatever that make up the memory in this system.
+
+Is that data stored? If I were to go somewhere to get that data, where would I physically go in the hardware to get that data?
+
+That's a physical address. So when you write a program, you use virtual addresses.
+
+But when the CPU talks to the memory, it uses physical addresses.
+
+In a virtual memory subsystem, the virtual address and the physical address can be different, and in fact,
+
+they can have different properties and be drawn out of different sets of possible addresses.
+
+So when we talked about, uh, the dedicated computer model, we said, hey, every process is laid out in this way.
+
+And furthermore, every process is protected from every other process in the system.
+
+So your process can't access the memory of other processes, and other processes can't access the memory of your process.
+
+But wait, the text segment is in the same place at the same address.
+
+In my process and in your process, how were they actually different?
+
+And the answer is the virtual memory subsystem.
+
+Your process gets its own address space, its own set of valid or invalid addresses that mean different memory from any other process in the system.
+
+So if your process has a piece of data stored at address 1 million,
+
+and another process has a piece of data stored at address 1 million, there are different pieces of data.
+
+Because while it is the same address. Each of those entire memory.
+
+Virtual memory spaces belong to their respective processes, and they don't necessarily overlap at all.
+
+So physically in the machine there are chips that make up the memory.
+
+And I don't know if you remember, but at some point I took the cover off my laptop and I showed you and there was like,
+
+there was a processor and then there were two chips beside that. I was like, oh, these are the Ram chips right there.
+
+The memory is actually stored in chips in the machine,
+
+and the way the computer gets to those bytes of memory in the Ram is it puts
+
+those addresses on those busses and asks for the memory that's stored in those,
+
+um, chips. Well, what those addresses are and where they are in that physical address space is depending on a lot of things.
+
+It's dependent on the architecture of the computer. It's dependent on who made the computer and how much memory you have in it.
+
+And like all kinds of things, right, that are hardware considerations.
+
+Um, it may be, for example. So for example, if you have an x86 PC.
+
+When you turn on your computer, it boots up as the exact same architecture and operational semantics as the processor in the IBM PC.
+
+In 1981, it's the Intel 8086.
+
+What was 8088 and the IBM PC? I want to talk about the difference, uh, designed by Intel in 1977.
+
+Your computer boots up with a processor from 1977.
+
+And then that processor and that architecture and the IBM PC,
+
+there was they only had one megabyte of memory, so it can only access one megabyte in memory.
+
+However much memory you have when it first turns on, it can only access one megabyte of that memory.
+
+And furthermore, there's a big old hole right in the middle of that one megabyte, starting at about 640kB to the end of memory.
+
+It doesn't have Ram. It has device space, right?
+
+Because that's how the IBM PC was designed. And then, uh, round about 1986 or 1987, they released a new computer, the PC, uh 80.
+
+And the PC that had a new type of memory had more memory.
+
+It could take 16MB of memory and a new type of video system.
+
+And so from 15 to 16MB there was memory for the video subsystem.
+
+So when your computer boots up first, it starts out with one megabyte of memory and then it stages up and it says, okay,
+
+fine, I have 16MB of memory, and when it gets to 16MB of memory, there's a whole from 15 to 16MB, etc., etc., right?
+
+All this weirdness in the architecture, that all goes back to the fact that it was a design from 1981.
+
+On the other hand, if you have an Apple Silicon Mac. That machine was designed in 2018 or something.
+
+I don't know how old Apple Silicon is 2020. Right relatively recently.
+
+It probably doesn't have those stupid holes in memory that the PCI architecture has.
+
+It just has memory in those locations, right?
+
+When you are writing a program, you do not care.
+
+What IBM decided to do in 1981 with the IBM PC when they were laying out the devices and blah, blah, blah.
+
+You don't want to think about the fact that there's a hole in memory here, and there's a hole, and you just want memory, right?
+
+So the physical address space may be really, really weird.
+
+And the operating system has to know that. But you don't have to know that because of the virtual memory subsystem.
+
+And you don't have to know that it's laid out differently on a whatever this thing
+
+is here versus or whatever this thing is here versus or whatever that thing is.
+
+You guys have a bunch of really strange hardware here in the front row.
+
+Is that a surface or something? It's an Asus.
+
+Okay, this I understand this is a also an Asus right?
+
+Yeah, this just looks like a laptop. I can take that. Then this thing's folded in half.
+
+Okay. Framework. That's good. Move. Yeah. All right. Um, anyway, I got a weird hardware here.
+
+That's fine, I love it. I love the diversity in hardware because we went through a period where every laptop was exactly the same, right?
+
+Um, like five years ago, they all looked like unibody MacBooks.
+
+That's what everybody wanted was a unibody MacBook, which is fine. They're, you know, nice in a lot of ways, but.
+
+Um, Apple made them, which is not great. But, um. Anyway.
+
+So it used to be you had to care about these things. Now we don't.
+
+And the reason we don't is because the virtual memory subsystem, somebody still does.
+
+The person who writes the operating system has to know.
+
+There's this weird hole of 640kB where there's no memory, right?
+
+Don't try to use it. It turns out you can. It's just complicated, right?
+
+Um, but you don't have to know, because the virtual memory subsystem.
+
+Um, the word colonel up here is in Letchworth.
+
+Autumn. Um. We've said, Colonel before, but this is a word you definitely need to know.
+
+The Colonel is the inner core of the operating system.
+
+When you think of an operating system, if you think of a program being an operating system, the kernel is that program.
+
+When your computer turns on some program runs, that makes it B windows or B Linux or B Mac OS or whatever,
+
+or B that allows an operating system from the 90s. Um.
+
+That is the kernel, right? The kernel has to understand all these intricacies.
+
+But you as an application programmer don't because of the virtual memory subsystem?
+
+Yes, the kernel makes. Well, some of them make it run smoother and some of them don't.
+
+That was a stretch. That was a stretch. I'm going to blame it on the lack of a beard.
+
+All right. Um, I'm going to end right there. Um.
+
+We'll talk. We'll start talking about the Mu in next lecture.
+
+I will see you all on Friday. Remember that there is lab this week.
+
+Please go to your lab. That is not my problem.
+

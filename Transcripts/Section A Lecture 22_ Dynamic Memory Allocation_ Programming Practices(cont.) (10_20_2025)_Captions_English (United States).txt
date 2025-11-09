@@ -1,0 +1,909 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+But he told us we are going to have to do math is like not math.
+
+Math. This is just arithmetic. I'm not going to hit you with any integrals or anything, right?
+
+Pretty close up. Uh, summations and integrals are closely related.
+
+That's a good point. All right, so, um.
+
+We left off Friday talking about two's complement.
+
+I can't remember if we went all the way through this example or not. Did we go all the way through this example?
+
+Oh, a number. Remember this was one compliment negative one.
+
+And we went through and it came out to be negative two in twos. Compliments this feel familiar?
+
+I think we did. I think we finished it. Um, I wish somebody was more confident about that, but I'm pretty sure we did.
+
+So, um, there's an observation that we can make.
+
+So if you remember, ones compliment the negative of a one's component number flips all of the bits, right?
+
+The negative of a twos component number. It's a little more complicated than that, but essentially starts with flipping all of the bits.
+
+And that top bit, the highest bit, the 31st bit in our 32 bit integer, or the 63rd bit in our 64 bit integer or whatever has a negative value.
+
+And this negative value is greater than and twos complement the sum of all of the other bits.
+
+So if we take that first bit and we make it a one, and then we make every other bit of one, the value we wind up with is negative one, right?
+
+Because the value of this bit, the magnitude I can't reach it.
+
+The magnitude of the value of this bit is larger than the magnitude of all of the positive bits added together by one, I specifically by one.
+
+And so we can observe that, um.
+
+In general with our ones and twos component representations.
+
+If the highest order bit of the number is a one, then the number is negative, and if the highest order bit of the number is a zero,
+
+then the number is non negative could be zero, but it certainly is not uh negative.
+
+And so in this example where we had a character C and we set it to 080, what is the bit pattern of 0X80.
+
+Liza. What is the bit pattern of 080?
+
+No. Ishmael. What is the bit pattern of 080?
+
+You're in danger right now if I know your name. And so if I want to volunteer.
+
+Uh, visit 2100 0000 1000 0000.
+
+And we know this because we can convert each hex digit to exactly four bits.
+
+Zero is zero is zero. All the bits are zero.
+
+Eight. Has the two to the three bit set and all of the other bits are set to zero.
+
+So 1000 is eight. Uh, you should memorize that table, right that I showed you.
+
+You don't have to memorize it. But, like, your life will be easier. And see, in our case, in an x86 64 machine, C is a care and cares signed.
+
+So therefore, if we have the signed eight bit two's complement integer 10000000, then that is negative two to the power of seven,
+
+which is -128, plus zero, plus zero, plus zero, plus zero, etc., etc., etc. and so it's actual integer numeric value.
+
+Is -128. And so when we say I equals C do we want as programmers.
+
+Is it most likely that we want AI to be equal to 00000000, etc., etc.
+
+10000000. Or is it most likely that we want it to be equal to the integer arithmetic number?
+
+-128. And the answer is probably that we want to be negative.
+
+128 we do one value that had the value, the numeric value of -128.
+
+And we assigned it to another variable. We probably want that other variable to have the numeric value of -128.
+
+And so that's exactly what C does. Its sign extends Si into IE by duplicating the high bit to the left.
+
+So every bit, because the first bit of Si was a one, every bit to the left of that eighth bit in the integer is a one, all of the bits become one.
+
+So if you remember when we dumped the memory, we saw that it was 805.
+
+Right. Because it's it's little Indian right. So that's zero x Fdfdfdfdfdfdff eight zero.
+
+Right. Um.
+
+I just said this. So what is the value of that to complement integer.
+
+Well if we add this up. This is roughly -2 billion.
+
+And then we add back in roughly 1 billion and then roughly half a billion, etc.,
+
+etc. if we do the total it's going to be -128 the resulting sum is going to be -128.
+
+Um, and there's I will do a quick sometimes I take a lot of time with this.
+
+I think this time I'm just going to do a quick example for you.
+
+There's so many notebooks here to choose from. So nice.
+
+Flat. Annual Leasing Training student workbook.
+
+I don't know about that situation. Teaching you how to rent an apartment.
+
+Or teaching you how to get people to pay for your [INAUDIBLE] campus housing apartment.
+
+Okay. All right. Mr.
+
+Pichardo here is not going to mind if I use the back page of his notebook.
+
+Or if he does, he shouldn't have left it where I could get it.
+
+Easy. Okay.
+
+Can we all see that? Yep. All right. So, uh, if we have the character, the eight bit character.
+
+Uh, 10000000.
+
+Oh, well, that's not going to work. Where's my page? Okay, so let's start here.
+
+10000000.
+
+This bit, if you remember, is the two to the zero bit. This is the two to the three bit, etc., etc. this is the two to the seven bit.
+
+But in our two's complement representation it's negative two to the seven right.
+
+So we have negative two to the seven plus whatever that stuff is.
+
+And the well zero in this case. So the sum of all of those bits is 128.
+
+Right. We add them all together and it's 128.
+
+When we do our sine extension, when we take this number and we want to store it into an integer that has a larger number of bits,
+
+what we do is we look at the leftmost bit,
+
+the highest bit, the negative bit, and if it's a zero, then all of the bits from there to the largest bit of the new value are zero.
+
+And if it's a one, then every bit from there to the largest bit of the new value becomes a one.
+
+Why? Well, it's because powers of two. So if I made this into.
+
+So this is a, uh, an eight bit.
+
+Uh twos complement.
+
+Integer. So if I make this into a nine bit integer.
+
+Then I assert that what I do is I copy this one one bit to the left.
+
+Pretend that's an arrow that makes sense. That's how you make an arrow. Right.
+
+So this is still zero. These are still zero. This now becomes two to the seven.
+
+And this becomes negative two to the eight.
+
+Right. So what is two to the eight?
+
+256. So it's -256.
+
+Plus 128. Which is 128.
+
+I had to scribble it out because I wrote one eight and then in heaven put a two in between.
+
+I do that sometimes. I don't know why I would write my numbers out of order, but not that kind of doctor.
+
+So I assert further that if I made this a ten bit integer.
+
+That it would become 1110000000.
+
+So this is 2 to 7. This is two to the eight.
+
+And this becomes negative two to the not.
+
+What would be nice if I could write negative two to the nine?
+
+What's two of the nine? 512. So this becomes.
+
+Five. -512 plus 256 plus 128.
+
+Which I assert is equal to 128.
+
+I'm sorry, this is -128.
+
+This is -128. -128. Right.
+
+So every time I add a bit I'm doubling the negative value.
+
+And then adding back in half. So it stays the same.
+
+So if I want to expand this to a two's complement integer of arbitrary bit width, I can do it by just copying that one.
+
+And every time I copy that one, I will have exactly the same value that I had before I started.
+
+Does that make sense? Because it becomes if I have negative two to the n plus whatever.
+
+It becomes negative two to the N plus one plus two to the n.
+
+Which is always equal to negative two to the n. Make sense?
+
+Okay. I don't know what I'm going to do in my next class when Mr.
+
+Pichardo is not here to use his notebook. Maybe I'll find some paper between now and then.
+
+Um. Well, this looks like actual work.
+
+It's like stats or something. Okay. Uh, okay.
+
+That's all I want to say about that. I already said all those things.
+
+Okay. So thought experiment. We're not going to go through this.
+
+You'll do this in CSC 341. Um, we already said there is no minus sign.
+
+So therefore we pick some pattern of bits and we decide that this pattern of bits of negative number in that pattern of bits is a positive number.
+
+What if I wanted a number that had a fractional value? There is no.
+
+Bit. That is the fraction bar, right?
+
+There is no bit. That is the decimal point. There is no bit that allows me to just naturally represent a number that is between integers.
+
+Right. There's a couple of ways to do it. Uh, one is what we call fixed point,
+
+which is where you take a just an input and you find that you're just before you use it to divide it by some other integer,
+
+and then it's going to be the value. Right. Oh, I have eight bits.
+
+I'm going to use four bits as my.
+
+Whole number and four bits as my fraction. And so I'm just going to divide by 16 whatever my value is.
+
+So if I had the value 255 it would become why do I do this myself 15 and 15/16 right.
+
+Or whatever. Right. Because I just divide 285 by 16 and the answer is 15 and 15/16.
+
+Maybe. Don't hold me to that. Um, so we call that fixed point.
+
+Um. This works well for numbers of moderate size and of moderate precision.
+
+The problem is that you have, for every power of two of whole number integer that you want to be able to represent,
+
+you lose a possible power of two of fractional value and vice versa.
+
+So if I have that eight bit number, I when I wanted for when I wanted to be able to represent sixteenths,
+
+right, fractions and sixteenths, my maximum number that I was able to represent became 15 and 15/16.
+
+Right. Even though I had an eight bit number which used to be worth 256.
+
+So I had to give up a huge amount of my magnitude range in order to get a relatively small amount of fractional range, right.
+
+Now in reality, you normally well, in fact, frequently you do do it with things like eight bit numbers, but you could do it with like a 32 bit number.
+
+And so then I could say have all numbers between um.
+
+Like. I don't know what to the 28 is.
+
+Let's say I wanted to give 256 one 256 the smallest value I can represent, the smallest increment I can represent.
+
+Then I could go from roughly. Um. 4 million right now.
+
+8 million? 60 million. Some multiple of millions with down to 156 resolution.
+
+Right. So if I have more bits, I can I can still represent reasonable numbers.
+
+Uh, but it runs out very quickly.
+
+If you need more range than that, then ordinarily what we do is we start encoding our numbers effectively in scientific notation.
+
+So rather than saying uh x times ten to the y,
+
+which is how we normally represent scientific notation in our calculations, instead we say x times two to the y.
+
+And we take however many bits we have.
+
+And we use some number of those bits to represent an integer, which is x and some number of those bits to represent an integer which is y.
+
+And then we treat it as if it was encoding x times two to the power of Y, right.
+
+Uh, this is called floating point because it allows us to change where the decimal point is by changing the value y.
+
+We change the magnitude of the number. We shift it back and forth on the number line right by multiplying it by a larger or smaller, uh, number.
+
+And if we allow negative values of y, then we can represent fractional values, right.
+
+Values that are smaller than, uh, between 0 and 1.
+
+Um, we're not going to talk about this anymore. You're going to spend a lot of time on it in 341.
+
+But what I want you to take all of these last two slides is the computer really only knows bits?
+
+Bits really only naturally represent, uh, integers.
+
+Even negative. They really only represent zero and positive whole numbers, right?
+
+Anything else?
+
+We have to decide as programmers, as hardware designers, as sort of the people, the scientists or the engineers that are creating these systems,
+
+how we're going to represent any sort of mathematical concept that is not zero or a positive whole number.
+
+And furthermore, we have this problem that we run out of bits. And so there are even positive whole numbers that we cannot represent.
+
+Uh, I think that's everything I want to say about integers. Are there any questions?
+
+Yes. I would just.
+
+It's the summation. Always remember the summation that you objected to.
+
+You push it out of your mind. Yeah, the summation is the answer.
+
+So if we have a binary and we want a decimal number, we use the summation.
+
+What I actually didn't show you was if we have the decimal number how do you get the binary number.
+
+There's several different ways to do that. Um, one of them is you find the largest power of two that fits in the number.
+
+Subtract it out. That's a one bit. Find the next largest power of two that fits the number.
+
+Subtract it out. That's a one bit, and then the other ones are zero. The other is you divide by two.
+
+And if you have a remainder of one then you have a one bit. And then you divide by two again.
+
+And if you have a remainder of one you have a one bit. And if you ever have a remainder of zero you have a zero bit.
+
+Right. So the remainder becomes your value and you just start recording from the.
+
+Smallest bit to the largest bit, right? But I'm not going to ask you to do that on any exam.
+
+So if I ask you to do any conversions,
+
+I'm going to ask you to do conversions of numbers that have a very small number of bits where you can just brute force it.
+
+In particular, the hex numbers you use for anything up to four bits.
+
+You should be able to go from binary to decimal very quickly, because you can go from binary to hex.
+
+That's just a pattern match. And then from hexadecimal that's just a pattern match.
+
+Yes. That's effectively fixed point.
+
+So you just you choose either the numerator or the denominator.
+
+Typically we choose the denominator. And then we set a the number becomes the numerator.
+
+And then you just always treat it as if it's divided by that denominator. So it gets the.
+
+No. Well, logically, in your software, it does.
+
+The hardware doesn't do that. So this is exactly how like when you do long division.
+
+So fixed point is like when you do long division.
+
+If you do long division of fractional numbers, you just write them out one over top of the other and do long division.
+
+And then when you're done, you figure out where the decimal point goes. That's that's fixed point, right?
+
+Effectively. I. Irrational numbers.
+
+It can't. Because they require an infinite representation, right?
+
+And there's no way to represent an infinite representation. So pi e cannot be represented a computer, you have to approximate them.
+
+Now you could calculate them to an arbitrary precision by using the rules that you would use to derive pi.
+
+And there's in fact there are programs called what we call pi spigots that spit out one digit of pi at a time.
+
+You can effectively give them. You can say, what is the three digit of pi?
+
+And it will just give you the answer, right? But you can't store the entire number because you run out of space.
+
+There's a hand over here. No.
+
+Oh, that is a beautiful question. So with all these different ways to represent things, different systems can choose different things.
+
+How is it that the discrepancies between how we represent things doesn't cause problems?
+
+It does. It doesn't as much any more, because we have more or less settled on twos complement and a floating point representation that we call 777 54.
+
+That actually is the Institute of Electrical and Electronic Engineers.
+
+It's a professional society. They have standardized on a particular format of floating point numbers that almost everybody uses.
+
+Um, but historically it was a big freaking problem.
+
+And you would, for example, if you did the same calculation, because computers are finite, if you did the same calculation on two different computers,
+
+you would get different rounding error, you would get different answers, and they could be different enough to be problematic.
+
+Um. So that problem is not solved.
+
+But what we have done is we have learned that you have to specify.
+
+So when you store data and you want to share it with someone else, you can't.
+
+And that's one of the reasons we learn things like system programing.
+
+What you know now that if I store integers and floating point numbers or whatever
+
+on a disk with one program and I want to read them and another program,
+
+I need to specify how did I store my integers?
+
+Are they big Indian or are they little Indian? Are they once competent?
+
+Are they to confluent or are they sign magnitude? Like what format did I used to store my integers?
+
+If I store floating point are they are 54. If they are they big Indian?
+
+Are they little Indian? You know, etc. um, and if you don't, then hilarious ness ensues.
+
+And, you know, programs get ridiculous. Values in space, probes crash into planets and stuff like that.
+
+Yeah. We haven't. We haven't cracked that nut. Okay.
+
+So I think we'll do Top Hat. I think if I'm correct.
+
+Oh of course, copper top. I was down with AWS, so now it's doesn't know that I've ever logged in before.
+
+Let's try this again. Maybe we won't do top hat.
+
+Let me give it one more try. But I think if I'm not incorrect that we should have a number of integer conversion questions.
+
+That we can, um. Practice with.
+
+I'm not sure it is. It's doing something. This is specifically what it's doing.
+
+Oh, that didn't work. This is specifically what it's doing.
+
+Oh, there we go. Okay. Administrators have been notified of the problem.
+
+All right. Thank you. Administrators. Good work. Oh, boy.
+
+Um, we have to talk. Well, so it's going to be on your final, uh, closing off.
+
+Um, so we know. We'll do that.
+
+Maybe on Wednesday we'll be able to do, uh, we'll do some practice problems.
+
+We will actually look at.
+
+I will give you some integers and ask you things like, hey, if this is a four bit two point number, is it positive or negative.
+
+Hey what is the value of this. You know, four bit number things like that.
+
+Um. Okay. Um. In the meantime.
+
+Let us. Start our next lecture topic.
+
+Um. So first things first. Live exam two is this week.
+
+Um, so your lab this week will be lab exam two.
+
+Please set two alarms if you need two, um, or three year for however long it takes to get you to your lab on time.
+
+Um, it will be pointer based data structures in some fashion.
+
+So something like a linked list, right? Um, it will not require pointer math like we've been doing in, um, pointer math in word blocks in 3D three.
+
+This is more like part two kind of stuff. Although we're not going to ask you to write your own tests.
+
+Um, so look over your data and sort of the ideas that are in you.
+
+It will be nowhere near as complicated as the data structure in you, obviously.
+
+Uh, but think things like linked lists, right.
+
+Um. If you took Lab exam one.
+
+And you do better on Lab Exam two than you did on Lab Exam one.
+
+We will just replace your lab exam one score with your lab exam two score so you'll get the same score twice.
+
+If you did better on Lab Exam one than you do with lab Exam two.
+
+Good for you. You did well on lab exam one. Your lab exam two score will be whatever your lab exam two score.
+
+Yes. Okay, so don't worry about not doing well on lab exam two.
+
+If you did do well on lab exam one. But if you do better on Lab Exam two than you did one did on lab exam one will do the replacement.
+
+Are there any questions? Does everybody set an alarm?
+
+Okay. So so far in this course, we've talked about two kinds of memory allocation towards sort of in the general, uh,
+
+sense static memory allocations, which are created before the program starts and persists until after the program needs them.
+
+This is what we use for, um, uh, global variables and static variables and things like that, and dynamic allocation,
+
+which is memory that is allocated after the program starts to persist for some time and then is released.
+
+And we have talked about two kinds of, of global or of dynamic allocation stack automatic variables and um, the heap.
+
+And we've looked at an API for the heap and we've looked at the automatic variables in great detail.
+
+Right. We saw how they are created before they're needed and then how they persist until we're done with them and then how they're released.
+
+We're done. Uh, by creating stack frames for the functions that we call.
+
+Right. What I want to do in this lecture is talk about, in this a similar level of detail,
+
+how the heap is managed and how the memory is created when you call malloc.
+
+So the interface to the dynamic allocator is malloc Catholic really and free.
+
+And those are relatively simple functions to use. You call malloc.
+
+You tell it how many bytes you want. It gives you that much memory you call free.
+
+You give it a piece of memory that you had previously allocated. It releases it.
+
+Right. Uh, relatively simple to use.
+
+Interestingly, um, the reason the function is called malloc, which is memory allocated, right?
+
+Malloc, uh, and not Alec, is that there was an older version of the function called Alec, uh,
+
+and the memory that was created with Alec when it was passed to free, you had to tell free how big the memory was in order.
+
+It was like it was. Maybe it was Alec and release. I'm not sure. Uh, but you had to tell it how big the memory was.
+
+And the big difference between Alec and Malik was that malloc remembers.
+
+Even though I told you it doesn't. We're going to talk about that. How big the allocation was so that it can be released again.
+
+Uh, later. So, um, the API does not provide the programmer any way to find out how big the allocation is, but free has to be able to free it.
+
+Right. And so therefore free needs to be able to figure out how big the allocation was, not how much memory was asked for.
+
+That's a different question. But how big the actual allocation made by the system was.
+
+So the underlying mechanism, however, that the operating system provides for memory management is much cruder.
+
+It does not allow you to allocate an arbitrarily small amount of memory.
+
+It allows you to allocate relatively large fixed size chunks of memory.
+
+Um, on our system, the minimum possible allocation is for kilobits.
+
+If you go to the operating system and you say, please, may I have some more memory for my program?
+
+The operating system can give you four kilobytes of memory, or it can give you nothing, or it can give you some multiple of four kilobytes of memory.
+
+So the problem with this is that that's not very efficient,
+
+because many of the allocations that we realistically wish to make are much, much smaller than four kilobytes.
+
+So for example, if you remember when we drew out that list node, right when we were doing structs and,
+
+uh, padding and things like that, we decided that it was 16 bytes.
+
+Well, you can put a lot of 16 byte nodes into four kilobytes.
+
+You can put 65,535 of them. Is that right?
+
+That cannot possibly be right. That was terrible math. It's 12 bits.
+
+You bet 256 of them in a, uh, four kilometer allocation.
+
+Right. So if every time you ask for a memory allocation for a linked list node, you're wasting 255 memory linked list nodes worth of memory.
+
+Pretty soon you're a web browser, right?
+
+Or something that's wasting a huge amount of memory. Uh, so this is not ideal.
+
+So instead what the C standard allocator does the standard library allocator in C is it says,
+
+okay, I will receive from the operating system these large four kilobyte chunks.
+
+I will break them up into much smaller pieces.
+
+And I will allow the programmer to have smaller pieces of memory, uh, or larger or, you know, arbitrarily sized,
+
+I guess, pieces of memory for which the programmer, uh, with which the programmer can do their work.
+
+Uh, we tried that. It didn't go well. So, uh, if you recall this, um.
+
+Diagram. This is our memory layout that we talked about when we talked about process anatomy.
+
+We have this place in the memory that starts above the bus and runs up some distance and has the heap inside it.
+
+To the operating system. That heap is just one big chunk of memory.
+
+It doesn't know what you're storing in that chunk of memory.
+
+It doesn't know anything about linkedlist nodes or arrays or integers or whatever things that your program is using.
+
+It just says, ah, this program has one megabyte of memory or however much memory it has, right?
+
+That's all it knows. Everything between the base of the heap and the top of the heap.
+
+Whatever space is in there has to be managed by the dynamic allocator by the C standard library.
+
+When you call the function Mallick, it does some kind of, um,
+
+data structure work in order to give you smaller allocations out of that large chunk of memory.
+
+All the operating system let you do is move what we call the system break, which we just traditionally spell break.
+
+The system break is the line between the top of the heap and that unmapped memory that's between the heap and the stack.
+
+Right. Typically it has it is the address of the first bite of memory, which is not part of the heap.
+
+So if you have, you know, state, say your heap starts at address zero and you have 100 bytes of heap, its address would be 101.
+
+Right. It's the first bit of memory that is not part of the heap. Doesn't matter exactly, but just typically that is how it works.
+
+So the only thing that the system will allow us to do is take that breakpoint and move it upward in memory,
+
+in which case we make our heap larger or move it downward in memory, in which case we make our heap smaller.
+
+There is no way to allocate a linked list node or whatever.
+
+We can move that heap, break up and down by us in our system.
+
+Multiples of four kilobytes, right for 4096 bytes.
+
+So it gives us two functions that allow us to do this. Burke and Spark.
+
+Burke says take the system, break wherever it is, and move it immediately to this address that I am giving you.
+
+All of the memory between the base of the heap and whatever address you give, it will magically become part of the heap.
+
+The operating system will handle that for you. This is a very difficult interface to use correctly and we will not be using it.
+
+The other is SB, k or uh, signed break I believe is what it stands for.
+
+Which we give a signed number and it moves the system break from wherever it currently is by the number of bytes that you ask it to move.
+
+So if I give it a positive number, it will make the the heap larger, and if I give it a negative number, it will make the heap smaller.
+
+The dynamic allocator will use this interface to request memory from the operating system.
+
+I should put a pill crow on this right here.
+
+Uh, because this is not fully true, modern, uh, dynamic allocators frequently use this is a mechanism that they can use,
+
+but they frequently use other mechanisms as well.
+
+And in fact, the allocator that you will create in this course will use other mechanisms, um, as well.
+
+Um. So the esprit de corps is what we are going to use.
+
+And it's what you should use is the safe way to move the system. Uh, brake.
+
+Uh, it it moves the brake from wherever it currently is, up or down in memory by the increment that you give it.
+
+So if you give it a multiple of four kilobytes, it will increase the heap or decrease the heap by whatever that size is.
+
+But it has to be a multiple of four kilobytes. When it's done, it will return the old value of the system brake.
+
+So this means that if you call the system break or the break function.
+
+With a positive. It works a little bit like Malik.
+
+So you say, please give me 4096 bytes of memory and it returns a pointer to the old system break.
+
+Well. If the system break is here.
+
+And I move it upwards by 4096 bytes and I return this address.
+
+Then, starting at this address, I have 4096 bytes of usable memory, the same as if I called Malaga 49.
+
+Right? Return an address at that address I would find 4096 bytes of usable memory.
+
+The, um, reason we don't just use this directly is that the only way to release that memory is to move the system break back down.
+
+So if I ask for some memory and then I ask for more memory, I can't free the first memory in any way, right, I can, I have to free all of it.
+
+It works like the stack, right? I can always add on to the end, but in order to freeze something,
+
+I have to have already freed everything above it before I can free, uh, any particular, um, item, the break function back.
+
+Um, don't use it. We won't use it. You shouldn't use it. It's very dangerous.
+
+And the reason is that it is difficult to figure out what value you should pass to it at any given point in time.
+
+Um, we will not talk about this until the very end of the course,
+
+but s break has the important property that from the perspective of your program, it is what we call atomic.
+
+You don't have to write that down now, uh, we will talk about it later in the course.
+
+Um, but it is what we call atomic, which means that it's safe for your program to call at any time.
+
+And the answer it gets back will be valid. Break, um, is more dangerous.
+
+It's more difficult to use. Um.
+
+All right. Are there any questions about this idea? Right.
+
+That we have some base of the heap that starts out where the base of the heap in the system break,
+
+or exactly at the same place in our heap has size zero.
+
+And then the way that we get memory from the operating system is we move this system, break upward in memory by addresses, right?
+
+In order to create space between the base of the heap and the top of the heap.
+
+Uh, and everything that's in between is the dynamically allocated heap on our system.
+
+But the operating system only allows us to just move that point up and down,
+
+and it only allows us to move it up and down by multiples of four kilobytes.
+
+Yes. It does go into the unmapped section.
+
+So when you move the break up, it goes into the unmapped section here in the operating system says,
+
+I will map that memory for you so that it's actually valid. So it's creating new, valid addresses.
+
+When the unmapped space. Your program crashes. It won't in our system, like it's not practically feasible for it to run out.
+
+But in smaller computers, it's possible. Yes. Sorry to break.
+
+No. Yes. I mean, conceptually the answer is yes, but in reality it's so hard to do that.
+
+Don't do it. And we'll talk about it. So notionally, yes, when you free memory, you would move the break down to give it back to the operating system.
+
+In practice, because of this thing where you can only free the top of the heap if none of it is being used,
+
+there's always something hanging out up there that you don't want to free right now.
+
+And so it turns out that it's actually very difficult to move the break back down.
+
+In practice. Why?
+
+Chunks of four kilobytes. That's just a design decision.
+
+Right. So the question is instead of like 2 or 1 or some other number, why four kilobytes?
+
+That's a design decision. Um, the eight we'll talk about later in the semester has to do with what's called paging.
+
+Um, the first machine that did paging in this fashion used 512 bytes.
+
+Right. So much, much smaller units. But it also only had probably a couple of megabytes of memory total.
+
+As memory has increased, we moved it up to four kilobytes. It turns out there's a dirty little secret there.
+
+It's four kilobytes. But then there's also larger chunks like two Meg in one gig.
+
+I think, um, that you can also use. But it's just they're so large that they're not useful in a course like this one.
+
+Um, but those are not. Those are just magic values. The designer of the processor said, uh, four kilobytes.
+
+That sounds good. Put it in the manual, and now it's just four kilobytes. If you went to a different architecture, it could be a different number.
+
+I've used a system that was, uh, five, 12 bytes. I've used a system that was eight kilobytes.
+
+So the question is, can you ask for more memory if you haven't actually used all the memory you already have?
+
+Yeah, you can ask and it will give you the more memory. Yeah.
+
+And sometimes you'll do that.
+
+Like for example, you allocate a very large buffer that you're eventually going to use, but you're not using it right now.
+
+Like, you know, you're going to read maybe from a website into this large buffer.
+
+But like you have to wait for that data to get here. And in the meantime, I need more memory.
+
+It's fine. Right. You can ask for more memory. Oh, there's another hand down here.
+
+Uh. He asked for like. So.
+
+Um, so this is actually a so the question is, what if I didn't ask for a multiple of four kilobytes?
+
+What would happen? The operating system will just say no.
+
+So the operating system call, which we'll talk about system calls more later.
+
+If you said please give me three kilobytes, the operating system would say no and it would return an error on our system.
+
+The C standard library will ask the operating system for four kilobytes.
+
+Say here's your three kilobytes. And it will just remember that there's one K left over that it hasn't used.
+
+But the operating system. If you say, please move my break by 1kB or 3kB or whatever, it will just fail.
+
+And so I can't do. Okay.
+
+So, um, I already said this. So the original Unix allocator required explicit sizes, both malic and free.
+
+You had to tell it how big the piece of memory that you wanted to allocate, or to free was,
+
+so that it knew how much free space was available to it at any given point in time.
+
+But the modern Unix allocator, we tell it how much memory we want when we allocate memory,
+
+but then after that it when we free the memory, we don't have to tell it how much memory we're freeing.
+
+We just say, please free this memory and the memory goes away.
+
+Um, so that means that the allocator must be able to figure out how much memory is being freed,
+
+so that it knows how much of that heap is available now to be used again, or would be available to move the break back down or whatever.
+
+So the allocator must actually store that size somewhere.
+
+Now given only a pointer to a block of memory allocated using malloc, calc or Realtek.
+
+How can you find out how much memory was requested?
+
+Allocation time. I will wait.
+
+Did you say? You can't? That's crazy. You can't, uh.
+
+There is no API. There is no way to ask how much memory was allocated, but internally, the allocator has to be able to figure it out.
+
+It doesn't need to know the answer, but it needs to be able to figure out the answer.
+
+So it may in fact be an expensive thing to do to figure out how much memory, not how much was requested, but how much was actually allocated.
+
+However, there is no way for the programmer to find out.
+
+There is no way. So that means it has to store the size somewhere or be able to calculate the size somehow.
+
+There are tons of different ways to do that and different solutions to that problem.
+
+The big reason that there's no way for the programmer to know is that you don't know what solution your system used,
+
+and it could change every time you compile your program. It could change every time you run your program.
+
+It is not part of the, um, guarantee that the C API gives to you.
+
+It does not say this is how you can find out this information.
+
+In fact, it says you cannot find out this information so that the implementation can do whatever it wants.
+
+Yes. When you call malloc when it wants memory, eventually it's going to call SBK for you.
+
+Yeah, you have to. That's the that's the way that you get memory from the operating system.
+
+There's a very limited number of ways to interact with the operating system. But at the.
+
+Towards the end of the semester, we'll talk about what that interface looks like and how you actually communicate to the operating system.
+
+It's not even function calls, right? There's like a special interface for how you talk to the operating system.
+
+So in order to do this sort of thing, uh, every heap application stores metadata.
+
+And metadata is a term that means data about data.
+
+In this case, the data is whatever the programmer is stored.
+
+So when you call malloc for some amount of memory,
+
+you're asking for that memory because you want to store data in that memory like you have some value that you want to save.
+
+The C Standard Library, on the other hand, stores a small amount of metadata, which is data about your data.
+
+It says, hey, I have given the user the user after 16 bytes.
+
+I gave the user for this some memory. This is where I stored it.
+
+The user asked for approximately 16 bytes of memory. Right.
+
+And it saves that information somewhere so that when you do things like call free,
+
+it can find that memory and put it back on the heap and make it available for other programs to use,
+
+so that when you call Malik, it can look through the memory on the heap and see if there's any free memory that could be used.
+
+Because while we don't normally give the the memory back to the operating system using s break, we do call Malik and free over and over and over.
+
+And if freed, could not reallocate the memory that had previously.
+
+I'm sorry if Malik could not reallocate the memory that had previously been freed,
+
+then our programs would just get bigger and bigger and bigger until they ran out of memory.
+
+On the other hand, what you expect and what actually happens is if I allocate a thousand linkedlist nodes and build a linked list.
+
+And then I free 500 of them and then I allocate 200 more.
+
+It should reuse some of that memory that I freed out of the 500.
+
+Right. It shouldn't go to the operating system. Say, hey, I know I said I need a thousand nodes more before, but now I need 200 more.
+
+It should say, oh, look, I've got enough room for 500 nodes over here.
+
+I'll just take 200 of those and give them back to the user. Right.
+
+And reuse that memory. In order to do that, we need, uh, metadata.
+
+How we store that metadata, how we manage that metadata,
+
+and exactly what information is saved varies from implementation to implementation of the standard allocator.
+
+There are hundreds, thousands.
+
+I can confidently say thousands of implementations of the standard allocator out there, and they all do things slightly differently.
+
+Good news. Uh, by the end of this semester, there will be approximately 300 more implementations of the standard allocator,
+
+because your programing assignment for you are going to write an implementation of the standard, uh, allocator.
+
+Uh, I'm going to quit right there, actually. I'm gonna quit right there.
+
+So on Wednesday. I hope that we will be able to do some top hat practice of some of the integer conversions.
+
+Uh, we will finish up this lecture and then maybe start the next please, if you have lab exam before we I see you on Wednesday.
+
+Make sure you go to it. But exactly happened.
+

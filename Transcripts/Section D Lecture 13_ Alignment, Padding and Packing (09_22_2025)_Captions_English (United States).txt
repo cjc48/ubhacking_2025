@@ -1,0 +1,985 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Well, we have announcements and then we have like our student stuff or whatever.
+
+I think the announcements you're going to enjoy, the student stuff you will endure.
+
+But the announcements, I think you're going to relieve some people's stress.
+
+So lab exam one was last week. Hopefully everyone's aware of that.
+
+Um, and it did not go as well as we had planned.
+
+The scores were lower than we expected.
+
+That's not entirely true. They were lower than we expected.
+
+But the real problem is when we give a lab exam, our intent is that we give you an exam where the distribution of scores looks like this.
+
+Most students get essentially all of the points.
+
+And then it falls off from there and the median student gets a reasonable.
+
+Not the median. The median student for a lab exam, we usually hope will get.
+
+Essentially all the points. And I think that might have actually been true this time.
+
+But then the students who start to do more poorly, most of them get a reasonable number of points.
+
+The problem is that this lab exam looked like this. Essentially, students either got all of the points or like two points.
+
+There were like, I think literally seven students got between 8 and 18 points, right?
+
+Nobody got any points other than essentially all of the points or essentially none of the points.
+
+And so this is a diagnostic problem. This isn't a problem with you.
+
+This is a problem with the exam. The exam did not function as intended.
+
+All of the people who should have been in here and been fine.
+
+Wound up, shoved down here and got like two points or four points, right, or something like that.
+
+And that's not your fault. That's my fault. Now, broadly speaking, we think that the exam was reasonable.
+
+More than half of the class got 20 points on the exam, which is what we expect.
+
+The problem is that when students didn't get 20 points, they just didn't get any points.
+
+So for some reason, when students stumbled on the exam, there was no graceful path to a reasonable but not perfect solution.
+
+And I don't know exactly why that is. And I don't. I probably will never figure it out one.
+
+I just won't have enough time on it. Uh, and two, there's probably not enough data points, right?
+
+We'd have to have, like, some controlled studies with, like, variations of the exam to figure out why that is.
+
+I have some hypotheses I think has to do with some, with some of the tests that we gave you and the way they behaved.
+
+Uh, I think it has to do some with the way people approach exams, which is not ideal.
+
+Um, I think it has some to do with the fact that reading is hard and like there were words that had to be read.
+
+Um, there's a lot of reasons. Um, but any rate, it wasn't hot.
+
+But broadly speaking, we think that the task we gave you is not too difficult.
+
+Um, the specific skills that you needed are all in zero. Um, essentially, it is a zero, right?
+
+It's a very small part of zero. But you did everything you need to be able to do in, um.
+
+Whatever it was called, pass number or whatever, something like that. Huh?
+
+Not his number. The other one. Zero.
+
+It's not is number. Percent or something like that.
+
+I don't know. Anyway, there was a function you had to write. Um, then we gave you the surfing example, which we feel like gave you.
+
+Good. We went back and looked at it, and we went back and looked at this exam.
+
+And we feel like it gave you like it taught you how to read the exam and how to approach it.
+
+And if you had done that, you would have done, you know, reasonably well.
+
+And a complete solution is not that long, right? It's 15 to 25 lines of code.
+
+But all of these things don't change the fact that the outcome was not what we wanted, and we don't think the outcome was usable.
+
+It's not valid. It's not a good, um, for a significant number of students.
+
+It is not a good representation of how well they could have done.
+
+And so we're going to make a correction which is that.
+
+When you take your lab exam two. If your lab Exam two score is better than your lab exam one score,
+
+we are simply going to replace your lab exam one score entirely with your lab exam two score.
+
+So if you got a two out of 20 on Live Exam one and you get an 18 out of 20 on lab Exam two, you'll have an 18 and an 18.
+
+Right. If your lab exam two score is poorer than your lab exam one score, we simply will do nothing.
+
+So if you got a 20 out of 20 on Lab exam one, and you get a 15 and 20 on lab Exam two, you'll get a 20 and a 50.
+
+Right. Um, this will be unlike the makeup exam.
+
+This will count both for your course letter grade and for the 60% average.
+
+We will just replace your lab exam one with your lab exam two. If your lab exam two is better than your lab exam one.
+
+Uh, at the end of the semester. If you would otherwise be eligible for the make up exam,
+
+it will not matter how we computed your score, you will still be eligible for the makeup exam.
+
+It will not affect eligibility for the make up exam.
+
+Um, we will at some point give you the legalese version of this summary, the like addendum to your syllabus that says how we're going to do this.
+
+But essentially, if you took Lab exam one and your score was not good, if you do better on lab exam two, it will just be better for you.
+
+Yes. Is that unfair to the students who did well on live exam one?
+
+Um. That's a game theory question.
+
+And it depends on the answer to. If everyone in this course gets an A.
+
+Does that. If everyone in this course gets this an A and learn the material, does that hurt?
+
+Those students. And the answer is no, right?
+
+As long as the students learn the material, it doesn't hurt the students who did well on live exam one, so it's not unfair.
+
+Um. If we just gave away free points, that would be somewhat unfair,
+
+because it wouldn't indicate that the students had ever actually learned the material.
+
+But in this case, there's a diagnostic problem with the exam.
+
+The result is not valid. And the cost.
+
+So the other thing we could do is we could give another live exam one.
+
+And say, hey, we're going to replace everyone's lab exam one with a new lab exam one.
+
+But frankly, that's a pain in the ass. Like we don't have a room to do it in.
+
+We don't have the time to do it. We don't have, like, we'd have to remove something else from the course.
+
+It's not feasible. Right? So my answer is no, I don't think that's unfair because it's there's no cost to the students who did well.
+
+If there was a cost to students who did well, then yes. We don't curve live exams.
+
+Won't matter. So satisfy your question.
+
+If not, come see me. We can talk about that. But no, I don't think it's unfair.
+
+Uh, because it's our fault. The exam was bad, right? Letting you.
+
+Letting the students who did poorly ride with a bad exam is far more unfair than any other effects that this will have on the.
+
+Outcome of the course. Other questions.
+
+Okay. Beautiful watch for the legalize version of this, but hopefully everybody understands what we're intending to do here.
+
+All right. So we went been talking in our so at the beginning of every lecture we have these things about how do you student.
+
+Uh, and, um, we've been talking for several weeks now, several lectures now, anyway, about asking questions.
+
+And we talked about when you should ask a question and we talked about how you should formulate questions.
+
+We talked about how you should approach problems in such a way that when you're done, you have a question you can ask if you're stuck on your problem.
+
+And so let's assume that at some point you have asked a question and you've received an answer.
+
+This advice is about what do you do when you receive an answer?
+
+The first thing you should do is think about the answer.
+
+This is something that a lot of times we don't do well.
+
+If we hear an answer and it doesn't immediately make sense and solve all of the problems,
+
+frequently students will say, well, I have another question, or that wasn't my question.
+
+You didn't answer my question or whatever and just sort of keep soldiering ahead.
+
+But that's not what you should do. For a couple of reasons.
+
+Um, which I guess we'll talk about here in a second. But what you should do instead is you should go sit down.
+
+You should think about that answer for a minute. Incorporate that answer into what you already know.
+
+If you're working on something conceptual, you take that answer and you put it in, what do I have?
+
+Right? And then you go through the whole rubric again, what do I need now?
+
+Can I get there? If you're asking about a programing question, you take that back and you say, well, does this answer affect what did I do?
+
+Like, do I now have a different understanding of what I did? Does this affect what do I expect?
+
+Should I expect something different than what I had expected before? Does it affect what I observe?
+
+Is there a different explanation for what I believed I was observing before?
+
+Right? How did this answer change my understanding of the situation?
+
+So the first thing you should do is think about that. And the reason is, uh, so first of all, many times you'll ask a question.
+
+This happens less when you ask student assistance and more when you ask Carl.
+
+Right. You'll ask a question. I will answer your question and you will say, that is not the question I asked.
+
+And I will say, I know, but it's the question you should have asked, and I promise that this answer is going to get you where you actually want to be.
+
+And we can skip all the in-between bits. And the reason for that is that I don't know how many students I've had go through this course,
+
+but like thousands of students, I mean, maybe 10,000 students have gone through this course since I've been teaching it.
+
+Um, and I've seen 25 or 30 years of programmers, you know, battle various problems.
+
+And I've battled thousands of programing problems in my career.
+
+So you asked me a question and I'm like, actually, you should know this thing over here.
+
+And you're like, what does that have to do with the price of cheese in China? And I'm like, just go.
+
+Promise. Go think about it for a minute. And it's going to answer your question, right.
+
+So that's one reason. That you should think about it rather than immediately coming in.
+
+Ask you another question. Another is that, um, sometimes you didn't quite answer.
+
+Ask the right question and you got an answer to your question.
+
+But the problem is not that you didn't understand the answer, it's that you didn't understand the question.
+
+And if you think about the answer until it makes sense, then you'll understand better what what question you should be asking.
+
+Or it might actually answer your question right. Once you figure all of that out right, you'll understand better what you should be asking.
+
+So what I want you to do when you when you ask a question is before you do anything else, set a timer.
+
+And this is an actual literal timer, just like the one.
+
+When you sit down and start work, you set a timer for a duration of time that is consonant to the question that you asked.
+
+So if you ask a very easy question, maybe it's 3 or 5 minutes. No, not an easy question.
+
+If it was an easy question, you wouldn't have asked it. If you ask a question that does not have a complex answer.
+
+Maybe it's 3 or 5 minutes. If you ask a question that's a little more complicated than maybe you give it more like ten minutes, right?
+
+Certainly not less than three, certainly not more than ten. Right. Somewhere in that window.
+
+And take that time in between.
+
+When you set that timer and when it goes off, and think about the answer that you received in the ways that I talked about before.
+
+When the timer goes off, ask yourself, you ask a question because you were stuck.
+
+My still stuck. Am I making progress? You don't have to have solved everything.
+
+But like, are you in a better position than you were before you ask your question.
+
+If the answer is yes, add another 15 minute timer and keep working right in 15 minutes.
+
+Evaluate whether you're stuck again. But that's a new stock. That's not the old stock.
+
+If the answer is no and you're still stuck, it's time to ask another question.
+
+But in that, you know, five minutes in between, you've thought about the answer you got, and now you can ask a better question.
+
+You can come in and say, this is where I thought I was.
+
+I asked this question. I got this answer.
+
+I see how that affects this thing over here, but it's not really affecting what I'm stuck on and I'm not sure what to do with it.
+
+And the answer you get is going to be better than whatever you asked the first time, right?
+
+It's going to be more directly applicable to whatever you're actually stuck on.
+
+I think that's it. That's all I want to say. Are there any questions?
+
+Two keys here. One. Think about the answer.
+
+Even if you think it doesn't answer your question. Think about the answer. And two.
+
+Don't be afraid to ask again. Just because the answer we gave you didn't get you unstuck, doesn't mean you're stupid.
+
+Doesn't mean you asked a bad question. It means that the answer you got didn't get you on stuck.
+
+There may be another question. We may have misunderstood your question.
+
+You may not yet quite understand the problem. Keep asking.
+
+All right? No. Okay.
+
+So, um, what I want to talk about today is related to compound types or aggregate types.
+
+Uh, and you'll see these a lot of terms in computer science, um, used interchangeably depending on perspective.
+
+And, you know, um. The.
+
+Um. I lost the word that I'm taking.
+
+Like the route that the term used to get to where you are.
+
+Right? The etymology of the term. Um, and so sometimes you'll see people call types that are.
+
+So we broadly divide types into, into two kinds.
+
+We're talking about low level programing languages or not so high level programing languages which is simple types and compound types.
+
+But sometimes you'll see these called scalars and aggregates. Sometimes you'll see it called primitives and structural types.
+
+Sometimes you'll see it called all kinds of things. Right? They all mean the same thing.
+
+Uh, structural types has another meaning in like programing languages, it means a completely different thing.
+
+So that term is not used very much anymore, but sometimes see one called records.
+
+Right. There's all kinds of different ways to talk about these things. Uh, we're going to call them simple types and compound types or symbol or um,
+
+sometimes I'll say scalars and aggregates, but a simple type in C and in the systems that we're looking at.
+
+Is essentially a type that is more or less understood by the actual computer itself.
+
+So it's basically numbers, right? Integers or floating point numbers.
+
+Now there's all kinds of different kinds of integers, everything from a Boolean which is literally just one bit all the way up to,
+
+you know, a long, long on our platform, which is 64 bits and they're signed and there's unsigned, there's all kinds of things.
+
+We'll learn more about integers later, but they're all just numbers that we can do math on.
+
+And there are several different types of floating point types. But again they're just numbers that we can do math on.
+
+And that's essentially all that the computer itself actually knows how to do is a little bit of math on numbers.
+
+And then we have compound types, which are any time that we take some collection of other types and we put them together in some way.
+
+And the basically the two kinds that we're going to talk about are structures and arrays.
+
+An array is just a whole bunch of simple types of the same kind put together, and the structure is a whole bunch of symbol types,
+
+or maybe other structure types or arrays, aggregate types of various kinds put together in some sort of.
+
+Um. Combination. Um, there is a third.
+
+Compound type in C that you will see in K and R.
+
+We don't ask you to read the section, although you may see it mentioned which is called unions.
+
+When you see unions in CSS 20, you should turn around and walk away quickly.
+
+Don't make eye contact. Um.
+
+So it turns out that when we put these data types, what be they simple or compound in memory.
+
+There are rules about where we can usefully put them in memory, such that the computer can compute on them in an efficient or correct, um, fashion.
+
+In most programing languages, these rules are utterly irrelevant to you because you can't tell that there's rules.
+
+The programing language just handles it. In the C programing language.
+
+Specifically because we have access to addresses, we have access to the actual locations in memory where we store the data.
+
+It becomes relevant to us that some of that data must be stored in certain places.
+
+And if we try to put it in a wrong place or we try to read it from the wrong place, it can have negative effects on the execution of our program.
+
+Um. Without pointers.
+
+We can't see this without compound types.
+
+We'll probably never notice this, but as soon as we have pointers and we have compound types, it becomes a thing that we have to deal with.
+
+There are two concepts that are related to this that we're going to explore and define in this set of lecture slides, alignment and stride.
+
+We're going to talk about what both of these things are, how to what their rules are, how to obey those rules,
+
+and where you will observe those rules in use specifically in the C programing language.
+
+We're also going to talk more about void pointers. So we defined void pointers in the previous set of lecture slides.
+
+Um but the only thing we talked about using them for was this idea that I have a pointer to some memory, and I don't really know what it is right now.
+
+Uh, it turns out that is also useful when I have a pointer to some memory and I want to do unholy things with it.
+
+Um, and we're going to talk about what those things are, why you might want to do them, and how you can do them with void pointers.
+
+Um, I think that's it for intro. Yeah. Are there any questions so far?
+
+Okay. So we previously talked about words.
+
+We talked about a tour of computer systems. We talked about what words are.
+
+And in particular, the words that we're going to talk about in this lecture are, um, the memory bus.
+
+Right. We said that the memory bus has a certain number of wires. That is the words size of the memory on this system.
+
+Um, and that word size has implications on how the CPU actually accesses the memory and the rules about what data it can access and where,
+
+uh, in the memory.
+
+So while it is true that the, uh, memory on the computer is all just bits, we have chunked it up into something that is larger than bits.
+
+That is, that is words. And when we try to access the memory, when the CPU asks to read the memory,
+
+it can frequently only read memory at addresses that are divisible by whatever the memory size word size is on the computer.
+
+So our computer has a 64 bit word size.
+
+Our addresses are byte addresses, bytes are eight bits, and so there are eight bytes in a word on our computer.
+
+And it turns out that when the CPU asks the Ram for a piece of data, it can only ask for data at addresses that are divisible by eight bytes.
+
+So you can ask the memory for byte zero through eight.
+
+Or you can ask I'm sorry zero through seven. Or you can ask it for eight through 15.
+
+Or you can ask it for 16 through 23. And it will give you that data, but you cannot ask it for four through 11.
+
+There's no way in hardware to do it.
+
+There's no way that the CPU can express to the memory.
+
+Please give me bytes four through 11. I just can't be done.
+
+It's an architectural decision, uh, in the design of the computer.
+
+And this limitation means that accessing memory in certain ways is faster and easier than accessing memory in other ways.
+
+On some platforms, accessing memory in certain ways may be impossible, while accessing in other ways may be fast and easy.
+
+Um. When we're storing simple types in memory, like ints or cares or shorts or longs or whatever.
+
+Floats, doubles. Typically in order to, uh, conform to the requirements of that memory bus and the way the CPU communicates with memory.
+
+The address at which we store those simple types in memory must be an address which,
+
+when divided by the size of that symbol type in bytes, is congruent to zero.
+
+It has a remainder of zero, right? Or equivalently, is congruent to zero mod the size of the type.
+
+Um. So if I want to put an integer in memory, an integer on our system is four bytes.
+
+I can put it address zero, I can put it outdoors four I can put it address eight,
+
+12, 16, 20, 24, etc. I cannot put it address 235, six seven, you know, etc. right?
+
+I just can't do it. Uh, that's essentially what I just said right here.
+
+So the the, um, twist to this is.
+
+That all of this is architecture dependent.
+
+So our computer is that we're talking about in this semester is typically an x86 64, uh, machine running Linux.
+
+Right. In order to know what the alignment rules are for your platform,
+
+you need to know what is the hardware architecture, what kind of CPU do I have and what operating system I run.
+
+Or more specifically, what Abi or application binary interface is my operating system using?
+
+There's typically a limited number of those on any given platform, regardless of what operating system you're running.
+
+For example, on x86 64, as far as I know, there's exactly two.
+
+Um, there is the standard which is used by literally everything except windows, which does its own thing.
+
+Um, but every other operating system, as far as I know, every other operating system that runs normally,
+
+like large major operating systems Linux, Mac OS, um, Solaris, um, whatever else is out there?
+
+Um. BSD, BSD.
+
+Yeah, they all use the same rules. Right. And then windows does something else because I actually don't know why.
+
+Um. So there's usually a limited number of of abbeys, but there's some number of guys.
+
+And once you know those you know what the rules are. But the most fundamental thing is what are the capabilities of the underlying hardware.
+
+So all of you, I predict and I'm very hesitant to make predictions in tech because they're invariably wrong, right.
+
+That for the next few years you will almost certainly all or almost all only use x86 64.
+
+And arm. Right. So Mac Apple silicon is arm the Qualcomm's.
+
+Snapdragon or whatever it is, is ARM. The Samsung S series is ARM, right?
+
+Like anything mobile is probably ARM right in anything.
+
+Desktop is maybe ARM, or maybe x86 64 servers tend to be x86 64, unless they are um.
+
+Unless you're concerned about power density, in which case they're off an arm, what we call blades.
+
+Um. But that has not always been the case.
+
+So when I was an undergraduate, there were dozens of architects.
+
+Well, dozens is an exaggeration. There were at least a half a dozen architectures that were commonly in use.
+
+And this comes and goes right. As we learn more about designing silicon, there will be an explosion of architectures that use new techniques,
+
+and then we learn how to integrate them into various architectures.
+
+And eventually we refine down to a few very successful architectures because it's expensive and difficult to maintain a large number, right?
+
+It'll refine down to a few, and then there will be more advances and, you know, whatever.
+
+In a few years, I might add five, for example, which is a relatively speaking, young architecture to that list of things that people actually use.
+
+But when I was an undergrad, um, so x86 64 didn't exist yet.
+
+ARM did exist. It was not that common.
+
+It was used on a few things. Um, but it was not that common.
+
+Not common like it is now. But I had a 32 bit x86 machine on my desktop, like most people's computers were 32 bit x86 when I started my undergraduate.
+
+If you had a macintosh, it would be a Motorola 68,000, which is a wholly different kind of CPU that does still exist.
+
+Now they're called Dragon Ball. Uh, not like the anime.
+
+Uh, maybe like the anime, but like I, for copyright reasons, they at least don't claim it's like the anime,
+
+um, or the manga, but the, uh, there's Dragon Ball, which or 68,000, right, was around.
+
+And then by the time I finished my undergraduate, if you had a macintosh, it was what's called PowerPC, which is yet a different architecture.
+
+When we went to lab to use computers in lab, they now they're just more x86 PCs, right?
+
+You go to your lab and they're just more, you know, x86 64.
+
+Then they were almost certainly sun workstations made by a company called Sun Microsystems,
+
+which spun out of Stanford University in, you know, I don't know, maybe the early 80s or late 70s or something like that.
+
+Uh, and they use an architecture called Sparc, spark Sparc.
+
+Um, there was MIPs, which you'll learn in 341 next semester was in fairly common use.
+
+SGI workstations were MIPs. We had some of those in my undergrad.
+
+Uh, anyway, there was this whole huge set of architectures, and they had different alignment rules, and they worked in different ways.
+
+X86 64 and ARM, uh, which are the ones that you are likely to use modern ARM.
+
+So Armv8 and later both have this property that you can actually access memory at any location and it will work.
+
+It may be slower than it would be if you followed all the alignment rules, but it will work.
+
+You will get the data that you wanted to read,
+
+or you will write the data that you wanted to write on some of those architectures, that was not the case.
+
+So on PowerPC, if I tried to read an integer at an address that was not aligned, my program would immediately crash.
+
+Whereas you get crashes that say segmentation fault core dumped, it would say bus error core dumped, right?
+
+Sparc bus error core dumped. Right. Many of these architectures had different alignment rules, different restrictions.
+
+So while today architectures are very forgiving, you should be aware that at any given point in the future they may not be.
+
+In particular, the place where you see brutally unforgiving architectures is when you do high performance computing.
+
+Because all as I said, if you violate alignment rules on x86 64, it will work, but it will be slower.
+
+High performance computing slower is the enemy, right?
+
+And so they don't even give you the transistors that would allow you to do it slower, because why would you slower.
+
+They just will crash your program immediately. Right. So if you wind up doing, you know, high performance computing on a, you know,
+
+some sort of very sophisticated cluster or something, probably GPUs or this way, I don't know, actually.
+
+Then your program will just crash, right? If you violate alignment, your program will just crash.
+
+Um, unfortunately for me, and fortunately for you, in Csea 220 if you violate alignment, you probably will never know that you messed up.
+
+All right. So we will learn all of the rules for how to align data and how to store data with proper alignment.
+
+And we will test you on those things. But in your programing Simons is probably not going to come up a lot.
+
+It's not going to be a big problem. Yes. It would be the other way around.
+
+So if you have software that you designed on x86 64, for example,
+
+and you violate alignment requirements because you can then when you go to run that
+
+on a spark or a PowerPC or something that has stricter alignment requirements,
+
+your software will crash, right?
+
+The good news is, if you don't pay any attention to alignment whatsoever, but you also don't get clever with pointers,
+
+it's never going to be a problem because the compiler will save you from yourself, right?
+
+But once you try to get clever with pointers, which I am absolutely going to make you do, then you can get into trouble.
+
+We actually, um. Have been given the ability to write horror software.
+
+Like objectively slower and worse software because we only have two common platforms and they're both very forgiving platforms.
+
+It kind of kept us honest in the 90s that you had to, like, follow all of these rules because it meant you had to pay more attention.
+
+Unfortunately, having to pay more attention means that you spend a lot more programmer time doing stuff that you actually don't care that much about,
+
+and it costs a lot of money, like development money.
+
+So we pay one of two ways, either in our wasted memory, poor performance, etc., or in the amount of money that it costs us to develop software.
+
+And fortunately or unfortunately, it depends on your perspective.
+
+We've decided that the amount of money that it costs to develop software is the more important of those two.
+
+Costs. All right.
+
+Any questions? When I say most platforms offer a performance penalty like x86 64.
+
+By performance penalty, I mean your software runs somewhere between two and say,
+
+maybe a hundred times slower than it would if you followed all the rules.
+
+It depends on how badly you violate them or where you violate them, whether it's two times slower, 100 times slower.
+
+Yes. Uh, what do you want to know?
+
+Oh. Segmentation. Fault. Cordons. Floating point exception core dump.
+
+That means you divided by zero. Almost certainly. Almost certainly made you divided by zero.
+
+Probably you did a mod zero. If you do mod by a variable that's very dangerous, you have to make sure that the variable is not zero,
+
+because otherwise a mod zero is equivalent to a divide by zero.
+
+Yeah, there's a number of things that can actually crash your program and dump core.
+
+The ones you're most likely to see in this semester are segmentation fault and floating point error.
+
+Yeah, but there are several other things. Uh, bus error is one. You can still get a bus error.
+
+I said, that's what happens with unaligned accesses.
+
+Uh, you can still get a bus error on x86 64, but you can only do it with, like, certain vector operations.
+
+Nothing we'll do in this class. But you could write if you were writing, like, video decoders or something.
+
+It can certainly happen. Um. And then aborts.
+
+So if you write in an abort statement, uh, that causes sig abort, I think, and it will just say aborted core dumped.
+
+Um, and then, uh, I think this is in at nine.
+
+There's various ways to quit a program. Um, starting from, like, the gentle, which is like pressing Q or control X,
+
+control C in Emacs or, you know, like, whatever it wants you to do to the less gentle,
+
+like pushing control C to the extremely less gentle like control backslash,
+
+which is basically sneak up on it with a club and whack it on top of the head. Um, and if you do that, it will it will dump a core, right?
+
+You can at anytime in your program's running. If you hit control backslash, it will quit and it will dump a core.
+
+And you could examine that core with the debugger, for example. Okay.
+
+Uh, typically, you don't want to do that. You'd rather attach the debugger to the running program, which we force you to do in.
+
+Uh, your current lab? Yes. Core is dumped.
+
+Uh, again, you'll cover in this current lab,
+
+but core dumped means that the the the operating system recorded exactly what your program was doing when it died to a file on disk.
+
+And that file, uh, is canonically called core.
+
+Core. Um, and the reason for that is.
+
+Yeah, I'm going to go ahead and tell the story. We're going to get behind. Uh, it used to be that memory was stored in, uh, what we call course.
+
+And they're a, um. And actual like donuts.
+
+Uh, of. Um ferrite, which is, uh, iron oxide in some ceramics, rust and some ceramics.
+
+And you would pass a wire through the core.
+
+In fact, you would pass two wires through the core in a.
+
+Um. Cross pattern, and then a third wire through the core in on a diagonal.
+
+Typically they'd go to other course, you know, down here. And um, the thing is that ferrite is um.
+
+Paramagnetic. Whichever one means that it can actually maintain a magnetic field.
+
+There's paramagnetic and diamagnetic. Paramagnetic like iron, right.
+
+Or nickel. And so by passing current through this course.
+
+So you have current flowing in this way and this way on these wires.
+
+Um, it would set up and I would have to do the, you have to do the like.
+
+In people. You should know which way it goes.
+
+I always I can never remember if it's a right hand or a left hand rule, because there's one of each, depending on what you're talking about.
+
+But. Right. It would set up either a, uh, magnetic current going this way, or a magnetic current going this way around the cord,
+
+depending on whether the current is going this way or that way.
+
+Um, or basically whether it's passing through the cord from the back to the front or from the front to the back, essentially.
+
+And it would set up a magnetic polarization that was, um, around the wire.
+
+And then later on, you could sense whether the core had been set clockwise or counterclockwise,
+
+and you would arbitrarily define one of them to be one and the other one to be zero.
+
+And that's how we made Ram. So if you had a kilobyte of Ram, you had 8192 tiny little donuts.
+
+With. Wires passed through and it looked like fabric, right?
+
+Like cloth. Um.
+
+Obviously this sucked, and as soon as we could not do this anymore, we stopped doing this and we started to use transistors to make Ram.
+
+But a core dump was then therefore reading the values of all of those cores and dumping them to the printer.
+
+And it would print out. Like all of the data on a piece of paper,
+
+and then you would go back to your desk with a highlighter and a pen and figure out what the [INAUDIBLE] just happened right in your program.
+
+Um. When I started working, I started working in an aviation company.
+
+They did, um, like, they made, uh, parts for airplanes, um, and other things that fly.
+
+Um, in the, I don't know, the late 90s, they had an IBM mainframe in there, and there was a huge chain printer at the front of the mainframe,
+
+and it had this, like, paper hanging out the back of it that said core on it.
+
+But the way it said it was like it was like letters this tall and it was like the C was like written like this with a whole bunch of little C's.
+
+And then the O was a whole bunch of O's that were like, shaped like the word letter and said core.
+
+And then it had just like pages and pages of hexadecimal on it from the last time they shut the mainframe down.
+
+They dumped the core. Was that this?
+
+I'm telling a story over here. It was a poignant story.
+
+There was. We were getting to the part where there were going to be tears. Uh.
+
+Anyway, it's kind of fun.
+
+Then by like three weeks later, after I started, they removed the mainframe like IBM came and carted it off because that's what IBM does.
+
+And so we had this room that was like the size of this room with like,
+
+drop ceiling and raised floors and like, massive amounts of air shoved through it for a data center.
+
+And at the back of it, there was a Steelcase desk with a Compaq, um.
+
+Proliant server sitting on just one server, right? They replace an entire room of mainframe with like one PC.
+
+But any rate, that's a core. We're so far behind.
+
+One of the reasons they were very large is because the memory was physically large, but also so was everything else.
+
+And also made a lot of heat and was, you know, I got more stories about that.
+
+But anyway, let's talk about. So, um.
+
+When we lay out an array in memory, we have to follow the alignment rules.
+
+If we make an array of simple types, following the alignment rules is easy.
+
+And the reason following the alignment rules is easy is because of mathematical induction.
+
+Not really, but mathematical induction will show us why it is easy.
+
+If we lay a simple type out in memory at an address that preserves its alignment requirements.
+
+So we have an integer. For example. It's four bytes long. We put it in an address that is congruent to zero mod four.
+
+Right? When we divide the address by four, the remainder is zero. We put that integer in memory.
+
+The rules for a C array says we put the next integer at the next available address.
+
+So if the integer was at address A, the next integer is it address a plus four, right?
+
+Because of the way arithmetic works, if a divided by four has a remainder of zero.
+
+A plus four divided by zero also has a remainder of four.
+
+And you can do this as many times as you want right. This is CSC 191.
+
+It's simple induction. Assume that the first element of the array is aligned to the size of the element in bytes, which we'll call b.
+
+Inductive step add B it's still aligned QED.
+
+Right. There's more to it than that, right? If you want to write a formal proof.
+
+But that's essentially how we can see that if we align the first element,
+
+we align all of the elements of the array for arrays of things that are not simple types,
+
+where the size is not immediately dictated by the uh, or the alignment is not immediately dictated by the size,
+
+uh, for example, other compound types, these rules get a little bit more complicated.
+
+So the way we solve that is we define our compound types in such a way that they just follow this rule,
+
+so that we can then use the same inductive proof to show that all of our alignments will always be maintained.
+
+But in order to understand that, we have to understand how we align those compound, uh, types.
+
+In particular how we lay out structures. Because remember, there's only two kinds of compound types arrays and structures.
+
+So how do we align structures. Every member in a structure is adjacent in memory in the same way that arrays are.
+
+If you remember when we talked about structures in the last set of lecture slides,
+
+I said that if you have a structure where all the members are of the same type in memory, it's exactly the same as having an array.
+
+It's just that we access the members by their name rather than their index.
+
+Right. But in memory, it's laid out in exactly the same way.
+
+Um. On the other hand, if we lay out items in and around a structure.
+
+Members in a structure that are of different types and those different types have different alignment rules,
+
+then we can no longer just place them immediately beside each other in memory and be guaranteed that our alignment requirements will be maintained.
+
+So it turns out that what we do in that case is we take the members of that structure and we insert a little
+
+bit of extra dead space in between the members of that structure until our alignment rules are preserved.
+
+That dead space that we insert we call padding.
+
+Padding has a value because every bit in memory has a value, it's either a 0 or 1.
+
+But that value is not meaningful and you cannot rely upon it.
+
+So if you ever write a C program that observes that padding and then uses that value, your program has undefined behavior.
+
+Observing and using the value of padding is undefined behavior.
+
+The good news is that as long as you're a nice, well-behaved child and you just use structures and integers and the sort of things that C gives you,
+
+you will never even know that the padding exists.
+
+But because we're in C and we have pointers and we can ask for the addresses of things,
+
+I can even ask for the addresses of the individual members in a structure,
+
+and it will give me not the address of the structure, but the address of the member within the structure.
+
+We can arrive at a situation where we have a pointer through which we could choose to access the padding inside a structure,
+
+and we must not do that because it is undefined behavior.
+
+So as long as we use sort of the simple tools that C gives us, no problem.
+
+But kind of like when we used void pointers and we could cast things to the, to a type that didn't make sense.
+
+As soon as we have pointers, we can point pointers at an address that doesn't make sense, right?
+
+That violates alignment rules, would observe padding, etc.
+
+Right. And we must not do that in order to not do that.
+
+We have to understand. What those rules are and how we would do that, how we would correctly do that.
+
+Um. Let me see how far Carl got.
+
+How far do I want to go? Farther than me.
+
+Okay, we're going to keep rocking. So in the least complicated case, as I told you, um, before, a structure looks exactly like an array.
+
+We are going to use diagrams that look like this to layout.
+
+Structure. So what we have over here on the right hand side of this slide.
+
+So I declare a structure. Um. And it has two members, a real and an imaginary right.
+
+So this is a complex number, right? It has a real part and an imaginary part.
+
+Note that in the structure I declare first the real part and next the imaginary part.
+
+The rules in C say. That I will always lay out the members of a structure in memory in the order that the programmer declared them.
+
+So I declared the real type before a real part, before I declared the imaginary part.
+
+So therefore, the real part will be at a smaller memory address than the imaginary part.
+
+And this is a transitive relationship. If I had 12 elements in there, the first one will be first, then the second one,
+
+then the third in exactly the order they were laid out in by the programmer, uh, in the description of the structure.
+
+Uh. And when I draw that, I draw it like I draw it on the right hand side.
+
+Here. The base of the structure I say is at offset zero.
+
+So the base of the structure, the structure is at some address in memory.
+
+It's stored at some address in memory. I call that the base of the structure.
+
+And I arbitrarily declare that that is an offset of zero.
+
+And then I can calculate the offset from that base at which each element of the structure would be stored.
+
+So if the real part is at the offset of the structure at offset zero, then the imaginary part,
+
+because a float it turns out is a four byte type, it's a 32 bit type.
+
+It turns out that the imaginary part will be four bytes after the first part in memory, exactly the same as if I had an array of two floats.
+
+If I had an array of two floats, the first float would be at the address of the array,
+
+and the second one would be at the address of the array plus four bytes.
+
+Right. And that's what I have over here on this side. Does that make sense?
+
+Are there any questions? Go over there somewhere.
+
+Yeah. Requesting memory.
+
+It's worth. A float is four bytes, but when the processor accesses memory, it always accesses a full word.
+
+So it's going to get eight bytes. Yeah. In our programing model, we ignore that.
+
+Right. We assume that if I ask for a float, I get a float.
+
+Hardware wise, I'm going to get eight bytes, but the hardware will throw away the four bytes that I don't want as long as I follow all these rules.
+
+So let me rephrase your question. It appears that the amount of padding that's in your structure depends on the order in which you declare the types,
+
+because we said we just pushed things out far enough to preserve the alignment.
+
+Does that mean that the order in which you declare your members of your structure will affect how much padding is in your structure?
+
+Yes. The next question is when do I care?
+
+And the answer is when we write programs, we follow a sort of mantra which is first, make it work.
+
+Then make it good. Then make it fast.
+
+In this case, less padding means faster because it turns out that accessing memory is one of
+
+the slowest things that we do in a in like the core operation of a program.
+
+So a smaller struct will be a faster struct. But in general, we can think of this as make it, you know, use fewer resources in any given way.
+
+Most times we stop with make it good, and we never get to make it fast because it doesn't matter.
+
+It's good enough. But there are going to be times when you're going to care.
+
+For example, if you have to ship it across a network where your bandwidth is low, right?
+
+And the network is slow, now, you care not to ship any extra information.
+
+You don't have to. Or if you have billions of the thing, then it matters, right?
+
+If I only have one of something and it's twice the space is taken up and padding, I probably don't care.
+
+But if I have a billion of something and twice the space is taken up and padding.
+
+Now that's like enough memory that I'm having to pay money, right?
+
+In order to buy bigger computers and faster computers and whatever to deal with that data.
+
+In which case I start to care, right? So usually first we make it work, then we make it good.
+
+And then if it turns out it's not good enough, we make it fast when we're making it fast as we look at like,
+
+let me rearrange the structure, reduce the amount of padding. All right, I'll let you go there.
+
+Um, okay, so we had some important information about lab exam one and lab exam two.
+
+Watch for the official ruling on that. But if you have any questions, come see us.
+
+We'll be happy to answer it. In the meantime, keep cracking on, uh, programing.
+

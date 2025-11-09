@@ -1,0 +1,859 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+What if this showed up on the screen? That would be cool, right? I felt.
+
+Okay, so we left off on Friday.
+
+I hope I had a great weekend, by the way. It's a good weekend. Uh, it was not a horrible weekend.
+
+It was gorgeous. Were you outside? It was so nice. What was your all?
+
+I did not have a Halloween costume. For reasons mostly related to not being prepared, which is something students should be able to identify with.
+
+Uh, I didn't get prepared in time.
+
+Uh, no, but it's okay because I didn't go trick or treating either, because my kids, uh, went to, like, friends houses to trick or treat.
+
+So I just stayed home. You know? Anyway, I hope I had a great weekend.
+
+I had a great weekend. It was nice outside. I went to Canada. Well, that's a decision.
+
+Um, but when we left off on Friday, we were talking about the virtual memory subsystem, and we were specifically talking about paging and,
+
+uh, the ways that paging is used in a modern operating system to manage the memory of the, you know, programs that we run.
+
+And we talked about, um, what paging is.
+
+We break memory into fixed size chunks, and we, um,
+
+map a fixed size chunk in the virtual address space to a chunk of the same size in the physical address space.
+
+And we got down to talking about, um, page backing, which is where pages contain information that can be found somewhere else in the system.
+
+And the idea that if we have a page that contains information that is available somewhere else in the system,
+
+that we can, um, take that page out of memory and throw it away and use that memory for something else.
+
+And if we ever need the data that's stored on it again, that we can go back to whatever that backing is,
+
+retrieve the data from the backing and put it back, uh, in, uh, memory.
+
+So. Having said that, um, that leads us to a rather neat idea that is present in most modern systems called demand paging,
+
+which is where you create a backing associated with some virtual pages,
+
+but you never actually allocate any physical pages of memory, and you never actually copy, uh,
+
+the data from the backing into the memory until the process actually tries to use that data.
+
+And at that point, the operating system will go find some memory, go read from the backing,
+
+copy that data from the backing into memory and allow the process to use it.
+
+And what happens in this case? Is the operating system sets up a, uh, backing in memory by saying, hey,
+
+if the if the user has ever wants to read this memory, then this is the data that should be in that memory.
+
+And if the user tries to use it, then I'll get around and doing something about that.
+
+And then it goes on and goes on its merry way. At some point,
+
+the users process will try to access a virtual memory address that has not been assigned a physical page of memory by the operating system.
+
+The memory management unit will trap that and it will say, um, hey, I don't have a mapping for this, right?
+
+Just like we talked about last time, and it will issue what we call.
+
+And we talked about this again last time a page fault,
+
+it will contact the operating system kernel and say this process tried to access some memory and I don't know what to do about it.
+
+We said before, the operating system will try to fix the problem and if it can't, you get a segmentation fault.
+
+In this case, the operating system will say, ah, you don't know what to do about it, but I do.
+
+It will then find the backing. Get a page of memory.
+
+Associate that page of memory with the virtual address that the process tried to access.
+
+Copy the information from the backing into the physical page of memory right that is backed at that virtual address.
+
+And tell the MMU let the process try again.
+
+The process will then try to read again and the MMU will say, yes, I have that data for you and it will give the process the data that it asked for.
+
+So this was an example of a page fault that was recoverable, right?
+
+And did not end in a segmentation fault. Um.
+
+And this is pretty powerful and we use it a lot. And in particular, um, we use it in some very practical locations.
+
+Um, in the case of allocating memory. We do this, but the backing for the file is I don't care, just give the process some blank memory.
+
+So when you call s break or when you call, or when you fall onto a new, uh, page in your stack, what will happen is when you try to use that,
+
+when you call s break, the operating system will say, okay, next time the process wants memory, I'll give them memory and it will just go away.
+
+And we'll see an example of this here in a minute. And then when you fall, it'll say, okay, fine, I'll find you some memory.
+
+Another place that we use it is when you start a program.
+
+So when you start a program, you run and you tell the operating system, I want to run this executable that's stored on disk, right?
+
+It's a file on disk. I want to run the program that's represented by this file on disk.
+
+The operating system will record the fact that you want to run that program represented by that file on disk,
+
+and then it will say, okay, programs start running. When the program starts running, but it doesn't necessarily allocate any memory.
+
+When the program starts running the program counter, the CPU will try to execute an address.
+
+And that address is not available. And so you get an MMU page fault.
+
+The operating system goes to that file on disk, finds the executable code that should be at that address,
+
+puts it at that address, and allows the process to keep running. And so the only parts of that file on disk that, uh,
+
+are actually copied into memory are the parts of that file on disk that your program actually tries to run.
+
+And any part of that file on disk that your program doesn't try to run never has to be copied into memory.
+
+And this is valuable because the disk, the storage that your files are stored on is much,
+
+much, much slower than the CPU in the memory in your computer.
+
+And so if I have to read in a large executable on a memory, it takes a long time.
+
+But when you run your program, you may not need all of that memory.
+
+So if I only copy it in on demand, which is why we call it demand paging, then I may only read a small fraction of that file.
+
+Consider, for example, if I start a program and it has command line arguments and I get them wrong, I type the wrong thing.
+
+When that program starts up, it will probably only run a few lines of code before it notices that it can't do whatever I've asked it to do,
+
+because the command line arguments are wrong and it will exit.
+
+If I have to copy the entire program into memory just to find out that I can't run the program, that's very wasteful.
+
+So instead, what I do is I copy and just enough of the program to figure out that I can't run the rest of it and then let it be removed from memory.
+
+And then I fix my command line arguments or whatever, and I run it again.
+
+And then maybe I read in more of the program because I can actually do some work.
+
+So this is demand. Uh, paging. We create mappings from virtual memory to physical memory on demand.
+
+And we copy the backings into those mappings on demand when we need the memory that's copied into those packets.
+
+Mhm. Uh, I'm absolutely not going to do that. So, um.
+
+The example I gave first was this idea where we allocate more memory.
+
+When you call break or break. You are asking the operating system to change the virtual memory map of your program,
+
+to add or remove mappings from virtual addresses to physical addresses.
+
+If you remember, we said that our pages are four kilobytes,
+
+and we also said that the minimum amount of memory you can ask for using break or break is four kilobytes.
+
+And the reason is because when you break more memory, when you ask for more memory, what you're saying is map more pages into my process.
+
+I can't map a part of a page. I can only map an entire page into my process.
+
+Um. So when you call brake, the operating system does not actually immediately run out and find physical memory to make it available to your process.
+
+Instead, what it says is, hey, if the process ever tries to use these virtual memory addresses,
+
+then I should go find memory and provide it for this process.
+
+Because once again, just like the demand paging,
+
+just because you've said I want to gigabyte of memory doesn't mean you need two gigabytes of memory right now.
+
+And if I go allocating a gigabyte in memory right now, that's going to take a long time.
+
+So instead what I do is I say, yeah, yeah, yeah, you can have a gigabyte of memory.
+
+And then when your process actually tries to use that memory, then the MMU will say, I don't have a page for this memory.
+
+The operating system will say, well I but I can get you one.
+
+It will map one into memory and then your process will continue its execution.
+
+This is particularly valuable because in many times in um algorithms we use what are called sparse data structures,
+
+which is a data structure that notionally contains a very large amount of data, but in reality it only has a small amount of data.
+
+With a little bit here and a little bit here and a little bit there, and a huge amount of space in between that you just don't use.
+
+So if you do demand paging. You allocate a large amount of memory to store your data.
+
+Then you only pay for the data that you actually use.
+
+So I reserve a gigabyte of data.
+
+I use one megabyte out of that gigabyte, and I don't ever pay any price for the other 999MB, because I never actually map them into the process.
+
+I never actually make them available. The disadvantage is that memory accesses may be slow as you start to create these pages.
+
+So here's a little animation for that. Here's my process.
+
+And this is the mapping in my we call it a page table in my process.
+
+And I have a bunch of unmapped memory. So this these pages are very large and my process is very small one or the other.
+
+Right. Just for this illustration.
+
+And note that the system break is above that second little white mapped box there and those boxes mapped to these pages over here.
+
+Right. So when I try to access the bottom box, I get this physical page of memory over here.
+
+When I try to access the next box, I get this physical page memory over here.
+
+When the process calls s break, what the operating system does is it moves the break up in memory,
+
+but it doesn't bother to go find a page of memory to provide to the process.
+
+Then at some point in time, the process tries to use that memory.
+
+Only then does the processor go find a page of memory and map it.
+
+So if we look here.
+
+This third line up that says not present is mapped, but there's not or is valid, but there's not actually memory associated with it.
+
+And as soon as I try to use it, I find memory. And I provide a mapping to the MMU so that the MMU can do the address translation.
+
+Um, and then the process does what it does. Uh, are there any questions so far about that?
+
+Yes. Um, it could exist.
+
+So the question is, does the back memory exist? Virtually, but not physically. Backing is a property of the virtual memory address.
+
+Physical memory. May have a backing, but only insofar as it is present in some virtual address somewhere.
+
+Right. If it's not in a virtual address space, then it doesn't have a backing, right?
+
+Um, and the mapping between the physical memory in, in the Ram chips and the backing,
+
+which just say a file on the disk or something is a property of that virtual address mapping.
+
+Does that answer your question? This is exactly the heap that we just talked about in this animation.
+
+And the next slide says we can also do this for the stack.
+
+So on your system. Can't remember if I went through this in this class or not, but on your system.
+
+So on my system at least. Uh, I can, uh, run a command.
+
+You limit a. And that command tells me about the various limitations on my process that are enforced by the operating system.
+
+And if you look here on the left hand side, like the fifth one up from the bottom says stack size,
+
+it's got the cursor over it inconveniently says stack size.
+
+And then, uh, out to the right of that, it says that the unit is kilobytes and it has 8192kB of stack, eight megabytes of stack.
+
+In reality, most processors never use eight megabytes of memory.
+
+But the operating system has said, hey, if you want eight megabytes of memory, you can have up to eight megabytes of memory.
+
+But rather than allocating eight megabytes of memory and giving it to every process,
+
+even though most processors only use, say, a few hundred kilobytes of stack total, right?
+
+Say one tenth of their stack allocation is all they will ever use.
+
+What the operating system does is it records the fact that if I ever want it,
+
+I can have eight megabytes of memory, but instead of giving it to me, it just doesn't map the stack.
+
+And so as my program executes as I push data down onto the stack, I will try to write to various addresses.
+
+At some point when I try to write to the next address downward in memory,
+
+I will move from the page I'm currently on to the next lower page in virtual memory address space.
+
+And when I try to do that, it will cause the MMU to fault and the MMU will say I don't have stack to push to this location in memory.
+
+And then the operating system will say, okay,
+
+but I can get you some and it will go find some physical memory and map it into the process and allow that to continue.
+
+So in the same way that demand paging allow me to not necessarily load memory until I needed it.
+
+Um, the stack can be allocated only as my process actually pushes enough data onto the stack to require a larger stack.
+
+So I can say, hey, here's an eight megabyte stack and that's free.
+
+Because that eight megabyte stack doesn't get allocated unless my program actually uses eight megabytes of memory,
+
+it only allocates that first four kilobytes, right?
+
+And then as my program uses more, it gives me more and more of my potential maximum of eight megabytes.
+
+Yes. If you try to go over eight megabytes, what will happen?
+
+That's a great question. What will happen is that address will move down into the very next page after eight megabytes.
+
+The MMU will travel to the operating system, and the operating system will say,
+
+no, you can't have any more memory and you'll get a segmentation fault.
+
+Uh, in some cases, the C library will actually catch that and tell you it was a stack overflow.
+
+That's what a Stack Overflow is, right? You know, like Stack overflow.com.
+
+That's a stack overflow. Um, it in some cases it will tell you that that's what happened.
+
+In most cases, you'll just get a segmentation fault in your program will crash just the same as if you tried to use pass to break.
+
+Uh, you know, above on the heap. As many of you hopefully are finding out.
+
+This week. Right. How many of you.
+
+I'm not going to ask that question, because I don't want to know how many people have actually started their project.
+
+But like, you're going to have more segmentation faults in the next couple of weeks of your life than you've had in total, you know, up to this point.
+
+Yes. Uh, yes.
+
+The heap does have a maximum size with the heat's maximum size. It might have said on that terminal.
+
+It actually doesn't. Yeah, it's not set here, although I think it can be right.
+
+Okay. So the data segment does show. So uh right here it says data segment Size unlimited.
+
+The third one down that includes the heap.
+
+And so in this case it's only going to kill my process if I try to use more memory than it can actually find.
+
+Then it will say no you're out. You can't have anymore. But I bet if I go to mom.
+
+Nope, it says unlimited, but I could set that lower and it would work the same way as that.
+
+Um. As the stack. If I tried to break more memory, it would say, now you can't write, it's going to fail.
+
+But in that case, you don't immediately get to segmentation fault. Your break will return.
+
+Uh, negative one. Right. It fails more gracefully with the stack.
+
+There's no way to tell you you can't have more stack. You just try to use it and it fails.
+
+But with the heap, it can tell you you can't actually have any more. That's a good question.
+
+Other questions. Okay, I think that's it.
+
+Okay. Note we have one more page. So, um, there's this other situation that comes up, which is where, um, a process wants another page of memory.
+
+And it can't get it because all of my physical memory has already been allocated.
+
+So I have one gigabyte of memory, and the processes that are currently running on my system are using one gigabyte of memory.
+
+And some processors. Can I have more memory?
+
+In that case, what the operating system will try to do is find a page of memory that can be used to serve that allocation.
+
+The first thing it will do is it will look at all of the backed pages, and it will look for a backed page that is clean.
+
+If you remember last time when we talked about back pages, we talked about clean and dirty pages.
+
+A clean page is a page where the data that's stored on that page is exactly the same as the data that's stored in whatever its backing is.
+
+If I have a clean page, I can just take that page of memory and just reuse it somewhere else, wipe it clean, reuse it somewhere else.
+
+And if the process that was previously using that back page needs it again, then I go find another page of memory.
+
+Copy the data from the backing, put it in the page and say, here you go.
+
+And the process never knows right. That it that it was ever reused.
+
+If there is not a clean page of memory, but there is a dirty page of memory that can be saved to its backing,
+
+then I can save that dirty page of memory to its backing, which makes it clean,
+
+because then the backing in the page are the same and do the same thing. If there is, this is where it gets really interesting.
+
+I promise. This is interesting. Uh, if there is neither a clean page of memory nor a dirty page that can be saved to an existing backing.
+
+I can take a page of memory that is not currently backed back it save it out and throw it away.
+
+And we call this swapping.
+
+There will be an area saved on your disk or on your file system storage by almost every operating system that we call the swap space,
+
+where it will take memory. When it needs more memory, it will take memory, um, save it out to that swap space.
+
+And then when the process ever wants it back, it will read it back in from the swap space.
+
+But the neat trick here is that many times the data that is evicted is never used again.
+
+Because programs use data like when they start up, while they're initializing themselves or whatever,
+
+and then they never use it again once they're initialized. So frequently you push data out to swap and you never bring it back.
+
+Now this laptop I boot every day, which is unusual for me.
+
+Usually I boot computers once and then reboot them years down the line.
+
+Uh, but it may not have any swap. It does not have zero bytes of swap used.
+
+Imaan, on the other hand, has two gigabytes of swap used.
+
+That means that there are two gigabytes of memory that were used by some program on him, on that it needed more memory,
+
+which I honestly don't understand why it needed more memory because it has 64GB of memory.
+
+So what are y'all been doing with that memory? I don't know. Uh, and what it did was it saved it out to swap, and it hasn't had to read it back yet.
+
+Yes. So what?
+
+How deeply can I see what people do on him? On. Is not that deep?
+
+How deeply can the system administrators see is as arbitrarily deep as they wish to?
+
+But ordinarily, they don't look. They don't look unless there's a problem.
+
+If there's a problem, they look right. You don't get right. I do not have a read on him.
+
+No. The total memory, plus any memory you could free up by pushing things into swap,
+
+plus anything it can like when it gets to the point where you asked for more
+
+memory and it's like I literally can't find a place to store anything else.
+
+Yeah, it's the maximum that the hardware would allow. I mean, you can't be truly unlimited because it's a finite system, right?
+
+Whatever the memory the computer has, plus whatever swap space you've allocated.
+
+So in this case, uh, Iman has 64GB of memory and 256GB of swap.
+
+So I can, in theory, use five times as much memory as it has physical Ram by pushing things out to swap.
+
+In reality, when you get to five times as much, the performance is not good, right?
+
+The computer's gotten very slow. You really need to buy more Ram, right?
+
+But in practice, that's a thing that you can do. Yes.
+
+Or a file. You can do either one. Yes.
+
+Uh, so the observation is on Linux, uh, Linux user partition and windows uses a file.
+
+Is there any performance difference? Um, the answer to that is a qualified yes.
+
+There is a performance difference. Um, in practice, frequently operating systems can arrange to make it so that there is not,
+
+by the way, that they choose to allocate the individual blocks that are used to store the swap.
+
+Um, in theory there is a performance difference, and if you have a swap file on the file system, it will be slower than dedicating a partition.
+
+In practice, most operating systems can can eliminate the majority of that overhead.
+
+Because you have to go through the file system interface. Right. And so like.
+
+So if you have I don't want to really spend too much time on this.
+
+But when you allocate a set of blocks on a partition, they're all guaranteed to be contiguous.
+
+Like they basically have addresses one after another.
+
+When you do with a file system, you have something like the virtual memory tables where you like at read from this place in this file,
+
+but it goes over there, you read for the next place, it goes over there.
+
+In practice, whatever the operating system knows that you're using the file for swap.
+
+It will place them contiguous so that that mapping is 1 to 1.
+
+And it's very fast. Which is why I say that like usually it doesn't make a big difference, but in theory it does.
+
+It's it's slower to use a file. You should assume that have windows. Does it slower.
+
+Yes. Page is dirty because your program has changed it with respect to whatever the backing is,
+
+and the operating system hasn't gotten around to updating the backing. So if I have a page that's backed by something that I can write to.
+
+Then when I change my page, I have two options.
+
+I can either update the thing that I write to, or I can, uh, remove that backing so that it's no longer backed by that location.
+
+Um, but if you decide to change the thing that you could write to,
+
+then there's a period of time between when you change the memory in between, the operating system saves that difference back to the backing.
+
+Um, and in that window of time,
+
+the page is dirty and that window of time can be arbitrarily long because there's no reason the operating system has to save it back.
+
+It only does that because it told you it would eventually.
+
+And so it can wait as long as it wants. And in practice, there's good reasons to wait.
+
+Like for performance reasons, it makes the system faster. Did that answer your question?
+
+Uh, why do programs get seg faults if I can have an arbitrarily large amount of memory?
+
+Because you have to ask for it first. And if you try to use memory, you didn't ask for it.
+
+You get a segfault. But if you swap them, then.
+
+You can, but you have to ask. So if I try to use a heap address that I didn't break.
+
+My program is going to crash. Even though if I did break it, I could have it.
+
+Right. This is like a few semesters ago.
+
+I don't know why I'm thinking of this story. Uh, so frequently, you'll come to my door and my office, and you say, can I ask a question?
+
+And I say, yes. If my door's open, I say yes. And that's, you know, you can have your memory.
+
+You asked for it a few semester ago.
+
+This kid walks up to my door and I'm in a meeting and I'm talking to another student and he says, can I ask a question?
+
+I said, no, and he stepped into my office and started to ask his question, and I was like, why?
+
+Why did you ask? If you could ask a question if you just don't care, right?
+
+And then I said, I told you, you can't ask a question. And then he kept asking his question.
+
+He's like, well, we're doing real, real quick. And I said, I told you, you can ask your question.
+
+Anyway, that kid got a segfault when I eventually was like, get out of my office right now, right.
+
+You just have to ask first and then listen to their answer, actually was the moral of that story.
+
+I don't know why I thought about that right now, but I did. Um, students.
+
+Man, you would not believe the stuff the students do. Well, you might.
+
+Your brother definitely would. All right, um, other questions.
+
+I told you, I'm allowed to bully, right? I look that up. I'm allowed to bully students.
+
+I'm not allowed to. There's all kinds of things not allowed to do, but bullying is not on the list.
+
+I checked. Okay. Um.
+
+That's all I want to say about that. Uh, let's go ahead and do that top hat question that I refused to do earlier.
+
+We'll do a topic question about virtual memory since it's all fresh in our minds.
+
+Top hat. Question about virtual memory addresses, in fact.
+
+The block for an array is guaranteed to be contiguous with a contiguous block.
+
+In what address space or spaces?
+
+While this counts down and you think about this answer I want to mention that you be hacking is this coming weekend?
+
+It's Saturday and Sunday, the eighth and 9th of November.
+
+And I hope you all will do it.
+
+Um, I understand that, um, most of the seats have actually been allocated, so if you want to do it and you have not signed up yet, do so soon.
+
+Right. There are many more seats available, but they will run out. So.
+
+Hmm. I can't because there's like actually a fire code for how many people we can put in Davis Hall.
+
+Mhm. Or by the OS I mean the fire marshal. Yeah.
+
+All right. Talk amongst yourselves for a few seconds or until I get bored of it, and then we'll do it again.
+
+It's not exactly viral, but I was, uh, I was just scrolling on Instagram and popped up, and I was just like, I couldn't believe.
+
+Yeah, I'm a team player. They asked me to participate, and I participate.
+
+It's memorialized. All right, let's do it again.
+
+They were so excited about that. I don't think we're going to do that.
+
+I'll show you what I frequently consider putting up on the overhead. What?
+
+Around time. Um. What's the answer?
+
+Be on. Good job. That's a really good job.
+
+Uh, the virtual address space, if you remember, we I drew up here on the board, which I'm sure they erased over the weekend.
+
+Uh, but I drew the mapping where we had the process and then the arrows into the physical address space.
+
+And I very carefully drew those arrows in the physical address space so that they were not contiguous in the physical address space.
+
+So just because memory is contiguous in the virtual address space does not mean that it's necessarily, uh, contiguous in the, um.
+
+Physical address space. Okay. We're going to close that.
+
+We're done with. Top hat for now. Now what we will do next.
+
+Because we'll start the next set of lectures. So last time we were here, I told you maybe the time before last, it all runs together for me.
+
+Uh, I told you that we were going to do an abstract lecture, and then we'd have a couple abstract lectures after that,
+
+and then we would get into our last sort of programing meet lecture.
+
+Um, and then we would, um. Finish out the semester with some more abstract lectures.
+
+So we're still in our abstract era. This is the one I always want to put on the overhead.
+
+Just to remind people you should do that. They should do my work when I ask them to do work, because this kid's a college student and that's my foot.
+
+Yeah, I'll show you guys. I'm not allowed to threaten students either.
+
+This is not a threat. And I would never participate in workplace violence.
+
+I would. But here's.
+
+This is me, and this is a college student. His name is Hashem.
+
+Um. Fortunately, he was 20 years old, so he hit the ground and just bounced and kept going like it did not even slow him down.
+
+Um, but that's why when I ask you to do your homework, you should do your homework.
+
+Huh? No, he was not in the air. Well, he sort of was.
+
+He jumped up to try to, like, punch down like this, and I blasted him into the distance.
+
+It was fantastic. I really enjoyed it. All right, I'll have them edit that out of the lecture video.
+
+Um, did you guys can't be trusted with that particular image?
+
+Um, okay. So, um, anyway, this is our, uh, another kind of abstract lecture, so we're going to have this lecture,
+
+and then we're going to have another one on, um, uh, another aspect of concurrency.
+
+And then after that we will have a programing lecture. We talk about how you actually would write concurrent programs.
+
+So bear with me through these more theoretical lectures as we talk about sort of the underpinnings
+
+and the fundamentals that we need to understand in order to write concurrent programs,
+
+and then sometime probably middle of next week or so,
+
+uh, we will sit down in the editor and actually write some concurrent programs,
+
+like we'll actually do some live coding, we'll write some concurrent programs, and we'll look at how they behave.
+
+Yes. When will the grades for three come out?
+
+Um, that's a great question. Uh, and one for which I do not have an immediate answer for you,
+
+but I guarantee they will be out by December 22nd or whatever, when, uh, class grades are required.
+
+Hopefully, like in the next week or so, it'll probably be after you'd be hacking, if I be perfectly honest.
+
+Because I probably won't get to it before you be hacking. Yes.
+
+Did you have a question also? He's on his laptop now. Did you also have a question?
+
+No. Okay. All right.
+
+Um. So processor threads and concurrency.
+
+I wanted to find some terminology here. Computer systems.
+
+A Programmer's Perspective is the optional textbook for this course, right?
+
+We have a number of required textbooks, all of which are free to you except for K and R, which is cheap insofar as textbooks go.
+
+Uh, and then there's an optional textbook, which is optional because it's 100 and freakin $60 or something, right?
+
+Which is crazy. It's just a book. Um, it's not even like it doesn't even have, like, gold leaf on the cover or anything, right?
+
+It's just it's just a textbook. So we said, what if students didn't have to pay for that?
+
+And we made it optional, but it does have some good material in. And if you ever have an opportunity to leaf through it.
+
+I have several copies in my office. You're welcome to come look at one. Uh, or it is available in the library.
+
+Right. You can check it out. It's got some good material on it, but it in particular defines a logical control flow.
+
+And we're going to define a logical control flow so that we can define exactly
+
+what happens in this dedicated machine model that we keep talking about,
+
+so that we can define what happens when we no longer use the dedicated machine model.
+
+So we're going to just sort of break this down step by step.
+
+And the definition it uses for a logical control flow is a series of program counter values
+
+that correspond exclusively to instructions contained in a program's executable object file,
+
+or in shared objects linked to it dynamically at runtime.
+
+And what this means is. So the executable object file is the actual file on disk that is compiled when you run the compiler.
+
+So it's the dot out file if you will, as the executable object file.
+
+And when you compile with the compiler, it creates, um, a sequence of instructions that your program will eventually run.
+
+When it runs, it saves those into a file on disk.
+
+And then when you run the program, we just talked about this in the virtual memory slides.
+
+The, uh, operating system will cause certain areas of the memory in your program to correspond to the data that's in that file on disk,
+
+so that as you execute your program, it will copy the data from that file into memory and it will run those instructions.
+
+Furthermore, there are what we call shared libraries on the system,
+
+which are pieces of code that your program uses that are not part of that file on disk.
+
+So for example, the C library is a shared library. When you call printf you didn't write printf.
+
+Printf is not in that file on disk. It exists somewhere else on the system.
+
+And when you call printf, the operating system goes and finds that somewhere else, finds the code that would run when you called printf,
+
+copies it into the memory state space of your program, and allows your program to run printf.
+
+The program counter. As we discussed, we talked about, uh, process anatomy, right?
+
+Is a register inside the CPU that keeps track of what address in your processor's virtual
+
+address space is currently contains the program code that is currently executing.
+
+So you are currently adding two numbers together.
+
+Adding those two numbers together corresponds to an instruction that was written out by the compiler,
+
+saved in that file on disk, copied into the memory of your program.
+
+It was copied into the memory of your program. Excuse me at a particular address.
+
+That is the value of the program counter at this point in time. After it adds those numbers together, it will add some value to the program counter,
+
+move to the next instruction and run the instruction at that address.
+
+If you call a jump or a branch or whatever it will, or you call a function, it will load a new value into that program counter.
+
+Maybe in the case of calling a function, pushing the old value on to your stack,
+
+so that when you return some function, you can go back to that location.
+
+And this observation says that we can think of a program running as the sequence
+
+of instructions that the processor actually runs as our program executes.
+
+So it does one thing, it does another thing one after another.
+
+If we record that sequence of instructions, then that tells us what the logical flow of our program is and what it did when it ran.
+
+And we can sort of, um, reify the abstract notion of a program running and doing something by just saying,
+
+well, these were the instructions that it ran. It turns out we also need to know what data ran them on and some things like that.
+
+Right. But that's a, you know, sort of a topic for another time.
+
+So now that we know what a control flow is in a program, we have this program that's running and it's running a sequence of instructions.
+
+We can now start to talk about concurrency. In concurrency is um.
+
+Informally, when we have more than one program running on the computer at the same time.
+
+Formally, what we say is that we have two concurrent logical flows.
+
+If we have two logical control flows that overlap in time, so one of them starts before the other one has finished.
+
+And so there's some point in time where they are both present in the system.
+
+They don't need to be actually executing an instruction at exactly the same time, but they need to.
+
+One of them needs to have started, and the other or both of them need to have started, and one of them has not yet ended at some point in time.
+
+Uh, note that this does not require that we even have the capability to run more than one instruction at exactly the same time.
+
+Because there is a concept or a, um, not so much a concept, but there is a, uh,
+
+an activity that we can cause the computer to do that we call multitasking, which is where we can run a little bit of one program stop,
+
+switch, run a little bit of another program, stop switch, etc.,
+
+etc. and then eventually come back to the first program and let it run a little bit longer.
+
+So if one program runs that, another program runs, then the first program and they switch back and forth.
+
+These logical flows are concurrent in the sense that both of them started and are in the system at the same time,
+
+even though at any given instant in time only one or the other of them is running.
+
+But over a if we integrate right over a longer period of time, both of them are running right at the same time.
+
+So, so far we have talked, uh, only about what what we're going to call processes.
+
+So a process is our sort of fundamental unit of logical control flow in our system.
+
+And that is the logical control flow itself, plus all of the other stuff that it needs to be a useful program,
+
+all of the data it's operating on and the resources that it uses and etc.
+
+This is the dedicated machine model that we've talked about.
+
+A process is the sort of thing that's inside the dedicated machine, and the way the dedicated machine model is sort of upheld.
+
+And the way it works is that the operating system, um,
+
+arbitrate any access that one logical control flow wants to have to any other logical control flow in the system.
+
+So if your process is running and it does not want to be aware that there are any other processes in the world which, as we've discussed previously,
+
+is very convenient, then whenever another process goes to the operating system and says, hey, can I mess with that process over there?
+
+Over there, the operating system says, no, you can't.
+
+But if your process says, hey, I kind of want to talk to that process over there, and that process over there says,
+
+I'm willing to talk to that process over there, then the operating system says, okay,
+
+and then we'll facilitate some sort of interaction between those two processes and start to break down that dedicated
+
+computer model model and allow us to think about having multiple logical control flows in the system at the same time.
+
+Yes. Is printf.
+
+An example of multitasking? No, because it runs in the same logical control flow.
+
+It's from a different code base, but your process is running along and it's running your code,
+
+and then it just jumps over here and it runs the printf code for a while, and then it comes back and it keeps running your code.
+
+So it's one logical control flow that moves along and runs another and comes back.
+
+Multitasking is literally just like I open two terminals.
+
+They're separate programs they're doing. They might be doing the same thing, but they're separate programs.
+
+They just happen to be running on the computer at the same time.
+
+Or like you have your web browser open and you also have, um, whatever it is the kids these days use this, not web browsers open at the same time.
+
+Discord or something, which is just another damn web browser. They're all it's all web browsers.
+
+Did we start having the ability to. When do we start having the ability to do concurrent logical flows?
+
+Um, that's a great question. In the 1960s, maybe even before that, but certainly by the 1960s, uh,
+
+say the early to mid 1960s, we were doing concurrent logic flows for a long time.
+
+Now, on home computers, like the kind that you could afford to buy and put in your house, it's been a lot less time than that.
+
+Uh, I mean, late 1970s or something, right? Early 1980s.
+
+Um, but in like, big professional computers, it was as early as the early 1960s.
+
+Problem? Yes. Um, definition.
+
+Right. So what is. What's the difference?
+
+Because sometimes these words I'm using process and.
+
+We will talk about process and then we come back. Next time we'll define them very precisely.
+
+Next time we'll talk about a few other definitions when we come back next time. Um I'm going to go ahead and leave it off there.
+
+I'm not going to go to the next slide. I will see you all on Wednesday.
+

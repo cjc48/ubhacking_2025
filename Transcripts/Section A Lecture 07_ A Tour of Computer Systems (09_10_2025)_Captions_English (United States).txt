@@ -1,0 +1,833 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+This is material that we will see over and over as the semester goes on, like sort of almost deeper and deeper removes, um, such that, um.
+
+We all sort of say, hey, this is a thing now and then, why is this not on?
+
+And then as the semester goes on, we'll say, hey, this is why that thing is that way.
+
+And then we'll say, hey. And it's that way because of this other effect.
+
+That means that we had to do this. And so therefore we had.
+
+So it just ties back a lot of the things that we're going to do for the rest of the semester.
+
+So I really like this lecture. Uh, I hope you all find it, um, interesting as well.
+
+So as usual, we're going to start off, uh, by talking a little bit about advice.
+
+And, um, and I want to talk specifically about time management and very concrete things that you can do to use your time wisely.
+
+Um, when you sit down to work, if you are at all like me, you will frequently find out that you sit down to do some work.
+
+You look at the clock. It's been an hour, and you have not actually done anything that you intended to do or anything useful.
+
+And so what I recommend you do is set a timer. And by set a timer, I don't mean a metaphorical timer.
+
+I mean go into your phone, go to the clock app,
+
+set a 15 minute timer that will have an alarm at the end and say start when you sit down to work and then 15 minutes later or 15 is not magic, right?
+
+Maybe it's ten, maybe it's 20, right? But a relatively brief period of time where you can still adjust your course.
+
+When that timer goes off, you ask yourself the question.
+
+Am I working? There's going to be one of two answers to that question.
+
+One is no, actually I'm not. And the other one is yes, I am.
+
+And depending on which answer you give, you're going to take a different path.
+
+If the answer is no, I'm not. Then you ask the question, why not?
+
+Am I hungry? Am I tired? Is my roommate too loud?
+
+Am I actually watching TV? Am I, you know, like, what is the reason that I'm not getting any work done and fix it?
+
+Because there is no point in sitting there and saying, I'm working on my 220 and using that time off.
+
+If you're not making progress, if you're too hungry, get something to eat.
+
+If you're too tired, take a nap. Go to bed. Right, take a shower.
+
+Do some exercise. Right. Something to like. Get you more ready to do some work.
+
+Uh, if your roommate is too loud, say, hey, shut up.
+
+I'm trying to work. You know what? Coffee shop, right?
+
+Do something to, like, remove that problem. Whatever the problem is that makes it so that you're not working.
+
+If it's just that you turn the game on in the background or whatever, just turn it back off.
+
+Right? Oh, no. That's obviously this is more distracting than I thought it was going to be.
+
+Turn it off. Get back to work. Right. If the answer is yes, I am, uh, working then, said another timer.
+
+Another 15 minutes. If you're really in the group, maybe you some little longer time, or you're like, I think I can get some real work done, right?
+
+But give yourself some accountability so that every, you know, so often you ask yourself, am I actually making progress?
+
+Because too many times we spend a lot of time,
+
+we spend a lot of time on something without having put a corresponding amount of effort into that thing that we're trying to do, right.
+
+So you set that timer, you give yourself some accountability, and you make sure that you're actually spending effort when you're spending the time.
+
+Any questions? Okay.
+
+Okay. All right. As we said in the very first lecture, we're looking at C and Posix, um, because they have something to show us.
+
+But they're not magic. They're just a specific implementation of a way to do computer systems.
+
+And we could be looking at any other ways to do computer systems, right.
+
+We could be looking at, um. Uh, well, these days it's hard to get away from C.
+
+Most computer systems are written in C or maybe C plus plus.
+
+But historically there were many write Pascal and Oberon and Lisp and all kinds of PL one.
+
+There were all kinds of languages that we use wrote system to write systems.
+
+We could use any one of those languages. It would be fine.
+
+There are many systems out there that are not POS systems.
+
+Um, fewer and fewer, um, more and more systems look like POS systems these days.
+
+The major surviving system that's not a perfect system is, um, Microsoft Windows.
+
+Um, but the thing is that it doesn't matter what language we look at or what system we look at,
+
+because they all have to solve the same problems somehow.
+
+You have to get from. What does this computer actually do?
+
+Like physically, how does the computer do its computation.
+
+Like what are the actual properties of the underlying hardware up to what is some kind of interface that a programmer might want to use?
+
+And whatever system you use, whatever language you use, it has to bridge that gap.
+
+And there are certain properties of that gap that it almost doesn't matter what system you look at,
+
+because it's going to have to solve the same problem. It's going to have the same properties, it's going to have the same overall, um, structure.
+
+So what this lecture and several of the other lectures throughout the semester are going to look like.
+
+Look at. Are some of the sort of conceptual underpinnings that no matter what system you're using,
+
+these are just realities of the way computation devices work.
+
+These are just realities of the way that computer systems operate.
+
+So if you chose a different language, if you chose a different system,
+
+they would address all of the problems that we're going to talk about in this lecture in
+
+some way that would look familiar based on the things you're going to learn in this course,
+
+because they're just sort of rock bottom. This used to be one of the very first lectures we did in the course.
+
+It's still early, but we didn't used to teach any C at the beginning of the course.
+
+And so this was like maybe in the second lecture of the semester.
+
+And one of the things that we would frequently address then, which you may still have the question now,
+
+but hopefully you're you're a little bit more convinced by now is like, why do I even need to do this?
+
+Why do I need to think about systems? Why do I need to think about the way the computer does its computation?
+
+Particularly if you're saying, hey, I plan to do front end web development, right?
+
+I'm going to be. The system is so far from me, I can't even see it from here.
+
+There's a, you know, three different programing languages, a web browser, a virtual machine model, a Dom or whatever between me and the computer.
+
+Um, and the fact is that some of you will not.
+
+Many of you will not do direct systems programing as like a large part of your career, and that's fine.
+
+It doesn't mean that the system's not still down there, and it doesn't mean that some of these properties won't still exist for you.
+
+So, for example, we're going to learn some things about array access into memory accesses in C that if you that
+
+have to do with efficiency and how fast the program runs and how well the program runs that,
+
+if you benchmarked a JavaScript program, you would find that the exact same properties held true and the same effects would be visible,
+
+maybe not at the same order of magnitude, because there's more overhead, there's more stuff between you and the computer.
+
+So whereas we see, you know, a 20 fold change in execution time, in C, you see a 50% change in execution time in JavaScript.
+
+But nonetheless, the fact is still there that, hey, this is how the computer works and it's still visible to me.
+
+Um. So some of it will be directly, uh, applicable, but some of it you will only see when under certain circumstances in particular,
+
+we talk, we'll talk about like for example, when things go wrong, right.
+
+Or when you need to dive a little bit, uh, deeper.
+
+A lot of what you'll talk about in your career will be much more abstract than the things that we talk about in this semester.
+
+You won't say, hey, let's talk about the exact address.
+
+The data structure will be stored in memory because you're using a language that abstracts that away.
+
+And we talked about before, you can't even ask what the address of a data structure is in Python.
+
+There's no way to ask because the language cannot express that.
+
+Um. And many times when you talk about computation, you won't be thinking about where do I store things?
+
+What is their representation, what is their whatever.
+
+You'll be thinking about much higher level concepts like what kind of algorithm and I using to solve this problem?
+
+What is the runtime complexity of this algorithm? Not how many like integer number of accesses do I do this to this array?
+
+But Big-O of what's right as you get through to 20 to 50 or.
+
+Learn about Big-O notation. Um. Excuse me.
+
+But sometimes. Those concrete things, the smaller things, the systems of your things, the how many access to do I actually do?
+
+Which access to do I do? In what order do I access to this array?
+
+Turn out to matter? Asymptotic analysis takes you so far, but at some point you actually care about that last little bit.
+
+What exactly am I doing on the hardware? This tends to be in places where you are pushing machines to some kind of limit.
+
+Some of the limits are very surprising. Our computers do just stupidly amazing things,
+
+but there are certain things that are actually substantially harder for them to accomplish than you would think that they are.
+
+For example. Um, we'll see later in this lecture, uh, a slide where we just copy an array in memory.
+
+It's about an eight megabyte array.
+
+Eight megabytes is approximately the size of a full HD screen, full of video, like a frame of video on the screen of a full HD display.
+
+Uh, 1920 by 1080. And we will see that in some circumstance it takes like 70 plus milliseconds just to copy that array from one place to another.
+
+Well, 70 milliseconds doesn't sound very long. You could do that a lot of times in a second.
+
+But if you are a video game or you are a video player like a multimedia video player,
+
+you are probably trying to ship 30 or 60 frames per second to the screen.
+
+And if you start doing that division out, that 70 milliseconds becomes a problem.
+
+It's not fast enough. On the other hand, you know for a fact that every computer in this room can play.
+
+1080p video at 60 frames per second with no trouble.
+
+Because the people that wrote those video player applications knew what the properties
+
+are of the computer and how they're designed and how they do their computation.
+
+And they very carefully wrote an application that can ship an eight megabyte screen of video 60 times a second without stuttering,
+
+without jittering, without tearing, without any of the things that we don't want to see in our video players.
+
+Right. So you may see this if you do things like that.
+
+Um. Even if you don't do that kind of thing, if you don't do low level things,
+
+you will find that there will be times in your career where you're working in a much higher level and you're trying not to worry about the machine,
+
+but for example, it's just not fast enough. Or is just using more memory than you can afford to use, right?
+
+So when you fire up your web browser, the first thing it does is allocate like four gigabytes of memory, right?
+
+Every web page that you open uses hundreds and hundreds of megabytes of memory.
+
+So at some point you say, well, actually I can't do this in JavaScript.
+
+I'm going to have to do it.
+
+Native code load as an extension, something like that, because it's just too big to do it in this highly abstract layer where I would like to do it,
+
+and all of a sudden you thought you were going to be doing basic frontend development,
+
+and now you are a native code applications programmer because your job just has to dive down one level to be performing enough to be resource,
+
+um, light enough to do whatever it is you're trying to do, right?
+
+This happens. Another place where it will happen is when things go wrong.
+
+When software has bugs. For example, asking the question, is the bug in my software?
+
+Or is the bug in the underlying implementation underneath my software?
+
+And this comes up more often than you would think. It doesn't happen as often now, because systems have gotten more and more stable over the years.
+
+Um, but it still does happen. So for example. If you are ever running, uh, a program on your computer and the whole computer freezes.
+
+It's not the program's fault. It is never the program's fault.
+
+It's the operating system. Because no. And we will learn later in the semester why and how this works.
+
+No one program running on a computer can freeze the entire computer if the system is doing its job.
+
+So if you're an application developer and your entire laptop freezes up every time you do some particular thing in your application,
+
+your application might have a bug. That just triggering this problem?
+
+But to solve the fundamental underlying problem, you're going to have to call Apple or Microsoft or Linus Torvalds or whatever and say,
+
+hey, there's a problem in your operating system.
+
+It's not my application because your application cannot do that if the operating system is doing its job.
+
+And if you don't understand where all of those layers of abstraction are and where the boundaries are,
+
+then you don't know when to say, actually, I'm chasing my tail.
+
+It's not my problem. It's somebody else's problem. Or conversely, because early in your career, you tend to say, it's not my problem.
+
+It's somebody else's problem. It's not. It's your problem. It's always your problem. Right? There's a great book.
+
+Um. It's called The Pragmatic Programmer.
+
+And, uh, it has a bunch of, like, pithy sayings, like every chapter has the saying that goes with it.
+
+And one of the chapters. The saying is select isn't broken.
+
+Select is a facility that's provided by the, um, operating system.
+
+And they go through this story where one of the authors says, I was writing the software and like I was looking at its behavior and I was absolutely
+
+100% convinced that this system call that's provided to the by the operating system,
+
+this fundamental part of the system underneath my was broken because there was no other explanation for the behavior.
+
+And then the sort of. End of the story on the moral of the story is he was using it wrong and so it wasn't doing what he expected.
+
+And of course, select wasn't broken. There were hundreds of applications on that computer that we're using.
+
+Select. Select was fine. You're writing an application.
+
+Where is the bug? It's probably in the new code, right?
+
+It's in the code that you're writing, not the code that people have been using in the operating system for 20 years.
+
+So that's another thing that you'll learn is when can I not blame the operating system?
+
+When do I know it's my fault? Right. It's not the underlying and it's not always the operating system.
+
+Maybe it's a library or whatever. So the crux of this slide is even if you're not a systems program.
+
+Even if you don't do systems programing, the things that you learn about how the computer does its computation, how processes are managed,
+
+how the operating system communicates with the applications that run on top of it,
+
+will help you understand better your applications, where they go wrong, how they will perform, and whether they will or not.
+
+They will be able to solve the tasks that you've been that you're setting out to solve. Yes.
+
+Does that come into your last program? So the question is are we going to talk about parallel computation, distributed systems, things like that.
+
+Your last programing assignment will be, uh, multithreaded.
+
+You will write a multithreaded application that uses that shared data structures among cores on a processor.
+
+We will not do anything distributed like among multiple machines, right.
+
+Or anything like that. However, there's a course here, distributed Systems that does talk about that, that you could take later in your career.
+
+But we will do parallel computation. Uh, there are a number of courses that you can take later.
+
+Um, so, um, there's a high performance computing course, um, taught by Yorick Zola.
+
+Um, that's for 77. For 77.
+
+Uh, you've taken it, right? Yeah. It's an excellent course, right? Yeah.
+
+That's what that's all about. Like, uh, just maximizing how much work I can do on one computer, right?
+
+There's distributed systems, which is multiple programs running on multiple machines, communicating with each other, etc.
+
+Um, there are some graphics processing courses.
+
+Um, there are two theory courses about, like, that kind of thing.
+
+Uh, there's uh, uh, algorithms from modern computing or something like that with Russ Miller and streams and sequences with your Zola.
+
+In this course, though, I will then I will give you some shared memory.
+
+Um. Okay. Any other questions? Oh, that's going to be like ten weeks, right?
+
+So don't hold your breath. All right.
+
+I kind of don't want to do this right now.
+
+I will start my web browser as a compromise. And then maybe we'll do a topic question later, but I don't want to do it right now.
+
+All right. So I said earlier, I've said probably five times so far in this course that the only thing that lets you see this.
+
+This is just. Chaos to leave an uncapped or just still rights.
+
+I want to put a cap on it. This one still.
+
+Right. So I want to put a cap on it to uncap markers. Chaos.
+
+All right, I have ADHD. I don't know if I mentioned that. Um, so I've said everything is just numbers, right?
+
+Everything is just bits. We just store bits in memory. Um, but there's an interesting property of, uh, numbers in computers.
+
+Which is that the. Isn't it a type?
+
+Not the same as the mathematical notion of an integer and a float or a double data type is not the same as the mathematical notion of a real number.
+
+We use them to approximate those things, but they are not fundamentally the same as the sort of pure mathematical concept of those numbers.
+
+And the fundamental reason for that is that mathematics is continuous and infinite, whereas computers are discrete and finite.
+
+Eventually you run out of room to store your numbers.
+
+You run out of no additional gradations that you can put into your numbers.
+
+They just get so small that you can't get any smaller or so large that you can't get any larger.
+
+Um, so here are some examples in mathematics, any number x other than I.
+
+X squared is greater than or equal to zero because a negative times a negative is a positive right.
+
+So there is no real number.
+
+Where for which x squared is not greater than or equal to zero.
+
+But in computer arithmetic, if you declare two ints x and you multiply or if.
+
+I'm sorry. If you declare an int x and you multiply x times x, it is possible that you will receive a result that is negative that is less than zero.
+
+And there's an example here, uh 40,000. That 40,000 gives us whatever that is 16 1.6 billion.
+
+Yeah, 1.6 billion. But 50,000 times 50,000.
+
+Well, in fact, you should try it at home, right? Just go write a C program.
+
+Take x times X, your compiler will. If you do it this trivially, um, the compiler, you can't do 50,000 times 50,000.
+
+That might actually work. But if you say int x equals 50,000 x times x, the compiler will probably warn you, right,
+
+that what you're doing is not going to yield the result that you want in a more complicated program.
+
+I can't do that. But in that very simple program, it will probably warn you. But when you print it out, you're going to see a negative number.
+
+You're going to get an answer that's a negative number.
+
+On the other hand, if you declare a float or a double, then there is no such thing as any value of float or double.
+
+That, when squared, does not yield a number greater than or equal to zero, it will always yield a number greater than or equal to zero.
+
+On the other hand, if we look at the associative property of arithmetic.
+
+So is the quantity of x plus y plus z equal to x plus the quantity of y plus z.
+
+Right. So we just move the parentheses in the mathematical world on real numbers.
+
+This is always true is always the you always get the same answer.
+
+With integers on a computer, it's always true. Any three integers x, y, and z I can associate in any convenient way, and I will get the same answer.
+
+But with floating point. Remember the integers did not work above.
+
+With floating point numbers. Below, there exist floating point numbers for which this associative property does not hold.
+
+Associativity and commutative also may not hold.
+
+So, um. For example, one E20 means one times ten to the power of 20.
+
+Plus negative one times ten to power 20 plus pi is going to equal pi.
+
+But one times ten to the 20 plus negative one times ten to the 20 plus pi the quantity thereof.
+
+Is not going to equal pi. What's it going to equal?
+
+Zero. Exactly zero.
+
+Both of these facts, the fact that, uh, integers did not preserve sine and magnitude either, and the fact that, um, floats did not preserve magnitude.
+
+Are because the integer and float data types are finite,
+
+and we just asked them in both cases to store slightly more data than fit in the amount of memory that we had allocated to store that value.
+
+So think of this like, um, those of you, for example, who have long names,
+
+you occasionally run into the form where you just have to leave part of it out because they're they didn't store enough letters, right?
+
+Or if you have a checkbook style ledger where you have individual boxes where you write numbers, right.
+
+My checkbook doesn't have enough digits that this is a problem.
+
+Hypothetically, you could have enough digits that you just don't have a place to write a number.
+
+Right? This is. And we did. Or the data.
+
+We ran out of letters. We ran out of numbers. We just couldn't store, uh, the end of the number.
+
+Both cases. Yes. So it's like I just took the example of 50,000 times, 50,000 events.
+
+Does it just overflow? It overflows to negative. Yeah, we know it's not random.
+
+It's predictable. And that's the next slide. So the question is that the overflow he did it and it was a negative number.
+
+And the question is is it random. Um no.
+
+Integers and floats have mathematical properties inside the computer.
+
+They have reasonable valid usable mathematical properties.
+
+They just are not the properties of mathematical integers and mathematical floats.
+
+They are slightly different. Right. So on uh, the answer is in the C programing language that is technically undefined behavior.
+
+So it can give you any answer at all. But in reality on any given processor it will be predictable.
+
+It will give you a predictable answer. Um, but you need to know more about the platform to be able to know what that answer is going to be.
+
+But if you did it ten times in a row, you know, came to at the calculation in different ways, you would always get the same answer.
+
+Um, that's not guaranteed. But in like in practice it's going to be the case.
+
+Um, and so it turns out, for example, that, um, this is all because of their finite right.
+
+Mathematics is infinite, and their finite integers satisfy the properties of a mathematical structure that is known as a ring.
+
+And if you ever take, um, intro to Higher math or, um, probably numerical analysis or a number of math classes,
+
+you will definitely talk about rings and groups and fields and all kinds of other neat mathematical things
+
+that you absolutely don't need to know for 220 but it turns out the integers satisfy the property,
+
+the properties of a ring, and in particular, uh, across the arithmetic functions they satisfy where they should.
+
+Right. So like division is not, uh, commutative, for example.
+
+Right. Like it's just like arithmetic division is not commutative but addition to subtraction.
+
+Ah right. So where it is appropriate they support commutative associativity and distributed tip distributive city,
+
+which is uh, you know, x times the quantity of uh y plus z is equal to x y plus z.
+
+Right. Um. And these will always hold.
+
+The answer may be that negative number or whatever, but it will always be the same regardless of how you commute,
+
+associate or distribute your terms right, you will always get the same answer.
+
+Floating point operations satisfy the ordering properties.
+
+So this is um sine preservation. So a if you have a positive number and you add one, it will always be positive.
+
+If you have a negative one number and you subtract one it will always be negative integers will not.
+
+There is a positive number such that you add one and it becomes negative.
+
+Right. That's just how it's going to be.
+
+Um and monotonicity um on the other hand they do not preserve commutativity associativity and distributive um.
+
+When you are writing a computer program, you need to understand when and where these properties hold and whether it matters for your program.
+
+Because sometimes it doesn't matter. Either you don't care, or you have some sort of platform that takes care of this for you.
+
+So if you go into Python and you do 50,000 times 30,000, it will give you the right answer.
+
+If you square that, it will give you the right answer. If you square that, it will give you the right answer.
+
+It will continue to always give you the arithmetically correct answer.
+
+It will just get slower and slower and slower as the numbers get larger.
+
+On the other hand, and see it will always see exactly the same amount of time, and at some point it will give you the wrong answer.
+
+All right. So that's a decision you make when you choose your platform, when you design your application.
+
+Um, these things become extremely important for compiler writers, for systems programmers, um,
+
+and for application programmers who are trying to do something with an application that is not just trivial, right?
+
+When you need high performance, when you need very large data.
+
+If you ever do scientific computation. So the course numerical analysis, which I believe here is taught in the math department, uh,
+
+one of the things that spends a lot of time on is if I am doing something like scientific computation with floating point numbers,
+
+when how do I avoid that commutativity problem that we saw in the previous slide,
+
+so that I know that my answers are always mathematically preserved enough digits
+
+of precision to be mathematically valid for the computation that I'm doing.
+
+Right. That's a thing you can study. It's a thing you can learn.
+
+We're not going to learn it in this course, but we are going to learn why it is that way.
+
+So that when you go forward and you work on other things, you know when to watch out and you know when to say, hey, this is a thing I should look up.
+
+Now there's a book, for example, called Numerical Recipes in C.
+
+That is a whole bunch of algorithms for doing numeric computations.
+
+That will give you the most accurate answer that you can expect for any given computation.
+
+If I needed to do complicated scientific computing, I would go get in C, I would go get numerical recipes in C,
+
+and I would just do what it says because I'm not that interested in the math.
+
+But I do need to know that that's a question I should ask, and that there is somebody who has that answer for me.
+
+Right? My wife, on the other hand, would want to do the math and not write the program.
+
+Really? All right.
+
+Okay. It's bullying me.
+
+I think Carl got likes. I slide 25 today. I need to speed up.
+
+Yes. What is today?
+
+The 10th? Yeah. There will be a little bit of it.
+
+Pretty. I remember.
+
+Oh, this is a perfect question. We just did this. You should be able to remember this.
+
+Um, for the time being that this monotonicity is, uh, for all x x plus one is greater than x greater than or equal to x.
+
+Sorry. The or equal is important. Maybe for this question.
+
+Which of the following statements are false? Oh, you had a whole minute to do this.
+
+I'm already old. I'm just getting older. It this.
+
+That's not true. That's false. But there's no reason you would have known that from what we talked about.
+
+I'll look into that. So the correct statement is that if x is of type float, then x plus one is greater than or equal to x,
+
+which is exactly the thing that I answered to your question, right?
+
+Um, floats actually have a distinguished value of infinity.
+
+And so infinity plus one is infinity. It doesn't get any larger.
+
+Right. So there becomes a point after which x plus one is equal to x.
+
+But there's no reason you would have known that from what we talked about in these slides.
+
+So I will have this question looked into, um, if x, y and z are of type float, then you know commutative is false, right?
+
+We saw that, right. We added two numbers together on one side. We got pi on the other side we got zero right.
+
+Okay. Russians. Great.
+
+Uh, I said this last lecture, so I'm not going to say it again. Um, I will talk about where you will use assembly.
+
+Um, the most likely place that you will use assembly, the most likely place that people in this room will use assembly is if you wind up working in,
+
+um, operating systems, compilers, embedded systems, those sorts of platforms.
+
+Right. If you actually wind up working assembly.
+
+But if you don't wind up working in assembly, the most likely place that you're wind up working in systems,
+
+the most likely place that you're going to see assembly language is, uh, debugging.
+
+When you're debugging something and things are so broken that you can't tell typically, is this my problem?
+
+Or is this the the runtime environment that I'm running on top of which one is wrong?
+
+Is it my compiler? Is it the libraries? Is it my code?
+
+You will wind up actually disassembling code and looking to see what actual instructions it is running to figure out,
+
+um, whose fault it is and therefore where do I go to fix this bug?
+
+Right? Where does this bug come from? Now, depending on how high up the stack you are, the probability that you will wind up doing that,
+
+you know, increases or decreases as you get higher and higher up the stack.
+
+But there is a large portion of the stack where you're not going to do it, and you're one you're not going to do it in year two.
+
+But at some point in your career,
+
+you're going to find yourself staring at machine instructions and trying to figure out where's the problem here, right.
+
+Um, so that does happen. Um, tuning program performance.
+
+We talked about, I think for mPEG, right. And, uh, live for you in a previous, uh, lecture.
+
+That is still the case.
+
+Another place where you see this a lot, if you have any interest in secure computer security, is in creating and fighting, um, malware.
+
+So most malware is written, if not written directly in machine language, which frequently it is not all written directly in machine language.
+
+It takes advantage of bugs in the way that systems deal with underlying representations.
+
+That's a very, very common thing for malware to do.
+
+And so if you are trying to defend against malware, trying to reverse engineer, trying to protect from malware, or if you do, um, you know,
+
+like red teaming stuff or things like that, and you are trying to break into systems,
+
+let's assume that none of us are going to be doing that for nefarious reasons.
+
+Uh, then you you will need to understand what are the representations.
+
+How might they break? And can I induce a piece of software into breaking,
+
+or where are the likely places that the software would have broken right, based on the underlying representations?
+
+We again have several courses here at U-b that talk about these things.
+
+If you do the cybersecurity minor, you will have to take some of them.
+
+Uh, but there are also some courses that you can just go take if you want, uh, software security.
+
+Uh, I think it's for. 17 or something like that.
+
+Um, uh, but it's called title Software Security. We'll look at that.
+
+365. We'll look at that maybe 465 to some, uh, degree.
+
+Okay. So memory matters too.
+
+And this is sort of a, um. Different location in the same layer of abstraction.
+
+So it's still how does the hardware operate? But rather than looking at what are the exact instructions that the machine runs,
+
+how does it represent the individual words of data that I store is just more generally,
+
+where do I put stuff and what does that mean for how my program, um, operates?
+
+Um. Again, this essentially boils down to the problem that our computers are finite.
+
+We do not have an infinitely large amount of memory, not only an infinitely large amount of memory,
+
+in the sense that our machine only has the amount of Ram,
+
+but also in many cases, we are architecturally limited to the amount of memory that we can think about expressing,
+
+much less actually have installed in the computer. Uh, when I was working on some research when I was a graduate student, um,
+
+I was at that time it was not uncommon to use 32 bit computers now, 32 bit machines for like, desktop computers.
+
+Ah, you'll never see one. You do see them in embedded machines pretty pretty frequently.
+
+Right. Embedded systems. But in desktop machines it doesn't happen anymore. But this was like the early, maybe 2005 or something like that, 2008.
+
+And my desktop computer was a 32 bit computer. And it turns out that the amount of memory that you can conveniently use on 32 bit
+
+computer before you literally run out of addresses to store data is about four gigabytes,
+
+and the operating system uses some of it.
+
+So on the machine that I was on, I could only use about three gigabytes of memory before my program would run out of addresses,
+
+like there were no more addresses in which to put data.
+
+And I was working on a data set that, uh, required me to put a little more than three gigabytes of,
+
+uh, it was almost four gigabytes of data in the memory of the computer, and it would crash, right?
+
+It would run out of memory and it would crash. And because I understood architecture clearly at that time, so I knew I was out of memory.
+
+Um, but I also understood exactly what my constraint was.
+
+And so I had two choices. I could rewrite Ram in such a way that it didn't use as much memory,
+
+which would mean maybe using some sort of database like techniques and indexing my data,
+
+and only reading it in what I was actually working on, and leave the rest of it on disk,
+
+or, you know, something like that, which frankly, sounded like a lot of work to me.
+
+Or there were hot new 64 bit computers out there that could address more than four gigabytes of memory, and I could just buy one of those.
+
+So I just bought one of those and I ran exactly the same program on a different computer, and it ran and it didn't crash.
+
+And it gave me the right answer in actually a very reasonable amount of time.
+
+Right. Because the problem was not that the computation took a long time, it just needed too much memory.
+
+But if you know about the architecture, you can say, ah, I can buy my way out of this problem.
+
+Don't do that too often, because that's how you want to with a web browser, right? But I can buy my way out of this problem, right?
+
+Or whatever. Right. If you understand these things, memory reference bugs are also something that you will fight over and over throughout your career.
+
+Although if you use very high level languages garbage collection, you are much less likely to run into these.
+
+But if you ever use c, C plus plus rust, um, go.
+
+You know any of these languages that use, um, that give you access to actual memory?
+
+Um, then you will find that you will reference memory that is invalid.
+
+And when that happens, it's all bets are off. Anything can happen.
+
+Your program behavior can be strange, you can crash at arbitrary arbitrary times,
+
+etc. and if you don't understand what the underlying machine is doing, it becomes very hard to understand how do I find this problem and fix it?
+
+In particular, it is the case that a um.
+
+If you make an error and write to the wrong.
+
+Data in memory. Then your program could crash arbitrarily long into the future and in an arbitrarily different part of the program.
+
+And then so figuring out where in your program you made that memory access mistake can be very, very difficult.
+
+Right. And we'll see later in the semester how this works. And then finally memory performance is just not uniform.
+
+Different accessing patterns of memory. Different areas of memory may perform much better than other, um, areas of memory.
+
+And I think that's the next slide. Yeah. So on this slide, uh, we have two pieces of code that essentially do exactly the same thing.
+
+They copy an array which is about eight megabytes.
+
+From one place in memory to another place in memory,
+
+by just walking through the array and copying every cell of the array, just like you might do in your game of life.
+
+Right. The only difference is on the left hand side.
+
+This program copies that array one row at a time, moving across the rows, copying every.
+
+Piece of data in the row and then moving to the next row. This piece of code.
+
+Copies the array one column at a time, starting at the top of the column and moving down the entire column before moving to the next column.
+
+Note that this code runs approximately 20 times faster than this code.
+
+The only thing we change was the order in which we access the elements of those arrays, and that one runs 20 times faster.
+
+By the end of this course, you will be able to tell me exactly why that one runs 20 times faster.
+
+Yes. Um, this data is stored in a really in a linear fashion.
+
+Is data stored in a linear fashion? Like what I have to go past I to get to.
+
+Uh, yes. So essentially, when you allocate an array, the first row of the array will be in memory all at once.
+
+And then the second row. So what the first one is doing is it starts at the beginning and it moves to the end smoothly.
+
+The other one goes here. Here here here here. And then goes back to here.
+
+Here, here, here. And then it goes back to here, you know, etc. down the array.
+
+So it's skipping around. And that's fundamentally what the differences. But one of them is 20 times faster than the other.
+
+All we did was reverse I and J. That's the only thing we did was reverse I and J, and one of them is 20 times faster.
+
+All right. Uh, I am going to start here on, um, Friday.
+
+We'll talk about there are 25 on Friday. So thank you all very much.
+
+I will see you in a couple of days. Yep.
+

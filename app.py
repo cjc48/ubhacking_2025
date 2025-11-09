@@ -39,22 +39,21 @@ def create_profile():
     try:
         # --- 1. Get the text data from 'request.form' ---
         mentor_id = request.form.get('mentor_id')
-        description = request.form.get('userDescription')
-        rules = request.form.get('userRules')  # This will be a JSON string
+        description = request.form.get('description')
+        rules = request.form.get('rules')  # This will be a JSON string
 
         if not mentor_id:
             return jsonify({"error": "mentor_id is required"}), 400
 
         # --- 2. Get the file(s) from 'request.files' ---
-        # .getlist() gets all files sent with the name 'userFiles'
-        transcript_files = request.files.getlist('userFiles')
+        # .getlist() gets all files sent with the name 'files'
+        files = request.files.getlist('files')
 
         # --- 3. Call your "brains" to do the work ---
         result = profileMain.main(
-            mentor_id=mentor_id,
-            description=description,
-            rules_json=rules,
-            files=transcript_files
+            files,
+            description,
+            rules,
         )
 
         return jsonify(result)

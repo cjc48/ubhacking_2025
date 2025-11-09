@@ -2,3 +2,9 @@
 serviceAccountKey.json
 
 .idea/
+
+backend/__pycache__/
+
+backend/messenger/__pycache__/
+
+backend/profileCreation/__pycache__/

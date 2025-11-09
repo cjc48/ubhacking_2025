@@ -1,0 +1,795 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+So we left off on, um. I'll wait for you guys to finish up your conversation so we can have class.
+
+We're good. Yeah. Thanks. Um, we left off on Wednesday and we talked about the Serac 25, which was an example of a software engineering failure where,
+
+um, some poor engineering practices led to actual, um, loss of human life.
+
+Right. Um, so mistakes were made by software engineers working on systems they didn't understand well.
+
+And, um, people died. Guys, class has started.
+
+Shut up. Be, please polite to your neighbors.
+
+If not me, if you don't care about me or yourself. There are 90 other people in this classroom who may wish to listen.
+
+Um, and so the first thing I want to do is look at two other examples, right, of software engineering situations where decisions were made.
+
+Uh, in all three cases, based on the way the understanding of systems by the software engineers working on those systems,
+
+uh, in such a way that, um, software engineering mistakes were made, right?
+
+Failures happen. So in the early so the theory I 25 was like in that 80s and 90s.
+
+Right. It was a long time ago. But the uh, in the early, I'm sorry, in the late 2000s, um, there was a significant, uh, news item.
+
+Right? It was on all over the place about Toyota vehicles undergoing acceleration when the driver was actually trying to slow down.
+
+So the driver says I pushed the brake and my car sped up.
+
+Um, and there were a bunch of investigations done, and they found some mechanical problems.
+
+So they found that there were some Toyota vehicles where the gas pedal was actually
+
+getting stuck underneath the floor mat because of the way the floor mat was,
+
+was cut or was curling in a corner or something. Um, but they also found that there were some software bugs in the microcontrollers inside the,
+
+um, car where they had put like multiple features into one computer to save money,
+
+and they essentially were overwriting the same memory location to multiple, um, uh, functionalities of the system were using the same memory location.
+
+And so it was literally the case that the driver was pushing on the brake and the car was saying,
+
+go faster and it was going faster instead of slowing down.
+
+Um, and there were accidents on the, on interstates and on smaller roads.
+
+And I think it mostly happened at, at, uh, fair speeds.
+
+And so a lot of them were on like interstate, uh, entrance and exit ramps and things like that.
+
+And, um,
+
+there was a huge investigation and there's a link to a summary of that investigation down here at the bottom of the slide if you want to read it.
+
+But there was a large investigation by the, uh, NHTSA and Department of Transport and NHTSA.
+
+TSR is, uh, National Highway and Transportation Safety Agency or something like that.
+
+Um. And they found that these software bugs.
+
+Right. And they found, in fact, that one of the things that happened was that some development team had literally gone to StackOverflow,
+
+not even in the case of the 325.
+
+You remember, there was copied code, but the copy code was copied code was from like other code from the same organization.
+
+They had literally gone to StackOverflow and copied and pasted code into their, uh, controller,
+
+and it turned out that it had, uh, memory errors and it was causing, um, accidents.
+
+And in the end, uh, people were injured. I don't know if anyone was killed in this case.
+
+I hope not in the 325, of course. Obviously, we already discussed that there were people who died in horrible ways.
+
+Um, in this case, I don't know if anyone was killed, but certainly there were people who were in accidents.
+
+They were injured. They were traumatized. Right? I don't know, hopefully you've never been on an accident.
+
+In an accident on an interstate, but, like, it ain't hot, right?
+
+You don't go home happy afterwards even if you walk away unhurt.
+
+Um, and there was tons of property damage, etc. and ultimately, Toyota was fined, uh,
+
+$1.2 billion and had to recall 9 million vehicles for, uh, essentially software updates to fix the problem.
+
+Um, and I honestly don't know which one of those is more expensive for Toyota,
+
+whether it was the 9 million vehicles or the $1.2 billion, that's only $1,200 a vehicle, right?
+
+Give or take, um, or the $1.2 billion.
+
+But nonetheless, it was a very expensive mistake and.
+
+People were hurt, right? People were unhappy. Uh, so before we go on, we're going to do everybody's favorite thing, which is a review.
+
+Um, top hat. Where did my top hat go?
+
+It could be, um, a program crash.
+
+Right. And we don't know until we run it's undefined behavior. Okay.
+
+Okay. Um, that's it for top hat right now.
+
+So the third case I want to talk about is one in which there were no injuries, but it is nonetheless somewhat dramatic.
+
+Um, just keep it with you, buddy. Keep it with you next time.
+
+Um, it's nonetheless somewhat dramatic. So the Mars Pathfinder rover, you guys know curiosity, right?
+
+Curiosity is famous right now. Everybody loves curiosity because it's 13 years into its 90 day mission or whatever.
+
+Um, the the Mars Pathfinder rover was a rover that came before, uh, perseverance and Curiosity.
+
+And in fact, it launched. Um. It launched, I think, when I was in middle school.
+
+But it landed on Mars when I was in, um, high school, and it was personally cool for me because, um, this was the days the internet was young.
+
+And like, if you wanted to view an image like the image of the Pathfinder rover right there,
+
+now when you click on a web page, if there's an image like that, it just shows up instantaneously, right?
+
+But back then you would you could watch it sort of draw line by line as it downloaded that image over the internet,
+
+because the network was so much slower.
+
+Um, but when Pathfinder landed, it was the first time that we had sent really a modern spacecraft to the surface of another planet.
+
+There had been some probes that went to some of the, uh, other planets in like the 70s, but in the 70s, there was no way that like,
+
+the only people that got access to that information was like NASA and the European Space Agency and whatever.
+
+And you had to wait till a book was published with, like, the photos in it or whatever if you wanted to see.
+
+But Pathfinder was new enough and used digital telemetry that when I was in high school,
+
+I remember staying up till like three in the morning because it landed like during the night.
+
+Our time, uh, when it started beaming back images of the surface of Mars and sitting there watching them come in,
+
+watching them draw one line at a time and being like, Holy crap, that is another planet, and it's another planet, like right now.
+
+And it was just mind blowing. Right now, we actually don't like curiosity ships new photos every day of the world.
+
+And how many of you were like, I'm going to go see what curiosity sent today, right?
+
+Because it's just like, well, okay. Uh, they actually have some cool, uh, NASA has some cool blogs where they just send out,
+
+like a new photo every day from, like, some spacecraft or whatever. But but anyway, it's like it's almost commonplace, right?
+
+Like, of course we can get images of another world. But then it was not right.
+
+It was wild that you could get images from another world, but it almost didn't happen.
+
+Because when. Perseverance. Uh. I'm sorry.
+
+When when Pathfinder landed, um, it rebooted constantly.
+
+Like every few minutes it would just reboot, um, and it rather than running the science it was supposed to be running, it would reboot and reboot,
+
+and they were able to get some of those images back, but they were not able to do some of their more complex science experiments.
+
+And, um. It turned out it was.
+
+It turns out it was a software problem. It was called. What's called a priority inversion.
+
+And the priority inversion was preventing it from, uh, running, um, correctly.
+
+And. There is if you go to the Smithsonian Air and Space Museum, uh, in Washington, DC, and you go to the location on the National Mall,
+
+there's a little corner where they have, um, a Rover that is exactly the same as curiosity and perseverance, which were the same.
+
+And they have one that was exactly the same as. Pathfinder and I think spirit.
+
+There were two of them as well, um, sitting there and you can look at them right in Pathfinders like this big.
+
+Right. Well, that rover they kept on Earth when they sent Pathfinder to Mars.
+
+So what they did was they took this rover and they put it in the same,
+
+put it in the same configuration that Pathfinder was in on Mars, and they ran it until it rebooted.
+
+And then they attached the debugger to it. Right. And they said, what's going on?
+
+Why is this probe failing? And they eventually figured out this priority inversion problem.
+
+And they came up with a fix, and they sent a software fix to this probe that was on Mars, and they rebooted it.
+
+Um, and it ran correctly. Right. And it didn't reboot anymore.
+
+But the lesson here is that they had a systems Pro priority for inversion as a deep systems problem.
+
+That has to do with what software is allowed to run and when they have this priority inversion problem and it was reproducible on Earth,
+
+they could have known before that probe ever landed, before it ever took off to fly to Mars.
+
+They could have known that it had this problem. They simply never tested that particular configuration.
+
+And I don't want to crap on the engineers at NASA because they do really amazing things, right?
+
+They just software patched Voyager.
+
+Two and rebooted it. It's been a few years ago now when it was like 14 light hours from Earth, right?
+
+They sent a software patch to this thing, which meant it took 14 hours for the radio signal to get there.
+
+Right there. They're amazingly good at their jobs, but nonetheless.
+
+Oh, by the way, that was another mission that was supposed to last for like 90 days or whatever.
+
+And we're like 50 years into it or, you know, whatever.
+
+However many 40 years into it. Um, but at any rate, um, nonetheless, this was a solvable problem.
+
+This was a fixable problem. And they just didn't know, right?
+
+Now, if you send a probe to another world and it doesn't work and it needs a software patch, and you can't just debug it and send a new fix,
+
+you have a problem because you cannot just send the IT squad over there to reinstall your rover, right.
+
+Like it's on Mars. But they were in fact, able to, uh, rescue it.
+
+Okay, so there's our three case studies in sort of interesting system software engineering failures, where in all cases, the lesson is.
+
+As software developers. As software engineers, we have a responsibility.
+
+To write software that we understand.
+
+For problems that we understand in such a way that the software that we write actually addresses the problem and solves the problem.
+
+In two of the cases we saw, human lives were at risk.
+
+In one of the cases, it was it would have just been an expensive and unfortunate mistake that would have taken years to recover from.
+
+Right. Because you can't just send another probe tomorrow to Mars. You have to literally wait for the planets to align before you send another probe.
+
+Are there any questions? All right, let's talk about computer architecture.
+
+So every computer, uh, has some sort of architecture, which is architecture in the same way as buildings.
+
+It's the way it's designed, the way it's put together.
+
+And this block diagram here represents the common architecture that is found in almost all modern sort of desktop and rack server,
+
+you know, room style computer supercomputers and very small embedded systems may depart from this architecture.
+
+But like all of your laptops, for example, have an architecture that looks like this where we have which is at the top left of our slide here,
+
+a CPU, the central processing unit, which is the only part of the computer, as we discussed a few days ago,
+
+uh, is the only part of the computer that actually does computation that knows how to actually, you know, perform calculations,
+
+make decisions, etc. and that CPU is attached to the rest of the computer via what we call the system bus.
+
+Every one of these double headed arrows on this diagram is a bus.
+
+Um, the system bus attaches the CPU to the rest of the system, typically via what we call.
+
+Did you just change clothes? Okay.
+
+I sounds like you weren't wearing blue a minute ago. Kids these days.
+
+Um. It's completely lost my train of thought.
+
+Uh, so the CPU talks to the rest of the system via what we call the, uh, Northbridge.
+
+Sometimes we call it the chipset, uh, or just the bridge.
+
+But typically these days we divide the bridge or the chipset into two parts, a northbridge and a southbridge.
+
+And these numbers, these names are just for convenience, right?
+
+To name the different parts of the of the bus or the bus architecture that connects different parts of the computer.
+
+And the northbridge is effectively a switching yard for busses where the busses can be connected to different devices at different times.
+
+The northbridge is connected to all of the very fast parts of the computer.
+
+Typically this is the CPU, which is normally, as we will see later in the semester, the fastest part of your entire computer.
+
+Uh, and then also things like the main memory, the Ram in your computer.
+
+So when you buy a computer, um, you will say you buy a laptop and it says that it has 16GB of Ram and one terabyte of storage.
+
+The 16GB is the Ram, right? That's how much main memory you have in your computer.
+
+And then the other storage. We'll talk more about the different types of storage later in the semester.
+
+Is like an SSD or something like that. Bless you. Um.
+
+The ram is very fast. Also, it's not as fast and CPU is very fast.
+
+And there are other devices that are very fast. Things like your GPU, right, that do very fast computation that require very fast transfers.
+
+The northbridge is attached to the southbridge, and the southbridge connects to all the parts of the computer that are not so fast.
+
+So that is things like your keyboard and your mouse. Right.
+
+They go through the southbridge.
+
+And the reason is that the your sausage fingers banging on the keyboard are just mind bogglingly slow to the computer.
+
+You know, you're typing at 110 words a minute and you think you're just rocking out.
+
+And the meantime, the computer's like, I literally executed, you know, 100 million instructions between your last two keystrokes, right?
+
+It doesn't it doesn't care. You're so slow that it doesn't have time for you.
+
+Um, and so therefore, we connect the slow things to the southbridge, which then go to the northbridge,
+
+which go to the CPU to give a little bit of architectural separation so that our CPU is allowed to run faster, more of the time.
+
+So as I said, all of these arrows between all of these parts are busses.
+
+A bus is a communication channel inside the computer.
+
+And every one of those busses has a width, and the width of that bus is literally the number of wires in the bus.
+
+Plus or minus, because every one of those wires at any given point in time, either has some voltage on it or does not.
+
+Right. The electrical things are part of this, are not that important in this course, right?
+
+But notionally it either has some voltage on it or it does not.
+
+And typically if it has a voltage on it, then it is a one.
+
+And if it does not, then it is a zero. So if I have a 32 bit bus, that means I have 32 wires.
+
+And every one of those wires either has a voltage on it, in which case is a one,
+
+or it does not, in which case it's zero could be the other way around. We call that negative logic, uh, in which case it is a zero.
+
+And so therefore every time I do a transfer, I communicate across one of these busses.
+
+I must necessarily send exactly 32 bits of data.
+
+I cannot send 33 because there is no 33rd wire.
+
+There's no place to put that 33rd bit of data.
+
+And I cannot send 31 because the 32nd wire is right there and it either has voltage on it or it doesn't.
+
+If it does, it's a one. And if it doesn't, it's a zero, right? I can't create or destroy those wires as I want to in software to do.
+
+The communication is a hardware property of the way the computer itself is designed.
+
+Someone decided this CPU will have a bus.
+
+It has 64 bits. It has 32 bits, it has 148 bits, how many bits it has.
+
+And then when they connected the rest of the system, they put that many wires in.
+
+And as a software developer, that's just what I get. There's no compiler option, right.
+
+That's going to change that. It's just a fact. All right.
+
+I neglected to bring any examples with me. So in the last lecture, what I did was I took my laptop apart.
+
+So I can show you some busses. All right.
+
+So here. Oh, boy. What's happening here?
+
+This is an empty pocket reform.
+
+I just want you to not auto focus. How do I make you not auto focus?
+
+Oh. Enter password grades. Okay, this is going to do dumb stuff when it auto focus is all over the place.
+
+But. Okay. Can you see?
+
+You can. This displays a little bit better. Um, it's hard to see, but if you look.
+
+This actually scared me a little bit.
+
+Last time I was afraid I was going to touch something I don't have like a non-conductive pointer to point inside my laptop.
+
+So if you look right here, you see these parallel lines that come up and across here, those actually, it turns out those are not a bus.
+
+Well, maybe they are. Those look like differential pairs.
+
+But any rate, this is the notionally like what a bus looks like,
+
+because we have a whole bunch of parallel wires that go from one place to another, and those wires are communicating some kind of data.
+
+If you look down here. So all these fingers right here, all these metal fingers, that's a bus, right.
+
+That's what connects the system on chip module here. If I look this is an SSD I'll zoom out here in a minute so you can see CSA SanDisk on it.
+
+If you look at this SSD. You see all of these little metal fingers across here, right in these little wires going up here?
+
+That's a bus. That is the bus that communicates.
+
+Between the CPU, which is right here. Here's the Ram.
+
+Uh, which ones of these of Ram? These two. Our Ram Lord only knows what that thing is.
+
+I have no idea what this thing over here is, but there's the CPU, there's the Ram.
+
+Uh, and then the boss will come out over these metal contacts right here.
+
+Some number of them will come out. We'll come over here and we'll communicate with this Solid-State device right here.
+
+This actually is PCIe. So this is coming through the northbridge.
+
+Right. Coming through the northbridge. This war is probably coming through the South Bridge.
+
+This is a much slower, uh, device. That's the Wi-Fi chipset.
+
+Uh, here's another bus over here. Because actually several of them.
+
+You can see all the wires inside this. Right here.
+
+And all the wires inside this right here. This boss is, uh, going to the display module.
+
+I actually don't know what this bus's. This might also be PCIe.
+
+I'm not sure, but this bus is going to display module. It's going to the LCD display inside this laptop when I look at the screen, right.
+
+So you can see there's how many wires there are right there. That's how big that busses.
+
+You can count them. Nothing I can do about that in software.
+
+That's just a hardware property, right? Any questions?
+
+Yeah. You could and we'll we'll talk about that presently.
+
+Yes. Huh? Why only 32?
+
+Why? What? Only 32. Oh, so typically our bus sizes are eight, 16, 32, 64, 128, etc. they're even powers of two.
+
+Um, for practical reasons in the way that we have chosen.
+
+And that's a choice to design our computer architectures.
+
+That wasn't the case historically. So, um, the um, PDP eight, for example, is a 12 bit CPU.
+
+Um, the uh, PDP. Which is a computer, is made by a digital Equipment corporation.
+
+The PDP ten is a 36 bit CPU, right?
+
+There were many different sizes of um CPUs in the past there.
+
+They could have been, you know, ten bits or nine bits or, you know, whatever, right?
+
+In almost anything. But ever since the IBM 360, um, which was 32 bits in the 1960s, uh, we more or less have settled on eight,
+
+16, 32, 64 and doublings, uh, on it powers of two doublings on up.
+
+It turns out there's reasons why that's convenient. Uh, that are outside the scope of this course.
+
+But that's a decision. That's an engineering decision made by the designer of the system.
+
+It's a good question. There's a hand over here somewhere. Yes. Uh, it's an arm.
+
+It's just an arm. Rock chips, a particular manufacturer. It's a Chinese, um, semiconductor, uh, manufacturer.
+
+Um, it's like, you know, if it was a Samsung or whatever,
+
+it just that's not a name that is as household as Samsung is, but it's a, uh, CPU designer manufacturer.
+
+I actually don't know. Um. I said it's a Chinese manufacturer.
+
+I actually don't know. Their chips are typically manufactured in China or in Taiwan.
+
+Um, but I don't know that the company may be a holding company from somewhere else.
+
+I'm not sure. Um. But it's like, um.
+
+There's millions of them. Not millions, but hundreds of CPU companies that are not as famous as Intel and AMD.
+
+And, you know, Samsung and Qualcomm, right. There's um, play and rock chip and um, uh, Broadcom and a bunch of others.
+
+But most of them, they're actually ARM. So that's actually an arm CPU just like your your phone or whatever.
+
+All right, let me, um, go back to my device. Said, go back to my device.
+
+And I'm going to actually take a second here. I'm going to go to my next slide.
+
+But I'm going to take a second here.
+
+It's going to slow me down a little to put the cover back on the back of my computer, because it is also the heatsink for the CPU.
+
+So so that it doesn't overheat. I'm going to go ahead and put the cover back on my CPU or my computer.
+
+So, um. Because I mean, as in many things, right?
+
+Our computer architecture is a little bit self-similar.
+
+The design that works well for designing the whole computer also turns out to work reasonably well for designing the parts of the computer,
+
+like the CPU itself. So if we look inside the CPU, what we will see is that we have in this diagram,
+
+the box in the center is one piece of silicon, the L2 cache is another piece of silicon.
+
+And then the northbridge that we talked about before this box over here is the system bus.
+
+And that stuff out there is entirely outside of the CPU. It's somewhere else.
+
+So this L2 cache, uh, and the CPU itself are probably inside that like rock chip chip.
+
+Right. And then the well, this is a system on module.
+
+So that may all be inside the system.
+
+Uh, that one chip, but in your laptop or whatever, the northbridge would be a separate chip with wires connecting between the two.
+
+This is more akin to like a mobile phone than a laptop in.
+
+It's like hardware architecture. This this particular laptop. Um, but in any rate, if we look inside the CPU,
+
+what we see is that it is made up also of a number of components that are then attached together, uh, via busses.
+
+Right. So we have in this case the top right corner there says ALU.
+
+Uh, the ALU is the arithmetic and logic unit.
+
+The ALU is where we said that the CPU is the part of the machine that actually knows how to do computation.
+
+The ALU is the part of the CPU that actually knows how to do computation.
+
+Uh, then we have um, the ALU here has a bus that goes to what's called the register file.
+
+The register file is a bunch of storage locations.
+
+If you remember, when we disassembled the if statement, we saw that it was reading and writing from,
+
+uh, EDI and E ax and our r ax, I think, um, various values.
+
+Um. Those were registers, right?
+
+The registers are in that register file. It's effectively a small area of memory.
+
+The number of registers is typically rather small, say um, double digits.
+
+Right. Our architecture is notionally about 16 registers per core.
+
+Uh, on other architectures it could be 32 or 64, but it's probably not a 1024.
+
+Right. It's it's relatively moderate numbers. Um, the register a file in this case talks to an internal bus interface.
+
+That internal bus interface, just like the northbridge and southbridge, it's kind of a switching yard, right, for busses.
+
+And then attached to that we have some caches. We'll talk about caches later in the semester.
+
+But they're effectively also memories. Yes. Arithmetic and logical unit.
+
+It does math and makes logic decisions. Now note that we could conceivably break this diagram down even further in that, for example,
+
+the ALU could be divided into an arithmetic unit and a logical unit that are connected
+
+together or connected to the registers or whatever by some bus in some way.
+
+I saw a hand, yes. No.
+
+The registers are a hardware portion of the CPU, right?
+
+They're internal to the CPU.
+
+When you turn the computer on, they will have some particular values stored in them that may or may not be defined by the.
+
+Hardware architecture, but they are purely a hardware thing.
+
+They are not. The OS can't do anything of the registers. If there are 16 registers, there's just 16 registers.
+
+Just like if you have a 64 bit boss, you just have a 64 bit boss.
+
+To answer your question.
+
+Uh, well, in this particular diagram with the L1, the L1 cache is almost always attached more closely to the CPU and is faster than the L2 cache.
+
+So yes, the L2 cache probably has to wait if the one cache wants to do something.
+
+Uh, but you can't tell that from a block diagram necessarily. Right.
+
+Who's like. Has more priority on the boss and things like that.
+
+You can't necessarily tell from a black tiger. All right.
+
+So, um, every one of these busses, the internal bus is inside the CPU and the external busses outside the CPU have fixed widths.
+
+So this means that we have various bus widths that we care about.
+
+And we usually call these bus widths word sizes.
+
+So the bus between the CPU and the Ram and the main memory is the memory bus.
+
+And the memory bus has a word size, which is the size of memory from the perspective of the CPU.
+
+Right. How when I read from memory how many bits of data up here at the CPU?
+
+And furthermore, there's also a word size for each of those registers.
+
+Every one of those registers is attached to the inside side of the CPU with a bus,
+
+and that bus has a certain number of wires, and those registers have a certain amount of storage.
+
+And that dictates the word size of, um, the registers.
+
+The um ALU, as we said several uh, lectures ago, may only be capable of doing relatively simple things,
+
+or it may be capable of doing more complicated things. We talk about risk and risk architectures.
+
+We talked about the idea that you might, for example, only be able to compare a number to zero.
+
+You may not be able to compare it to an arbitrary other number or things like that.
+
+All of that is decisions that are in the computer architecture. And again, as programmers, not something we have control over.
+
+It's just a fact from our perspective. Uh, okay.
+
+So here we talk more about word sizes. An important thing here is that the word size of the CPU, the word size of the registers in the CPU,
+
+and the word size of the memory that the CPU communicates with may not be the same if the read the CPU registers are larger than a memory word,
+
+then that means that when we do something like we did in that assembly language that we looked at,
+
+where we load a memory location into a register, then we may have to do more than one memory access, right?
+
+Go to memory multiple times in order to get enough data to fill up a register, and vice versa.
+
+If we have a memory boss that is larger than the size of our register, when we want to store registers in the memory,
+
+we may have to store more than one in order to come up with enough data to store a single memory location.
+
+But the point is, we cannot send a partial register or a partial memory location because the bus has a certain width.
+
+Like that's just how much data we compute. We may ignore part of it, but the data has to be there.
+
+We can't say, hey, just, just don't have that wire, right?
+
+Just don't do that communication. The communication is done.
+
+We just may not care about it at any given point in time. Are there any questions?
+
+Yes. Imani is a 64 bit x86 64 computer.
+
+Just like all of the machines that you're using are all 64 bit.
+
+They mean all be x86 64. Um, it has 64 bit registers and it has um.
+
+It's memory bus software wise. The architecture of the computer, it exposes it as if it is a 64 bit memory bus.
+
+It turns out it gets a little more complicated than that.
+
+The hardware sometimes lies to us, etc. it's actually wider, but software wise it appears to be 64 bits wide.
+
+Yeah. Which all of your machines in this room? I would be very surprised if anyone has a computer that does not have 64 bit registers and a 64 bit.
+
+Um, software bus interface. Because that's like all computers do right now.
+
+Um, and that's a, uh, a money trade off. So, uh, you want more bits?
+
+Because more bits means you do more transfer at a time, which means your computer runs faster.
+
+You could do larger computations, etc., but you want fewer bits because every time you add another bit, you're adding expense.
+
+You need more transistors. You need more silicon area. You need more copper.
+
+You need more like it costs money, uh, to build wider, um, busses and wider, uh, CPUs and such.
+
+And so there's a tension between how fast is my tight in my own.
+
+How fast is my computer go and how much does it cost to buy it?
+
+So historically, like supercomputers, which are very expensive, uh,
+
+would run very fast because they would have wider busses than then, like a desktop computer that you would have at home or whatever.
+
+Um, now we sort of hit a sweet spot.
+
+There are computers with bus widths that are wider than 64 bits, but there are not a lot of computers that have bus widths,
+
+software bus widths, like the CPU architecture, bus width that are wider than 64 bits.
+
+Um, because it's kind of a sweet spot in terms of the amount of computation that we can effectively do when we have 32 bit machines,
+
+the maximum magnitude of a number that you can conveniently work with is about 4 billion.
+
+Well, even if you're an organization like you be, um, 4 billion, for example,
+
+if you're calculating your budgets is an inconveniently small number, right?
+
+Like an annual budget, particularly if you calculate it in cents years.
+
+No way you can fit it in 4 billion, right?
+
+Um, but on the other hand, a 64 bit machine, the maximum number that it can conveniently calculate is about 4 billion times 4 billion.
+
+Well, now we're talking, like, larger than the gross product of the entire world.
+
+Right. And so, like we don't frequently run out of bits, right.
+
+And run out of need larger numbers and need to do slower computations.
+
+And so the benefit of going beyond 64 bits in terms of the, uh, logical bus size is minimal, right?
+
+So it will be I think it'll be a while before we see a lot of computers that are substantially larger than 64 bits,
+
+and we may see something like quantum computing or some other mode of computation come up right before that happens.
+
+Historically, that was not the case, right? 32 bits, which was our last sort of step.
+
+Like there was clear benefit from going to 64 bits.
+
+I already told you story about running out of memory because that four gigabytes was not enough.
+
+Right. And then you can imagine that computing numbers like 4 billion is it's a big number, but it's not like astronomically large,
+
+like it's a reasonable number that you might use as an intermediate product or even an actual, uh, answer to a calculation.
+
+Um. Of course, older computers.
+
+The first microprocessor was four bits, which meant the largest number it can compute was 16,
+
+which meant that if you wanted to compute a larger number, you just had to do a lot of work in software to build up a larger number out of 16.
+
+Um. Okay. Any questions?
+
+All right. So, um, all of that said, we just said, hey, we can only send an entire bus width at a time.
+
+All of this us is defined by hardware. The computer only knows how to talk about bits.
+
+We talked about the weird math that it does,
+
+etc. but then we use a language that's even a fairly low level language like C, and we talk about things like strings,
+
+and we write programs that use pixels on the display and 3D triangles in, you know, rendered scenes and all these like higher order abstractions.
+
+And the thing you have to understand is that every one of those higher order abstractions
+
+is just a software construction at the bottom of all those string manipulations,
+
+all we're doing is looking at. Chunks of memory and asking, is this one all zeros?
+
+Are all of the bits in this piece of memory that I'm looking at? Zeros.
+
+If not, it's part of my string. If so, I've reached the end of my string, right?
+
+It's all software constructions. Now, some of those software constructions are provided for us,
+
+like by the compiler or by a complexity in the instruction interface of the CPU that's provided for our convenience.
+
+Um. But if that's the case, then when I ask to do that operation that is not on a full word of memory or that is on multiple words of memory,
+
+or that requires me to count the bytes in a string,
+
+then I have to understand that ultimately, when my software runs, it's not just going to run one CPU instruction,
+
+it's going to do some software routine that's going to do a bunch of work on my behalf.
+
+Questions. Okay.
+
+I think that might be the end. That's the end.
+
+Um, so are there any questions? Before we do another top hat question.
+
+But here's the thing. Don't get your devices out. Nobody answer this question.
+
+I'm going to ask a question. Do not answer this top hat question.
+
+You will not enjoy the results of answering this top hat question.
+
+In fact, I'm not even going to show it to you. Yeah, we'll look at it.
+
+Okay. I will show it to you. But, um. Don't answer it. Don't answer it.
+
+Uh, I will show it to you, but you don't actually necessarily know how to answer it yet.
+
+We'll do that in one of our next lectures, but we can have some schadenfreude here while we look at this number down here.
+
+See if it becomes something, not zero. It didn't in the last class. Um, are there any questions about.
+
+So this was a big lecture, right? It covers a lot of stuff. It covers a lot of, um,
+
+abstractions as well as realities of the way computation is done that we're going to come back to over and over over this semester.
+
+Are there any questions about any of it? No suckers.
+
+All right. I love it, I love it. Uh, I don't like it when they're suckers, because it just makes a lot of work for me.
+
+I think I've told you that gives me hives. Uh, okay, then, uh, I have two options.
+
+I can start a new lecture in the last six minutes, which I don't think I want to do.
+
+Um, because it'll get me out of sync with Carl again.
+
+Um, or I can let you go on a Friday so you can go have a weekend.
+
+So I'm going to do that, but because you're paying me until 250, I will be right here until, uh, at least 250.
+
+If you have any questions you'd like to ask, everybody, have a great weekend.
+
+Enjoy the weather. It's supposed to be gorgeous.
+

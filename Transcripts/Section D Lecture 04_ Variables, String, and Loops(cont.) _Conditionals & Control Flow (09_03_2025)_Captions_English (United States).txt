@@ -1,0 +1,871 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Maybe. Maybe not. Because I filed a ticket with you bit.
+
+Are they doing something now? Can you tell? Yeah.
+
+You can hear it coming from above. Okay. I found a ticket with you bit that the audio was too quiet in this room,
+
+and they supposedly adjusted it, so hopefully the, um, recording will be usable.
+
+Of course, on Friday. A lecture.
+
+My first lecture, the one right before this, had no video.
+
+It just had a green screen. And this lecture had no audio at all, no audio at all.
+
+So, um, I guess if you would like to know what we talked about on Friday,
+
+you should listen to the audio from the other lecture and watch the video from this
+
+lecture and pretend like it's a bad foreign film that's been poorly translated,
+
+uh, because nothing lines up. Right? So sorry about that.
+
+Hopefully it will be better. Uh, in general, we provide lecture recordings for your benefit.
+
+Uh, and things happen. Right. So, uh, we'll try to make sure we have good recordings for you when we can.
+
+All right. Um. So we left off on Friday.
+
+We had, uh. In fact. Uh.
+
+Moved on from our minimal example to, uh, a printing example where we printed some values and someone asked me after class,
+
+they said, um, I ran the same program, and I got a different result than you did, in particular, the printing of X.
+
+Uh, as a. Float, which is not on the screen right now, but we did it yesterday.
+
+Um, printed. No printing of F as a decimal.
+
+Um, which is invalid. Right. And we didn't get to talking about that very much.
+
+Printed a different value. Uh, and the reason is that, of course, f is not an integer.
+
+Percent d prints integers, f is a floating point number.
+
+And what the compiler is, uh, when that happens, that's what we call undefined behavior.
+
+And what the compiler is permitted to do in the face of undefined behavior is get this.
+
+It's wild. Absolutely anything it wants. So when you have undefined behavior, your program can behave in unusual ways.
+
+And in fact, we looked after class and we ran it a few times and we found that, uh, every time we ran the program, we got a different value.
+
+It actually printed a different value. Uh, it didn't always print exactly the same number because.
+
+And I think I know why, which I yesterday, I don't remember who asked me about it, but, um.
+
+O'Keefe, did you ask me about that? No, I don't remember who asked me about that.
+
+You asked me about that? Yeah. I think what's happening is, uh, on our particular architecture, you don't need to know this.
+
+You can close your ears for the next 10s if you want.
+
+On our particular architecture, floating point numbers and decimal numbers use a different set of registers.
+
+So when we say percent print percent d,
+
+what it's actually doing is it's printing the first or whatever register it believes the first floating point number would be stored in,
+
+but it's using the integer registers instead of the floating point register.
+
+And so, um, it's getting just whatever garbage happened to be stored in that CPU registers.
+
+So every time you run the program, there may be slightly different garbage stuck in that register based on what happened previously in the execution.
+
+Um, but with undefined behavior. You can do, you know, whatever it wants.
+
+So why did I show you this last time? I just said, oh, look, this number doesn't make sense, right?
+
+It's the wrong type. It's the wrong. Why did I show you this? Unlike previous languages that you have learned, C does not care.
+
+About anything you or the fate of the universe, or whether your program runs right or not.
+
+It does very, very little work to ensure that your program is correct.
+
+What it says instead is, if you give me a correct program, I will run it correctly.
+
+But if you give it an incorrect program that it will do literally whatever it wants at any time.
+
+Other languages that you've used, like Python and Java, will do things like throw an exception and say, well, you can't print that here.
+
+It's an integer, and you asked for a floating point number, right? Or oh, you can't have that element of the array.
+
+It doesn't exist because the array is not that large. C will say, fine, I'll just print something you want me to print.
+
+I'll print something. It will say, fine, I will give you a piece of memory that could have been in that array if it had been,
+
+but it's not right, and it will give you a value that you asked for anyway.
+
+Um. And what this means is there are tasks for which the C programing language is not well suited, for which you should not use it.
+
+There are also tasks for which there are very few or no other programing languages that will solve that task.
+
+If you're using a task which C is the language to solve that task, you should.
+
+You see if you are doing a task where C is not well-suited, you should not.
+
+You see many people come into this class. They're like, oh, he's in love.
+
+C he wants to do C for everything.
+
+No, I don't you see for most of my programing ah, you see for my systems programing I use other languages for my other programing.
+
+I particularly like Lisp. I like to write things in Lisp.
+
+Um, but you could use Python, you could use Scala, you could use Java, you could use, um, don't use JavaScript.
+
+It's trash. What other languages you guys know.
+
+Huh? Oh, camel, if you've had 3 or 5, you know camel, right? You can use a camel.
+
+Um. And you, you see when it's time to.
+
+You see for every, as the proverb goes, you know the.
+
+Person with only one tool in their toolbox. If all you have is a hammer, everything looks like a nail.
+
+If you only know one language, you're going to use that language for everything. That's how you get like React Native and stuff like that.
+
+Somebody is like, I'm a JavaScript programmer. I don't know anything else.
+
+What if I wrote native apps in JavaScript? Not because it's a good idea, but because that's what they knew how to do, and that's fine.
+
+Until you have to write a React Native app and then you're like, wow, why do these people exist?
+
+Right? Um, but in practice, you want to choose the language that's appropriate for the job.
+
+There are many jobs which C is not appropriate because it does stuff like that.
+
+We will also see things throughout the semester that only C can do.
+
+If you need to do those things, you you see. All right.
+
+It talked about print. Arthur. We talked about puts. Spilled some water on myself.
+
+Um. What next? What do I want to talk about next? Um.
+
+Let's talk about strings. So when we use puts in print, we provide them with the string in double quotes.
+
+There's this. So let me start with a little fact. About a race and see.
+
+There is no way. In the C programing language to find out how big an array is.
+
+In Python you have Len write. In Java you have length.
+
+In various collections. You have different ways to get sizes in lengths and whatever.
+
+I'm going to repeat it again. There is no way in the C programing language to find out how big an array.
+
+And I'm going to say this now and I'm going to say it again later when we talk about a particular operator called sizeof.
+
+Because at some point in this semester you are going to want to know how big an array is,
+
+and you're not going to remember that I said that you're going to go to Google and
+
+you're going to Google and see how do I find out how many elements are in array.
+
+And you're going to find a StackOverflow post and it's going to say, well, you do size of array divided by size of the first element of the array.
+
+And I'll tell you how many elements are in the array. It's just wrong.
+
+It's just wrong. Flat.
+
+Wrong. And sometimes it's going to give you the size of the array, and sometimes it's going to say eight.
+
+And I don't say aid is like an arbitrary value. It's literally going to say eight.
+
+In fact, I could show you a time when it says eight. Maybe I'll do that here in a minute.
+
+I'll show you a time where it says eight. In fact, in the example I would show you, it's going to say one.
+
+Not a. I think it was going to say one nutty.
+
+But hey, right, the size of the stackoverflow post is just wrong.
+
+Because Stack Overflow answers are not provided by people who are good programmers or who know the answer.
+
+They're provided by people who figured out how to make it work. And in their particular circumstance, it gave them the right answer.
+
+And there are circumstances where it will give you the right answer and you can find out how big an array is.
+
+But until you can tell me exactly when those circumstances are and why.
+
+There is no way in the C programing language to figure out how big an array is, because sometimes it's going to say eight.
+
+Yes. The reason is why. The technical reason why is what's called pointer decay.
+
+An array decays into a pointer under certain circumstances, and the size of the pointer is a.
+
+So don't do it. That's the bottom line. What that means is, if we want to know how big an array is, we need to have some way to know how big it is.
+
+You can't ask like you can't. And. Python.
+
+You can say Len of some array and it will tell you, oh, there's 32 elements in this array, you know, or whatever.
+
+And see you can't do that, which means that you need to know how big an array is.
+
+Strings in C. I have between double quotes.
+
+We need to know how big they are. We need to know how many characters in that string are reasonable.
+
+When I call printf and I give it a string, a string and C is just an array of characters.
+
+It needs to print each one of those characters until it gets to the end.
+
+So it needs to know how big that array is. So on our system.
+
+This is a lie. And I'll tell you a lie. Pretend there's a big pill. Grow over everything I'm about to say.
+
+On our system, we use an encoding called Ascii. The American Standard for Computer Information interchange.
+
+Ascii is capable of representing the Latin characters.
+
+Upper and lower case numbers and the punctuation symbols that are like on your keyboard and very little else.
+
+But there are certain code points in Ascii that we use for special purposes, and one of them has the value zero.
+
+We call it not capital. In capital U. Capital L1L.
+
+Later in the semester, confusingly, we'll see null with two L's in it means something completely different.
+
+Also zero, but it's a different zero. That null character we use in seed indicate the end of a string.
+
+So when I use a string and I give it a string in double quotes,
+
+what I'm actually saying is if I say the string hello, right, hello has five characters.
+
+Oh. And I put it in double quotes. What the C compiler will actually give to my program is an array of characters.
+
+The first character is an H, the second characters an E, etc.,
+
+etc. and after the O it will put a null character that null byte, the zero byte at the end.
+
+So even though my string has five characters in it, the array that contains my character string has six,
+
+and the sixth character is that we called a Terminator that terminating null.
+
+Now, you probably have run across this already in our old code, right?
+
+If you're if you're on track and you're working on everything, you probably have seen this already in old code.
+
+But the implications go deeper than what you see in our old code, because this is something that is true in everything in C.
+
+Any time you want to know how long a string is in C, you have to count the characters.
+
+There's no way to know. There's no way to ask. How many characters are you just have to count the characters.
+
+Now there's a C library function called Sterlin that tells you the length of a string, but guess what it does?
+
+The characters. So if you have a very long string, it takes a while right to count all of those characters.
+
+Um, other arrays also. You have no way of knowing how large they are.
+
+So anytime you see an array, you have to have some tool for figuring out how large that.
+
+So let's look at an array of strings. Previously, when we've written the main function, we've given it no arguments.
+
+But you know from your old code handout that it actually takes two R, it actually takes three arguments, but we're only ever gonna use two.
+
+It takes two arguments, maybe four. At least three.
+
+Anyway, we're only ever going to use two. Into args.
+
+Care star arg v square brackets. No, I don't want to talk about the star.
+
+And I don't want to talk about exactly what that means. But effectively it takes an integer and it takes an array of strings.
+
+We will talk about it like next week, right? But not this week. It takes an integer and an array of strings.
+
+Um, and the reason it takes an integer, an array of strings is because your program,
+
+when you run it, is given a certain number of command line arguments.
+
+And because you can't ask, see how big the array of strings is those arguments.
+
+And because you can't ask, see how big the array is.
+
+You have to have a way to know how many arguments are in that array and how many of them are valid.
+
+So it tells you. Argc sees the number of arguments in your string, and arg v is the actual arguments that were passed your program.
+
+It's an array of strings. Each one of those strings is an array of characters,
+
+the last item of which is that zero byte that tells you that you've reached the end of the string.
+
+So let's write a quick program that prints out all of the command line arguments of a program.
+
+And I'm going to tell you that it looks like this. It's going to start with zero, though, not nine.
+
+Right. Now, there's another thing that you may know from the RL decoder handout, but I will tell you right now.
+
+Which is that the first argument passed your program argv sub zero is always the name of the program.
+
+Someone came up to me after the last class and said, why is the name of the program?
+
+That's just how it is, right? Like it's defined to always be the name of the program.
+
+Turns out that that can be useful. I don't wanna talk about that right now.
+
+That's why I just. Just know that it's always defined to be the name of the program.
+
+So RV sub zero is always the name of the program.
+
+So when you run a program, when you write a program and you run a program, you should always ask yourself before you whack that enter key.
+
+What do I expect to happen? Because if you don't know what to expect to happen, then when you run your program,
+
+you don't know whether what it did is what it should have done or not.
+
+Now, of course, obviously we expect that our program is always fully correct and does exactly what we want, but in reality, that's not the case.
+
+So we need to think about this a little bit harder and say exactly what output do I expect this to print?
+
+Then we run it and we look at the output and we say, is that the output that I expected?
+
+So who wants to tell me based on the facts that I've given you?
+
+What they expect this to print. How many lines of output?
+
+Will this print? One line. What will it contain?
+
+Just the name of the program. Argv.
+
+Square bracket zero equals double quotes the name of the program.
+
+Double quote in a new line. When you run your program, you should think about it in that level of detail.
+
+What exactly do I expect this to print out so that if it does something else, you can say, oh, that's a bug,
+
+and either say, I don't care, it's fine, or I didn't understand it, I expected something different.
+
+But like this is actually makes sense, right? Or I need to fix it.
+
+Yeah. One.
+
+We don't have to pass an argument. Because remember the first argument.
+
+Is always the name of the program. So you always get Argosy of at least one.
+
+And it always contains the name of the program. Now if I run.
+
+This was more than one argument. What I'm going to see. Is this going to print the name of the program and then the shell,
+
+the command interpreter into which I type my command will break up the rest of the command line based on whitespace,
+
+and make each of those additional words on the command line arguments that it passes to my program.
+
+This is why, if some of you have tried using strings with whitespace in them for RLT code, the first time you try it,
+
+you get the wrong number of command line arguments, and it prints an error message or whatever is because it breaks on that whitespace.
+
+You have to quote it if you want to include white separate space in your string.
+
+I don't want to talk about that right now, I already did. I give the sadness talk about I'm sad that nobody reads that.
+
+Now I know that I already talked about that in this class. Yeah, okay. I'm still sad.
+
+I'm also sad that nobody reads at seven. Literally zero people.
+
+So far this semester I have run a command. It didn't do what they want, and then they actually did what at seven says to ask for help.
+
+Literally zero people. We have like 200 piles of post zero people have read at seven and followed it, which it makes me sad, but it doesn't.
+
+That doesn't make me sad and keep me up at night. It makes me sad for the future of humanity.
+
+Uh, okay. Any questions about what happened here?
+
+If you have any questions about the future of humanity based on the ability to read and follow simple directions.
+
+For Tum's. Okay. All right.
+
+Um. Now, I told you.
+
+That every string in a C program is a sequence of Ascii characters, followed by the Ascii zero byte.
+
+So it turns out. I also told you previously.
+
+That everything in the computer. It's just a number.
+
+And it turns out that if I put no.
+
+I'm sorry, put care. These two characters.
+
+You knew what I meant. It prints the character A in a new line.
+
+Right now that backslash n. Uh, is a single character.
+
+The backslash says the next character that comes is what we call a meta character.
+
+It's going to tell me something like more backslash n means a new line,
+
+which a new line causes the cursor to go to the next line and then back to the beginning of the page.
+
+If you've seen the teletype in my office, um, well, we'll talk about that later.
+
+It turns out that's two different operations.
+
+Going the next line and going back to the beginning of the page are two different operations, but in this case it does both.
+
+But we talked about the fact that everything in the computer is just bits.
+
+So it turns out that I happen to know that the Ascii character for A is has the integer value 65,
+
+the bit value of 65, and the Ascii character for a new line has the bit value of ten.
+
+So I can either put Karen A in a new line, or I can put a 65 and a ten, and it's going to print exactly the same thing.
+
+And if I. Right. For example, the string.
+
+I like this. This is exactly equal to.
+
+What are you doing? Real.
+
+What are you doing? All right.
+
+This is exactly equal to. We idiomatically write that zero as that.
+
+It's. It's exactly the same.
+
+The string. The quoted string syntax is what we call syntactic sugar.
+
+Which is a little something in the compiler. Does that make your code look a little sweeter?
+
+Right. The. I think we can all agree that the curly bracket.
+
+Tick tick comma tick I. Tick comma.
+
+Tick. Backslash zero. Tick. Closing curly bracket sucks as a syntax that we would have to type in every day if we wanted to write a string.
+
+Right. So the compiler very kindly takes the quoted string and turns it into that for us.
+
+Right. But that's the actual representation. When you declare a string, what you are declaring is an array of characters.
+
+Each of those characters comes one after another in the array, followed by that trailing zero like.
+
+Uh, puts prints a string without interpreting it.
+
+Print f Prince formatted. Output it.
+
+Remember we when we looked at print f, we use the percent ds and the percent xs and whatever it expands, those we call them expand those.
+
+It expands those and inserts arguments that we gave into the string.
+
+So puts just writes a string print F provides us formatted output.
+
+Good question. All right.
+
+Now. Now, your first in class assignment.
+
+Actually, before I do this, let me do the, um. Just so you can see, I'm not lying about the Stack Overflow thing.
+
+Oh, the compiler was even telling me I'm an idiot. That's all I wanted.
+
+Size of stir in Maine. Size of exactly the same thing.
+
+Seven. Makes sense, right? H e o o o new line.
+
+That's six characters. And then the backslash zero at the end. Size of str in.
+
+Sterlin. Eight. Told you to be eight, right?
+
+Why are you so slow? She just left the queue.
+
+Mistakes have made. 45.
+
+Eight. Sterling will not give you the size of an array.
+
+Don't do it now. In. Two assignments when half of you ask on Piazza why it's not working.
+
+I will make fun of you. There are no stupid questions, but there are definitely questions to which you already have the answer.
+
+Uh, I will I will answer your question, but I will make fun of you. Carl won't because he's Canadian.
+
+Um. All right. So let me instead run KSI Sterling on Aadhavi sub one.
+
+Right. Which is the first argument. So our goal here.
+
+Oops. Is to write a function which when we call it, tells us how many characters are in the string.
+
+I have already given you all of the information that you need to write that function.
+
+I am not going to write anything. You're going to tell me what to write? How do we figure out the length?
+
+Of the character string str in C.
+
+What do I need to know to do that? Where the null byte is.
+
+Specifically, I need to know where the null byte is, right?
+
+How? What do I need to keep track of to find that? An index.
+
+Why do I care about the index? Does it tell me where the white is?
+
+I can use it to find it. But how? If I find the index of dynamite.
+
+Then it turns out that that is the length of the string because it's zero indexed, right?
+
+So the first character is zero. So hello, if I find the nobody at the end, the answer is going to be five, right?
+
+But if I find the index then all right. That is the length of the string.
+
+How do I find the index of the null by. I can do a while loop until that index.
+
+What does that look like? So this is this is a for loop.
+
+Okay. That's fine. We can do a for loop there. The same. What I do here.
+
+This is the first time. Taught this course like 30 times.
+
+The first time we arrived at the first try. Usually we didn't last class because of the way I lead you into it, right?
+
+Usually we wind up declaring a length variable, and then inside the loop we increment the length variable,
+
+and then it takes us another stop to say, oh wait, that's actually exactly equal to I.
+
+We can get rid of the length variable because there always is always equal length variable.
+
+Uh, but you got to do it on the first try. I think this is might be the first time ever.
+
+Um, so the takeaway is, because if I lead you through it and I say, what do you do next?
+
+What do you do next? What do you do next? You tend to think about what is the next line of code I can write.
+
+When you write your projects, you tend to think about what is the next line of code I can write.
+
+Every now and then you have to step back and look at all the code and say, what does this code do?
+
+And should I revisit that? And then when you do that, you notice you don't need that extra variable, right?
+
+That counts like the string. But we got there first. Now I will say, I will tell you I expect this to give the right answer.
+
+Uh, but idiomatically, this is not how I would write it.
+
+So, um. It's close. It's very close.
+
+See? Human programing languages have what we call idioms.
+
+An idiom is a thing that we say that, uh, doesn't mean necessarily,
+
+although sometimes it does the thing that we say, but it has some very particular meaning.
+
+And as a native speaker of the language, you would use the idiom fluently,
+
+but as a second language speaker, as someone who doesn't know language as well,
+
+you might either not use the idiom where it's called for, or you might not know what it means when you hear it, right.
+
+So, um, some idioms are more, uh, opaque than others.
+
+So, for example, when we depart from someone in the English language, we say goodbye.
+
+Does anyone know why we say goodbye? What does goodbye mean?
+
+God be with you. But it was contracted over the years into good bye because in the Middle Ages, when you said goodbye to somebody,
+
+there was a real good chance that they were going to, like, get bubonic plague and die before you saw them next or whatever.
+
+So it's like. I hope you don't die, right?
+
+Uh, but we say it all the time, and we only think about it idiomatically. We say good bye.
+
+If you are departing from someone's house and they said to you in English now, in other languages, this is perfectly normal.
+
+But if they said to you in English, God be with you. You would be like, nobody says you, dude.
+
+Like, what are you doing? Right? Um.
+
+But it's idiomatic right for us to just say goodbye. We don't even think about it.
+
+Then there are other idioms, like the straw that broke the camel's back.
+
+If I say, boy, that last homework was the straw that broke the camel's back.
+
+If you're a native English speaker, you know that I mean that that last homework was just one thing too many,
+
+and I couldn't handle anything else, and it was too much. But before that homework, I was bearing up.
+
+Right. If you're not a native English speaker, you might be like, who would say that?
+
+What does this have to do with anything? Right? Is because there's a parable of a camel that's loaded and loaded and loaded.
+
+Eventually they put one extra piece of straw on the back of the camel,
+
+and it's too much in the camel's back breaks, and presumably it dies, I don't know.
+
+I think it's probably from 1001 Arabian Nights or. Mr. Harrison.
+
+It. Um. But there's tons of these idioms.
+
+There's idioms in programing languages too.
+
+Now, the difference between a programing language idiom and a natural language idiom is that they always mean exactly what they mean.
+
+There's no such thing as like metaphorical meaning in a programing language.
+
+But on the other hand,
+
+there are ways that a fluent programmer in a language would write something that a non fluent programmer in that language might not write,
+
+but that when another fluent programmer sees it, what that first fluent programmer did, they know exactly what they meant and why.
+
+So if I see a for loop with two curly brackets, then a bright blank line in between.
+
+The first thing I do is I'm like, oh, whoever was writing this function got distracted.
+
+And never finish this for loop. So I could do something like.
+
+This. Right. But that's a little hard to.
+
+That's easy to miss or do something like this, which is even easier to miss, right?
+
+But what I would idiomatically do is this. Any fluency programmer who looks at that for loop is going to say,
+
+when the author of that for loop wrote the loop, they were using it for the side effects.
+
+In the condition. And it didn't need a body.
+
+They didn't forget to put a body in it. I shouldn't look there for the bug that I'm looking for.
+
+Probably they might have made a mistake, right? It's not supposed to have a body.
+
+And they'll move on. Right. There are many, many things like that in the C programing language.
+
+There's another one on the screen here, which is that we have when we look for the end of the string we use a tick backslash zero tick.
+
+That is the character constant. Zero. The null byte.
+
+It would compile and run equally correctly and be an equally correct program in every way.
+
+If I wrote this. But if I write that I'm not communicating to the other programmer, I expect this array to be a string.
+
+And I am looking for the null terminator, right?
+
+When you write programs, when you learn programing languages,
+
+take the time to learn the idioms of those programing languages, to write in the idioms of those programing languages.
+
+Some languages have more idioms than others. C has a few.
+
+Uh, the tick backslash zero tick is one of them. You'll normally see that the semicolon on a blank line.
+
+Sometimes you'll see, sometimes you won't. Uh, there's another one.
+
+So in C some people instead of while true will write this.
+
+Which does the same thing, and they pronounce it as forever. Right.
+
+Um, there's a few idioms that you'll see in C.
+
+Um, some languages have tons of idioms, so.
+
+Oh, camel. For example, tons of idioms for x colon, colon, xz right or whatever.
+
+Right. Tons of idioms in camel. Um. Go has tons of idioms, right?
+
+But when you learn a language, take a time to learn what those idioms are and use them.
+
+It will not only help you get your code right.
+
+It will help the next programmer down the line understand what it was you were trying to do so that they can work more effectively on your program.
+
+And the secret is, and I'll say this over and over in this class. The next programmer down the line.
+
+Is you. Like frequently in like six months.
+
+You're like, what idiot wrote this code? And you go to like, get annotate and like, it's you and you're like, oh well, maybe they weren't an idiot.
+
+What were they? Maybe there's more to the story. And it turns out, no, they're an idiot and you just made a mistake or whatever, right?
+
+Uh, but six months down the line, you don't remember. This is not something that you experienced much as a student.
+
+Because how often do you go back to code that you wrote six months ago? Right.
+
+You write a two week project, you turn it in and you never look at it again.
+
+But as your career goes on, you'll find yourself looking back at code that you wrote years and years ago.
+
+Hopefully you commented it. Hopefully you use the idioms. Hopefully you gave good commit messages, etc. etc.
+
+All right. We'll talk more about that in other classes. We will talk more about it as this class goes on to the next thing I want to talk about.
+
+Are there any questions? Yeah. This shouldn't be I.
+
+This should be one. Uh, when I started off the code.
+
+Why did I start? That's this program.
+
+You know that program right there? Yep.
+
+No, because argc is the number of arguments. Just like I said that the first argument is always the name of the program,
+
+Argc is always the number of arguments, and that is given to me by the operating system.
+
+If it was not, I would have no. Well, it turns out there's another way to know how long that particular array is on.
+
+We'll talk about right now, but, uh, I would have no way of knowing how long that array was, but it tells me, hey, there's five or whatever.
+
+If I didn't know how many there were, eventually I would run off the end of the array and it would be bad, and bad things would happen.
+
+All right. Other questions. Good question.
+
+Uh, Argosy is given to me by Fiat.
+
+And, uh, also, the name of my program is given to me like, this is just the eunuchs reached down and poked that into that argument of main.
+
+And that's just how it is, right? Yes. So what this does is so the question is what is this doing right.
+
+So I go through the string, I look at every character of the string stir sub I and I say is this backslash zero.
+
+And if the answer is yes, my for loop that that item in my fault loop is false, it breaks out and then I return whatever that index's.
+
+Are you talking about this right here. The 45 and eight. That's just a fact.
+
+If you call that I use sizeof on an array. If you use size of an array, sometimes it will tell you eight.
+
+So don't do it. That's the only moral of that story. Don't call sides of an array ever.
+
+It's bad. It makes. Unicorns cry, but their tears are caught.
+
+And so instead of healing the world, they do whatever it is unicorns tears to when they fall into a bubbling pit.
+
+In [INAUDIBLE]. So don't call size of an array.
+
+Correct. Yep, zero, one and two.
+
+Yeah. All right. I want to move on from this.
+
+Um, I would like to. Yes.
+
+Uh, you. If so, if you want to use a while loop inside of a for loop, it would have one line in the body, which is a plus.
+
+Plus. So you would say int I equals zero while of Abi is not backslash zero I plus plus.
+
+Yeah. But idiomatically I think that for loop is is what a lot of people will write.
+
+I won't say it's better. But it's a lot of people are going to write it.
+
+It's idiomatic. All right.
+
+Uh, I want to start the next lecture. So the way this course will work.
+
+Tonight. You're killing me. Uh, is I will when I finish a lecture.
+
+I will simply move on to the next lecture.
+
+Um. I will simply move on to the next lecture.
+
+Uh, and. I will try to make sure that the slides are up before the lecture starts,
+
+but they're not necessarily going to be right at the end of the lecture period,
+
+because most of the lectures we do in this course are somewhere between 1 and 2 lectures long.
+
+So we'll do one lecture period, and then we'll finish it up, and then we'll move on to the next,
+
+or we'll start in the middle, and then we'll finish at the end of the next or something like that.
+
+Right. Um.
+
+So we're gonna start a new lecture right now. But the reason I want to start this lecture right now is I want to show you something else,
+
+which is at the beginning of almost all of the slide decks in this class, at least for the first half of the course.
+
+The first couple of slides will be advice. They're not necessarily advice about CSC 2020.
+
+Their advice about being a student, about being an effective worker,
+
+about being a good programmer, about being a conscientious worker, things like that.
+
+Most of them fall into the category of things that your mom has been telling you since you were three years old,
+
+but you haven't been listening because surely she didn't mean you. I'm going to tell you again.
+
+You're not going to listen, because surely I don't mean you. But I promise, uh, some of you throughout the some one this semester,
+
+it happens every semester will come to me halfway through the semester and be like, you know what?
+
+I started doing those things you said. And I was headed for a deep loss.
+
+And now I think I'm going to get a B. Hopefully that's you.
+
+Well, hopefully you're not head of Verde. Plus, you've already internalized these things.
+
+But if you are, hopefully you come to that realization. So the first thing I want to talk about in terms of advice is planning your time.
+
+And I want to talk first about the Carnegie rule. So there's a man by the name of Andrew Carnegie.
+
+You may know him from the university Carnegie Mellon.
+
+Uh, who spent a lot of time thinking about higher education in America because he was, like, blindingly rich from stealing money through,
+
+like, steel or trains or something, uh, and founded a university and had a lot of free time on his hands.
+
+I shouldn't say it that way. It's kind of comes across. Well, like he was a robber baron, right?
+
+Um, but he did found a university, and he did spend a lot of time thinking about education.
+
+And he came up with this guideline that for good education in the university,
+
+one of the things that we can do is we can ask students to work both in the classroom and at home.
+
+And he designed this Carnegie rule that says for every one hour you spend in contact with your instructor.
+
+So we call em contact hours. You just spend 2 to 3 hours at home working on that class, studying, doing homework,
+
+etc. which means that this is a four credit class that you have for contact hours,
+
+three contact hours in lecture, and then you have a lab that's two hours, one of which we instruct you in, the other of which you do the work.
+
+Right. That's how labs are counted.
+
+Which means that for contact hours, you should do between 8 and 12 hours of homework for this class every single week of the entire semester.
+
+This is why 12 credit hours is a full time schedule, because 12 plus two times 12 is 36, and 12 plus three times 12 is 48.
+
+How many hours a week is a full time job? 40, which is between 36 and 48.
+
+Right. So 12 credit hours of the full time schedule.
+
+Now, we all know that not every class that you take actually requires 12 hours of homework, right?
+
+Some of them just don't. Right. You're probably taking pathways right now that don't take you 12 hours to do your homework.
+
+They might not take you 12 hours for the entire semester. If they're online.
+
+Um, but courses like this course are going to ask you for 12 hours every week for the entire semester.
+
+250 is going to ask you for 12 hours every week for the entire semester.
+
+And my guideline for you is to make sure that you have that 12 hours to spend on this course by planning your time wisely.
+
+And the first thing I suggest that you do is you schedule for every one hour that you spend in this classroom,
+
+you schedule an hour and a half of homework time. Now that won't get you to 12 hours.
+
+But you schedule an hour and a half of homework time that you put on your calendar.
+
+I had one hour of lecture on Wednesday from 2 to 3, and on Wednesday from 5 to 630.
+
+I'm going to work on 220 or on Thursday from 10 to 1130.
+
+I'm going to work on 220 and come [INAUDIBLE] or high water. When that time on your calendar comes around, you work on 220.
+
+Even though you have a 250 deadline tomorrow because you set that time aside for 220,
+
+or if you set the time aside for 250, even though you have a 220 deadline tomorrow, you work on 250, right?
+
+So that you work a little bit consistently throughout the entire semester,
+
+rather than trying to do that 12 hours of homework in the eight hours before the project is due,
+
+which we know is a thing that sometimes happens, right?
+
+All right. We'll talk more about this later. We have more advice. I will see you on Friday.
+
+Linux on a mac. Yeah, I thought you'd be.
+
+Is it the stars of the day? Right. The Linux distribution.
+
+Oh, arch. In a virtual machine or native.
+

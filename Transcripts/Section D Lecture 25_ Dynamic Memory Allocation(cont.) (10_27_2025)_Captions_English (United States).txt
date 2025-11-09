@@ -1,0 +1,661 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+All right. All right.
+
+I've use ten minutes of your class time. You're welcome. You can thank me by registering.
+
+Good point. As I've said before, you'd be hacking is like, my favorite.
+
+Activity of the academic year, not just the fall semester of the academic year.
+
+It's really great. You should absolutely do it. Um, even if you don't know what you want to do, sign up.
+
+It will be a good time. The energy is great, right?
+
+Like people are there to have a good time. They have a good time.
+
+There's free food. You kind of lead you in and on. You're both kind of buried lead on that.
+
+You open up. These are undergraduates with there's free food and then go from there.
+
+Yeah, there's free food. Um, but I it's my favorite event of the year.
+
+I highly recommend that you do this. Sadly, I can't make you.
+
+If I could make you guys do things, this would be a different world. You'd all pass for one.
+
+Okay. Shouldn't you have a friend?
+
+Do you know who your friend is? Oh, okay.
+
+Osama. Okay. Well, it'll be just a minute. Hiding in the middle of the classroom.
+
+The man sits in the front row when he takes the class. And then. Okay.
+
+So, um. I think we left off here.
+
+Is that correct with left bit shift. And then I said right bishops are more complicated and we didn't go any further than that.
+
+Is that accurate? Okay. So we were talking about bit shifting and we talked about left bit shifts.
+
+Um, right. So the rule with left bit shifts was we move our bits to the left,
+
+and then we shift the bits that we shift out, fall off the end, and they're gone forever.
+
+And the bits that we shift in are all zeros. We always get zeros.
+
+Right. Shifts are trickier. And the reason is, and I will tell you the reason, but you don't necessarily have to know this by you know.
+
+Heart. Is that if you think about an integer as a number, as a numeric value.
+
+Then, uh, what you want to do with the high bit is different than if you think of as an integer, as just a sequence of 32 bits.
+
+If you think of it as a numeric value, then sine preservation becomes important to you.
+
+And if it's a negative number, you want to stay a negative number.
+
+If you just think of it as a sequence of 232 bits, then this is not important when you do a shift.
+
+And so if you right shift an unsigned number.
+
+Then it works exactly like left shifting, and on any integer is, which is that the number will move down by one bit position.
+
+And then on the big side of things, on the highest order bit you'll get zeros, right.
+
+It will shift in zeros. And on the little end of things in the lowest order bits, as you shift them out, they will fall off and they will go away.
+
+However, when you shift a signed number, it might shift for a negative number.
+
+For a positive number. Everything works as you would expect. For a negative number, it might shift in ones and it might shift in zeros.
+
+And you don't get to choose. The C standard has this beautiful quote that's at the bottom of this slide here, right.
+
+It says if the shifted value is a sign type and a negative value, the resulting value is implementation defined.
+
+What implementation defined is. It means is that the compiler author gets to choose,
+
+usually based on the way the underlying hardware works, and they have to put the answer in the manual.
+
+But there are two possible answers here. It might shift in zeros or it might shift in one's right.
+
+And in order to know, you have to read the manual.
+
+There's no other way to find out. So if you go to Yemen and you run info GCC somewhere under the documentation for x86 64,
+
+it will tell you that signed right shift preserves arithmetic sign, which means it shifts in once because that's what our platform does.
+
+But any given other platform might not.
+
+This is kind of like how care could be signed or unsigned.
+
+And they have to tell you, right. It could be either one. They have to tell you. In 220.
+
+Just don't write shift sign numbers. There's no reason to do it.
+
+We aren't going to ask you to do it. Just don't do it. Right.
+
+We're going to see an example later when we do do it. But. Just don't do it.
+
+That's the best advice is just don't do it.
+
+If you're in a place where it matters, you'll know, right, that you need the right shift to sign number, and you'll know that you need to.
+
+Now, I've told you, you'll know you need to consult the manual. The problem with the consult, the manual thing is, this is not portable.
+
+I write my code and I make sure it works on my computer.
+
+I give it to somebody else, and it does something different.
+
+And it's allowed to. Because it doesn't say you have to do this thing and it has to be predictable.
+
+It says you have to do this thing and then write in the manual what you did,
+
+which means that until you check the manual, make sure your software is compatible.
+
+You don't know, right? So that's why you should avoid it. You should avoid right shifting sign numbers.
+
+Okay. That's all I want to say about that. Are there any questions? And I find it very hard to take you seriously with a clean shaven face.
+
+I thought the same thing. I got a little stubble. Yeah, I'm just waiting.
+
+Give it another few weeks. I also got to just talk to you like this.
+
+This is why I do an Allen Shaves too. Have you guys seen Allen? When he shaves, he's like 18.
+
+Allen Hunt. He's like 18. When he shaves, he looks like Medhat.
+
+I mean, the 18 part, uh, with your little smooth baby cheeks.
+
+I gotta I gotta see how much facial hair. Okay.
+
+Fair. All right. You had a question or something? Um. Is there any like.
+
+What do you mean by. No.
+
+I'm done. What's your question? So, uh.
+
+Okay. So suppose that I have an eight bit sine integer. Because eight bits is easier for me to write on the board.
+
+If I have an eight bit sine integer and it's this. And I shift it right.
+
+It just moves to the right one position and becomes 0101110.
+
+The one falls off the end, right? And we shift to a zero. No problem if it's assigned integer and the first bit is a one.
+
+So it's 11011101.
+
+It can either shift it to uh, 01101110, or 11101110.
+
+It can either shift in a 0 or 1. It just has to tell me which one it's going to do.
+
+That answer your question? This case, it's exactly the same as dividing by two.
+
+Arithmetically. In this case, it is not. It was a logical operation, not an arithmetic operation.
+
+But don't. Don't sweat that too hard. Just be aware. Right.
+
+Shifts are dangerous. Right? Yes.
+
+That. It just moves the bits around inside the number.
+
+Why would you want to do it?
+
+So most of these bitwise operations, the reason you want to do them is because you're not necessarily dealing actually with numbers.
+
+You're dealing with just 32 bits of data, and they have some property that you care about that you need to move around.
+
+You do this when you're doing things like writing, uh, communicating directly with hardware or across the network or things like that,
+
+where you're really concerned about your representation. Exactly. What bits am I putting, where and why?
+
+Right. So, for example, I've been working in this last couple of weeks on you guys have all seen my little cute little laptop here.
+
+The keyboard here has a little microcontroller that reads the keys, right?
+
+Most keyboards do, right. They have a little microprocessor in them. I've been working on the firmware that runs on the keyboard in this laptop.
+
+The reason I bought the laptop was open source. And so I think we've talked about this at some point when I took it apart for you.
+
+Right. Um. And I'm doing that kind of thing because I'm actually communicate.
+
+Well, I'm not it's already in the firmware, right. Because they're they're actually communicating with the microprocessor and reading and
+
+writing from the individual electrical pins attached to the processor recording Gpio.
+
+And they do things like masking and bit shifting and things like that.
+
+Right. You don't do this when you're just writing generic application code.
+
+It's just not a thing that you need to do, right?
+
+It's when you're doing communication, when you're dealing direct with hardware, the kinds of things that I mean, as I've said before,
+
+systems programing, we're doing this in C because you do systems programing in C, you don't do other things in C because it's a dangerous language.
+
+But almost everybody at some point will do some kind of systems programing.
+
+Right. Many of you won't do it as a career. You may only do it just once or twice here or there, but it comes up.
+
+Yes. Why is left shift not a problem?
+
+Because the first bit. The lowest bit.
+
+Is not the sign bit. This is the sign bit.
+
+If I do this shift. This was a negative number.
+
+I shifted to the right and now it's a positive number. If I do this shift, it stays a negative number.
+
+If I shift to the left. This bit is not the same bit.
+
+So I only change sign if I overflow. That's the answer.
+
+Trust me, you don't have to know that. But that's the answer. That won't be on the exam.
+
+Why? Won't be on the exam? Just a fact. Works exactly like right shift, except it goes left.
+
+So you move all your bits of that way, they fall off that end and you move zeroes in on this end.
+
+The Russians. All right, let's do a top hat.
+
+Yes. You know. Correct.
+
+Coming up. Somebody told us that there's one that shipped with us.
+
+Yes, yes. Depends on your platform.
+
+Oh, yeah. It depends on your platform. And also in assembly, usually you have two different right shifts.
+
+One of them will be arithmetic right shift and one will be logical right shift.
+
+One of them will preserve sine and the other one won't. You'll talk about that in 341 though.
+
+This is. It's just a general. And then, as you say.
+
+And. Shifting and see never rotates.
+
+There's no way to rotate and see, only shift. The last bit never goes back.
+
+Yeah. That's that. You have to use assembly language if you want that. But we won't do that this semester.
+
+All right. What is the value expressed in base ten?
+
+When 110 is interpreted as a base 16 number?
+
+Now, we've already done this for base two and we've already done it for base three.
+
+I'm going to tell you a fun fact, which is that 16 times 16 is 256.
+
+If that feels relevant to you, you should use it in your answer. Until they know their powers are two.
+
+That is so true. So true. All right, now, this is when you work for your money.
+
+Because when you work for your money with some. Now you have to work for your money.
+
+So it would be negative. Uh 240.
+
+Okay. Sounds good. Questions.
+
+All right. Um.
+
+Did we already talk about this? No.
+
+Okay. So don't confuse your bid operators and your logical operators.
+
+Um, I don't bring this up because you are likely to be like, oh, no, do I use one ampersand or two?
+
+This happens more often when you like copy and paste, or you just make a typo or something like you actually wanted one ampersand,
+
+you accidentally hit two because you usually hit two, so you just went ahead and hit two or whatever.
+
+Um, and because the problem is that sometimes they work right and sometimes they don't,
+
+and it depends on the values that you're using when you do your computation, whether they're going to work right or not.
+
+Um, so if you have bugs around.
+
+Bitwise operators or bugs around logical operators.
+
+It's worth just looking and saying wait, did I use the right not.
+
+Did I use the right and did I use the right? Or again, not because you won't know which one you want.
+
+But in particular we get on autopilot and we just use the logical ones because that's what we always use.
+
+But in C it's spelled with a single ampersand number rather than a double or whatever you want, the bitwise right.
+
+Um, so just be aware that that's a common source of bugs in particular.
+
+Um. Or. Almost always does the right thing for just regular integers or does the right thing.
+
+What are you single or double? Or the result is different.
+
+If you use double or it's exactly zero, or exactly one if you single or it's either zero or some nonzero integer, right.
+
+But it does sort of the, um, conditionally, it does the right thing, right?
+
+The other direction is not true if you use a double or when you wanted a single, or it does not do the right thing, right, etc.
+
+Okay. So one of the things we use bitwise operations for.
+
+So the question like what is bitwise operation for. One of the things we frequently use it for is to work on part of a word.
+
+Because when you do loads and stores in your computer, when you save and load data in your computer,
+
+you always save and load entire bytes, entire words, entire whatever your data type is that you're saving or loading.
+
+But in many cases, you don't necessarily need the entire word to represent the data that you have either.
+
+The data that you have is not numeric data, in which case it could.
+
+It's just bits, right? It could be any bits. You could use any of the bits for anything or it's numeric data and you don't need them.
+
+All right. In which case you may repurpose some of them. So in A4 for example we are going to repurpose the bottom three bits.
+
+Well one bit is what's in the handout. But you can have up to three of them uh, in your um in the addresses of your allocations.
+
+No. And I'm sorry, in the sizes of your allocations. In fact, you can have up to four of them in the size of your allocations.
+
+We'll just use for something else. Right. Because we know they're always zero.
+
+So we can put some value that's not zero there. And then when we want the actual number we just clamp it to zero and that's fine.
+
+Right. Um. And then if you're working with hardware and things like that,
+
+it's frequently the case that you will do a store to a hard to a location that is actually a hardware register of some kind.
+
+So, you know, a device, you know, you're writing to, um, turn on the light on the, um, webcam.
+
+Right. And so you just store a one bit somewhere where we can't store a bit.
+
+So what you do is you load the whole word, you set a bit, and then you store the word back.
+
+Right? Or you're setting the you're building a network packet,
+
+and you're setting the IP version in the IP packet that you're sending for the internet protocol.
+
+Well it's a four bit quantity. Well there is no four bit integer.
+
+So what you do is you load the larger word, you find the four bits where you want to put the version and you put your version there.
+
+Um, so this is the kind of thing that we do, and we frequently do it with masking and particularly with and or and shift operators.
+
+And so masking is a term. It's not a computer term, right.
+
+It's a generic term. It's used in art. It's used even in like painting rooms and things like that.
+
+Right. You go by the blue tape. What kind of tape is it? It's masking tape.
+
+Masking tape is tape that you use to cover up something that you don't want to paint.
+
+Right. Masking in words is used to cover up the bits that you don't want to change,
+
+or to cover up the bits that you do want to change depending on which direction you're going.
+
+Right? So we can select certain bits out of a word and make sure that they're exactly zero.
+
+Or we can select certain bits out of a word and make sure that all the other bits are zero by using masking.
+
+Normally the way this is done is we and with some um value.
+
+Right. Which covers up all of the bits that aren't ones in that value.
+
+Here on this slide we have an example where we take a value that is presumably an integer right a 32 bit integer.
+
+And we say well I only want the lowest eight bits of this integer.
+
+I don't want any of the other bits of this integer. And so we mask it with zero f.
+
+And the reason is. If I have an integer and it has however many bits it has, and then it has eight low bits.
+
+And I mask it with 0XFF. Now F when represented as a 32 bit integer.
+
+Is 24 zeros, zero bits, followed by eight ones.
+
+So we have 24 zeros and eight ones. And we know this because every hex digit represents.
+
+By the way, I don't think I told you this fun fact. I just remembered in my last class that I should tell you this because you don't know.
+
+It represents four bits, which has a name similar to the technical name for four bits.
+
+There's a technical term. It is a nibble. Eight bits is a byte.
+
+Four bits is a nibble. I am not making that up. You heard it.
+
+Someone else knew it. Four bits is a nibble. So every hex digit represents a nibble.
+
+And we happen to know that the bit value of f is 1111.
+
+So therefore 0XF which is actually 0X00000FF.
+
+Right. How many zeros are out there turns into the bit pattern.
+
+Like this. Well, zero and anything is zero because of that, and is only true if both bits are one.
+
+And one and anything is whatever the anything is.
+
+So it preserves the value of anything that you end with one.
+
+And so if I do this operation.
+
+My output value is all zeros except where I have a one, and then the value where I have a one is the value of the input number.
+
+Right. So these are all masked off. They become zero.
+
+And the bits that are a one are preserved. So I took an eight a 32 bit number as an input.
+
+And my output is an eight bit number. And all of the bits that didn't fit inside that eight bit mask were just squashed to zero.
+
+They became zero. Does that make sense? Are there any questions?
+
+Yes. I've got any more to go on.
+
+Explain what again? So zero and anything is zero.
+
+Right one and anything is whatever the anything is.
+
+Because if X is a zero, then one and zero is zero.
+
+If x is a one, then one and one is one. So if I mess with one bits, all of the one bits remain the same.
+
+All of the zero bits are squashed to zero. Did that make sense?
+
+Other questions. Okay.
+
+So, um, frequently we will set and frequently in systems programing.
+
+We will set and unset individual bits in a word.
+
+So we will take a word and we will say, hey, whatever the bit is at this particular position in this word, I want to make it a one.
+
+Or whatever. This is at a particular position in this word.
+
+I want to make sure it is a zero. That is a fairly common operation, uh, particularly in, as I said, dealing with hardware and network traffic.
+
+Often individual bits are used as flags. Right?
+
+So, um, should the light be on or off? Right.
+
+So if I have bits for a webcam in a hardware register somewhere, I might have a bit that says, um, should the shutter door be open or closed?
+
+Right. Physically open or closed? Should the recording, should it be capturing data from the CD?
+
+And if so, the light is on, and if not, the light is off.
+
+If it's good hardware, that's the same bit as is the light on or is the light off you, right.
+
+Because you don't want those to be separate configuration bits,
+
+because the nefarious software could say capture data from the CCD and leave the light off.
+
+Right. So I have one bit is it recording or not. And then I have another bit am I recording audio or not.
+
+Right. And I might have another bit that is should I turn on the light or not.
+
+If it has a back fill light, right. Or something like that. And so I just pack all these into a word.
+
+And then in my software I configure and I say, okay, well turn on the camera, uh, mute the microphone,
+
+turn on or open the shutter, turn on the camera, mute the microphone and turn on the back fill light.
+
+And so I set three of those four bits by doing something like this.
+
+And then I send that data to the camera.
+
+And the camera does whatever it is I just asked it to do. Right. Um.
+
+So if I want to set a bit, I do it with or because anything or one is one.
+
+Anything or zero stays whatever the anything was.
+
+So here with and anything and one stays the same with or anything or zero stays the same.
+
+And anything and one becomes a one, I'm sorry. Or one becomes a one.
+
+If I want to clear a bit, then I will frequently do what's at the bottom down here, which is and not the bit that I want to clear.
+
+And the reason for this. Is that if I have an integer that is, in this case it's this.
+
+And I take the logical or I'm sorry, the bitwise complement of that.
+
+That just takes every zero and makes it a one. And takes every one and makes it a zero.
+
+So now I have a word that is all ones followed by a zero.
+
+Well, by the rule we used over here, that means that all the bits will stay exactly what they were, except the last one, which will be forced to zero.
+
+So the first line up there, the other line, forces the last bit of a 32 bit value to be a one.
+
+And the and not line forces the last bit of a 32 bit value to be a zero, right.
+
+So we can force that last bit to be either a one or a zero as appropriate.
+
+Are there any questions about that? You're going to be asked to do this and pay for.
+
+It's not required. It's optional. Many times students don't do it.
+
+And when we're trying to help them debug and they haven't done it because you're not
+
+required to do it because it doesn't have to be done for the program to to work.
+
+But we ask you to do it because when you're debugging, it turns out it's really helpful to know a certain little thing.
+
+So you set a bit. And many times we ask students, why didn't you do it?
+
+They say, I didn't know how. It's right there.
+
+You copy and paste it. Yes. Okay.
+
+Explain what again. By doing that.
+
+1 to 0 is the last one. X equals x and not one.
+
+Because this. Is not one.
+
+One and anything is the anything zero and anything is zero.
+
+So I keep all the bits the same except the last bit, which becomes zero.
+
+It's exactly that over there. Except the mask is 1111111110.
+
+One and anything is whatever the anything was.
+
+So if I have. And I and that with this.
+
+One and one is one zero and one is zero.
+
+One and one is one, one, zero, one, zero, one, one and zero is zero.
+
+So this will unconditionally be set to zero. And all of these are exactly the same as all of these.
+
+Make sense? So the first.
+
+First. 0010.
+
+Let me again. So if it's, uh, let's say 0010.
+
+The first light of. That would just be.
+
+So 0 or 1 is one. 1 or 0 is one.
+
+Zero zero is 000 is zero. So we have 0010I promise.
+
+This is 0010. And now we have 0011.
+
+We unconditionally change this zero into this one.
+
+Cool. Yeah. Other questions. Yes.
+
+I just spent five minutes explaining how that can be useful. Go back and watch the video. Are you going to put your video away and listen to me?
+
+Okay. Remember the story about the webcam and the four bits, and one of them turned on the camera and one of them turned on the mic.
+
+And you're Malik. We're storing a flag at the bottom of an integer.
+
+You have a 32 bit integer. You have some bits at the bottom that you know are always zero.
+
+And so you can use one of them to store a boolean. Am I allocated or am I free?
+
+Okay. Other questions. Yes. I just did.
+
+So zero zero 0 or 0 001 is 0011.
+
+Okay. Other questions.
+
+All right, let's roll.
+
+So another thing that we do frequently is we have a bit that we don't care what its value is right now, but we want it to be the other one.
+
+So if it's zero, we want it to be one. If it's a one, we want it to be a zero.
+
+It turns out if you look at the truth table for XOR, that XOR one does exactly that.
+
+Anything XOR zero stays the same. Anything XOR one flips to the other bit.
+
+So I can flip the value of a bit unconditionally by just XOR that bit with a value one.
+
+So if I want to flip only the third bit of a number, then I can just do xor zero x.
+
+Four, right? And that will always slip the third bit of a 32 bit number or whatever,
+
+the third from the smallest right bit of a 32 bit number or a 64 bit number, whatever size my number is.
+
+Yes. As a toggle.
+
+Yep, exactly. So in this course, you use the toggle once.
+
+Where did you use the toggle? And one right.
+
+And we did the plus one mod two. You now know three ways to do that.
+
+Plus one mod two. XOR one and not right.
+
+Exclamation point. Not bang, not not twiddle not. Because one, not one is zero and not zero is one.
+
+So if you wanted to cycle between 0 and 1, you now know three ways to do that, right?
+
+We did plus one mod two in part one, because every language you've ever learned up to this date was capable of doing plus one mod two.
+
+But the bang not is this kind of a key thing?
+
+And the bitwise Not we weren't going to get to until the middle of the semester.
+
+But there's three ways to do that there, right. You could use any one. I personally would probably it's a little bit cheating because it.
+
+Is kind of conflating types, but she loves to conflate types.
+
+I would probably use the bang thing if I were doing it. I would do, you know.
+
+X equals bang x, right? Or whatever it was.
+
+Current equals bang current. Right. In order to do my not not right.
+
+But you could do it any of three ways that we've learned so far. Probably more, but three that I can think of.
+
+Okay. Questions. Yes.
+
+Because. So the first one. So this first one here takes any value, no matter what makes it.
+
+Definitely one. The second one takes any, any bit, no matter what, and makes it definitely zero.
+
+XOR says whatever the bit is right now, make it the other one, right?
+
+So it's the difference between conditionally setting, unconditionally setting to one,
+
+unconditionally setting to zero, and conditionally complement it.
+
+They're all focusing on values. It's just that the bit is what's.
+
+So in this case X the 32 bit number. The only bit that's changing is the ones bit.
+
+Right. If the one bit was a one it becomes zero. If it was a zero becomes one.
+
+Or if you want to think of it another way, if you want to think of it numerically, if X was even, it becomes odd by adding one.
+
+If it's odd, it becomes even by rounding down right every time you do that.
+
+XOR. Why are there like this?
+
+Will be done in a minute and you guys can come in. Um.
+
+So I've got one more example that I want to do, but I don't want to start it now with one minute left to go.
+
+Um, uh, I will say this fact quickly, which I did say before.
+
+Uh, right and left shifting or multiplying, dividing my powers of two.
+
+And you can see why this is by looking at the summation.
+
+So basically, if a bit is at position I and you left shift it by two bits, it becomes at position I plus two.
+
+So if you do the sum for I equals zero to w minus one of every bit times two to the power of I, plus however many bits you shifted.
+
+Which is its new position. Right. Then that's the numeric value.
+
+Right. So, um, that's just a fact. You should know it.
+
+Um, and then I'm not going to ask the question. We'll start with this.
+
+When we come in. This the first thing we'll do when we come in on Wednesday.
+
+All right. Thank you all very much. I will see you on Wednesday.
+

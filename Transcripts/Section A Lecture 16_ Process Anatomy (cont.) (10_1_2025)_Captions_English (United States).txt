@@ -1,0 +1,997 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Oh, turn on the projector. I can see what's on the projector.
+
+All right. So I want to pick up right where we stopped on, uh, Monday, as a reminder.
+
+Your midterm is one week from today. It will be in class in this room.
+
+And it will be designed such that if we all get in here and we all get seated.
+
+Stop! I'm talking. Thank you. If we all get in here and we all get seated quickly, you'll have plenty of time, right?
+
+It's not a 50 minute midterm. It'll be like a 30 minute midterm, right?
+
+Um, because we only have a 15 minute class period. But that does mean that you all need to be here, and you all need to be seated on time.
+
+Right now, I'm preaching to the choir because you're all here and you're all seated while most of you are seated.
+
+Um, I will someone remind me to say this later after, like the 15 minute kids dragon, right?
+
+Um, that you'll need to be here on time for that midterm. Because I have to leave on time.
+
+Uh, because I have another midterm in ten minutes and NSC right on Wednesday.
+
+So, uh, we'll talk more about the midterm later. We'll give you some details.
+
+There will be a piazza post. There will be a practice midterm. There will be probably some practice questions on, uh, you be Lance.
+
+I make no promises. Um, and we'll talk more about, uh, logistics.
+
+Um, but keep it on your radar. Right. Midterm is one week from today.
+
+If you're behind on required readings. Start getting caught up.
+
+Um, if you are, uh, if you have anything that you we've talked about that you're not fully comfortable with,
+
+now's the time to start asking those questions. There will be office hours Monday and Tuesday.
+
+Um, DEA office hours. Uh, Monday and Tuesday.
+
+Um, there will be no office hours Wednesday and Thursday.
+
+I may hold my office hours on Wednesday. Karl may hold his office hours on Wednesday, but if we do, we won't take 220 questions.
+
+Right. And the reason for that is that there's an 8 a.m. exam.
+
+And if we allow people to take the eight exam, and then we continue to answer people's questions up until 1 p.m.,
+
+you had more time to ask questions than they did, right? That's not fair.
+
+The Romeo officers on Wednesday, Romeo officers on Thursday. We're going to grade your exam.
+
+And then we'll have office hours on Friday. And from there on out. Okay. I think that's all the announcements I have.
+
+Any questions bearing in mind that there will be more logistics? Yes. Um, how important are the.
+
+In terms of the midterm. Yeah. So this is a legit question because you only have so many times, so many hours in the day, right.
+
+Um. If you don't do any of the readings.
+
+You're going to struggle a lot more on the programing assignments than you should on the midterm.
+
+It's hard to put a number to it, but I'd say probably 5 to 10% of the midterm you just won't know the answer to because it's in the readings.
+
+But if you learn everything from class, that leaves you still open to get that 90 to 95%.
+
+There's also stuff that we will have technically said in class that it will make more clear, like why it's that way and how it fits together.
+
+So it may be worth more than that 5 to 10%,
+
+but it's very likely there will be like at least a question to you on the midterm that we just didn't talk about in class.
+
+It's only in the readings, but it's not going to be the majority of the midterm.
+
+Right. So it's like the difference between an A and a B, not the difference between pass the midterm.
+
+And not unless there's something you didn't understand when I said it.
+
+One of the reasons that we try to give you multiple resources to read from is because I have a particular way of communicating things.
+
+If you're like, I don't know, every time he's in talks, it makes no sense to me.
+
+It's possible that the readings, you'll be like, oh, that's what he was trying to say, right?
+
+That makes sense. Why didn't he just say that? Right, well, I did, I gave you the readings.
+
+Okay, that's a fair question to ask. It's not a stupid question.
+
+There's only so many hours, particularly for those of you who wind up taking, like, you know,
+
+20 credit hours of classes or whatever, like you got to do what you got to do, you know?
+
+All right. I've had questions since the beginning of the semester about how that water bottle got up there, and when they're going to take it down.
+
+I mean, I know how it got up there, right? But, like, feels like, how many times did somebody have to try, right, to get that water level up?
+
+I'd be more impressive. It was standing. Okay. So we left off.
+
+We, uh, talking about this, right?
+
+So the, um, basic idea here is that every process has a memory layout that runs from address zero to the maximum allowable address on the platform.
+
+Uh, okay. So not always, but on plastic platforms, that tends to be how it is.
+
+Um, and that there we have to put all of the things that a process needs.
+
+Remember the process is sort of the program in motion, doing the thing that it does, all the things that the process needs.
+
+We have to put into memory somewhere and somehow.
+
+Right. And then the operating system does that. How does it do it?
+
+Well, it turns out we lay it out in memory,
+
+starting at the bottom of memory and working towards the top with a bunch of stuff that we know at the time.
+
+We compile the program at the bottom of memory, and then things that we don't know until the program runs, uh, toward the top.
+
+So, um, I said that last time, but we didn't talk about any of these sections and what's actually in them.
+
+So section in this case is a technical term, right.
+
+So each of these labeled things is a section.
+
+And the section has a particular purpose.
+
+And if you use debugging tools to look at the programs that you write on your system and ask them about the structure of those programs,
+
+they will say text section, data section, right.
+
+That's the technical term that we use. And I said, down here at the very bottom, uh, there's an area that is not mapped on our system.
+
+It's about four megabytes on our system. Last time I looked at that.
+
+They can change that any time. Uh, but I, um, I believe it's about four megabytes.
+
+And this memory down here has no valid memory there to be accessed.
+
+So that specifically, if you chase a null pointer in your program and you try to say,
+
+well, give me what's at this null value, the hardware in the computer will say, I can't.
+
+And then your program will crash and it will dump core. And you can open it up in the debugger.
+
+Right? Because as we've said before, this is strictly better than it doing something because whatever it does is absolutely a bug.
+
+So you would rather it just stops now and you can debug it.
+
+Then it continues to run for a while and maybe crash somewhere else where it's harder to tell why it's stopping.
+
+Right? So we have an unmapped area. Above that we have the text.
+
+Text is a technical term. Uh, why is it text?
+
+I don't know, it's just text. Did we talk about this list? Items that feel familiar.
+
+We talked about text BSS told you about BSS is block started by section came from a similar.
+
+All right I'm wasting my time. I already said these things. What else do I want to say on this slide.
+
+So all of this stuff down at the bottom, uh, is read in from the program file on disk, the executable file on disk.
+
+When you start the program, the operating system reads the file on disk, and it just copies the program code into memory.
+
+It just copies the data into memory. And then the bus, it doesn't copy it in memory because it doesn't know.
+
+Remember the BSS was variables that were not initialized. Did we talk about that?
+
+Data is initialized. BSS is. Okay.
+
+So if I say in global space in my program, if I say x equals three semicolon.
+
+When I compile the program, I know that I need a variable x. Int x equals three.
+
+Semicolon. I know that I need a variable x. I know that it's an integer, so it occupies four bytes.
+
+And furthermore, I know what should be in those four bytes.
+
+When I start the program it should be the number three. So what the compiler does is it literally saves four bytes to disk in that executable program.
+
+And in that four bytes is the number three.
+
+And then when the operating system loads it, it loads that directly into the data section, I just writes it into memory.
+
+Here's your three that's going to be x. If, on the other hand, I say int y semicolon.
+
+No initialization. The programmer.
+
+The compiler says, okay, I know I'm going to need a Y, and I know it's going to be four bytes,
+
+but I don't know what value it should have because the programmer didn't tell me somewhere.
+
+When your program runs, presumably you will store some value to y and then you will use that value.
+
+But when the program is compiled, the compiler doesn't know what what value y should have.
+
+So rather than putting y in the data section which stores initialized data, it puts it in the box.
+
+And what it says is I don't need to store a Y in that file on disk, because there's no meaningful value that I can store for Y on that file on disk.
+
+All I need to do is store the fact that I'm going to eventually need a Y, and it's going to be four bytes.
+
+That's what I put in the file on this. Then when the program starts, it just creates a bus and it turns out, initialize it to zero.
+
+I think we'll talk about that at some point later. Uh, it writes zero to every bite in it, but all it needs to know is basically how big it is.
+
+It doesn't need to know what data goes in it because you didn't tell it. What data?
+
+Everything from here to here is known at the time that you link your program when you run that last GCC command.
+
+You remember this from the Mac lab, right?
+
+You can compile either the C file into an object, or you can link objects into an executable when you link the object in the executable.
+
+Everything from this bottom line to the top of that BSS line is known.
+
+And saved in the file on disk. It's static. We say that static.
+
+Above that we have several sections. We have the heap and the, uh, process stack.
+
+And then we have another big unmapped area in between.
+
+And the heap and the process stack are data that your program will create and use as it is running.
+
+But at the time that your program starts, there's no data on the heap.
+
+There's nothing on the process stack. They both have size zero.
+
+And then the very first thing that happens is your program calls main.
+
+When it calls main, it puts a little bit of data on the processor stack.
+
+Right.
+
+And then as it continues on it will maybe allocate on the heap, maybe allocate more stuff on the process stack, etc. and we'll learn how that works.
+
+Uh, we'll worry about the, the stack in this set of lecture slides, and we'll learn more about the heap uh, later.
+
+In general, what's on the heap is data. When you call malloc and you ask for memory, that's what goes on the heap, right.
+
+So every time you malloc memory goes on the heap. If you never call Mallick your heap never has a size greater than zero.
+
+Turns out that's not strictly true because the system might call malic on your behalf.
+
+But basically speaking, if somebody doesn't call malloc, there's never any data on the.
+
+Um, the stack contains the information about what your program is currently doing.
+
+We will see a lot more about that as this lecture goes on before we finish this, uh, lecture.
+
+All right. That's the layout of the program. Starts at the bottom, runs the top text, data base stack and unmapped area.
+
+The heap right above that. You see, it says, uh, kernel ID on our system.
+
+It turns out that the operating system reserves a little bit of memory at the very top for its own use.
+
+Um, the operating system kernel, which I think maybe we've already mentioned that word previously, but it's the inner core of the operating system.
+
+It reserves a little bit of memory at the top, uh, for purely for efficiency reasons.
+
+It doesn't have to do that. It does that purely for efficiency reasons. The reasons that it does that are outside of the scope of this class.
+
+But there's a little bit of memory at the top that you're not allowed to use. It belongs to the operating system.
+
+Yes. So good question.
+
+So the tech data and the B.S. apply only to global variables.
+
+Um, stack variables, which will learn about automatic variables, which we'll learn about in the rest of this lecture.
+
+The local variables you declare and functions, they go on the stack.
+
+They don't get initialized at the time your program starts.
+
+They have unpredictable values when your program starts, and that's where the uninitialized variable comes from.
+
+If you have a global variable uninitialized and then you read from it, you will not get a warning that it's an uninitialized variable.
+
+It will be guaranteed to either have whatever initialization value you gave it when you compiled your program, or be exactly zero stack variables.
+
+That's not the case, and we'll see why by the end of this lecture. Yes.
+
+We will talk in. So the question is what exactly is everything in the heap and stack in terms of how the memory inside is used?
+
+We will talk in great detail about the stack today.
+
+Uh, the heap we want, but the high level.
+
+Fact is that the memory on the stack is managed for you.
+
+The memory on the heap you manage explicitly. So the everything that's on the stack will be created and destroyed by the compiler effectively.
+
+Whereas on the heap it's because you called malloc or free. As your program gets larger, the heap will go up and the stack will come down.
+
+And when they meet in the middle, you ran out of memory. That's when malloc returns.
+
+And. All right. Yes.
+
+When you. Optimized out.
+
+Yeah. This is not going to appear on your midterm.
+
+Um. So the short answer is that the information that would be required to reconstruct what you asked for.
+
+Was known when the compiler compiled your program, but it didn't store enough information to figure it out when you.
+
+Are running your program. So when this classically happens is if, say, you have a string.
+
+Uh, and you run from I equals zero as long as stir square brackets.
+
+Is not zero. And then your program is running and you say print I and it says I is optimized out.
+
+And the reason for that is that it looks at your program and determines that it doesn't need.
+
+And I it can convert. This is absolutely not on your midterm.
+
+Absolutely not on your midterm. It can convert this. Into this.
+
+Provided that you never use AI inside the loop for any purpose other than this.
+
+If it only ever appears a stir square bracket, I so say then what we do is we say,
+
+you know, uh, total this is total, uh, plus equals stir square bracket I.
+
+If this is the whole loop. What is AI on the third iteration of this loop?
+
+It's optimized out. You don't know. Does that make sense?
+
+Optimize out. This is faster. It requires less memory and it runs faster.
+
+All right. That's the end of what won't be on the midterm. That's the answer to your question. That's the end of what won't be on the midterm.
+
+And there are tricks that it can do.
+
+Like it can store the fact that C is actually surplus, ie in a special place so that the debugger can reconstruct that sometimes.
+
+But that's what that means, is that it tried harder to make your program better and it made it.
+
+To where there's some information that you might ask for doesn't actually exist. All right.
+
+That won't be on the midterm, but it is a good question. It's interesting, which is why I took the time to.
+
+So we used to have this in this class. We would talk about it. It was one of the last sections we would do.
+
+But we run out of time. So. Probably won't get to it this semester.
+
+Um, it's been several, probably a year and a half or two years since we got to it.
+
+All right. We do other stuff and stuff. So.
+
+Okay. Um, why do we care about sections?
+
+And I hinted at this before. Um, this is valuable debugging information to you as a programmer.
+
+Um, it hasn't happened yet this semester.
+
+But invariably at some point during the semester, someone comes to me and they're like, my program is crashing, and I don't know why.
+
+And I say, did you ask gdb. And they either say yes or no.
+
+We both know what they actually say, but they either say yes or no.
+
+And I say, okay, well let me run under GDB and let's see what happens. And at some point I print a variable and it prints an address and I say, oh.
+
+It's because you're, you know, you returned a variable that was on your stack or whatever, and they're like.
+
+How did you know? And it's because I looked at the address and I saw what value that address because it's just a number, right?
+
+I saw what value that address had. And I said, that address is way too big to be anything but a stack address.
+
+And we shouldn't have had a stack address here.
+
+So therefore, you know, I returned a local variable when I should have returned something that's on the heap or whatever.
+
+So once you learn how to recognize oh, that's probably on the heap.
+
+Oh, that's probably in the data section. Oh that's probably on the stack.
+
+Then when you start doing things like looking at your program back traces,
+
+you have a lot more information about what your program was actually doing and how it's working.
+
+Um, so that's one reason to, uh, care about these, um, sections.
+
+There's also the fact that, um, these sections have different properties that can be valuable to you to know.
+
+So, for example, the maximum size of the stack on our system is about eight megabytes.
+
+We'll hear in a minute. We're going to talk about how we use the memory in the stack and what we wind up putting on the stack.
+
+And it turns out that if you declare a local variable that is an array that is like large,
+
+that's megabytes in size, then you'll run out of stack and your program will crash.
+
+So you need to be able to tell yourself, oh, when I create this variable, I expect it to be on the stack,
+
+or I expect it to be in the data section or whatever, and it matters where it winds up.
+
+Uh, the biggest single skill that you can build is when you have a crash and you see a pointer value, and that pointer value is small.
+
+Where by small I mean typically.
+
+Between the value zero, which is null, and maybe 3 or 4 digits long.
+
+Like the number that represents that pointer. You've made a mistake.
+
+That was a null pointer. And we'll see later.
+
+Actually, we've already seen why it might have been a null pointer.
+
+It might have a value like 16 or something like that.
+
+So if I have some struct, remember our int pointer struct and I have some struct int pointer star ip and I say ip arrow next.
+
+And IP is null. What address is it going to try to access?
+
+Remember we had an int and then a pointer. And our struct in pointer has two members int value and struct pointer star.
+
+Next. What address? If ip is null which is zero?
+
+At what address is the next number? Well, it will be a segmentation fault, but what numeric address is that?
+
+It's not null. Yeah, but how small?
+
+You know exactly what number this should be. Close padding.
+
+Eight. Going to be exactly eight, right?
+
+So when your program crashes, it will crash and you win.
+
+When you look at the backtrace, it'll be because you, you know, IP arrow next and it will say IP equals eight.
+
+As well as probably, say zero eggs and then a bunch of zeros and then eight.
+
+Right. And you'll be like, oh, I mean, that's my face.
+
+You'll be like, oh, uh, that was an old pointer, right?
+
+So very, very small values mean that you tried to use a null pointer. If you take nothing else out of process layout.
+
+As a programmer. Not for your midterm. That's a different question. But as a programmer, that's the most important thing here.
+
+If I see a very, very small value, I tried to dereference an all pointer.
+
+If it's exactly zero, of course it was an all pointer. It was a small value.
+
+It was an array. And I tried to get an element, but the array pointer was null or it was a structure.
+
+And I tried to get a member, but the structure pointer was not. Probably.
+
+Or maybe I didn't math, but the pointer I started with was null instead of some, you know, memory structure.
+
+All right. So here's some example of how layout. Works on a real program.
+
+So here is a simple function and some global variables.
+
+Right? I have two global variables. And we want to ask ourselves in what section of the executable should all of this data be stored?
+
+And we're going to start at the bottom of the tech section and work our way up. So it turns out that the actual characters HELOC and the null byte.
+
+When I did this, like I actually did this, and I looked to see where the variables were wound up in the text section.
+
+They could have been in the data section, but in this case they wound up in the tech section, which is okay.
+
+And of course, all of the executable code that makes up the function f wound up in the text section,
+
+because that's what we think of as the text section is being four. Is the executable code right?
+
+So all of this stuff that's bracketed in Letchworth autumn, uh, is in.
+
+Have I told you guys the story yet?
+
+Like, you know, there's a UB brand palette and there's colors that you're supposed to use, and like this is UB blue.
+
+Does anyone know what this is? Hayes Hall, white.
+
+Do you know what color it is? It's just white.
+
+It's just white. But they call it Hayes Hall white.
+
+I don't know if you've ever seen Hayes Hall, but it ain't that white, right?
+
+Uh, this is just black. This is.
+
+Victor E blue. And this is Letchworth.
+
+Autumn. There's others. Olmstead green and, um, Lake LaSalle blue.
+
+That might be Lake LaSalle. Actually, I think that's a victory. Blue. But it might be Lake LaSalle.
+
+Anyway, it's really great. Um, I guess Pantone was too expensive, so.
+
+Okay. Um, so. The global variable stream.
+
+It's a global variable and it's initialized. I know exactly what value it should have when I compile the program.
+
+When I compile the program, the value stored in string will be the address of the string.
+
+Hello. Right. So it goes into the data section.
+
+It's a global variable and I know exactly what valuable value it should have at the time the program was compiled.
+
+So it goes into the data section. Note that I can change it later.
+
+That's fine. It's still going to go into the data section because when the program first starts, its value is no.
+
+It can change later. That's fine. But when the program first starts, its value is known.
+
+The variable I size is an integer in global scope.
+
+But its value is not known. It could be absolutely anything.
+
+So what happens is it gets put in put into the bus and initialized to zero.
+
+Doesn't matter what its value is. So we'll just put it in the bus.
+
+It'll be initialized to zero. The local variable P.
+
+This is a local variable. Is stored on the stack.
+
+Local variables go on to the stack. We'll talk about that in great detail in the rest of this lecture.
+
+Local variables go on to the stack. And finally.
+
+When I call Malik. The memory returned by malloc is on the heap.
+
+Now notice that this leads to an interesting situation where my layout of my process.
+
+Looks like this. Right.
+
+And I have my up here and I have my Jeep down here, and it goes this way.
+
+The memory returned by Malik. We're down here.
+
+P is somewhere up here. The value stored in P is an address of something that's down here on the heap.
+
+So P is on the stack. Star P.
+
+Is on the heat. Write the variable that points to.
+
+Is on the heat, but P itself is on the stack and it stays on the stack.
+
+It does not move to the heap because I assigned to it a value that's on the heat.
+
+P is a number stored in memory, and the memory that stores that number is on the stack.
+
+Does that make sense? Okay.
+
+So that's all of the sections in this case, right. We had something in every possible section of the executable we had.
+
+The code itself was in the tech section. We had the global variable um string.
+
+The variable itself was in again that was similar.
+
+Right. So it's uh in the. Uh data section, but it pointed to data that was in the tech section, right?
+
+That's okay. The variable itself, uh, string is in the data section.
+
+The variable I size is in the BSS.
+
+The variable p is on the stack. And the memory allocated by malloc which is anonymous.
+
+It doesn't have a name. But we store the address of it into the variable p, which is on the stack.
+
+The memory allocated by malloc is on the heap. Any questions?
+
+Yes. RF is a function that returns a value of type care star.
+
+To answer your question. It's not.
+
+It doesn't exist. F is on in the text section.
+
+The value that it returns doesn't exist. It will exist when we call F.
+
+But in this snippet it doesn't exist. When we call F.
+
+The return value will be on the stack, but we haven't talked about that yet.
+
+Okay, that is your question. Yes.
+
+Okay. Why you ask me questions like this? Uh, the answer is yes.
+
+On the midterm. In reality. Remember how we talked about optimizing?
+
+The compiler will be like 000. I have a place where the value is zero.
+
+That's the base. I'll just put it in the base. Which is not cool for the midterm, but for the midterm, if you say zero,
+
+it's going on the it's going in the data section, but in reality it gets a little wibbly wobbly.
+
+Depends on your compiler options with probably if you turn off optimization it'll be
+
+in the data is actually if you turn on optimization something else could happen. Yes.
+
+Star power will be in the hips. When we call the function f.
+
+A local variable P will be created that will be on the stack.
+
+When we call the function Mallik memory will be created.
+
+That will be a heap star P will point to the.
+
+So if I asked you on the midterm, like where is P, you would say stack.
+
+If I said where to start P you would say he. Yes.
+
+Yeah. If you free P, this memory goes away. P still exists.
+
+And that's why it's best to then set it to null, because it still exists and it has this address.
+
+It's just that doesn't exist anymore. Yeah. Good questions.
+
+You guys are killing me. I didn't kill me in the good sense in this case.
+
+Uh, these questions are fantastic, right? Uh, this is these are the best questions I've had in many semesters.
+
+I'm proud. I have questions about the 11 people who didn't get the you can't the first time, but y'all got the second time, so that's cool.
+
+Um, all right, so, uh, the static allocations are created when the program starts.
+
+When we run the program. The text, the data and the BSS will be created immediately.
+
+They are of fixed size. They are actually copied from the executable file on disk into memory.
+
+It literally just says read this data from disk, write it into memory.
+
+It may then modify it or do some things with it, but that's where it essentially comes from.
+
+The size of all these are known at the time. They compiles, they don't change.
+
+And this memory is released only when the program exits.
+
+So from the point of view of your program. Global variables and anything else that gets stuck into the data and BSS or is in the text section.
+
+Exist before your program starts. And they exist until after your program exits.
+
+They can never be invalid, right or out of scope.
+
+They can hold the wrong value, but accessing them will not be invalid.
+
+Right. They're always in scope. Now it is the case that you may have locations that are not accessible for writing.
+
+For example, if you declare a const value in the data section,
+
+then the hardware may enforce that you never change that value and your program would crash if you tried.
+
+But as long as they use them legally according to the rules that you've declared, they will always exist.
+
+They exist before your program starts. They persist until after your program is done.
+
+The heap and stack sections, on the other hand, are dynamic.
+
+They start out as size zero, and as you need memory in those sections, they will become larger,
+
+and as you no longer need memory in those sections, they will become smaller.
+
+Secretly, they normally don't become smaller.
+
+The memory becomes available for re-use, but it doesn't actually get released back to the operating system for various reasons,
+
+but mostly because if you have used a lot of memory, you probably will use a lot of memory again.
+
+Um, it turns out, and it's a waste of time to actually give it back to the operating system.
+
+Um, but they nonetheless, notionally, they grow larger as they need to be larger, and they get smaller, uh, as they are no longer, uh, needed.
+
+Anything that you don't freeze. So the question frequently comes up.
+
+Memory leaks. What happens if I don't free memory and then my program exits?
+
+Is it gone forever? Does the computer lose the memory?
+
+No. When your program exits the same as the data base, you know, and tech sections, any memory that you created, say,
+
+on the heap with malloc or any memory that was on the stack that you,
+
+if you don't return all the way out through main, will be released by the operating system.
+
+In the operating system, when it destroys your program will destroy all of the memory that it was using.
+
+Yes. Correct.
+
+There's no lab next week. A little strange question for the middle of lecture, but, um, I also have ADHD.
+
+Um. The stack, the memory, the the heap can be very, very large.
+
+The stack is small. And the reason is that, uh, normal, normal programs doing normal program things don't need a large stack.
+
+In fact, most of your programs, it's an eight mega stack.
+
+Most of your programs, I doubt, ever use a mega. Right?
+
+Uh, in fact, they may only use a few hundred kilobytes. Modern computers, they probably do use a few hundred kilobytes.
+
+Older computers. The stack would be sometimes limited to like four kilobytes.
+
+And that was probably okay. Once you see what goes on the stack, you'll see why that is.
+
+Other questions. Not a compile time at runtime.
+
+At compile time they have size zero. They're unused at runtime.
+
+They start with zero, and they grow as they're needed. Yep. Exactly. Yes.
+
+Could you? What? If you.
+
+It's called blowing the stack. As in, that's it.
+
+A little porn like from Steam Engine days when you blow the stack, it's when the boiler actually exploded in the.
+
+Smokestack came off of it.
+
+Blowing the stack is when you try to use more memory than you have in your stack, and your program will crash with a segmentation fault.
+
+Uh, with the heap. What'll happen is you'll call malic and it will return null.
+
+If you then try to use the null, you'll get a segmentation fault, but you can actually detect that condition.
+
+There's no safe way to detect that you blew your stack. You just have to make sure you keep it smaller.
+
+And it turns out that that happens, right? That's fine. As again, eight megabytes is very, very large.
+
+It's much more memory than you'll probably need. Great questions.
+
+Love it. Okay, so let's talk about the stack. So a stack is a data structure.
+
+Um. You almost certainly have seen a stack already in some class previously that you've taken.
+
+Um, although that's not required for this discussion. Um, but V stack.
+
+So there's a stack and there's the stack.
+
+The program stack. A stack is a data structure.
+
+That is what we call, uh, litho LIFO.
+
+Or some people say Philo, but that's not cool because that's a kind of dough.
+
+Uh, litho is last in, first out.
+
+The last thing that I put into a stack is the first thing I get when I take something out of a stack.
+
+It is literally like a stack of things, right?
+
+So if I stack up Ethan's notebook and computer here, it's much more difficult to take the computer out than it is to take the notebook off top right.
+
+So it's a stack. We take the thing that we most recently put on it on there.
+
+It's like your nightstand, where you put all the books that you really do intend to read.
+
+The one of them is on top, right? Um. The program stack.
+
+Is a very specific stack, and your program has one program stack for every what we call execution context.
+
+We will talk more about what that means later. For now you have one.
+
+You have one program stack. That program stack is a stack in the sense of the data structure, a stack.
+
+But it is a stack that is implemented and behaves in a very specific way.
+
+Specifically, it is a stack that is implemented essentially as an array where as I push things,
+
+we say pushing to put something on a stack, they move downward towards lower addresses.
+
+And when I take things off the stack, the top of the stack moves back upwards towards higher addresses.
+
+So we say that the stack has some height.
+
+It starts at some address that's high in memory.
+
+And we call that the base of the stack, which is, you know, your nightstand in the books that you intend to read.
+
+Metaphor. Right. The top of the stack is the surface on the top of the next book that you haven't read,
+
+where you would put the next book that you're also not going to read right onto that stack, right?
+
+The top of the stack is where you would place the next item.
+
+The base is below the bottom item. The top is above the top item on the program stack.
+
+The base is at the top and the top is at the bottom, and we push things onto the stack downward in memory.
+
+So gravity has been reversed for some reason. The some reason is practical reasons.
+
+Remember I showed you the heap in the stack and they point like this.
+
+It's so that the stack can grow arbitrarily large and the heap can grow arbitrarily large.
+
+And as long as they never meet in the middle, you don't run out of memory. Uh, originally that's how Unix was implemented.
+
+But in 2025, we have two to the 64 minus one possible addresses of memory.
+
+And neither one of those things is ever going to actually meet in the middle.
+
+So we just said, I don't know, the stack can be really big. Eight Meg. Right.
+
+And then we allocate onto the heap until we run out of the actual memory available in the system,
+
+which is much less than two to the 64 minus one bytes. It's probably like 60 gig, right.
+
+Or something like that. Which is two to the 36, I think.
+
+234. Um.
+
+So here's an empty stack. What time is it? Okay.
+
+So I'm going to say now what I said at the beginning, for all the people who came in in the first bill and now 40 minutes of class,
+
+but really the first 15, the midterm is next Wednesday. It's a week from today.
+
+It will start at 1 p.m. If you were not here at 1 p.m., you will not be admitted to the room.
+
+If you are not admitted to the room, what grade do you get on the midterm?
+
+No. Zero. In fact, three is close, but it's actually zero.
+
+Um, so please be on time for the midterm in one week.
+
+One week from today. Okay. Um, and there will be instructions for where to wait.
+
+Unfortunately, in this classroom, there's really only one door that you can open.
+
+Fortunately, there's another door. That you can wait at.
+
+You can just can't open it from the outside. You can come from one world. Uh, or you can wait at the outside door of weather's nice.
+
+Uh, will let people in, you know, both rooms. One 1:00, both doors one 1:00.
+
+Come so lined up on both sides so that people can get through the hallway out here.
+
+But please be ready to be here at one. Okay. Back to stacks. Um, and the reason is it's a 50 minute midterm.
+
+So if it takes us ten minutes to get seated, that's just ten minutes. You don't have to take the midterm.
+
+Okay, so back to stacks. So here's an empty stack.
+
+We have an empty stack where the base of the stack and the top of the stack are both at exactly the same location,
+
+at the very top of the memory that has been allocated for the stack.
+
+So this is your nightstand right after you clean your room and you decide that you should just put those books back on the bookshelf.
+
+Okay. When a program needs to put something on the stack, it will put the verb that we use as push.
+
+We push something onto the stack, that thing onto the stack.
+
+So say we have an int I. And it has the value 42.
+
+We will take four bytes of stack. Move the top of the stack down.
+
+So now there are four bytes between the base and the top.
+
+And we'll put that int right there in that space. So if you look at this stack every one of these rows is 32 bytes wide.
+
+It's four bytes wide right. So I put a four byte integer in the very top address that's available to me on the stack, and I stored that integer there.
+
+Um. If I need to push another item, then I will continue to move the top of the stack downward.
+
+But recall that we had rules about where in memory we can place values.
+
+You can't just put a value at any old given address you want.
+
+Those addresses have to follow some rules. They have to follow the rules of alignment.
+
+So in a stack, just like in structs, we will use padding to maintain the alignment of the individual values that we push onto the stack.
+
+In this case, though, instead of putting the padding below the item to maintain its alignment,
+
+we put the padding above the item to push it downward until the bottom of that item.
+
+The base of the stack. Is that an appropriate address to put that item on the stack?
+
+So if I put an int and then a double, I'm going to have an int below the int I'm going to have four bytes of padding.
+
+And then below that I will have my double right, following exactly the same rules that we used when we padded out.
+
+Strokes just in the other direction. Turns out the rules work exactly the same, because all of our items will be of sizes that are powers of two.
+
+So it will always work exactly the same. If you would put them in a particular order in a struct, it'll have padding in, you know, certain places.
+
+If you just run those rules in the other direction, you're the padding will wind up in exactly the right places.
+
+This makes sense. Yes.
+
+These is the name of the variable. It says I.
+
+And it was and I and double D. Because it starts with an eye and double starts with D.
+
+So the compiler has to remember where it put stuff. Right. So we'll have to remember that AI is the top thing on the stack.
+
+And D is, you know, below AI. Yes. There is an next to the 42.
+
+Oh, that d. That's a great question.
+
+In the see. It's in K and R in the C programing language if I write this.
+
+This is a float. If I write this.
+
+This is a double. I can also write this.
+
+And make it explicit for an int. I don't know if I could put an AI after an integer to make it yet.
+
+I actually don't know. Somebody should read the standard.
+
+But if I want to make sure it's a long like if I have a three and it's not a four by three, it's an eight by three.
+
+I can put an L after it. A lowercase or an uppercase L that does the same thing.
+
+And then that makes it a long.
+
+We usually use an uppercase L, because some people use crappy fonts where it's hard to tell the difference in a one and L.
+
+So to make sure that it's not a 31, you write three capital L instead of just telling everybody,
+
+use a font that doesn't suck, which is what we should do. Uh, we use a capital L, but you can do the same thing with integers.
+
+So if I wanted to a constant number and wanted to say this is an eight,
+
+my constant, I can say it's a law actually, or I can say it's a short or whatever.
+
+Yes. I don't think you can write anything after it.
+
+Uh, so with floats, they don't have anything. But you're allowed to use the F with ns.
+
+I don't think you actually can. I think if you said three, I. It just wouldn't compile.
+
+Sexual never come up before. You're the first person in seven years that has asked that question.
+
+I told you guys, that's great. Questions. Keeps you on my toes.
+
+Next time I don't answer your question when I say, do I answer your question? Don't say yes. Say no.
+
+And you didn't. Okay. So then if I push a struct.
+
+Here I have a struct and it has two members x and y.
+
+X comes before y. So when I lay this struct out in memory, x is at the base of the struct and y is at the base plus four bytes, right.
+
+I assign it the values three and for some reason it wrapped five.
+
+Uh, note that when I push it onto the stack. It did not push onto the stack.
+
+Upside down. X is still at the lower address and y is at the higher address.
+
+So the stack is moving downward with the things that we put on the stack are not upside down.
+
+Does that make sense? That struct looks exactly the same there as it would if I just put it on the heap or, you know, whatever I did with it.
+
+Right? It will always look exactly the same. Cool.
+
+All right. I kind of want to do a top hat question. Is it time? There's no top topic questions.
+
+I want to top that question. And the reason is, come the end of the semester.
+
+Uh, you're going to get grades for your top eight questions. And if I haven't asked a lot of them, then if you missed one, it's like a big deal.
+
+So I want to make sure that we get plenty of opportunities to answer some of our questions.
+
+We don't need padding because they're both ints, so they don't need any padding.
+
+They're both four bytes. Yeah. So if one of them is aligned, the other one is aligned.
+
+Top hats trying to load. So that's not the only problem that has.
+
+It wants me to use it real bad too. It wants me to use AI to make questions.
+
+All right. Maybe we're not going to Top Hat because it's just loading. It's just spinning.
+
+What if I reload? Oh. Here goes. It's loading from DQ.
+
+HD, CB. Blah blah blah dot CloudFront dot net.
+
+Nice, guys. Nice. Yeah. Good naming. I don't think it's because.
+
+All right. This is a tough one. It's tough because it's going to take a minute and we don't have a lot of time.
+
+So, uh, let's get right to it. It's going to be the last thing we're going to do.
+
+And at the moment I say, that's all right. So the, um.
+
+BSS stores uninitialized global variables. The data section stores initialize global variables.
+
+The heap stores memory that is allocated by malloc and reallocate.
+
+The text stores the actual program code that you compile.
+
+All right. I'll see you on Friday. We'll finish this set of lecture slides.
+
+If we don't, we'll finish it first thing Monday morning.
+
+But Monday should be dedicated to reviewing for your final. We'll spend the whole class period reviewing your final.
+
+Yeah, yeah. So, uh, fortunately for you, and I mean.
+
+That is correct. You can see I can go ahead and screenshot that and send it to me.
+
+But probably what I'm going to do is I'm going to tell you, you get to drop the six lowest days.
+

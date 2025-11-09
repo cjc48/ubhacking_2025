@@ -1,0 +1,945 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Now I can start. So. What I want to do to start with.
+
+So at the very end of last lecture, we drew some like data structures on the board.
+
+Right. We drew a heap on the board. Um, what I want to do now is go through a very similar example.
+
+We'll just work through it. However we work through it. Right? However, the spirit moves us, as it were.
+
+Uh, as we work through it. Um, but I want to go through it on the, um, document projector here so that it shows up well on the.
+
+Oh that's close. So that it shows up well on the, um, recording.
+
+Right? I'm so obsessive compulsive.
+
+Okay, so that shows up well on the recording. Um.
+
+So we'll just get some things out. We'll take 10 minutes or 15 minutes or something, sketch those things out.
+
+Uh, give you a little bit longer explanation because we flew through it at the end.
+
+And what I don't want is for people to say, well, I don't know.
+
+Ethan flew through it, but then when I went to look at the recording, it was I couldn't see the board.
+
+Right. Because I know that the camera doesn't pick up these boards, uh, particularly well.
+
+There's actually, like a chalkboard mode. But it only gets the middle board.
+
+So. I don't know. Anyway, um, this this classroom.
+
+This is the best classroom. I showed you the thing in the back, right? With the with the window.
+
+The people outside are like, what is happening right now? Like in that? Cool. Like I can open and close the window by pushing a button.
+
+I don't know when it unlocks. I don't know when it unlocks. I think you have to be logged in, but if it's logged in, it's open.
+
+Okay, so, um, actually, I'm going to have to move this anyway because I want to use the opposite page from what I used last time.
+
+So we'll go. Right there.
+
+All right. Um, so I'm going to draw just a little bit of what we did, uh, last time.
+
+And then we'll go ahead and start into today's lecture. So, um.
+
+Turn it on. They call me in my last class like five minutes in.
+
+Every day. You buy calls and it's like, do you wanna turn your mic on?
+
+I'm like, oh yeah, I'll do that. Then I turn it on. Um, so essentially.
+
+The operation we're going to go through is the operation of some heap allocator.
+
+It's not, as I said last time, it's not the allocator that you will do for your pay,
+
+for which I know you all know all about, because it released this morning at 8:00 am.
+
+And so you've already read the handout. Um, we're not going to go through like that heap allocator, but we're going to go through a heap allocator.
+
+So when I say things you're like, oh, that's not what's in the handout. Like no it's not.
+
+But like broadly there's a lot of similar concepts and it's good for you to see the difference.
+
+So when your process starts. You've seen this diagram, right?
+
+We have some unmapped memory down here, and then we have the tech section, and then we have the data section, and then we have the BSS.
+
+And then the heap grows upward from the BSS.
+
+Right. So if we look at just the heap when the your program starts, the program break is pointed here in the BCIs here.
+
+And it's pointed exactly at the top of the BSS.
+
+So there's zero bytes of heat. And sometime after your program starts something, we'll call Malik.
+
+Now, in our case, just so you're aware that something happens and usually before main is called.
+
+So sometime between when your program starts and when main is called, something will call Malik.
+
+Uh, the reason I tell you this is when you're debugging your program and you're like, why is it crashing before my break main or whatever?
+
+It's because the, um, dynamic library loader, which we're not going to talk about in this course, but trust me,
+
+it's a thing that exists, calls malloc sometime between when your program starts and when main, uh actually gets control to execute.
+
+But at some point something is going to call malloc and it's going to call Malik for some size.
+
+And it doesn't matter what size it is. Uh, so let's say it calls Malik for 388, right?
+
+I don't know if I should have picked that number or not. I don't know if it's going to align, but I do anyway.
+
+Whatever. We'll just pretend like it does. Um. So it's going to call Malik for some value.
+
+Your allocator is going to do something. And that's going to turn some at return some address a and that,
+
+that's an a uh and then that address A will represent a block of memory that the users program can used to write their application.
+
+So when that happens your allocator is going to go here and it's going to look at this chunk of memory here between the BSS and the system break.
+
+And it's going to say oh I actually don't have any memory.
+
+So somewhere you'll presumably have like a free list. And that free list is null, right.
+
+There's nothing at all on the free list. And so when the user calls malloc you'll say, I actually cannot proceed from here.
+
+I can't give the user any memory. I'm going to have to go to the operating system and ask for more memory.
+
+I'm gonna have to request more memory from the operating system. And to do that, the allocator will call s break.
+
+Now, in your allocator, you're always going to s break in.
+
+Pages of 4096 bytes or chunks, as we call them, at 4096 bytes.
+
+Your program, should it ever have the number 486 in it?
+
+The program should never have the number 496 in it. We gave you a constant chunk size.
+
+You should always use constants, right? No magic numbers. Magic numbers are bad.
+
+They make Ethan sad. Um, so you'll call iceberg of chunk size.
+
+The operating system will find you, uh, in 4096 bytes of memory.
+
+And it's going to return some pointer, right, some pointer p,
+
+and if you go to that pointer p in memory, you'll find that there is from P to wherever the end is.
+
+Let's call it q. There is 4096 total bytes of memory right in this chunk right here.
+
+That chunk will be located right here. And so what'll happen is the system break will move up just a little bit.
+
+In memory. So now the distance between the top of the bus and the system brake is 4096 bytes.
+
+And you have a heap. And that heap has some data on it. Now the user did not ask for 4096 bytes of memory.
+
+The user asked for 388 bytes of memory.
+
+So a thing that an allocator could do, the kind of allocator that we're going to talk about right here, is what's called a breakup allocator.
+
+I made some cruel jokes about breakups in computer science students in the last class, so I won't do that this class.
+
+It was pretty good though. You should watch the video. Nobody cried.
+
+Well, let's just say, first of all, I said something about. Okay, fine.
+
+I said, um, breakup. Not like what happened to you over fall break, but.
+
+And then I said, haha, that was just a joke because you're all computer science students and nobody broke up over a fall break because,
+
+you know, and then some of them cried, but you guys wouldn't because you're cooler than that, right?
+
+You. Yeah. Anyway, so, um, what you do is then you then take this chunk of 4096 bytes.
+
+That you got back from the allocator, and you carve off a piece and you write 396 or whatever right here.
+
+Yeah, I did a good job this time. Uh, and then you're right.
+
+3700 right here. And you make two blocks, right?
+
+And this one you give to the user and the distance. So if this has an eight byte header on it, then there's 388 bytes here.
+
+Right. And you give that to the user. And then this block let's call this block.
+
+You know B you put on the free list. Right.
+
+So your free list points right here to this block of memory.
+
+And then this block you give to the user. But this block that you give to the user looks like this.
+
+And the address of that block is this address right here.
+
+But you do not want to give the user that address right there. Because if you give the user this address right here, then when they store their data,
+
+they're going to scribble all over your sides that you neatly put in this block so that you can free it later.
+
+So instead, what you do is you move forward past the head.
+
+And you give them that address right there. Right. You use the pointer math.
+
+You move past the header on the block, and you give them the address of the actual free area of the block where they're allowed to store their data.
+
+And when they call free what they're going to free when they're done with their block of memory.
+
+Is a right. It's this address right here.
+
+And at that point, you have to be able to go back here, find the header and figure out how big your block is.
+
+Yes. 396 is just 388 plus eight bytes.
+
+The user called Malik of 388 bytes.
+
+So you created a block of size 396, which is eight bytes, that has stored in it the integer 396 and 388 bytes.
+
+Of like data that they can do what they want with. That's at the address a which is what you return from Malik.
+
+You free the entire thing? All 396 bytes. So they're going to give you a.
+
+They're going to give you a pointer to this location right here. And you're going to have to back up in memory.
+
+Find this header. Find the number that says 396 and say oh this is the 396 byte chunk of memory.
+
+And you're going to have to put that back on the free list. Okay.
+
+Um, so then this piece of memory that's right here. Because if you note we have this is a B, I can't write, which is a real problem for me in life.
+
+Uh, but this is a B and then the B goes to null. So right here you're going to have a next pointer that goes to no.
+
+Right. And that's your free list. Right. So your free list goes here and it goes to null.
+
+And there's only one block of memory on your free list, and it is 3700 bytes in size.
+
+Yes. If the user uses all of the memory on the free list, but never calls malloc, then calls it again.
+
+Then you go back to the OS and you call ask break again.
+
+If they use up this 3700 bytes, for example, you would call this break again, get more memory that would go up here right.
+
+And then use that to serve the user's allocation. They could conceivably free all of the memory.
+
+But you don't get it back to the OS because that feels like work. And we don't.
+
+We're computer scientists, fewer engineers. We don't really do work if we don't have to.
+
+Please, I don't it gives me hives. Yeah, I'll just hold it off. This is kind of.
+
+It's similar to pay for. It's not the same, but similar to pay for. So the first.
+
+The user called malloc. And.
+
+The. Yep.
+
+A is this pointer right here. So the user called malloc.
+
+Your free list was empty. So you said I don't have any memory.
+
+Where do we get memory from the operating system? How do we get memory from the operating system?
+
+We call s break. So you called us break?
+
+S break gave you some pointer. You took that pointer, you broke it up into some chunks.
+
+One to serve the user. And then one of memory that's still free. Right.
+
+So then this program runs for some time and the user calls malloc and they call free.
+
+And they call malloc and malic and malloc and they call free and they whatever.
+
+And then at some point your heap looks something like this.
+
+You have a chunk of memory here and it's allocated. It's a certain size and you have a chunk of memory here and it's free, right?
+
+I'll slant that the other way, and it's a certain size. And then you have a chunk of memory here and it's allocated.
+
+Maybe another chunk of memory here is allocated. The chunk here that's real small because we're in our room and it's free.
+
+And then a chunk here get tired drawn these it's allocated.
+
+So I'm making a real big. And then a chunk here that is free.
+
+All right. And your free list works its way.
+
+So this was allocated. This is allocated.
+
+This is allocated. And.
+
+This is allocated. And your free list works its way through this list somehow.
+
+So if we call this A, B, C, and D, your free list might be free.
+
+Uh, goes to B and then C, and then A, and then D, and then uh null.
+
+So in which case it inside b.
+
+This is a. Okay, fine.
+
+Want to make another free one. So inside B there is a pointer that points to C.
+
+And inside. See, there's a pointer that points to a and inside A, there's a point of the points to D and inside there's a null.
+
+Right? So it's just some thread that goes through your heap somehow, and every free block of memory on your heap is somehow on that list.
+
+But you don't care necessarily about the order that they're in or where they are or how they're laid out,
+
+because that just depends on when the user called free and when the user called malloc.
+
+Right. When the user calls free, you put it on the list when they call malloc.
+
+You allocate if you can. Okay. Does this make some sense?
+
+Doesn't have to be fully clear right now, but like, it seems like it makes some sense.
+
+If not, what are your questions? Yes.
+
+What is? Is it like that?
+
+You have to put it on. There's definitely.
+
+There's the. I just don't see this like that.
+
+Many bikes that you can see. The free list is memory bytes that are currently free.
+
+So they've either been freed by the user they were previously allocated and now they're free, or they're bytes that have never been given to the user.
+
+You call that's break. You had some leftover memory. You put it on the free list.
+
+Other questions? Yes. It's satisfying that you're like, right there between those monitors, and I don't have to move the needle and sees that.
+
+D has a next pointer in it that is null. Because remember that when you gave this memory to the user, this 388 bytes, if the user ever calls free,
+
+the next pointer is going to go right here, right on top of the beginning of that 388 bytes.
+
+Yeah. So you just inside that D block right here.
+
+You have a size and let's say it's 508.
+
+And then right next to that you have a bunch of zeros, right?
+
+And then you have junk. You don't care. You don't convinced, but think about it and ask me if you have more questions.
+
+Yes. Had to move for that. That was less satisfying.
+
+But go ahead. At the beginning of the block right by the header typically.
+
+So the question is where's the pointer stored. It's typically right by the header. So you'll have a size.
+
+And then immediately after that you'll have a pointer. And in fact we recommend in your par four that you declare a struct.
+
+And you just create a struct that has a size in it and a pointer in it.
+
+Yes. Does the heap have a size limit?
+
+Yeah. Eventually you'll call S breaking the operating system. We'll say no, but that size is very, very large.
+
+We're not going to run into it in 220. It can frequently be larger than the amount of memory that's actually on the computer.
+
+And when we talk about the virtual memory subsystem, we'll talk about why that is and how that would work.
+
+Yes. Is the heap memory contiguous?
+
+Is that the question? Yes.
+
+That's not address. That's the size of the actors of that story.
+
+Cycle eight. Yeah.
+
+That's like this. Just exactly like this.
+
+I wrote down a 508. And right beside it I wrote down A000.
+
+I wrote down A508 and Riverside. I wrote down A000.
+
+This happens to be an address, but it's just a number.
+
+This is not even an address. This is just a number. I saw the light.
+
+Come on. All right. We're good now. Yes.
+
+It is not that they are restoring, but. You just have to be very careful with your pointers.
+
+So the question is how? Essentially how do you know what's a header and what's a next pointer.
+
+And what's a free block and what's allocated memory. And like because it's all just memory.
+
+How do you tell. You all got it from the operating system in the same place.
+
+You have to be very very careful with your pointers in your data structures.
+
+So you will not have a pointer to anything that's not a size in this particular example.
+
+Right. Because you carefully maintain only pointers to the sizes.
+
+And so there are other addresses that would point to this next pointer or two, you know, something else or to the user data or whatever.
+
+But you just don't have any of those pointers. Does that make sense?
+
+Yes. Junior's pointer arithmetic.
+
+Yep. Because, for example, when the user calls free,
+
+you're going to get this address here and you're going to need pointer arithmetic to find this address here, which is where that size is.
+
+Yes. Last question. Yep.
+
+Because you need four bytes for a header. I just I'm sorry, eight bytes for a header.
+
+I just arbitrarily said my header. My header is eight bytes. Right.
+
+Because it's the eight bytes in the A4. The next would also be a mix.
+
+No, because the eight bytes of the pointer goes inside the memory that the user allocates.
+
+Because you only need that pointer when the block is free. So you give the user 388 bytes, and when they give it back, you take eight of those bytes.
+
+So now you have 16 bytes of header and 380 unused bytes.
+
+Right. Okay, I said last question.
+
+Okay, I'll take one more while I close this so we can ask more questions. Yeah.
+
+When? When the user calls Malik. If you have three blocks on your free list. If the user calls Malik again, you may not call s break.
+
+You may just pull something off the free list and give it to him.
+
+Yeah, that's the whole point, is that you can pull something off the free list and give it to him.
+
+Yep. Okay. Good times. Now.
+
+We're starting a very exciting lecture. It's exciting for two reasons.
+
+One. After we complete this lecture, we will have covered the entire C programing language.
+
+There's nothing else. There's like 1 or 2 operators that we aren't going to talk about, and there's unions, which we aren't going to talk about,
+
+but essentially we've covered the entire we have certainly covered 100% of the C programing language that you will use in CSC.
+
+220. I just found out today the CSC 350 also uses C, so I would almost certainly have also covered all of the.
+
+See that you would use them to see 350. Um, so that's one thing.
+
+And that's exciting. It makes us happy, too.
+
+Uh, we are also covering the last of the information about, uh, integers that we're going to cover.
+
+So we will have learned everything that there is that we're going to learn about integers this semester.
+
+After this lecture, most of the things that we're going to talk about are higher level concepts, right?
+
+We're not necessarily talking about the actual bits and the bytes of storage,
+
+but more like how does the computer organize its storage and things like that.
+
+Um, the exception is that when we get to the very end, we will talk about concurrency.
+
+Uh, what's like write the module or two before the end.
+
+We'll talk about concurrency, and we will not learn anything more about the C programing language.
+
+But we will learn a little bit more about the C libraries that are available to us.
+
+We'll learn some functions from the C libraries. So we took a break because Carl and I rearranged some, uh, lectures.
+
+We took a break, uh, from our lectures that have, um.
+
+Advice at the beginning. Uh, and so we're going to cover a little bit of advice.
+
+This might also be the last advice of the semester. So a lot of lasts in this, uh, lecture.
+
+And, um, I don't want to spend a lot of time on it, but I am going to spend some time on it,
+
+because in some sense, I feel like the advice that we talk about,
+
+not for every student, but for many of you,
+
+is one of the most important things that we talk about the entire semester, because you can go learn C, right?
+
+But for many of you, you are taking CSC 220 and 250 at the same time,
+
+or maybe 220 and 331, or you have a semester where it's a heavy semester for you.
+
+You have a lot going on, and for many of you, this will represent and you may already be aware of this or you may have already had this moment.
+
+But for for many students, it's this semester, the first semester where you can't just wing it.
+
+You have to have a plan. You have to know what you're going to do with your time and how you're going to do things and when you're going to do them,
+
+because just winging it is not enough anymore.
+
+And so there's a little bit of trying to make sure that people have the advice that they need when they need it.
+
+Because when we give you advice and you don't need it yet, you don't listen.
+
+And when we give you a device and you're ready for it, you say, oh, I could do something with that.
+
+The number of times that I have given these advice lectures and then come around week 12 or something,
+
+some student comes out of my office is like, I'm drowning. And I say, let me introduce you to the things I've already told you this semester.
+
+I don't say it like that. And they're like, wow, this is great advice.
+
+I wish I'd known this before. And I'm like, okay, well. You weren't ready for it.
+
+Right now you're ready for it. So, um.
+
+I will spend a little bit of time. The moral of the story is, are you just eating raw protein powder?
+
+Shaving your beard did something to you. That's all right. Oh, look.
+
+I don't know if I can continue after that. Yeah, I'm gonna need a minute.
+
+Um, so. Where was I?
+
+So let's talk a little bit about about the process of development.
+
+So, uh, if you remember the last time we talked about advice, we had that diagram,
+
+right where we had the cylinder with the two light shining on it, and you had the circular shadow and the square shadow.
+
+And we talked about how looking at things from different directions is valuable.
+
+And I said, one of the ways you look at things from different directions is the different things,
+
+uh, that you create and that you have available to you when you start.
+
+Uh, trying to understand the project. Right.
+
+So you have your hand out, you draw some diagrams, you write some pseudocode, and those becomes your views into the, uh, assignment.
+
+Um. One of the things that I always recommend is drawing diagrams.
+
+Now, full disclosure I'm not a big diagram guy. I don't just write draw tons of diagrams.
+
+I draw a few judicious diagrams because, hey, you've seen my handwriting, right?
+
+I can't. Once I drew my drawing is approximately like my handwriting.
+
+I don't know what it says after I'm done drawing it anyway, right?
+
+Like it's just not useful to me. Um, and b I am a verbal thinker, right?
+
+I think while writing things out and everybody learns differently and everybody thinks differently.
+
+But on the other hand, when I come to something particular, a date,
+
+particularly a data structure problem, and I can't understand it, I absolutely draw some diagrams.
+
+And so some of you, when you get the handout,
+
+the first thing you do is start drawing all over everything because you're a visual thinker
+
+and you like to see the relationships between things and the diagrams and whatever.
+
+And the point is that this is this a personal, personal thing, right?
+
+How many diagrams do you draw? What do you draw? How much time do you spend with them?
+
+Some people are going to spend more. Some people are going to spend less, I spend less.
+
+I spend more time with words and less time with pictures.
+
+Some people spend more time with pictures and less time with words.
+
+But the point is that sometimes whichever one you like, you should do the other.
+
+So when I don't understand something, well,
+
+I start drawing the pictures because it gets my brain thinking in a different way from the way I usually think.
+
+So what do you draw and what's the point of drawing when you don't draw diagrams?
+
+The point is that you want to abstract away all of the details that you don't need right now to understand this part of the problem.
+
+So you don't want to be thinking about the names of variables and the specific values that you're storing in them,
+
+and all those little details that kind of cloud the issue. You want to be thinking about how are they connected together?
+
+What kinds of things are my storing? Maybe where am I storing them?
+
+And that's what you want to draw.
+
+So you draw boxes and arrows and, you know, scratch things out and just shade them in different colors rather than giving them specific values.
+
+Right. So that you can look at the patterns and look at the overview of how things look.
+
+And frequently that's data structures. And we do linked data structures.
+
+They fall out very nicely linked lists and things like that. Just boxes and arrows between them.
+
+But sometimes it's also the code that you write. So we used to when we taught programing, we would make you buy.
+
+I say we. I was not around at this time. I mean, I was around, but like, I was.
+
+You know, playing with my G.I. Joe or whatever. Um, we would make you buy this, like, ruler, right?
+
+And it had a ruler along one edge. And it was something kind of like the thing where people that like people who do drafting
+
+and things use where they have plastic compound curves and whatever that they used to,
+
+to draw whatever things they're trying to draw. And in it, it would have cutouts and those cutouts.
+
+You'd have a trapezoid and a square and a triangle and a circle and maybe one of these big fat arrows and whatever.
+
+And you would write. Flowcharts as diagrams that describe what your code was going to look like.
+
+So you would say, okay, we start, you know, in my program and I do a thing.
+
+And then I do another thing. And then, uh, I make a decision.
+
+And then if the decision is, yes, I do this thing and the decision is no.
+
+I do this thing here and then whatever. And your program becomes this formalized, like there was a design language of this flowchart.
+
+We don't really do that anymore because we use higher and higher level languages,
+
+and our languages are it's easier to keep more of your program in your head at the same time.
+
+But in particular, when we taught assembly language, this is how we taught assembly language.
+
+I don't think Chris uses these. Does anybody have 341?
+
+No. You can if you're a computer engineer because you've had 241.
+
+Um, I don't think we teach it that way now because we don't write a lot of assembly language.
+
+We don't write big assembly language programs, but certainly this is how we taught it. Um, so.
+
+I'm not going to recommend that you go learn this design language, but this kind of idea of like, what is the flow through my program look like?
+
+Or maybe what is the data flow through my purse. So this is a control flow diagram.
+
+But I can also write a data flow diagram.
+
+I have, you know, uh, stream of integers coming in and I turn them into vertices, and then my vertices become polygons.
+
+And then ultimately I put shading on it and, you know, then it's a 3D model at the end or whatever.
+
+Right. Can be useful. Right? So think about drawing those things.
+
+And then the other thing is pseudo code.
+
+Once you have your diagrams, write some pseudocode and I cannot stress enough how valuable it is to actually write the pseudocode.
+
+Get out a piece of paper and write it down.
+
+Or what I like to do is go right into your editor and where you're going to write the code, just write some comments.
+
+What am I going to do here? And you start out with something that's very, very high level.
+
+Like if you're doing pa1, you might say for every cell in the matrix, calculate how many neighbors there are.
+
+Well, that's not code. That's not. You're going to have to break that down.
+
+And then once you start your implementation,
+
+you take the code that you actually write and you put it right there beside those comments that you put in your code.
+
+Right? And you say for every X location, for every Y location, compute the number of neighbors of this location and leave the comment right there.
+
+And that allows you to look at the comment, look at your code and say, do they do? Does this actually do what I said I was going to do, right.
+
+Yes or no and things like that. And then maybe you say, okay, compute neighbors.
+
+That really should be a function call. So I will define a function compute neighbors and I will call it right here.
+
+And then inside that I will say for every neighbor take some action.
+
+Right. And then ultimately eventually by the time I'm done implementing for every neighbor will turn into four x minus one to x plus one for y,
+
+minus one to y plus one or whatever. Makes sense.
+
+Are there any questions? Yes.
+
+I'm not a huge diagram draw. Did I, early in my career, draw more diagrams?
+
+The answer is no because early in my career I was young.
+
+And young people are stupid. And so I spent a lot of time looking at problems that I should have drawn.
+
+Listen, all the stuff that I tell you and I'm like, you should do this.
+
+I'm not saying you should do this, I do it. I'm better than you.
+
+I'm saying I should have done this. I wish I had someone had shown me.
+
+Right? Because I didn't draw enough diagrams because I said, hey, I'm not a visual learner.
+
+I'm a I'm a I'm a verbal learner, right? Not even verbal.
+
+If you tell me something, you'll frequently see this in office hours. If you tell me something, I will stare at you for a second.
+
+Be like, I don't know what you're talking about. Write it down. Right. Show me your code.
+
+Like I actually have to look at it. If you read me code. I have no idea what you told me, right?
+
+I'm really like. I need to learn. And some people do.
+
+Some people listen to learn. Some people like, don't, don't give me a don't give me a book.
+
+I don't want it. I want an audiobook because I can read the book and I don't know what happened.
+
+I listen to the audiobook and it's a fantastic story, right? Some people like visual things.
+
+I'm not a big visual guy, so I didn't do it. But what I have learned over the years is that's almost an extra power.
+
+If you're not a big visual person and you draw, it absolutely is engaging a part of your brain you weren't using before.
+
+If you're not a big reader and you write it out in prose, it absolutely is using a part of your brain that you weren't using before, right?
+
+So it gives you some insight. But I didn't know I didn't do it. I should have, but I didn't.
+
+For me, drawing everything out is probably not real useful to me because I don't learn that well.
+
+But absolutely, drawing the tricky things out is very valuable.
+
+And I make a lot of tables, so I'll just get a piece of paper and I'll say, you know, all my variables down one side,
+
+or lines of code down one side and variables on the top or whatever, and like make tables right and draw out all the write out all the values.
+
+Look for patterns that I don't like, slash a diagonal across it.
+
+Oh look, this is the same. How did that happen? Is it supposed to be like that?
+
+You know, things like that. Okay, other question.
+
+That's a good question. Yes. Is it better today than just.
+
+So I made a whole video about this for you.
+
+Right how to work your way through the handout. I advocate.
+
+Which I said in the video, read through the whole handout. Then go back and tackle it one piece at a time.
+
+But when you read through the whole handout the first time, you don't have to understand everything.
+
+The idea is just to show that you have knowledge of the kind of all the things that are going to happen.
+
+But trying to understand it all at once is frequently too much. So you read through the whole thing.
+
+Then you go back and you look at each piece at a time and make sure you understand it and how it fits together with the others.
+
+Does that answer your question? Yeah. If you haven't watched the video.
+
+If you haven't, watch this terrifying video by now, please do.
+
+I promise they're worth your time. I would also suggest that you read the textbook, but we all know that's a waste of my time.
+
+I actually have a former teacher who is now, um.
+
+Has been working with some people in, uh, industry and, um, they are consistently impressed over.
+
+And he was he's a reader like me. He really likes to read. And the industry people are impressed over and over,
+
+and that he is aware of and has read many of the references that are relevant to their field because he's just read a ton of books.
+
+So they're like, do you know about this thing? And he's like, oh yeah, I read whatever book.
+
+And they're like, oh, that's fantastic, right? And it's landing the man jobs, right.
+
+So. Reading, if nothing else, can be a lucrative career.
+
+Okay. The last topic for C for the C programing language is bitwise operations.
+
+So um, we've already looked at dealing with integers, the arithmetic operators and the logical operators.
+
+The third class of operators that works on integers is the bitwise operators.
+
+The bitwise operators correspond to circuit elements that you would use if you are building an electronic circuit.
+
+They are things like and or X or not, etc.
+
+Now, I realize that many of you do not have extensive experience with circuit elements.
+
+Um, if you're in computer engineering, you probably have had 241, in which case you probably have seen some circuit elements.
+
+Is that, no, you haven't had it or. No. No. Is it after this semester?
+
+Okay. Well all right. Well eventually you'll see some circuit elements sadly.
+
+Chris Schindler and I talk about this frequently. Computer scientists are no longer required to take 241, which I actually think is a mistake.
+
+I think computer scientists should take 241. Huh? Digital systems?
+
+Yeah. Digital systems. I think computer scientists, if you transferred, you probably did take it.
+
+Right. So most, um. Uh, New York State, um, two year degrees do require digital systems.
+
+So if you transfer and you frequently you have taken it. But at any rate. Um, these are the elements that we build processors out of.
+
+And gates or gates, not gates, etc. Right.
+
+Um, the bitwise operators in C expose those to you as a programmer.
+
+Some languages do not.
+
+In fact, many languages do not, because they're not languages that are used in a context where it matters that you can XOR two integers together.
+
+Like what does that even mean arithmetically? It actually doesn't mean a lot, right?
+
+Um, but in C we do use them, um, frequently.
+
+So for each of these operators, there is a truth table you should be familiar with truth tables.
+
+Um, they certainly, uh, should be in 191, 91.
+
+Um, and it probably was in your high school curriculum somewhere.
+
+But essentially a truth table says if I have an operator or a Boolean operator, that operator takes in one or more.
+
+In C, it's always exactly one or exactly two, one or more true or false values, and produces as its result a value that is either true or false.
+
+And the truth table just exhaustively enumerates those possibilities.
+
+So in this case we have the or operator. It has two input values x and y.
+
+They can be either 0 or 1, uh false or true.
+
+And then it produces a result which is either a 0 or 1, false or true.
+
+And in the case of the or operator, 0 or 0 is zero and anything else is true, 1 or 0, 0 or 1, 1 or 1 are all true.
+
+And so we arrive at this table right here. But there are tables for any operator that you want to define.
+
+You can define the truth tables for um in if you do predicate logic, you will find that, uh, which you may or may not do,
+
+I don't know, in 191, you almost certainly would do if you took, uh, some of the higher math classes here.
+
+Um, you could have a, an arbitrary sort of number of inputs and then one or more outputs.
+
+But in C, we always have exactly one. In the case of the operator in the bitwise complement or exactly two uh inputs with a single uh output,
+
+I'm not going to spend any more time on the two tables. You should know them by now.
+
+If you don't, they're here in the slides. Please look at them and become familiar with them.
+
+So NC we can take these bit operations and apply them to any integer type.
+
+And what that does is it treats every bit in the integer individually, applies the bitwise operation,
+
+and produces a bit output that goes into the output integer at exactly that same position.
+
+So you take the zeroth bit of the integer the two to the zero bit.
+
+Of some ex and the two of the zero bit of some y,
+
+and you produce the output the 2 to 0 bit of some result q then you take the two to the one bit of x, the two to the one bit of y,
+
+and you produce the two to the one bit of Q, and you do that if you have a 32 bit integer, 32 times,
+
+if you have a 64 bit integer, 64 times, whatever, each bit, one at a time, beginning to end.
+
+This is a lot like doing arithmetic. Except that there's no carries.
+
+Every bit, every pair of input bits or every individual input bit in the case of the bitwise
+
+complement produces exactly one output bit and they don't affect each other,
+
+you know, at other place positions in the integer.
+
+Whereas if you do arithmetic, if I have all ones and I add a one, it becomes like all zeros in and one pops out on the end, right.
+
+So they carry they affect each other. Uh, okay.
+
+which makes more heat and increases the size of the heap.
+
+If we break a negative number that moves the system break downward in memory towards a lower address which decreases the size of the heap.
+
+In either case, the return value of s break is the old value of the system break before s break changed it.
+
+All right. And that's all I want to say about that. Um.
+
+So we divide the see um unitary operators.
+
+So the C by the. We divide this in bitwise operators into unary and binary operators.
+
+These are terms that you should know, plus you. Uh, unary means a function that takes exactly one argument.
+
+Right? So we have. For example, in arithmetic we have the unary minus sign.
+
+And then we have the binary minus sign. Binary means a function that takes two arguments.
+
+So negative x is the unary minus because it takes one argument x and it just inverts
+
+the sign of the integer stored in x and x minus y is the binary uh minus sign,
+
+right? It takes the value that's sort of an accident, subtracts the value that's stored in Y.
+
+In the bitwise operators. The. The complement operator, which we pronounced not, is a unary operator.
+
+The not operator takes one argument and it's spelled as a little twiddle, the tilde as we call it.
+
+It takes every zero that's in a number, and it turns into a one in every one that's in a number, and it turns it into a zero.
+
+So if we have the four bit binary integers zero, zero, one, one and we knotted, we get 1100, right.
+
+It just flips the bits. Um.
+
+The binary operators are the, uh, circuit gate elements and or and XOR,
+
+as well as which we haven't really talked about yet, but we will hear in a moment.
+
+The bit shifting operators, the bit shifting operators take the bits and they move them around in the word to one side or the other.
+
+Yes. It is the same as one compliment.
+
+It is a one compliment operation. If you're talking about sign numbers.
+
+Yep. Yes. The result is an integer with the same number of bits as x and y, which have to have the same number of bits.
+
+If they don't have the same number of bits, the smaller one will be expanded.
+
+To have the same number of bits as the other. Right.
+
+So if you do, uh, 64 bit and a 32 bit, it will be expanded out to 64 bits and 64 bits, and then you'll get a 64 bit result.
+
+You. Good question. Okay.
+
+Uh, so let's look at the weird ones on this slide, which is the shift operators.
+
+So the bit shifts are a little more complicated than the binary operator, than the binary, than the, um, bitwise uh and or XOR and not operators.
+
+Um, note that there are other bitwise operators that are circuit elements.
+
+So for example nor and x nor and you know.
+
+Whatever else there are. Um, they don't exist in C, right?
+
+And or XOR and not. That's the sort of single bean operators that you get.
+
+Um, but you also get these bit shift operators and the bit shift operators move the bits in a word around.
+
+So as the example is right here, uh, if I have the.
+
+Word. Um, 1010, and I left.
+
+Shift it by one. Then that's just going to take each of these and move it to the left.
+
+And if we have a four bit integer. Right?
+
+So they move like this. The one.
+
+This is my four bits, right? The one that comes this way.
+
+We'll sort of fall off the end and disappear. And the space that I opened up here, I'll put a zero in it.
+
+Always a zero. Always a zero. So I take whatever bits are in my word.
+
+I move them to the left one bit. Place. I throw away the one that sticks out the end, and I put zeroes in where I had a gap.
+
+So if I shifted it by two places, then it would become zero one.
+
+No, it would become 1000, right?
+
+Two of them would fall off the end, and I would bring two zeroes in on the right. If I have a 32 bit integer, I do the same thing.
+
+It's just there's 32 places, right? Um, so this is fairly straightforward.
+
+It does correspond to a multiplication by two to the power of the number of places that you shift it.
+
+Right. Arithmetically it's the same. And if you go through the definition of integers, you'll see why that's the case.
+
+Right? Uh, that's left shift. Right shift.
+
+We will pick up with on Monday. It is somewhat more complicated than left shift.
+
+It has special rules. So everybody have a great weekend. Make sure you get your par four started and I'll see you on Monday.
+

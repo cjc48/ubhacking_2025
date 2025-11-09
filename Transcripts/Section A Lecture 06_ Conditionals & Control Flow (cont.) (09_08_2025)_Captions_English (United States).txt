@@ -1,0 +1,857 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+So not a control flow in the sense of what is control flow, because we already know that.
+
+But control flow in the sense of um, what does the computer actually do when we say if this, then that,
+
+or while this or like, how does that actually happen, uh, when the computer is, um, doing its computation.
+
+I'm like, why is it not showing up on the screen? Well, Ethan, because you have to plug it in.
+
+All right, there we go. But how does the computer do?
+
+Where are you talking about this? Right. Conditionals.
+
+Okay, so, um, just as a refresher, uh, control flow is the path that the, uh,
+
+execution takes through your program when it has things like if, while, etc.
+
+Right. The decisions that the program makes are the control flow of, uh, the program, the C model,
+
+and the model of most programing languages that you have been introduced to is linear flow.
+
+By default. You write a series of statements, the first statement runs, then the second statement, then the third statement in the for statement.
+
+This is not the case in all programing languages. So uh, some choices that you all might have seen it or might see it in the relatively near future.
+
+That this is not the case is um, shaders in um, 3D rendering engines, right?
+
+Shaders do not run one line, another line, another line, another line.
+
+They run like all at once at the same time.
+
+Um, if you when you get to 341, you'll look at some hardware description languages that don't work that way.
+
+There are also programing languages that don't work that way. So there's a language called Prolog, for example, where you describe a series of axioms.
+
+That sort of all just exist at the same time.
+
+So you say, for example, a list consists of a head element and then more elements after that, or a first element and then more elements after that.
+
+And then it can induct on that and say, well, but then the next element consists of an element and then more elements after that, etc.
+
+Right now I have a list and then you ask, it just is this program, what is the solution to this you know, statement?
+
+And it goes and looks through all your axioms and it gives you a solution. Right.
+
+Um, and so you don't necessarily say do this, then this, then this, you just give it a set of rules and ask for an answer.
+
+Right. So there are programing languages that don't work that way.
+
+But it turns out that the computer itself, the reason languages like C work that way, is that the computer itself does work that way.
+
+It starts at the beginning of your program.
+
+It starts following the instructions you give it until it gets to a point where it needs to do some brief deviation from that series of instructions,
+
+and then it continues, you know, one after another after another.
+
+Um, so let's look at that. Here is a.
+
+I don't want let you all know that. Uh, actually, no, I will read this slide.
+
+Okay. So, um, if we think about the if statement.
+
+It's very simple. We say if some condition and then if the condition is true, we run the body and otherwise we just don't run the body.
+
+We skip over it. Um, that if statement has to be turned by the C compiler because your computer to make things.
+
+Perfectly, um, explicit. Does not know what to do with C.
+
+Your computer does not know how to run. See, there is a piece of software called the compiler that reads the C that you
+
+write and translates it into something that the computer does know how to do.
+
+And that thing that the computer does know how to do is different depending on the computer you're talking about.
+
+So if you are using, uh, a. Mobile phone.
+
+It almost certainly has an ARM processor in it. That ARM processor has certain capabilities, whatever.
+
+And you would your C compiler would have. Net code for that type of processor.
+
+If you are using a uh, this HP laptop right here, it has an x86 64 CPU and it just like the one we have on demand.
+
+And when you compile for this HP laptop or for Amazon or whatever, it would emit a certain set of instructions that that laptop knows how to run.
+
+If you have an Apple Silicon Mac, I don't see any here in the front row.
+
+Maybe that's an Apple Silicon Mac. Yeah.
+
+If you have an Apple Silicon Mac, it is an ARM, but is a qualitatively different ARM processor from the one that's on your phone.
+
+It's more similar to the one that's in modern iPhones, but still it's a qualitatively different program processor.
+
+So when the, uh, compiler compiles those instructions, it's going to be different.
+
+It's not going to be the same as the instructions for the mobile phone. It's not going to be the same as the instructions for the laptop or Fremont.
+
+It's not going to be it's going to be a new set of instructions yet. And there are in fact.
+
+Hundreds or maybe probably thousands of different architectures.
+
+We call an architecture, uh, of of processors that are out there that use different types of instructions.
+
+So when you write C, when you write Python, when you write Java, when you write any of these things,
+
+you're not speaking in any sort of language that the computer itself understands.
+
+There's a piece of software that translates what you write into something that the computer understands.
+
+And what the computer understands is very, very, very simple.
+
+We saw a little bit of this before. We're going to see a lot more of it right now.
+
+It essentially can do only very, very simple things like add two numbers together, compare two numbers to see if they're the same things like that.
+
+It does not understand something like is this list empty or is this string, uh, does the string have at least AI characters in it?
+
+Right. It cannot answer those questions. What it can do is count the characters, come up with a number.
+
+Compare that number to I, but you have to count the characters and then store that number and then compare it to the AI.
+
+Yes. So, uh, I'm about to get to that, um, disclaimer, which is that I am not going to teach you assembly language in this course.
+
+That's assembly language. Right? So the registers and the, um, the specific instructions that the CPU can run and things like that.
+
+Um, not because I wouldn't love to do that,
+
+but because we already have a full course and you'll take 341 and they'll teach you assembly language, and 341 you'll learn to, uh,
+
+assembly language for the MIPs processor in 341 and if you take 379 or what will be 479 by the time you would get there,
+
+you will learn assembly language for the ARM, um, processor.
+
+If you're interested in learning assembly language, come see me. Come see Chris Schindler.
+
+There's a few of us who would be happy to help you with that, but we won't cover it in this course.
+
+We will talk about registers and those things, but we're not going to talk about exactly like in detail.
+
+How do they work on this CPU? Is there a reason besides.
+
+Like other than a business standpoint that we don't have. One CPU that.
+
+Is there a reason other than sort of market dynamics, that we don't have one CPU architecture to rule them all?
+
+Yes. And the answer is trade offs. Um, so broadly speaking, um, the for a long time now, the x86 architectures,
+
+so there's different classes of CPUs and I don't want to talk about the deep details.
+
+You'll get to them in 341. But there's what we call siskin risk Cisco with a c CISC uh and risk RISC.
+
+So Sisk is complex instruction set computing risk is reduced instruction set computing.
+
+Um and it has to do with like the types of instructions the CPU knows how to run.
+
+Um, it turns out that Sisk architectures with hardware re compilers,
+
+which is what the x86 if we don't call it a re compiler, they call it it's it's more complicated.
+
+Uh, if you just want blindingly fast programs, that's the best way to, we know to make blindingly fast programs.
+
+But if you want to do that and run for a long time on a battery.
+
+Risk turns out to be better. They're not quite as fast per construction cycle typically, although they're catching up for a variety of reasons.
+
+Um. But they're much more efficient.
+
+Right wrist tends to be much more energy efficient. So there's a lot. And that's not the only trade off.
+
+But like for example, I just want the fastest CPU I can possibly have versus I want my battery to last eight hours.
+
+I'm going to choose different, make different choices. That's why we have different architectures.
+
+The reason we have so many different architectures is market pressures, right?
+
+There could be just a few, but there's a bunch.
+
+Also, over time, the complexity of architecture that we are capable of designing and implementing has increased.
+
+And so old architectures have died just because they were the best we could do at that time.
+
+But now we can do much, much better. And the architectures that have survived like x86, x86 is from the 1970s.
+
+Right? Um, the the processor in this laptop here, when you turn it on, boots up like a processor from 1977.
+
+And the first thing that the software that's running does is let's pretend to this 1987, and then it does some more setup and then says, okay,
+
+pretend that it's the mid 2000, and then eventually it gets to like your,
+
+you know, octa core four gigahertz, you know, whatever capabilities that it has.
+
+Um, and the, the reason they've been able to do that is they have sort of continued to improve their designs.
+
+Some of the designs either didn't lend themselves well to that, or they didn't have the money for the engineering effort to make it happen.
+
+That's more instruction, more answer than you signed up for. But that's what happens when you ask me a question.
+
+All right. Um, so. Here's my disclaimer that I said I was going to get you.
+
+I am not going to teach you assembly language. I am not going to expect you to write any assembly language in this course.
+
+I am not going to expect you to read any assembly language in this course,
+
+except for very specific examples that I will explain to you when I give them to you.
+
+And the reason I'm making this disclaimer is because many of you,
+
+when you see the assembly language I'm about to show you, you're going to be like, why is he doing this to me?
+
+Right. That's not this course. It's a whole course of its own, right?
+
+So don't be scared. When you see the assembly language, say, okay, how can I understand what Ethan is trying to tell me about this right now?
+
+He is never going to ask me, what does this instruction do?
+
+Or how would you write this program in raw assembly language instructions.
+
+Right. So don't be afraid of that. What I want you to think about more is sort of what does this kind of code look like?
+
+All right, so here's a trivial C, uh, program.
+
+It has, you know, two lines of code three, depending on how you count it.
+
+Um, it has a conditional that says if arg c is equal to two and arg v sub one sub zero.
+
+So the first character of the second argument is the minus sign.
+
+Print the word negative. And otherwise.
+
+Or when you're done with that, return the value zero. Right.
+
+So this second, the first line of code, the if conditional in particular is fairly complicated.
+
+It does a number of things, all on one line of code.
+
+Well, it turns out computers can't do that, right?
+
+The compiler can, or the computer can only do very small numbers of things at a time, or frequently only one.
+
+And the compiler is going to break this down into a whole bunch of different things.
+
+Right? Now, obviously we could write this as more than one line of code.
+
+There's no reason that I couldn't put a enter after z equals two, and an enter after the double ampersand,
+
+and a enter after the argv one sub zero uh equals minus sign, right it make it multiple lines of code.
+
+But conceptually when we're writing C, we think of this as a single expression that we gave it right.
+
+We gave it a single compound Boolean expression. The computer can't do that.
+
+Almost never can the computer do that. So when we compile that, it turns into this.
+
+I think there's two slides. No. Just one. It turns into this.
+
+This, uh, is the assembly language that, that.
+
+Program compiled into. On a particular version of GCC with a particular set of options at a particular point in time.
+
+If you try to compile it today and look at the output, it may not be exactly this.
+
+And that's okay. The compiler ought to do that as long as it does the same thing.
+
+Um, what I did was I took that program, I compiled it using GCC,
+
+and I asked it to tell me what assembly language per, uh, instructions would you use to implement this program?
+
+And then I cut out all of the extraneous faff because there's tons of it.
+
+Right. Reduced it to the actual logic of those three statements.
+
+And then on the right hand side there, I wrote a comment for what is every one of these lines of code?
+
+What is it actually doing on this, uh, line of code?
+
+And I want that to help you understand the kinds of things that an assembly language, uh, that the CPU is actually capable of doing.
+
+So if you remember the code that we looked at, the very first thing said, if r, c is equal to two and something else.
+
+Right. So let's look at that. So the first line of code says compare the long value two.
+
+Dollar sign two means the actual number two. In this particular assembly language syntax with the register Ebi now every CPU.
+
+And we'll talk more about this in the next lecture slides. Then again later in the semester.
+
+Every CPU every processor that runs code. I think I can say that every processor that runs code has a small number of special
+
+memory locations that are stored inside the processor that we call registers.
+
+Typically, those registers are named or numbered with very small numbers.
+
+It turns out that because x86 is a wonderful architecture sarcasm, it's not, uh, they are named things like.
+
+Ax b x c x dx.
+
+E I'd I s I.
+
+ESP. I'm missing one.
+
+Anyway, they have these ridiculous names, right? That just are historical accidents, right?
+
+It turns out that the register die when treated as a 32 bit number we call Eddie and that percent.
+
+Eddie says the contents of the register.
+
+Eddie. The 32 bit register. Eddie. And it turns out, furthermore, that on our computer, the first argument to a function is stored in the register.
+
+Eddie. So if you look over here at the function, we're compiling int main int arg c r c is the first argument to this function.
+
+And then you look down, it says if argc c is equal to two.
+
+RC is percent Eddie. Write the value args in this particular assembly is percent.
+
+Eddie. So the simple dollar sign 2% Eddie simply says, look at the first argument to this function, which is named RC.
+
+And compare it to two. Doesn't do anything with that comparison.
+
+It just compares it to two and metaphorically gets out a pad of paper and writes down it's the same.
+
+It's larger, it's less than, you know, whatever properties it has.
+
+Right. And remembers that. That's it. One instruction.
+
+Compare these two things and remember what their relationship is to one another.
+
+The next line says, if the last two things that you compared were the same.
+
+Don't move on to the very next instruction.
+
+Instead, jump to the instruction that I have chosen to call light.
+
+Right. So we see this.la colon there. So it says if the last two things you compared were the same, jump to light.
+
+Because if you remember, the default action of the CPU is to just run one instruction after another in a row in the order that they appear.
+
+So if the two things are not the same. If they are in fact different, then it will not jump.
+
+It will just run the next instruction. But if they are the same, it will go somewhere else and run a different instruction.
+
+In this case, the somewhere else is not very far away, right?
+
+It's just a couple of lines of code later, but it could be arbitrarily, well, not arbitrarily distant, but it could be fairly distant.
+
+Right? So what the code said was if these things are equal and something else.
+
+Do this body. What the instructions the compiler admitted said was.
+
+Compare these two things. If they're equal, go over there.
+
+So what must over there be has to be the rest of that comparison.
+
+Remember that double ampersand. We compare if they're equal and only if they're equal.
+
+Then we go over there because remember the C has short circuit evaluation.
+
+So if they're not equal. In our.
+
+Code right here. We must not try to read arg v sub one, sub zero and compare it with a minus sign,
+
+because short circuit evaluation says if RC is not two, I'm not even going to look at the rest of this.
+
+I am immediately just going to return zero. And it turns out that that block of code there between L4 and L8 is exactly just return zero.
+
+Right now. Um, in fact, what it says is XOR the value in the 32 bit quantity of the register acts with the 32 bit quantity of the value.
+
+So value in the register acts and store the result in the 32 bit quantity of the register acts.
+
+So we just XOR a number with itself and then store that result back where we found it.
+
+And it turns out if you go through the truth table for exclusive author, that will always yield exactly zero.
+
+We'll talk more about that later in the semester. And then RET says return from this function.
+
+Note that it doesn't return zero. It puts the value zero in a particular register and then returns.
+
+Because just like the first argument to this function was just a value stored in a register somewhere on the processor.
+
+The return value from this function is just a value stored in a register somewhere on this processor.
+
+Now, let me ask you a subtle question. There is a type in C void.
+
+You can have a void function, and a void function doesn't return anything.
+
+If the return value of a function is just the value stored in a particular register.
+
+Can you have a function that returns nothing?
+
+So if I am simulating a CPU. I'm pretending to be the CPU and I'm running some code.
+
+And I say to you. We'll see if this actually writes.
+
+I usually bring one with me. Oh it does. The return value of every function will be there.
+
+And then I run a function and there's a three here. And that function returns in.
+
+You go there and there's a three and you say, oh, the return value of this function is three. Now I run a function that returns void.
+
+And there's a three there. What was the return value of that function?
+
+It's kind of three, right? There is no way to actually not return a value from a function.
+
+What we can do is tell the compiler. If this function returns a value.
+
+I don't care what it is, but the register still exists, right?
+
+When you go to check your mail and the mailbox is empty.
+
+You don't have any mail, but you still have a mailbox, right?
+
+It's still there. It's there all the time.
+
+On the CPU that register that is, return value is always still there.
+
+And unlike your mailbox which can be empty, it always has bits in it.
+
+And those bits are either ones or zeros, and there's nothing we can do about that.
+
+There's always a value in that box. It's just sometimes we don't care what that value is.
+
+And that's what void sets. It doesn't say technically speaking, this function doesn't return a value.
+
+What it says, technically speaking, is I don't care what this function returns.
+
+And if the user tries to ask. Print an error.
+
+Instead of compiling their program. Because the CPU doesn't know and doesn't care.
+
+It just puts a value into action and returns from the function right?
+
+This can get you in trouble if you remember when we looked at printf and we saw that when we printed certain values,
+
+it didn't print what we expected because we had the types wrong. It's because it was in the wrong register.
+
+It was looking in the wrong. The register still existed so we could perfectly, reasonably look at it and print it out.
+
+It just didn't contain the information we wanted. Right.
+
+When you get down to the very low level. All of that information about where did this data come from and what does it mean is gone?
+
+It's just bits. Just numbers, and some of the numbers are meaningful to us and some of them are not.
+
+All right. Any questions so far? We're through the first four lines of code here.
+
+Yeah. G is jump is equal.
+
+Yes. That's an excellent question.
+
+Where does comparison store its result? Turns out stores in another register.
+
+There's a special register that's called the, uh, on x86.
+
+There's no way to directly read the. Well, it's complicated, but there's a special register in the size of the CPU we call the status register.
+
+It stores it in that status register, and the G instruction looks at the bits in that status register.
+
+One of them is the equal bit. If the last two things I compared were the same, that bit will be a one, and if it's different, it'll be a zero.
+
+And what jump equal says is if that bit is a one jump.
+
+Otherwise if it's a zero, just keep executing. Uh, so it's just stored somewhere in the processor.
+
+Yeah. And you can't access the status register directly.
+
+Um,
+
+I believe there is an instruction that allows you to move the contents of the data structure register into a register that you can access directly.
+
+So you can look at those bits. Normally you don't normally use instructions like jump equal that implicitly.
+
+Just look at the status register. So note that if I had done other things between the compare and the jump, the value in that status.
+
+Other things that. So I have to compare and then jump.
+
+There are some things that don't set the status bits, in which case I could do those between the compare and the jump.
+
+But otherwise if I try to do something else in between, I might overwrite that 1 or 0,
+
+and then it would just be lost forever because I can't name it and I can't save it easily.
+
+Yes. I'm going to have to walk over here because I can't hear what you're saying.
+
+A register. Is it over? Yes.
+
+So the question is because the register has always hold something.
+
+If you do this code, you use a register and later you override you o later you use the register again.
+
+Does that mean that the value that you had is just overwritten? Yeah.
+
+Those registers are, um, there's a very small number of them.
+
+Like I say, on x86 32 bit, there's eight of them on 64 bit that we're using there, 16 of them.
+
+So the first eight I gave, they have all those fancy names. The second eight are named R8 through R 50.
+
+Right. Because they got tired and they were like, we've come up with a lot of names.
+
+And it's like eventually if you had a family that had a lot of children and then eventually they're just like your number seven,
+
+your number eight, your number, you know?
+
+Um, but when you go to call another function or whatever, it will just put new values in that register and they're lost forever.
+
+And in fact, that's can be a problem. And the compiler has to know what registers are being used for what,
+
+so it can decide whether it's okay to put a new value in that register, or whether it has to keep what's there.
+
+And there's rules for that. It's called the Abi. Um, there's rules for that.
+
+Other questions. All right, so after that.
+
+Um, it goes on, and it's, uh, the first thing that it does.
+
+This line right here move Q8, parentheses, percent RSI, comma percent Rax says move the 64 bit value.
+
+Um, found in. This is not true.
+
+This comment is wrong. Lo, it's not lo argv some one, some zero to rax it is.
+
+Load the address of argv sub one sub zero.
+
+The location in memory where arg v sub one sub zero is stored into the register rax.
+
+So I don't want to talk about exactly how all that works. It's not important.
+
+The point is that the compiler knows how to figure out where argv is, where the first argument of argv is, where the second argument of argv is,
+
+and then where the item that is stored in that value would be right, and it loads it into another register.
+
+In this case the registers called ax no. So we used ax there when we return zero.
+
+We also used uh d up there first load.
+
+Then it says compare the value 45.
+
+Which I believe is decimal. Uh, like the number 45 with the the, um, single byte that you find when you look at the location stored in.
+
+So holds an address. It goes to that address.
+
+It loads a single byte of memory and compares it with a number 45.
+
+Now, if you remember when we did we put care. We saw that like characters are just numbers, right.
+
+So 65 was uh, capital A and you know, 48 is zero, etc.
+
+It turns out that 45 must be the minus sign. I don't know, I'd have to look right.
+
+Must be the minus sign. So we go to that place in memory and that's our visa one sub zero.
+
+We get that value and we look to see if it's equal to a minus sign.
+
+And again just like uh that was a compare a four byte uh 630 integer.
+
+This is compare a one by eight bit integer. We'll talk more about what that means later.
+
+Um, and if they're not the same, jump to L for.
+
+So again, if we look at our conditional, it says if argc is equal to two and rv sub one, sub zero is equal to minus print something.
+
+What this code says if argc is equal to two.
+
+Go somewhere else. Otherwise return zero. If arg v sub one, sub zero is not equal to minus return zero.
+
+Otherwise keep executing. So it's inverted.
+
+Are conditions in some places. So we said if equals it said if not equals right.
+
+But that's okay because semantically the thing that it's doing is equivalent to what we asked for.
+
+So if argv sub one sub zero is not minus.
+
+Then we don't want to print anything. We want to return zero.
+
+So it jumps to L4 and it returns zero. Right.
+
+So in inverted our condition. Then, assuming that we get to the lake line, that means that arg c is equal to two and argv sub one.
+
+Sub zero is equal to the minus sign, right?
+
+Otherwise we would have at some point gone to line four and return zero, right, or label four and return zero.
+
+So it then says, uh, load. It turns out that this means the, uh, the string negative that we put in the.
+
+This is a location in memory that stores the string negative followed by a zero terminating byte.
+
+Right. Just like we wrote it in our program, uh, into the register already.
+
+Then, uh, do some stuff I don't want to talk about and then jump to the function puts.
+
+So it put this in this register.
+
+Die. Puts takes one argument.
+
+The first argument is the string that you want to puts.
+
+If you remember, our main takes two arguments. The first argument is argc.
+
+Where did we get it d I. So when we call puts in assembly language, there are no arguments.
+
+So the function puts. We just take the value that we want to be the first argument.
+
+We put it in the register die, and then we call puts.
+
+And when puts is invoked, it's going to say all the information that I need.
+
+The first argument that I need to do something with the user will have put in the register die.
+
+So I should look in the register die.
+
+So the compiler arrange to put that string in the register die before it called, puts that, then prints negative.
+
+After this it goes through for some reason it doesn't just jump to L4 and returns zero.
+
+It went through another return zero down here.
+
+Um, and I think I know why it did that. Around half percent.
+
+Sure. I think I know why it did that. It's not important for now.
+
+Uh, but the point is that it effectively did exactly the same thing, the XOR of a number with itself and then, uh, return.
+
+So what do we learn from this? Are there any questions?
+
+Yes. Yes.
+
+That is a great question. So the question is, does it take more computer power to jump farther?
+
+And how does that impact how we code? Um, the answer is yes.
+
+It actually does take more computer power to jump farther, although not necessarily in in a way that's going to be intuitive.
+
+Um, it depends on the architecture and a lot of other things.
+
+But broadly speaking, if you don't go very far, it's almost always faster.
+
+And on some architectures like x86, if you go particularly close, like within about.
+
+I don't remember maybe 64 bytes or something. It's extremely fast.
+
+Um. How does that affect how we code?
+
+Back in the olden days, when we rode our Conestoga wagons to Oregon.
+
+Um, we thought a lot about those things. The Oregon settlers.
+
+Actually, there were no computers, but when I was a kid. My parents were kids.
+
+Uh, we thought a lot about these things. Today, we mostly just let the compiler handle it.
+
+And the reason is the in the manual for the x86 64 that we're assembling for right here,
+
+that tells you everything you need to know to decide exactly what kind of jump you should use.
+
+Is about 4000 pages long. Now, you don't need all 4000 of those pages to make that decision.
+
+But for any given instruction that you select, there are several of those 4000 pages that are relevant to you.
+
+Right? Um, and it's really, really hard to keep track of what exactly the best instruction is at all times.
+
+The compiler knows because someone encoded the rules for when you should do this kind of jump,
+
+and when you should do that kind of jump, and how far can they go and whatever.
+
+So the compiler knows, and it will make good decisions only when it is super duper important that things are really, really fast.
+
+Do we get out that 4000 page manual and figure out exactly what instructions should we run?
+
+And then usually we do a bunch of benchmarking and other stuff.
+
+For example, there is a library called which some of you may be familiar with called ffmpeg.
+
+Um, F stands for Fast Fourier. Uh, there is a particular mathematical function called a Fourier transform.
+
+Um, I actually think FFmpeg doesn't do a fast Fourier transform.
+
+It does a discrete cosine transform instead, but they're related.
+
+Um, there is a library called lib fft, which is the fastest Fourier transform in the West.
+
+Because there's the fast Fourier transform is a. Anyway, it's all puns all the way down, but FFmpeg does.
+
+Edits video files or plays video files using this live for you and, you know, whatever.
+
+Um, in the very core of that programing for because it is the fastest Fourier transform in the West,
+
+someone sat down and hand-coded a Fourier transform for this computer and this computer and this computer and this computer, and then their different.
+
+Right. And it will look at your CPU and decide which one you're on and it will run the absolute fastest one.
+
+99.95% of the software you ever run.
+
+Maybe 90, not 99.995% of the software you ever run.
+
+Nobody did that because they wrote it, and they compile it with the C compiler and it was fast enough.
+
+Right. But occasionally when we really care something like ffmpeg, somebody dives in there and really does that work?
+
+Again, probably more answer than you wanted, but we're ahead of Carl section so I can ramble.
+
+Um. Other questions. All right.
+
+So what do we take out of this? The compiler is obligated to emit a set of computer instructions that follow those rules,
+
+that they start at the beginning, and sometimes they jump somewhere else, and maybe they come back or whatever.
+
+But they follow these very, very simple. They do these very, very simple things.
+
+It is obligated to emit a sequence of those instructions that semantically does what our program asked it to do.
+
+But the manner in which it does it, we don't care about.
+
+So we say, for example. Here is a bottle.
+
+Get me some clean drinking water.
+
+And we don't care if it gets it out of a jug somewhere of clean drinking water, or if it goes to a fountain that has a dispenser,
+
+or if it somehow combines hydrogen and oxygen from the air and distills the water into like, we don't care, it just comes back with water, right?
+
+So when we write our program, we're saying something very high level, like, get me clean drinking water and put it in this jug, uh, or in this bottle.
+
+And then the compiler goes off and chooses a series of actions to take that is equivalent to what we asked for.
+
+But we may have said. Um, ask them to do 3 or 4 things and it goes off and it does them in a slightly different order,
+
+and it does one before another, and it checks the negation of something instead of exactly what we asked it for.
+
+We asked for positive. It checks the negative. The negative is not true.
+
+A double negative makes it positive. Now we're good, you know, whatever.
+
+And when it comes back, it did what we asked for.
+
+But the way that it chose to do it might have been slightly different from whatever we had in mind when we wrote our C program.
+
+And all of the instructions that it does in between. Must be equivalent to what we asked it to do.
+
+And do those very, very small, simple things that the CPU knows how to do in some order that produces that equivalency.
+
+The structure of our program may be lost, the exact order that we asked it to do things,
+
+the positives, the negatives may be lost, but when it's done, it did what we asked for.
+
+Um, it turns out that the only thing it knows how to do is those very simple things.
+
+And anything else is a software construction. So when you are using a graphics library and you say draw a rectangle on the screen.
+
+Your computer does not know how to draw a rectangle on the screen.
+
+It probably doesn't know how to draw a single dot on the screen.
+
+There is a more or less large and complicated piece of software under there that knows how to draw a dot,
+
+and knows that if it draws those dots in particular places in a particular pattern, it looks like a rectangle.
+
+And when the meat eyeballs look at it, they see a rectangle.
+
+And so when you ask for a rectangle, it will go do all of those things in that order to produce that rectangle on the screen.
+
+But the CPU can't do any of it. All it can do is just move a number from here to there.
+
+If you move the right number to the right place enough times fast enough.
+
+It turns into, you know, 60 frames a second of first person shooter or whatever.
+
+Right. But it doesn't know how to do that. The computer does not undo.
+
+All right. Um. So we saw an if and we saw that it rearranged our stuff.
+
+Um, and we saw that it either did the body or it jumped over the body or whatever, depending.
+
+Um, the else clause is just whatever it didn't do. So if I have an if and an else, then I can, for example,
+
+have the else clause be something that it jumps over if the if it's true and then it
+
+does the f or I can have it do a thing that's the if and then jump over the else,
+
+or it just arranges it so that in some way it only runs one or the other, but the order in which it does it and which one it ordinarily jumps over,
+
+and which one it considers sort of the straight line path versus the out of my way path.
+
+Again, it's up to the compiler. It can do whatever it wants. So here's a stylistic thing.
+
+Uh, use your curly braces. Uh, and the reason is, particularly if you're a Python programmer, you write something like this.
+
+Now, Emacs won't let you do this. It'll be like, this is not right. Right.
+
+And it will not arrange it in this way, and it will fight you if you try to arrange it this way.
+
+Um, but if you write something like this, you're like, oh, this is very clear.
+
+If modify X is true, then I want to check negate and I want to do a thing.
+
+But the C compiler does not read it that way. It doesn't care how you indented it.
+
+The C compiler reads it this way. Because else always binds to the closest if in.
+
+And this can get you in trouble if you're not paying attention.
+
+So I recommend that you just put curly brackets around stuff because then it can't be wrong.
+
+Right. So use your curly brackets and see any language that allows you to elide curly brackets.
+
+I usually recommend that just go ahead and use them. Right.
+
+There are exceptions like particularly if you have if something and then a statement on the same line with just a semicolon at the end.
+
+Sometimes, like if you have a whole series of those like it can make your code a lot shorter.
+
+But in general, I recommend that you use your curly brackets.
+
+All right. That's what I want to say about that. I would now like to just for fun and profit.
+
+Um. Do a top hat real quick before we leave.
+
+So everybody get out. Whatever you use to answer your top hats. It's fine.
+
+You got time because it makes me log in to. I hate if you're ever a UI UX person.
+
+If your site is going to log me in immediately when I click the login button.
+
+Don't make me click the login button. Just log me in.
+
+All right. What is today the eighth.
+
+Because the link. It's almost.
+
+All right. What does the following code print when I run it?
+
+And there's a whole bunch of options there. No, that is lined up.
+
+So there's an I under a D, there's an AI dot, not AI under a present D, there's a B under a D, etc. to help you follow what goes with what.
+
+But it's going to print one line of output. What values does it print for each of those.
+
+Expand those. Oh.
+
+Discuss amongst yourselves. 30s. Maybe less, because we're running out of time.
+
+All right, let's do it again. Yes.
+
+What values does it print? Is that a Coca Cola tallboy?
+
+I look at it humbly. I have questions.
+
+Okay, if your phone looks like this with all the nbsp is all over it.
+
+Send an email to Top Hat and ask them why they suck.
+
+Oh, really? Yeah, because you're paying for this. Like its innards coming out your tuition.
+
+Because I have asked them why they suck and they're like, well, we don't suck. All right, what's the answer?
+
+Turns out A is the answer. We don't have enough time to discuss this now, so if you have questions, ask.
+
+But go look at that and figure it out. All right. I'll see you all on Wednesday.
+

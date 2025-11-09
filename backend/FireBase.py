@@ -2,12 +2,23 @@ import os
 import firebase_admin
 from firebase_admin import credentials, firestore
 import datetime
+import json
 
 # Initializer
 
 if not firebase_admin._apps:
-    cred = credentials.Certificate(os.path.join(os.path.dirname(__file__), "../serviceAccountKey.json"))
-    firebase_admin.initialize_app(cred)
+    try:
+        key_path = os.path.join(os.path.dirname(__file__), "../serviceAccountKey.json")
+        with open(key_path, 'r') as f:
+            cert_dict = json.load(f)
+
+        cred = credentials.Certificate(cert_dict)
+        firebase_admin.initialize_app(cred)
+    except Exception as e:
+        print(f"Error initializing Firebase: {e}")
+        # Re-raise the exception to see the full traceback
+        raise
+
 
 # Firestore client
 db = firestore.client()

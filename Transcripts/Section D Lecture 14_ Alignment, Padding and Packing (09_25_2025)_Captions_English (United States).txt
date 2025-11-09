@@ -1,0 +1,959 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+All right, let us pick up right exactly where we left off on.
+
+Actually, no. I made an announcement the end of my last class that I actually should make now.
+
+So I don't forget, because I forget a lot of things.
+
+Um, today is Friday, the 25th of September 26th.
+
+26th of September. This coming Wednesday also has a date.
+
+Like the first or something, right? I don't know. Anyway, point is, your midterm is one week from this coming Wednesday, right?
+
+So it's like a week and a half away.
+
+And I bring this up not to give you stress or to scare you or just to gloat that I get to give you a midterm and you have to take it or whatever.
+
+But because if you are behind on your required readings, now would be a great time to start catching up rather than waiting till the last minute.
+
+Right? You have a week and a half until your, uh, midterm.
+
+So please, you know, make sure that you're on track for your required readings.
+
+Okay. Now let's start right exactly where we left. Ooh, they turned me up again.
+
+Yeah. I don't know.
+
+This is why I announce these things at the very end of class. There will probably be a practice exam, but I make no promises.
+
+That way if I forget, I'm not in trouble. But our intent is to give you a practice exam now that you need one.
+
+Because like, you either know the material or you don't. So. I don't know.
+
+Yeah. Yeah. Well, I'm going to make sure here in a minute that, you know, it actually.
+
+Let me. Let me make a note to do that. Uh.
+
+I would never give you a trick question. Or anything like that.
+
+It actually annoys me when people accuse me of giving trick questions significantly because it's like,
+
+I, I don't, I just don't because I that doesn't test what you know.
+
+It tests like, I don't know what it tests. It doesn't tell us what you know. But I do get accused of that sometimes.
+
+But no, it just means they didn't know the material. Okay. There's one question that I'm absolutely going to ask you.
+
+That's not a trick question, that that's what I'm queuing up here so we can make sure that we ask that question.
+
+Okay. So anyway, now we're going to start right where we left off. Um, we talked about this slide at the very end of last lecture.
+
+And as a reminder, we've been talking about the fact that when we have an address,
+
+we have a pointer to something, then the value of that it's an integer is just an integer, right.
+
+The value of that address matters. And that there are some values that are more or less appropriate than, um, than others.
+
+And in particular, uh, for simple types we require most platforms require that the address at which you store a simple type,
+
+when treated as an integer and divided by the size of that type in bytes, has a remainder of zero, right.
+
+So we call that a line. And then we said, hey, structs are aligned.
+
+Uh. Simple types are aligned, arrays are aligned.
+
+We talked a little bit about putting, um, simple types into arrays and what that meant for alignment and how they're one after another.
+
+And it just sort of works out because if I have some integer end and uh, in mod k is congruent to zero,
+
+then n plus k mod k is also congruent to zero by the rules of just how math works.
+
+Right. And so uh arrays are fine. But then structs.
+
+Mhm. Now we have heterogeneous types. Right. So we could have different parts of a struct of different sizes.
+
+And so it turns out that this has different rules.
+
+And then I said but remember that we said that in C uh arrays are just a bunch of values of the same type side by side in memory.
+
+And that structs, when the values in a struct are of the same type, they're laid out in memory exactly like an array.
+
+It's just that instead of talking about the members by their index or by their offset like you would in an array,
+
+we talk about them by the name that we give to the members, right when we create the struct.
+
+And that's where we left, right? We were done. We said, hey, here's a struct. It has two members, real and imaginary.
+
+They're of the same type. Their offset is four and we don't need to do anything else.
+
+It's just like an array with two members. Any questions?
+
+Great. So. But what if.
+
+Because structs allow us to have heterogeneous types. What if the members inside the structure are not all of the same type?
+
+What if one of them, uh, is of a smaller type and another is of a larger type?
+
+And those types have different alignment requirements? When this happens.
+
+And we saw a slide that said, this is going to happen, right? But now we're concretize it.
+
+When this happens, we fix this problem by putting a little bit of padding inside the struct.
+
+And the purpose of that padding is to ensure that every member of the struct
+
+has an alignment that maintains the requirements for that particular type.
+
+So in this case, our struct list has an int which is four bytes.
+
+Uh, quick aside sorry about bits and bytes here for a second.
+
+A bit is a value that can hold exactly a zero or a one, right?
+
+It's binary. That's what bit. Bit is a portmanteau of binary digit.
+
+Right a bit. It's exactly a zero or a one. Um, a byte is a collection of bits.
+
+In our case, it's eight bits, right? A byte is eight bits.
+
+And I will go so far as to say that on any reasonable modern platform.
+
+That is not like a massive supercomputer or some weird, you know, computation cluster or something.
+
+A byte is always eight bits. The C standard actually says it's at least eight bits.
+
+It doesn't say it's exactly eight bits. Says it's at least eight bits, but it's eight bits.
+
+Um, and the reason I bring this up is that those that's a unit and units are important.
+
+And if you ever took physics, you've been beaten with about the head and shoulders with this fact.
+
+Right. It's like, oh, you gave me the right answer. He didn't give me units. Wrong, right.
+
+I. Usually I'm not that picky, but absolutely, if you give me the wrong unit, the answer is wrong, right?
+
+Um. And if you don't give units where it's necessary for correctness, then the answer may be wrong.
+
+Um, and the reason I bring this up is that frequently when I hear students.
+
+Talk, or when I see students write like answers on exams or whatever.
+
+It's common that you mix up bits and bytes.
+
+And um, they have that has can have very important implications.
+
+Right. So if I have a 64 bit system. That means that my word size is eight bytes.
+
+64 bits versus a 64 byte system is a very different thing.
+
+That word size is eight times larger than a 64 bit system.
+
+Right. And so my offsets are going to be different. My calculations are going to be different.
+
+That's a whole like we live in a different world. If we're talking about a 64 byte system that's.
+
+256 bit. Right. No. 64.
+
+Two four 512 bit right system right 64 bit to 512 bit.
+
+It's pretty different numbers, right? Um, so please be careful when you're talking about bits and when you're talking about bytes.
+
+And I say this. Not to, you know, make fun of anyone.
+
+But in the last class, I gave this speech and live, like, literally the next question that somebody asked me, they said, uh, bitten sort of bite.
+
+They I said, well, an integer is four bits. And I said, well, let me stop you right there.
+
+That's what we just talked about. Right. Is that an int is four bytes.
+
+Right. And I point that out not to pick on anybody but to say like it's easy, right.
+
+It's easy to not think about that. It's easy to slip up. This is a class where it's going to matter.
+
+So think about do I mean bits a bit. Is a 0 or 1 or do I mean bytes a byte is is eight bits right.
+
+And try to use the right one. Try to use it carefully, even to yourself, so that when I ask you a question on an exam, you write down what I want.
+
+Okay. So um, in this case, value is an integer.
+
+An integer is 32 bits or four bytes on our platform.
+
+It occupies four bytes of memory.
+
+And so if I were putting two integers back to back in memory, I could put one of them in memory, and four bytes later I could put another one.
+
+But next is a pointer. And on our system a pointer is 64 bits or eight bytes.
+
+And so if I have an address which is congruent to zero mod four.
+
+It might be congruent to zero mod eight, but it might be congruent to four mod eight.
+
+Right. So I can put an integer at address zero. And that's okay.
+
+And I can put an integer at address four. And that's okay. And I can put an integer at address eight.
+
+And that's okay. But a pointer I can put it address zero and that's okay.
+
+And I can put it address eight. And that's okay. But I can't put it address for.
+
+Because four divided by eight is zero, remainder four and four.
+
+I think we can all agree is not zero. And so that's not okay.
+
+I can't put that. Pointer there. So what we do is we say, well, let's assume.
+
+That this structure is aligned such that I can store a pointer at the base of the structure.
+
+I put my integer in it and then I say, can I put a pointer here?
+
+And the answer is no.
+
+Because if the base was aligned for a pointer and then I put an integer in it, then now we're at an address that is congruent to four mod eight.
+
+So I put in four bytes of padding because four plus four is eight and eight is congruent to zero mod eight.
+
+Then I put my pointer. So if I put them back to back, the pointer is misaligned.
+
+But if I just spread them out a little bit and I put I don't care what is in that space, it's not useful to me.
+
+It's not valid data. It's just space. Now both the integer and the pointer are aligned.
+
+Does that make sense? Okay.
+
+So that first assumption is it's fairly important.
+
+I said assume that the structure is aligned such that the base of the structure is an appropriate address to store a pointer.
+
+Because if the base of the structure were at an address that's congruent to form on eight, then I wouldn't need any padding at all.
+
+Because they would both be aligned. But we need to know where it's going to be.
+
+We need to be able to predict where it's going to be, and we need to be sure that it's always in that location.
+
+So what we do is we say assume that there's a rule.
+
+Which is that every structure placed in memory will be placed in memory at an address which preserves the alignment of the largest type.
+
+Of any member of the structure. Sort of.
+
+Transitively. Right?
+
+So if I structure inside a structure, then the alignment of each structure has like each structure inside it has an alignment and etc., etc.
+
+Right? So in this case I have two types. I have an int and I have a pointer.
+
+And the alignment requirement of int is four. And the alignment requirement of the pointer is eight.
+
+And I just take the max of those values and I get eight.
+
+And now I say well the alignment of the structure must, must be um, the structure must be sort of an address that preserves an alignment of eight.
+
+Right. Because that's the max of all the values inside the structure.
+
+And then I place all of the padding inside the structure, um, to preserve that rule.
+
+Right. I place the minimum amount of padding required.
+
+To preserve the alignment of every individual member of the structure. Does that make sense?
+
+Yes. Uh, no, that's a good question.
+
+So is every element eight bytes, even if I don't need it? No. Every element has exactly enough padding to preserve the alignment for that member.
+
+So if, for example, I said I have struct, pretend this says struct, uh, of whatever type it is and I have int uh x and then I have int y.
+
+And then I have double. Uh, magnitude.
+
+Pretend this says magnitude. Right.
+
+Then when I lay this out in memory. I have x, I have y and I have magnitude.
+
+And this is four bytes and this is four bytes. And this is eight bytes.
+
+But from here to here is eight. So the alignment is preserved.
+
+If this was aligned and this is aligned, I don't need any padding at all. Right.
+
+Because this is not aligned to eight bytes.
+
+But why? This is a why. Why doesn't care.
+
+It only needs four. And this is a line to four bytes.
+
+So therefore I don't need any padding. Does that make sense that I answer your question? Yeah.
+
+Yes. The compiler does this when you just declare a struct and you say, give me one of these structs.
+
+It will have padding in it. Right, just like you need it.
+
+The reason we care about it and see is because I can take the address of value and I can take the address of next,
+
+and I can see where they are in memory.
+
+And if I naively assume that they're actually back to back, then I'm going to say, well, those should be four bytes apart.
+
+They're not they're eight bytes apart. Know the.
+
+So every struct will be. So the question is will the compiler rearrange the members of a structure so that
+
+they are to packet with maximum efficiency with the minimum amount of padding.
+
+And the answer is no, it absolutely will not. Um, the members inside a structure will always be placed in memory in the order that you declare them.
+
+So the first member of the structure will always be at the lowest address.
+
+The next member of the structure will be as close to that as it can, but above the next member will be as close to that as it can, but above.
+
+Right. And so they will always move upward in memory. And the C and the C standard guarantees that that will always be the case.
+
+Other questions? Yes. Yeah.
+
+If I put the double in the middle, there would be padding. And in fact we'll see in a second it would be more complicated.
+
+So if I, uh, if I had, you know, x d y this is a d uh, then I would have, uh, four bytes of x down here, I would have four bytes of padding.
+
+Then I would have eight bytes of d, uh, then I would have four bytes of y.
+
+And as we'll see in a minute, it turns out it gets even more complicated than at the end of the structure.
+
+Yeah. So this structure takes up actually a lot less space than this structure.
+
+But remember what I said before in response to some question previously when I write code,
+
+um, first I make it work, then I make it good, then I make it fast.
+
+This difference is strictly in the realm of fast, not work or good.
+
+Uh, when you are putting members into a structure, you should place them based on the order that is most convenient to the programmer.
+
+So if a structure only has a couple of members, it doesn't matter. You put them in what order ever order you want, right?
+
+It doesn't matter. Maybe you even pack them according to size to make sure you minimize padding or whatever.
+
+Um, but if a structure has a fair number of members, which can happen because in C we don't have objects.
+
+So when we want to start to build more complicated data types,
+
+we tend to to make structures and put multiple members in them and gather together so we can talk about it at the same time.
+
+So you could have a structure that has a half a dozen members or whatever. You should order them based on their logical relationship to one another.
+
+So over here I have x, y and magnitude. I think I would argue that x magnitude and then y like doesn't make sense.
+
+As a programmer I would be like are these x and y related? Is this actually a coordinate?
+
+Am I missing something here? Whereas if I say x y magnitude it's like oh, this is a you know, a vector, right?
+
+I have, I have an origin and an a magnitude, right. I guess I need a direction to, um.
+
+And so you place them based on like logically what makes the most sense.
+
+And then when you're done writing your program, if you're like, man, that structure is really big.
+
+And I have 10 million of them and it's a problem, then you're like, okay, let me rearrange this thing, right?
+
+To save some space, to save some of that padding. Good question.
+
+There will never be padding before the first element in the structure. Yeah.
+
+The first element of the structure will always be exactly the address of the structure.
+
+That's a good question too. I love afternoon class. I said this in my last class.
+
+I love afternoon classes because y'all are like, paying attention and thinking and asking questions.
+
+I don't know how Carl does like the 8 a.m. class. I'm sure those are great students.
+
+But they're also asleep, right? Except a few, like I.
+
+Aiden, Aiden's come here a couple times, he said down here, one of the student assistants.
+
+He gets up at like four in the morning or five in the morning, like, okay.
+
+It's over here. Like. Yeah. Me and Aiden, uh, so, like, sure, those students are ready for you at eight in the morning,
+
+but otherwise you have an 8 a.m. class, and you're just like, please, somebody ask a question just so I know I'm not alone.
+
+Anyway, there's a hand back here. Yes. Uh, yeah.
+
+So this number here is actually not the address of the structure.
+
+It's the offset from the beginning of the structure. So I could put the structure anywhere in memory.
+
+And as long as the address is marked zero there is congruent to zero mod eight then four bytes.
+
+After that I'll find padding and eight bytes after that I'll find the next pointer.
+
+Right. So those are really offsets not. The offset of.
+
+The next pointer needs to be oh, the first offset.
+
+The zero. Yes. Must be moderate. That's what this slide says. Yes that's accurate.
+
+Yeah that's correct. Yes. Yes.
+
+Yes. So the the alignment of the struct.
+
+Must be the same alignment as the largest alignment requirement of any member of the struct.
+
+You take a max, you take the alignment requirement of every member in the struct.
+
+You take a max across that. That's the alignment requirement of the base of the structure.
+
+To answer your question. Yeah. Okay. Other questions.
+
+Yes. Um.
+
+You don't have to worry about that. I put that weasel word in there, because the world is always more complicated than we talk about in 220.
+
+So, for example, I'll just tell you quickly, this also came up in the last class.
+
+You guys are concordant. Maybe I brought up in the last class.
+
+Uh, on our platform.
+
+It turns out that many times, structs will have a large a stricter alignment requirement than what their basic alignment requirement is.
+
+And the reason is that if the CPU thinks that you might use it in a vector operation, um, then it needs higher alignment requirements.
+
+There is a special unit inside the CPU that we call a vector processor.
+
+Um, that basically you say here is a base address it.
+
+If you go to that base address, you're going to find several integers in a row, add three to all of them, or multiply them all by two or whatever.
+
+It's like doing matrix operations basically, but in one instruction,
+
+the requirements of that are even higher yet than just the size of the integers, the size of the block of integers.
+
+So sometimes you'll see other alignments. But for our purposes it's exactly the requirement of the largest item.
+
+All right. So remember.
+
+You guys remember we talked about Malik? When we malloc something, we told it how many bytes we want it.
+
+And what we got back was a void star pointer, which is a pointer to I don't know what.
+
+So if I malloc so that struct int list was 16 bytes right.
+
+We had four bytes of int. We had four bytes of padding.
+
+And then we had eight bytes of pointer. Right.
+
+So 16 bytes. So if I were clicking one of those I would say malloc sizeof struct int list.
+
+And what malloc would receive is nothing about int list. It would receive the number 16.
+
+So I'm saying malloc 16 bytes. Malik doesn't know that.
+
+I'm going to put a struct analyst in those 16 bytes.
+
+I could be putting a string in those 16 bytes, which is characters, and their alignment requirement of a character is one byte.
+
+I could be putting four integers in those 16 bytes, in which case the alignment requirement of those four integers would be four bytes.
+
+I could be putting two doubles in there. I could be putting a double in two INTs.
+
+I could put an integer, some padding and a pointer like we just did, right?
+
+All of those are 16 bytes, but the alignment requirements could be one, two, four, or eight.
+
+Malik doesn't know. And so therefore every time you allocate memory using malloc it's going to give you an address
+
+which is congruent to zero mod the largest possible alignment requirement on this system.
+
+Which on our system is something like 16 or 32, but for our purposes, we're going to say it's eight, right?
+
+We're going to pretend like it's eight because unless you're doing vector stuff, it's eight and we're not doing vector stuff.
+
+So let's say it's eight, right? So every time I call Malik.
+
+Even if I'm Malik. One bite. It's going to give me an address.
+
+This divisible by eight. Because the next time I call Malik, it might need to give me an address that divisible by eight, right?
+
+So it just aligns them all to eight. Which means that if I malloc one byte, then I'm throwing away seven, guaranteed.
+
+Right. There's just not going to be used because I have to align the next thing.
+
+Right. Which means that there's overhead. Um, it turns out that there's always overhead to allocations.
+
+How much overhead there is. Allocations can vary, right? But there's always overhead.
+
+But in this case, this particular overhead means that if I am allocating a large number of very small items.
+
+I frequently am better off to allocate one array of a large number of small items, and then use those items out of the array,
+
+because then if they don't need any extra padding in between them because they're small, right?
+
+So if I really need a 128 individual characters,
+
+I am much better to malloc 128 bytes and use it as an array of characters than I am to malloc one character 128 times.
+
+Right. It uses a lot less memory. Now modify this with my previous statement.
+
+First make it work, then make it good. Then make it fast, right?
+
+I would argue that if you're actually allocating 128 characters malloc one at a time, probably we're not in the realm of good, right?
+
+Like you're whatever you're doing, we need to think about that. Right?
+
+But. Um. So sometimes you may want to allocate a lot of small things, but sometimes it's like now I just I just need the array.
+
+Right. I should just allocate an array. Uh, don't sweat that too hard into 20.
+
+It's not going to come up. But, you know, think about it. We will look more at overhead and allocations later in the semester.
+
+All right. One more property. So alignment is at what?
+
+What are the properties of the address?
+
+The numeric arithmetic properties of the address at which I can store a particular piece of data.
+
+There's another closely related term which is stride, which is if I put two pieces of data in memory.
+
+Side by side. How far apart are they?
+
+For simple types. The alignment requirement of the type.
+
+The stride of the type and the size of the type are all exactly the same thing.
+
+If I say was the alignment requirement of int and it is 32 bits are four bytes.
+
+The alignment requirement is four bytes, the size is four bytes and the stride is four bytes.
+
+Right. If I put two integers back to back, they're four bytes apart, right?
+
+If I took two integers in an array, I took their addresses. I subtracted those addresses.
+
+The answer would be four. Right. They're four bytes apart.
+
+Um. But for compound types, this can be more complicated, right?
+
+It turns out that there's times that the amount of data that the type takes up sort of naturally when I do my computation.
+
+And the stride. The distance between where I can put two of these things might be different.
+
+In which case, it turns out what we're going to do is we're going to artificially make the thing bigger so that they're the same.
+
+But certainly the alignment of the thing and its stride may be different.
+
+So if I have a struct that has four integers in it.
+
+Its alignment requirement is four bytes,
+
+but its stride is 16 bytes because the four integers that are inside it each take up four of those four bytes that are required.
+
+Um. There is. So we talk about stride.
+
+We talk about pointers.
+
+Because when I have a pointer to something, the stride is how far apart and the address space would be the next pointer to something.
+
+There's a special type in C which is void star, which is a pointer to I don't know what how far apart are two.
+
+I don't know what's. I don't know. So we say by fiat.
+
+One there, one byte apart. Now, strictly speaking, in the C99 standard it says thou shalt not ask that question.
+
+The what? How big is a void star? What is at a void star?
+
+And what is the Strider void star? The answer to all of those is no.
+
+Right. In practice. In 30 years, I have never seen a C compiler.
+
+That did not treat Void Star as if it had a stride of one.
+
+And in particular GCC, which is the compiler that we're using.
+
+Treats void star as if it has a stride of one. And for reasons that we're about to talk about.
+
+This makes it convenient to use void star as a data type when we want to do math on pointers,
+
+because it artificially points to an I don't know what with a fake size of one byte, which makes it easy to do correct math.
+
+Right? And the reason for that. Is that when?
+
+Oh. Okay.
+
+This feels like an awkward time to lecture question, but okay. I'm sure I put that slide there.
+
+So I at one time I thought this was a great time to lecture.
+
+So the question so I'm going to ask you a lecture question. Now I'm going to say anything about it.
+
+I'm going to be completely silent during this lecture. Question. Gavin.
+
+Only one. You may recall that last lecture.
+
+I said, there's going to be a question and it's going to be on your midterm.
+
+And it's going to say, given only a pointer to a region of memory allocated using malic.
+
+How can you find out how much memory was requested at the time it was allocated?
+
+And I said, and the answer is you can't. And I have never had a class where everyone on the midterm said, you can't.
+
+And I said, we're going to do this in a top hat, and it's going to be on your practice midterm.
+
+And this could be on your midterm. It's going to be on your final. And I've never had a final where everyone in the class said you can't.
+
+So we're going to run this question again. And you're all going to click.
+
+You can't. Do you or should you?
+
+Because those are different questions. Everybody's clicking.
+
+You can't. Right? What? No, I did, I did.
+
+I. Last class, there were 11 people who didn't.
+
+But you can't. All right.
+
+So. There are 83 people in this room.
+
+Who I expect on their midterm to write.
+
+You can't. Right.
+
+Make this the first semester in seven years that every student.
+
+I can't do anything about Karl's lectures. Just you just a and lectures every student.
+
+Right. You can't. Yes. Uh, if you get one of them wrong and one of them right today, you would get three points out of four for your credit for today.
+
+But your attendance is just yes. If you want to get 100%.
+
+Yeah. But if you only if you get every single topic question wrong for the entire semester, then you will get 50% of your lecture activity grade,
+
+which is five points, which means that the maximum possible score you can get in this course is 100%.
+
+Because it's out of 105%. And 100% is the maximum grade that we award.
+
+Right. So you can miss every lecture question. Still get 100%. That's how kind I am.
+
+Do you know why this course data 105%. Because the very first time I taught this course, when I was.
+
+Doing my. Um, when I was designing the course and writing the syllabus, I had this, like,
+
+breakdown of points where I just could not come up with a way to make it worth 100 that I liked.
+
+So I said, I'll make it 105 and graded out of 100.
+
+And like, nobody's going to complain because it's a free five points.
+
+Students, my friends, some of you will complain about literally anything.
+
+Literally anything. All right.
+
+Also, I've had to reword the syllabus like three times because people don't understand where the 5% comes from.
+
+They're like, where's this extra 5%? How do I get that extra 5%? Like if you just add up the numbers, they add to 105, right?
+
+Like it's not there's no secret. It's just like if you add these numbers up, they don't add to 100.
+
+And then I divide by 100. All right anyway.
+
+You can't. So if I have a compound type, then I run into a little tricky problem with my stride,
+
+which is that if I just maintain alignment internal to my compound type.
+
+Then. And that's all I do. Then if I put two of these compound ties back to back, I can run into the scenario that the second one is not aligned.
+
+Because the first one has needs no padding, maybe right, and is a particular size and that's fine.
+
+But the last the first address after it doesn't meet the alignment requirements of its own type.
+
+Which means that when I would create an array, then I would need padding between those types, between those elements.
+
+So what we do is we instead of saying, well, when I create an array, what we do is we say, when I define this structure, when I calculate padding,
+
+I am also going to calculate how much padding has to be required at the end in order to meet the alignment requirements.
+
+If I put this type into an array and I always include that padding.
+
+So if I call sizeof on this struct right. So this struct has an eight mike pointer and a four byte integer.
+
+If I call sizeof on that struct, the size of that struct is not 12 bytes, it's 16.
+
+Because there's an extra four bytes of padding at the end. And this struct doesn't need that padding.
+
+Because any number that's congruent to zero mod eight is also congruent to zero mod four.
+
+And so if next is aligned then value is aligned.
+
+So I don't need any padding between them. But I need padding at the end so that if I put two atlas in an array.
+
+The second one preserves the alignment of that next field.
+
+Right. Does that make sense? Yes.
+
+No, it's always padded. Every instance of the stroke will always have that padding, whether you need it or not.
+
+Because for example, if I malloc. So the question is, is only happened when I put two structs together.
+
+No. Because when I malloc say I malloc. And then I put two structs into that memory.
+
+Malik doesn't know. I was going to put two strokes into that memory. It's not actually an array.
+
+It's not actually a. So it just always has that padding just to guarantee that this never becomes a problem.
+
+Every struct will have that extra padding at the end. Now in the previous example, I didn't need it right.
+
+If I did pointer and then or I'm sorry int and then pointer, I had padding in the middle.
+
+I didn't need it at the end, but in this case I need it at the end.
+
+Yes. The hint. Yes. Okay.
+
+So I'm going to answer this question. Because you deserve an answer.
+
+It's a great question. Everything I'm about to say. Until I tell you is not on the midterm.
+
+Right. So it is illegal to access the padding inside a structure.
+
+So the question is, I said last time that if I put an array.
+
+Inside a struct. Then I can copy a struct.
+
+And so therefore I can copy an array. And I didn't understand how that was connected to the next part.
+
+But basically the next part was when I copy this thing now I'm copying padding, right?
+
+Yeah. He could have two raisins.
+
+Yes. Yes. Maybe. I don't understand the question, actually.
+
+Now we have two arrays. I'm so confused. Oh.
+
+Uh, okay. Yes. This is not the question I thought it was. This will be on the midterm.
+
+If I have two arrays. Do I need padding between the arrays?
+
+The answer is a very solid. Maybe. So if I have an array of integers and there's an odd number of them.
+
+Then the last. The first byte after that will be, uh, at an address that is congruent to four mod eight.
+
+Right. So if I then put an array of pointers after that, I would need four bytes of padding.
+
+So I would have three integers in an array. Then I would have four bytes of padding and then I would have an array of pointers.
+
+Did that answer your question? That was not the question I thought you were asking. I thought you were asking a different question.
+
+That's a good question. The other question that one will be on the midterm.
+
+I thought the one you were asking would not be on the midterm, but that will be on the midterm. Not like I'm.
+
+I reserve the right to ask exactly that question, but I probably won't. But that concept.
+
+Yes. If you're late, try. Okay.
+
+This is what I thought you were asking. Wait one.
+
+Oh, I thought, I thought I knew what he was asking, but then the exact words he said was, if you're like, trying to merge.
+
+And I just want to know, technically speaking, what does that look like in syntax?
+
+Okay. That's what I thought you were asking. Okay, so this is the part that's not going to be on the midterm.
+
+If I copy a structure to another structure, which is not like trying to merge.
+
+Or maybe it is.
+
+I don't understand how kids these days talk, but if I have some struct s and some structs t and they're of the same type and I say s equals t,
+
+then it's going to copy t into s, write all the bytes of t into s.
+
+So the question is what about the padding. And the answer is this is not on the midterm.
+
+What about the padding? It's undefined. What happens to the padding?
+
+In reality, what it's going to do is it's going to copy that padding.
+
+But because it's not legal for you to ever look at the padding, you'll never know.
+
+This is the whole of a tree falls in the forest. Doesn't make a sound right if the padding is copied by the compiler.
+
+Would you ever know? And the answer is no. He's not allowed to look at it.
+
+So but yes, it's just going to copy. I mean, the memories memory is just going to copy that.
+
+Like if that struct is 56 bytes long, it's just going to copy 56 bytes.
+
+No, because the padding will preserve the alignment either way. All right.
+
+Now we'll go back to things that will be on the midterm. That's not going to be on the midterm.
+
+The compiler is allowed to do a lot of things that you're not allowed to do.
+
+It makes the rules. Okay.
+
+All right. So pointers. As we've said many times so far this semester they're just numbers.
+
+Why does this number? It's an arithmetic type. I can do arithmetic on pointers.
+
+If you remember, we said we had four ways to create a valid pointer. And one of them was computing that pointer.
+
+So the authors of the C programing language by whom I mean.
+
+Dennis Ritchie. Um. Looked at the way that people do arithmetic on pointers.
+
+And said when people do arithmetic on pointers, they normally want their pointers to act more or less like arrays.
+
+And if I have a pointer to an int and then I ask for the next pointer.
+
+What I really mean is not that pointer plus one byte.
+
+I mean the next integer in memory. Right? So that pointer plus one int in memory.
+
+And so when you add if you have a pointer of type something star, that something has a size.
+
+If you arithmetically in your C program say p plus one, what is added to the address stored in P is not the integer one.
+
+It is the size of the kind of thing that p points to, one of the size of the kind of thing that P points to.
+
+So if I have an array of integers. Array.
+
+Square bracket zero is the first integer. Array square bracket one is the second integer.
+
+Star A is the first integer star.
+
+Parentheses a plus one is the second integer.
+
+Right. This is convenient.
+
+But it means that when you add one to an integer, you cannot assume that the address that is yielded is exactly the old address plus one byte.
+
+In fact, it never is unless that size of that type is exactly one byte.
+
+Um. Fun fact, and I didn't tell my last class this.
+
+Don't ever don't don't remember this. I'm going to tell you this. And you should be like, wow, that's crazy.
+
+And then never remember it ever again. If I have, uh.
+
+Isn't. Star P. Right?
+
+And I say. P sub three.
+
+The compiler transforms this to star P.
+
+Plus three. Exactly the same thing.
+
+Right. Because that's p plus three times the size of an integer.
+
+Go there and give me what you find. P plus three times the size of an integer.
+
+Go there and give me what you find. This is all fine.
+
+This is normal. This is the kind of stuff that shows up on the midterm. Same thing.
+
+Exact same result. If I ever see you do that.
+
+I will find you, right? But it's because these are exact.
+
+This is. I mean arithmetic, right?
+
+P plus three and three plus £0.03 have to be the same thing. So these are the same thing.
+
+Now I'm going to race this for somebody gets hurt. All right.
+
+Question. Yes. Just why?
+
+Why would they do that? Why is it like this? You.
+
+If you compile it, it'll run. It'll work. Yeah, it'll totally work.
+
+Yeah. What's the problem? I will hurt you. I won't for legal reasons.
+
+I will not actually hurt you. I won't tell anyone, but I will.
+
+Okay, well, that's a different conversation. Uh, but, like, it's just it's bad, right?
+
+It's bad programing practice. Anybody who reads that program is like, what is happening here?
+
+Why would I don't want to be here anymore right now?
+
+Uh, interestingly, if we have int x equals three. Right.
+
+I can do p square bracket x. But x square bracket p is a type error.
+
+Right. These are square brackets. Right x square back three would be a type error because it will say you can't subscript an int, right?
+
+But anyway. Fun fact. Don't ever do it. I mean, do it.
+
+Go home and try it. I really hope that the compiler complains before it does it anyway, right?
+
+But like it works. But it's not like it kind of hurts a little bit when it works.
+
+Okay. Um. Note the compound types can be quite large.
+
+In fact, they can be arbitrarily large. So here's the structure that contains inside an array of 256 characters.
+
+The stride of this structure is 256 bytes.
+
+So if I have a pointer to this structure and I add one. I added 256 bytes to that address.
+
+Right. And that can be arbitrarily large. I could have a struct that had an array of, you know, a gigabyte inside it.
+
+That's legal. Again, this goes back to like if you're declaring an array or a structure with an array of a gigabyte inside it,
+
+like we need to ask what you're doing and why you would do that. But like it's legal, it's a, it's a reasonable, um.
+
+It's not a reasonable thing to do. But like the thing you can do, right?
+
+Um. Now, let me ask you this.
+
+What is the alignment requirement? Of struct big.
+
+Try. Okay. You can't just say I don't know. Uh, that's a good guess.
+
+256. What is the alignment requirement of, um, an array of 206 characters?
+
+Don't chicken out. Put your hand up. Okay, check it out.
+
+It. Um, I'm going to say no, but, uh, yes, one is what you mean.
+
+Like, anything, right? Anything. The alignment requirement is one byte because we can't have zero, because what happens is we divide by zero.
+
+Like it's it's not well-defined. Right. But we can say what right.
+
+The alignment requirement of, of an array of characters is one, because the alignment requirement of a character is one.
+
+And so the alignment requirement of the base of that array is one. This is a structure containing an array of characters.
+
+The alignment requirement of the structure is the alignment, the largest alignment requirement of any item inside the structure.
+
+There's only one. It's alignment requirement is one, so the alignment required the structure is anywhere in memory one byte, right?
+
+Any address in memory is appropriate to place the structure.
+
+Now, in practice, your compiler is probably going to say eight because it doesn't like things like that.
+
+But like, I can put this anywhere in memory and then access any byte inside that array and it would work correctly.
+
+Right. I could do, you know, b dot or B arrow, a square bracket three.
+
+And it would work regardless of where B was in memory, because a character can be placed anywhere in memory.
+
+All right. I'm going to let you go now. Um, remember that your midterm is one week from this coming Wednesday.
+
+Please do catch up on your required readings, and I will see you on Monday.
+
+Have a great weekend. You're back.
+
+I said I sent to some some.
+
+I said I saw Shreya and you know what they said? Did she see you?
+
+November 9th. All right, I will tell you. Are you leaving campus now? Okay, so I was gonna tell you.
+
+RTA meeting is at 4:00. Okay.
+
+All right. I'll see you if you be hacking. I'm really happy you stopped by. It made me so happy.
+
+Would there be anybody? There wouldn't have to be, you know, there wouldn't have to be, because, um, by our rules, there wouldn't have to be.
+
+I think the compiler would probably round that to the 56, but by our rules, there wouldn't have.
+

@@ -1,0 +1,1013 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+So hopefully it'll be better today. Uh, we'll we'll see.
+
+Um. So we're gonna start a new set of lecture slides today.
+
+As I said about the last lecture slides, it really touches on a lot of things that we'll do sort of throughout the semester.
+
+And we're going to hit some of those again, uh, already in this lecture.
+
+But as is tradition and this confuses me very much, this, this next slide that comes up,
+
+excuse me very much in my last lecture, as is tradition before we talk about, um,
+
+the material for the day, I want to talk a little bit about, uh, what's working right,
+
+getting effective work done, and in particular about asking effective, um, questions.
+
+And I make an assertion to you, which is that answering questions is always easy.
+
+But asking a question that can be easily answered is difficult.
+
+So whatever question is asked of you, if you have the information to answer that question, answering it is typically just not a big deal.
+
+But sometimes the question that you've been asked, you don't have the information to answer that question.
+
+And it's difficult to come up with the answer to the question. What that means is the question that has been asked is unfortunate, right?
+
+Asking the right question, asking a question for which it is easy to produce an answer is difficult.
+
+Now, this is a viewpoint that many of you probably do not take,
+
+because usually the questions you're being asked are being asked in order to determine
+
+whether you have learned the things that would make it easy to answer that question.
+
+And in many cases, you haven't, or you're not comfortable with it or whatever.
+
+But most questions that we ask in the world, we don't ask in order to see if someone knows something.
+
+We ask them because we would like to have the answer.
+
+When I ask you a question on an exam like I know the answer, I'm not waiting for you to solve a problem for me.
+
+I'm just asking to see if you know the answer.
+
+But when you ask questions as you're working, which you will frequently do, you're usually asking those questions because you want the answer.
+
+You want to be able to find the answer. And it's possible to ask a question for which you don't know the answer.
+
+But just a little bit of thought brings you to the answer. And now you know more.
+
+And then you ask another question that you don't know the answer, but with a little bit of thought, you can come to the answer.
+
+And now you know more and thus build up your knowledge base right by answering these questions one after another.
+
+And this is how we work, right? This is how we learn. This is how we grow. This is how we do new things.
+
+As we ask questions, we find the answer. We ask the next question. We find the next answer.
+
+It's how scientific progress works, right? If I am a scientist and I'm trying to determine, uh, whether I'm trying to come up with some new knowledge,
+
+if I ask a question that is very far from what I already know,
+
+then I am probably not going to succeed in answering that question in a satisfactory way.
+
+But if I ask a good question, a solid question, that's just a little bit beyond what we already know.
+
+Then I do some work. I come up with an answer to that question and I have expanded, you know, human knowledge.
+
+So I assert to you that one of the skills that you should be practicing is asking good questions.
+
+And here is a rubric that you can use when you're working on something.
+
+To ask good questions about what it is you're working on to help yourself make good progress.
+
+And I'm going to suggest that you use this when you're stuck.
+
+When you're trying to do something and you don't know where to start, or you don't know exactly what you're supposed to be doing, or you're,
+
+um, conceptually confused about how something is supposed to work, I suggest that you use this rubric that's on this slide here.
+
+And just like when I said, when you start working, set a timer.
+
+And I said, no, literally, I mean, start a timer on your phone. So in 15 minutes it beeps.
+
+I mean, get out a piece of paper and write down the question, what do I have a question mark and write underneath it?
+
+Write down what you have and by what you have.
+
+I mean, what do you know about the problem that you're currently facing?
+
+What what is it that you, uh, have already done that might be helpful to you in the situation you're currently
+
+in and just make a list of I know these things about the topic at hand.
+
+Right. So say you're working on part one. Uh, and you haven't started yet because it's the Monday that the project is due.
+
+And for some reason, you think that's a good idea. What do you have when you have a handout?
+
+You could read it. Right. That's the thing that you can do, right?
+
+Maybe you started last week like a good student and you've already read the
+
+handout and you've been working on part one some and you're stuck on something.
+
+And then so what you have is. Information.
+
+Detailed information from the handout. You know how the rules of the game of life.
+
+So you can write down the rules of the game of life. That's something I already know.
+
+You know that you can read a starting position for a life.
+
+Um, uh, board write.
+
+You know how to do that. You know how to use past life. You can write that down.
+
+I know how to use past life. I know how to get the starting position. Maybe you figured out how to print a board.
+
+You can write down. I can I could print the current state of the world. Right.
+
+Like, these are the things I know how to do. And then you ask yourself, what do I need?
+
+Because you're stuck, right? The way you got here is you're stuck. You were trying to work on something or I don't know what to do next, right?
+
+What do I need? What am I trying to do? And write down in your own words what you're trying to do?
+
+Don't copy it out of the handout. Don't you know, uh, repeat what your boss asked for.
+
+Write down in your own words. What am I actually trying to accomplish right now?
+
+Because that'll help you understand better what it is you're actually trying to do.
+
+So you might say, I'm trying to implement Conway's Game of Life, right?
+
+But that's pretty big. It'd be better if you'd say, I am trying to compute the next generation of Conway's Game of Life, right?
+
+You say, all right, what do I have? I have the current generation.
+
+What do I need? I need the next generation, right?
+
+Or whatever. And then ask yourself, now that I've gone and I've actually written these things down,
+
+look at them, read them, think about them for a moment and say, do I know how to do that?
+
+Given these things, do I know how to get that thing? If the answer's yes, you're done.
+
+You've solved your problem, right? Go do the thing right. And then keep working.
+
+If the answer is no, as it frequently is, then you ask yourself, well, okay.
+
+Do I know how to get partway from here to there? I don't know how to compute the next generation.
+
+I'm really not sure how that should work. What do I need to produce the next generation?
+
+Well, for every cell in the grid. I need to know whether it lives or dies.
+
+Okay, so I need to know whether a particular cell lives or dies.
+
+Given what I have, do I know how to do that? If the answer is yes, you're not stuck anymore.
+
+Go do that and then come back, right if you have to. If the answer is no, I actually am not sure how I would do that.
+
+You ask yourself, well, what do I need to know whether a particular cell lives or dies?
+
+Well, I need to know how many of its neighbors are currently alive.
+
+Right? And that's the thing I can compute, right? I can count whether, uh, neighbors are, uh, dead or alive.
+
+Do I know how to do that? If the answer is yes, go do that.
+
+Put that in the list of things that you have and ask yourself, now, can I compute the next generation?
+
+Right. And you just iteratively repeat this. If I can't get all the way to where I want to be,
+
+can I find someplace between here and there that I can get to add that to the things that I have and then ask it,
+
+can I get from there to wherever it is that I need?
+
+Um. The best part about this whole thing?
+
+Is when you get to the end and you're like, no. I can't get what I need.
+
+I don't know how to get what I need. I don't know how to get partway to what I need.
+
+Because what you have now done is you have carefully written down.
+
+Absolutely everything that a core staff member needs in order to help you get unstuck.
+
+Because you may have experienced a circumstance where you come to a core staff member and you say, I don't know what to do next.
+
+And the core staff member says, May I introduce you?
+
+To my friend. The handout. And you're like, I've read the handout, right?
+
+I still don't know what to do.
+
+Well, the problem is that you didn't communicate to us what you did and did not understand about the handout, and so we don't know where to start.
+
+Same as you don't know where to start. We don't know where to start.
+
+But if you bring a piece of paper that has a list of what I have and what I need and how I can't get there from here to there,
+
+then we'll say, oh, are you aware that some fact.
+
+Right. And then you'll say, ah, I can work with that.
+
+It's not just the handout, right?
+
+So it either helps you get unstuck or if it doesn't help you get unstuck.
+
+It tells us exactly what we need to know to give you useful help, not generic help.
+
+Right. You can read the handout yourself. You probably. Well, you probably didn't read the handout.
+
+Statistically speaking, I'm sure everyone in this room did. But statistically speaking, you probably didn't read the handout.
+
+Um. But if you have, it's like, well, I already know that.
+
+And that's that's not my problem, right? Well, what is your problem right there?
+
+You wrote it down. Show us. Will help you. Any questions? Oh.
+
+All right. So, um, I'm going to tell you a bunch of stuff that I've already told you previously this, um, semester.
+
+A very interesting conversation today with another professor who's teaching a course.
+
+And gave a whole lecture, and at the end had like a little recitation in the lecture where students were
+
+supposed to do a particular activity and a student put their hand up and said.
+
+I don't know what to do. And the professor said, well, were you listening to lecture?
+
+And the student, being an honest person, looked right at him and said, no.
+
+So you may or may not have heard this before,
+
+but we have before said in this class that the memory on the systems that we are using is, uh, stores data.
+
+That data is accessible to our programs and the program, that data is stored in an address in memory.
+
+And the address is the location in memory where we have chosen or where the computer has chosen to store the data, uh, that we are going to, uh, use.
+
+We saw in a tour of computing systems, right? We had this block diagram and we had the CPU, and that was only one part of the system.
+
+And there was also memory and there was other things.
+
+The way the CPU accesses data that is stored in memory or somewhere else in the computer is by that address.
+
+So when you tell when you and your in your program, whether you write it in C or you write in Python,
+
+you write in Java or JavaScript or whatever language you write it in,
+
+your program tells the CPU, hey, go to this location in memory, get the data that's there, and do some computation on that data.
+
+And what happens is the CPU goes to one of those busses, and it puts the address where that data is stored.
+
+On one of those busses, the address goes out to the memory.
+
+The memory says, oh, I have something stored at that address.
+
+And it takes what's stored at that address and it puts it on a bus and it goes back to the CPU.
+
+And the CPU says, okay, I'd like to add something to that, or, you know, compare it or do whatever I want to do with it.
+
+But those addresses are fundamentally how the computer does its computation.
+
+And whether you have a language like C where we actually expose those addresses, you can see them and you know what they are.
+
+Or you have a language like Python or Java or JavaScript or Ruby or, you know,
+
+whatever, that does not expose those addresses and there's no way to get them.
+
+They're still there. And the computer is still using them.
+
+Just in C, we have the privilege of knowing what they are and knowing how to find them.
+
+So in addition and again, we said this in a previous lecture, uh, we have what we call the dedicated computer model in the systems that we're using,
+
+where every single process on the computer appears to have its own memory.
+
+It appears to run on a dedicated CPU, to have its own memory, to have its own input and output devices,
+
+and be the only program that's running on the entire computer at any given point in time.
+
+And from our perspective, that memory starts at the bottom of whatever our address space is, because addresses are just a number, right?
+
+Which in our system is zero. Right.
+
+And it goes up to whatever the maximum allowable address is on the system, which on our system is two to the power of 64 minus one.
+
+So we have two to the power of 64 possible addresses in, uh, memory zero and 2 to 64 minus one non-zero um addresses.
+
+However, it may be the case that not all of those addresses actually exist.
+
+In fact, normally they do not. So your laptop probably has something like two to the 34 or 2 to the 35 bytes of memory, right?
+
+Somewhere in that range, maybe 2 to 33 bytes of, uh.
+
+Memory. That would take you from four gigabytes to, say, 32GB of memory, which are reasonable values for a laptop today.
+
+Um, and that is, of course, two to the 32.
+
+There are two to the 32 times, two to the 32 bytes and two to the 64.
+
+Right. So most of the memory space actually doesn't exist on any given computer.
+
+But notionally those are the addresses that we can use. Those are the places where we could store memory if we had something to store there.
+
+It turns out that on Unix systems in particular, the way we use that memory is very predictable.
+
+Later in this semester, we will learn something about how we use that memory and where we put different kinds of data in the memory of the computer.
+
+Today, I'm going to tell you that that's a thing later in the semester, probably around the midterm,
+
+just before just after the midterm, we will talk about what addresses we use to store what data and why we put that data there.
+
+So. Furthermore, in the C programing language, we've just said all of our data is stored in memory and all of that memory is accessible by address.
+
+And the way the CPU uses that memory is it goes to an address and it gets whatever it finds there.
+
+In the C programing language, we have a datatype called pointers.
+
+And pointers are variables. That store in them an address.
+
+And they associate that address with a type, which we'll talk more about later,
+
+so that we can access a particular place in the memory of the computer and do computation based on what is stored at that location.
+
+This allows us in the C programing language to explicitly interact with the memory of the computer.
+
+And this is something again, as we said in like the second day of class.
+
+This is something that most programing languages do not allow you to do.
+
+They still store their memory, their data in the memory of the computer, and they still stored at addresses,
+
+but they don't expose to you as the programmer what those addresses are,
+
+or show you what is at a particular address when you go to try to access that data.
+
+You have maybe a variable name or something, but not a number, right?
+
+Not the actual location where that data is stored.
+
+This is very powerful. It allows the C programing language to do some things that other languages just can't do, but it's also somewhat unsafe.
+
+Because I can choose to access an address that doesn't belong to me.
+
+Or an address that belongs to me, but doesn't contain the kind of thing that I'm trying to use right now.
+
+So in Python if I have a reference to a linkedlist node.
+
+It is absolutely 100% always the case that when I look at that linkedlist node, it is a linkedlist node.
+
+And see if I have a pointer. And that pointer is allegedly to data that is a linked list node.
+
+What's located at that address because I could just change the address.
+
+I could just say, show me what's at address 37. 37 is probably not a linked list note, right?
+
+I don't know what it is, but it's probably not a linked list note.
+
+But nonetheless, I can say go to the address 37 and give me the link list.
+
+Know that you find there and C will let me do that.
+
+And my program will go horribly wrong. It will crash. Actually, in that particular case, it will crash.
+
+But in other cases, it may not crash. It may just go horribly wrong.
+
+So this is a very powerful thing that allows us to do cool things.
+
+But it is also a dangerous thing because it gives us one more way for our program to have bugs.
+
+And if there's anything you know, it should be by now that if there is a way for a program to have bugs,
+
+eventually your program will have that kind of bug, right? It's just the way programing works.
+
+Unfortunately, it turns out that most non-trivial data structures in C will require you to use pointer.
+
+So you can't just say, okay, wow, this is really cool and it's great, and I'm glad it's powerful, but I'm not doing that, so I just I'm safe.
+
+You're not. You're going to need pointers. If you write a real program in C or in C plus plus or in roster and go in other languages that pointers,
+
+you are absolutely going to need pointers because of the way these languages work.
+
+Yes. Yes, like the debugger, for example.
+
+Yeah. Uh. I'm talking about. Yes.
+
+Yes. Um. In like. How come?
+
+Okay. So the question is. Assume that one is aware that there are programs that exist that allow you to modify the memory of other programs.
+
+I already said earlier in this lecture that you can't do that.
+
+Everything in memory is yours, right? Every program has its own memory, etc.
+
+How? And the answer is that the operating system has to provide an interface for that.
+
+And it typically is a debugging interface is intended for writing debuggers.
+
+So for those of you who plays Dwarf Fortress. I thought you guys were nerds.
+
+Fake nerds gatekeeping right now. Nerd. Dumb.
+
+All right, well, I have an assignment for you. Don't do it till after the semester's over.
+
+Go download Dwarf Fortress Church. With graphics.
+
+Okay, well that's okay. Dwarf therapists.
+
+The dwarf therapists.
+
+There's a program called Dwarf Therapist, and it opens up the memory of Dwarf Fortress and lets you modify what's happening in your world.
+
+I can't believe none of you played Dwarf Fortress. I'm going to have to process this for a moment.
+
+I was thinking about cheating. You're still nerds.
+
+I thought you were cool nerds. Anyway.
+
+Anyway, uh, they used debug interfaces.
+
+So essentially the same thing that a debugger does when you're debugging a program, it goes to the operating system and says,
+
+hey, can I see the memory of this program so that I can help you understand what's happening?
+
+They say, can I see this memory of this program so I can help you understand what's happening?
+
+And then they allow you to give yourself 99 lives or whatever, you know. Yeah.
+
+So even that. That it will allow them to modify that memory.
+
+And the operating system can say no, right? Yeah.
+
+So, um, let me rephrase your question.
+
+Garbage collectors are cool because they mean that we don't have to mess with all of this manual pointers and allocating and freeing.
+
+Why would we want that in C? Um, and the answer is that garbage collectors are also slow.
+
+And it is much faster to manually allocate and free your memory.
+
+That's the fundamental reason. Um, however, they are super cool.
+
+And if you don't have to have pointers and you don't require the speed and the efficiency of manually allocating and freeing your memory, don't do it.
+
+Go use Python. Right. Or Java, or you know, some language that has that management for you because the most of the time,
+
+the power of having those things outweighs the fact that it is larger and slower, it uses more memory,
+
+etc., because the expensive thing is not how long does it take my program to run its how long does it
+
+take me to write a correct program and it takes longer in C because all of that stuff is manual.
+
+Does that answer your question? Yeah. So it's we pay a price to do things manually in terms of like.
+
+How hard it is. Intellectually difficult it is to do it. And in return, our programs run faster and use fewer, fewer resources.
+
+And sometimes that really matters. Usually it doesn't.
+
+Efficiency. Yep. At the end of the day, uh.
+
+And KSI 220, I make you do it. But after this, you're going to look at the tasks that you accomplish.
+
+You're going to say, do I need to access raw memory for some reason? If so, I'm going to need a language that has pointers.
+
+Do I need the efficiency that comes from manually allocating and freeing all my memory and keeping track of all of my resources?
+
+And if so, you're going to use C or C plus, plus or rust or one of these languages that makes you do that.
+
+And if not, you're going to be like, whew, Python time, right? You're going to go write Python or whatever.
+
+Pythons kind of slow, but there are faster languages that still like Java that still allow you to get away from that rat race.
+
+Yeah. All right. Good questions.
+
+We'll disappoint. None of you play Dwarf Fortress, but other than that, good questions.
+
+Okay, so, um, if we think of the memory in our system.
+
+Yes. Are you going to ask about Dwarf Fortress? Oh. Why not?
+
+It should be like, why does he think this is so cool? Go ahead.
+
+No, don't play till the end of the semester. You'll lose the rest of your semester. Uh.
+
+Restrict some. Memory addresses or are you able to like completely?
+
+We'll talk about that. We'll talk about that. Hold that question. We'll answer that.
+
+Some of it today and some of it like in 2 or 3 weeks.
+
+So hold that question. The short answer is not all addresses are valid.
+
+Okay. All right. So, um. If we think of the memory of our system, starting from the address zero and going up to the address of 2 to 64 minus one,
+
+or to the 32 minus one or whatever, how much memory we have in a particular system.
+
+If we think of it as a giant array.
+
+Then we can think of a pointer as simply an index into that array.
+
+So our memory is a giant array of bytes, and a pointer just says go this many bytes into this giant array and access what's there.
+
+And that is how a pointer works. That's essentially exactly how a pointer works.
+
+Now, unlike the arrays that you know from programing languages that you've used previously.
+
+In most programing languages. If you have an array, then there's some range of contiguous locations that are valid, right?
+
+Zero to n is valid and anything past that is invalid, right?
+
+Some of these addresses are valid and some of them are not valid.
+
+And there's not really any way to tell from the outside exactly which ones are going to be valid and invalid.
+
+So you might have a few that are valid. And then you have a whole and there's some that are not.
+
+And then you have a few more that are. So the metaphor falls apart at some point.
+
+But essentially a pointer is just saying go into the array.
+
+That is the memory space of this system, go to this element of the array and give me what's there.
+
+Right. All right, before I move on.
+
+That's it for, um, the intro of these slides.
+
+Are there any questions? Yes.
+
+I've heard Factorio is excellent. I have never played Factorio. It's not Dwarf Fortress.
+
+Other questions that are on topic. Yes.
+
+Yes you can. Can you change your byte in memory that already has something assigned to it?
+
+Yes, you can. Not always, but sometimes. Um, and if you do that very carefully, that's a powerful thing.
+
+That's one of the powerful things that C gives you. If you do it badly, then down that path lies madness.
+
+And we'll talk a little bit more about that later in this lecture. Yes.
+
+What is dependency? Why does Java, why does he have pointers?
+
+Java doesn't, etc. C has pointers because at the time that C was created, that was the easy way to solve a particular problem that they had,
+
+which is they wanted to write an operating system and they wanted to not do it in assembly language.
+
+Uh, why does Java not have that? Because it exposes you to a whole class of bugs that if you don't have that capability, those bugs can't exist.
+
+And languages like Java say it's worth the trade off. Right I will.
+
+You cannot write an operating system in Java. Can't be done. Well, that's a strong statement.
+
+Can't be reasonably done. Um, yeah.
+
+But in return, there's a whole bunch of bugs that just don't exist in your Java program, and they can't exist because the language doesn't allow it.
+
+Did I flip to the next slide? I didn't. That's unfortunate. That means I have to stand up.
+
+All right, so a pointer. Is a variable in C.
+
+The stores an address. It also associates that address with a type.
+
+And it allows you to manipulate. Or view whatever is stored in memory at that address.
+
+So if I have a pointer and it contains an address, the address is just a number, right?
+
+Just a number that indicates some location in memory. That pointer will have a type say it's an int pointer.
+
+I can then go to that place in memory and say, give me the int that is stored at this address in memory.
+
+Or I can say change the int that is stored in this address in memory.
+
+Make it have a different value. Yes. Well it's C.
+
+So the question is if I said give me the answer to this address in memory and it wasn't INT, would it throw an error.
+
+No this is C. It would silently take whatever it finds there, smash it to an int shaped object and give it to me.
+
+And then it's just garbage, right? The number that I read would not be meaningful.
+
+It would be a number because everything is bits, right?
+
+Everything is bits. If I have 32 bits in a row, some of them are ones and some of them are zeros.
+
+I have an int. It may not be a meaningful int, but I can look at it and I can say what is that number?
+
+And I can tell you what number that is. Right.
+
+Uh, and it would absolutely do that. It would just take whatever 32 bits it found there and it would say, here's your it.
+
+And if it was not actually an event that was stored at that location, then you would get garbage.
+
+It would be not a meaningful value. Um.
+
+So okay. That's essentially what I just said. Memories is bits. Um, there is a special pointer value that we call null capital in UL all caps.
+
+Note that we have already learned about a null this semester.
+
+Capital in U1L, which was the Ascii zero byte that we put at the end of strings.
+
+This has two L's. I'm sorry, I don't know why we did this, but this is what we did.
+
+The C value null in u, l is the only pointer address that you know as a C programmer for a fact is invalid.
+
+Absolutely. Any other address might be valid.
+
+Might not be and you can't tell. So if I give you a pointer and it has the value 1,723,406.
+
+And I ask you, is that valid? Maybe it is.
+
+Maybe it is that you can't tell. But if I give you a pointer and it has exactly the value null and I say, is that valid?
+
+You can say, no, it is not. It's absolutely not valid.
+
+C guarantees that to you. Yes.
+
+An invalid address means something that you shouldn't be messing with.
+
+Sometimes it means the program is going to crash. Sometimes it means that it's just something you shouldn't change.
+
+Sometimes it means that it is something that you could change. But you shouldn't be changing right now.
+
+Right. It's anything that's not what you want it to be. What your program logically expects it to be.
+
+It's not guaranteed. So the question is, does he throw an error when you try to access.
+
+No, it's not guaranteed on our system. Yes. The answer is yes. It's going to crash.
+
+In fact, your program is going to crash. So he doesn't throw an error. The program will crash.
+
+Um, on other systems, you might actually just if you try to read novel, you might just get whatever data.
+
+The question of what if it's not meant? Whatever you get there is not what you want it to be, but you might get something.
+
+Uh, in our system, our address space, that space from zero to 2 to 64 minus one is so large that they just said,
+
+okay, fine, we'll take a few of these addresses and we'll make it. So if you try to use them, your program will crash.
+
+But so for example, C was originally written on a computer called the PDP 11.
+
+The PDP 11 had 16 bits of address space, so it had 65,536 bytes of memory.
+
+You don't want to give one of them up, you might need it.
+
+So no was a valid address on the PDP 11 like a valid address in the sense that there was data stored there,
+
+but it wasn't data you should ever use of your C program. That makes sense.
+
+Yes. There is no null pointer error and c.
+
+And the reason is that C doesn't know whether that address is valid or not until it tries to use it.
+
+And when it tries to use it, if it's invalid, your program crashes.
+
+If it's an actual address that yes does exist in your program, but it's not what you wanted it to be.
+
+It does whatever you asked it to do, and your program is just wrong.
+
+From now on, you've corrupted it right until eventually, maybe if you're lucky, later, it crashes.
+
+Worst case scenario, you have written a service.
+
+That runs in your company, and they start it on January 1st and they reboot it on December 31st.
+
+Runs for a year at a time. On March 12th.
+
+March 8th. It's a better day. Why is March 8th the better day?
+
+Anybody. March 8th was March 8th, the better day.
+
+Nobody. It's International Women's Day, right?
+
+And women are better than we are as men. Um, women.
+
+Thank you. Um. On March 8th.
+
+You pretend you're a man or a man and you corrupt memory somewhere.
+
+You write the wrong value to the wrong address in memory. But it's an address that exists, and it's part of your program.
+
+Then on November 6th, which I made up. It's not a holiday.
+
+Maybe it's a holiday on. Your program crashes.
+
+Because it tried to use the data that you wrote wrong on March 8th.
+
+Find that bug. Right. It proceeded to a completely different part of the program, doing a completely different thing from when you corrupted memory.
+
+See? Doesn't care. It will happily let you do that. Can't tell.
+
+Same as you can't tell how big an array is some same as you can't tell how many characters are in a string without counting them.
+
+Same as C, just doesn't care. It doesn't keep track of those things. It doesn't know those things.
+
+Which reminds me, um, some of my student assistants told me that there are several people who are fairly upset during, uh.
+
+And it may not be anyone in this room who are fairly upset during, uh, lab three, because you can't find out how big an array is.
+
+And they're like, why can't you find out how big an array is? Why would you do this to me?
+
+Why are you making my life so hard? Um, we're not making your life hard.
+
+That's just the way C is. We already had the first person, so I suspect it's not one of my lectures because I preach about this a lot.
+
+But we already had the first person who was like, but size of exists.
+
+I promise you can just use it. And the student assistants were like, no, you can't.
+
+It doesn't do what you think it does. And the student and this is why I'm bringing this up now, got sassy and was like, why do you suck?
+
+I know that size up exists. Why won't you let me use sizeof?
+
+Okay, first of all, I said don't use size of not my student and don't take it out on them.
+
+Second of all, size of doesn't do what you think it does.
+
+Stop. Right? But the real point is.
+
+And the reason I tell this story is my teaching assistants who, um, claimed to not know who had gotten sassy with them.
+
+I don't know if they actually don't know or they didn't want to throw somebody under the bus.
+
+Um, said that there were students who were getting angry with them, actually, about the unfairness that they were perpetrating.
+
+Please don't do that. They are literally just doing the job that I asked them to do.
+
+If you have a problem breaking up with me, don't take it out of my student assistants.
+
+They don't deserve it. I'm sure it was nobody in here, but I don't know who it was, so okay.
+
+All right. So, uh, now that's conceptually what you need to know about pointers.
+
+Let's talk about how we actually use them.
+
+So the first thing we need in order to be able to use a pointer is we need to be able to create a variable that is actually of a pointer type.
+
+The way we do that is by using the star operator.
+
+You've already seen this, right? We saw that it was the canonical string type.
+
+When we looked at some of the string functions. Uh, and you've seen it in uh main right care star argv, square brackets is an array of strings.
+
+And you've seen it in, uh, past life. Right? Past life returns a double pointer.
+
+So when I say care star str, what I'm saying is I would like to have a variable.
+
+And the value that that variable stores is going to be a pointer.
+
+It's going to be an address. And the thing that will be stored at the location of that address is going to be a character.
+
+Now, I know that I cannot tell when I see character STR well, if I see character str and it's named str,
+
+it damn well better be a string, because otherwise that programmer is just psychopathic, right?
+
+Sociopathic. Uh, but if I say, you know, if I see care star P just a pointer P right of type care star.
+
+I can't actually tell if it's a string or not.
+
+I know it's a pointer to a character, but I don't know if that character is part of a string or if it just is a character.
+
+Or maybe it's a couple of character, like I can't tell, right? But, uh, it is.
+
+If it's named SDR, it's probably a string. Um.
+
+Note that I can declare a pointer as const and you'll see with this a lot.
+
+It will. You will see const care star str or const in star or const whatever star.
+
+Um, the reason I bring this up here is it doesn't mean what it intuitively seems to mean.
+
+Uh, when you first see this, what it means is const care star str says str is a pointer.
+
+Esther holds an address and I can change that address.
+
+I can store different addresses in STR at different times.
+
+Esther is not const. What str points to is const str stores an address.
+
+And if I go to what's at that address, whatever I find to that address I shouldn't change it because it is const right.
+
+So the concept binds not to str but to the store.
+
+Right. Whatever's at the other end of that address is const.
+
+It is a pointer to a const care, not a const care pointer.
+
+Right. Does that make sense. There is a way to express a pointer where I should not change the address to which it points.
+
+You probably don't want to do that because there's a what I consider a flaw.
+
+Don't tell. The C and Unix people that I said this,
+
+but there's a flaw in the way the C type system works that makes it so that declaring one of those pointers is going to be a world of hurt.
+
+So don't don't do it. Um, it is, however, a good idea to declare const pointers like this.
+
+I'm not even going to teach you how to do it, because you shouldn't do the other thing, right? It is a good idea to declare course pointers like this.
+
+When you intend to have a pointer to something you don't want to change. And the reason for that is C,
+
+as you know from K and R is called by value when I call a C function and I pass a value in as an argument to the function,
+
+I cannot change the argument that I pass in if I change it.
+
+When I go back to my calling function, it's not changed, right?
+
+The calling function doesn't see the change. Um.
+
+However, if I change what's stored at a pointer at an address in memory, the calling function can see that.
+
+So if I declare my pointers const I can't accidentally call a function that changes my memory, right?
+
+And if you try to do it, the compiler will say, are you sure you meant to do this?
+
+You declared this variable const and this function's going to change your [INAUDIBLE], right?
+
+And then you say, oh no, that's not what I wanted to do, right? So do use concepts.
+
+It's good to use const uh. Any questions about declaring a pointer?
+
+I'm creating a variable that stores an address. Yes.
+
+Yep. Yep. That new location is also cast through this pointer.
+
+Well, the. So the pointer won't allow you to change.
+
+What's that? So the question is if I have a const costar str that points to a particular location, I can't change what's at that location.
+
+If I change it to point to a different location, can I change the new location?
+
+No. Can the old. Is the old location still const?
+
+The old location was never const in the sense that memory is just memory.
+
+All you did was you said using this pointer.
+
+I don't want to change what's on the other end. If I had another pointer that stored the same address but was not const, I could change what's there.
+
+Right. The handle is what says, no, don't let me change what's on the other it.
+
+Does that make sense? Yeah. If you didn't follow that. Don't sweat it too hard right this minute.
+
+Yes. Why should I use the pointer with a star instead of a ray bracket with creating a string?
+
+Good question. There's two reasons that I can give you right now.
+
+One is. Arrays with square brackets are what we call statically allocated.
+
+You sort of have to create them at the time that you compile your program.
+
+So if I don't know how big it should be, I don't know how many I'm going to need, I don't know, etc. I can't, I can't do that.
+
+And then which case I'm going to need a pointer later, which we'll talk about.
+
+Two is arrays in C are constant in size. You can never change their size.
+
+So if I declare something with square brackets, I have to tell it how many characters to put in those square brackets.
+
+And I can't ever change my mind. That's just how big my field is.
+
+Um. Which means that if I don't know how big it's going to need to be, I have to use a pointer.
+
+So if I don't know how many or I don't know where, I have to use a pointer if I need to have an arbitrary number of them, I need a pointer.
+
+If I need an arbitrary size, I need a pointer. And that's just a limitation of the C programing language.
+
+Other languages could solve that differently, but C did not. Yes.
+
+How many pointers can point to a particular address in memory? How many do you want to declare?
+
+Those are called aliases. So if you have more than 1.2 points, the same location is called an alias.
+
+It's not great. It makes the compiler's job much harder if you do that.
+
+But you can do it. You can create as many as you want. Go ahead. Yep.
+
+Okay. This is a very insightful question. Uh, I'm going to answer it, but don't break your brains on this right now.
+
+So I have two pointers to location. One of them is cost and one of them is not.
+
+They both point to the same address. I can change it with one.
+
+I can't change it with the other. It also calls. This is a place where aliasing causes bad things.
+
+It also causes bad things when I use the const pointer. Uh, so if I read a location from that pointer and it currently contains a seven.
+
+And then I used the other pointer to change that seven to a 14.
+
+And then I read that pointer again. The compiler is allowed to tell me seven.
+
+Because it's a pointer, so it must not have changed between last time I read it and this time that I read it.
+
+Right. Which is problematic. See, usually doesn't do that C plus plus does that a lot.
+
+Um, that's undefined behavior at that point. And it and it will it can give you either the seven or the 14.
+
+So you should try in a single scope never to have two pointers to the same.
+
+Address, but over your entire program you may have many and that can be okay.
+
+Yes. No, the non-conscious pointer would give you 14.
+
+I don't want a rat hole on that too much, because a I'm not going to ask you to remember that just yet.
+
+That's a fairly complicated concept, actually. Uh, and B,
+
+we're going to do a lot more with pointers throughout the rest of the semester where
+
+some of these things will become more clear as we see more about how pointers work.
+
+Yes. Speaking of relationships.
+
+You're not in the back of the room anymore. But I still feel like our bond is not the same as when you sat down here in the front with me.
+
+Look at these. All these chairs down here. I promised myself.
+
+Don't make promises you're not going to keep. Go ahead. Mhm.
+
+Yes. Yes.
+
+Okay, I'm going to stop you right there. I'm going to give you a short answer.
+
+And that's all the answer I want to give right now. We can talk about it outside of class.
+
+Later on, you'll know exactly everything there is to know about that.
+
+So the question is, past life is a double pointer naive, and it acts like a 2D array.
+
+And naively, it seems like that means that a double a 2D array is a double pointer.
+
+They're not. They are. So in memory, the way that data is stored is structurally different.
+
+When you have a double pointer versus when you have a 2D array,
+
+and I will draw it very quickly, we will see it in much greater detail later in the semester.
+
+So a 2D array in memory looks like this.
+
+Right? It actually doesn't. But like for now, let's say it looks like this a double pointer.
+
+Looks like this. Right. So instead of having one block that has a bunch of rows in it, I have a bunch of rows and then I tie them together.
+
+Right. So structurally in memory they're laid out differently. Yeah.
+
+But don't worry about that right now. If you have more questions, I'll take a master class. I don't want to confuse everybody.
+
+By the end of the semester, you'll know exactly how this works and why it's like this.
+
+Yes. Is an array that points to more arrays.
+
+Yes. Yeah, yeah. All right. Other questions. Nope.
+
+Let's roll. Okay, so what does it mean to say care?
+
+Start. What that means is I would like to create a variable.
+
+I want to name that variable str what I'm going to store in that variable.
+
+STR is an address. And when I go to that address, what I expect to find in memory is whatever type is on the left side of the star.
+
+Right in this case of care. So if I say int star str.
+
+I would never say that when I say instar pea.
+
+P is a variable. P contains an address, but when I go to P, I don't expect to find a character.
+
+I expect to find an int, right? So the type of the pointer is what I expect to find when I go to that address.
+
+What is stored at that address? Uh, note for example, I'm just going to throw this out right now.
+
+That's what past life returns. Past life is an address.
+
+And what is stored at that address.
+
+Is an address. And if I go there.
+
+What I find is a character. Right. So that's why it's star.
+
+Star. It's an address that points to an address that points to a character.
+
+Turns out they look like a race. We'll talk more about that later.
+
+Don't sweat that just yet. I think by the end of this lecture, we will have worked our way through that.
+
+Maybe, uh, it may be a lecture that we do next week.
+
+So, uh, I don't think I'm going to end there. Yeah, I think I'm going to end there and we'll talk about how we get a pointer.
+
+Uh, next lecture before you go. This week is lab exam.
+
+Lab exam one is this week. It is in your lab.
+
+If you are late to your lab, you will not be permitted to take your lab exam.
+
+So please be on time. What is in your lab exam?
+
+If you look at Piazza, there is a link to a video and a sample lab.
+
+It is not the same as your lab exam, but it is of similar complexity and sort of concept area as the lab exam that you will be um, doing.
+
+Lab three is strictly more difficult than anything you will be asked to do in lab exam.
+
+Your lab exam is much easier than lab three. All right.
+
+In terms of the concepts that may be covered PA zero, PA one, lab one through three, and, uh, any of the readings that you've had to do so far?
+
+All right. Good luck with your lab exams. I'll see you all on Wednesday.
+

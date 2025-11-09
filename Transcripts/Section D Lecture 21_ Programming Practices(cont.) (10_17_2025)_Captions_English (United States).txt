@@ -1,0 +1,879 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+What? What about it? I've had a friend of mine gave me this belt buckle in, like, 1994.
+
+His name is Bill. So you'd have to ask Bill. No, my friend who gave me the belt buckle.
+
+All right. So we left off on Wednesday talking about Indians.
+
+And I said, we'll talk more about this later. But I gave you the key insight to this.
+
+The important part, the part that I really want you to remember, which is that integers are words.
+
+They're more than one byte, but our memory addresses are by byte.
+
+And so therefore there is more than one address that corresponds to some part of the integer,
+
+which means that we can put different values at different bytes of the integer.
+
+And we like we can choose which values go with those bytes.
+
+We don't choose the processor manufacturer chooses right? Which bytes go with those different addresses of the integer, and it matters, right?
+
+That's the bottom line, the key insight. Integers are more than one byte, and our addresses name bytes.
+
+If you understand that you understand indianness, you don't necessarily understand the specific rules of the Indians,
+
+but you understand what Indian this is and like why it's a thing that we need to decide on.
+
+And I told you the story about Gulliver's Travels and how we have little Indian and big Indian,
+
+because whether we eat the eggs from the big end or the little end, and it's an allegory for stupid [INAUDIBLE] that people do and whatever.
+
+Um. But I want to talk just a little bit more about this sort of idea.
+
+Right. So. And drive home the point that it really doesn't matter, right?
+
+It really doesn't matter. So in English.
+
+And in the arithmetic that we do here in the Western world, we write down our numbers.
+
+If we think of them as per digit and not per byte. Do we write down our numbers big Indian or little Indian?
+
+Big in you, right? We write the big number first.
+
+So if I wrote down that number 1038, I write the one for the 1000 before I write the eight for the eight.
+
+Right. And of course, eight is bigger than one, but eight is not bigger than 1000, because the one and the 1038 is on the big end of the number.
+
+But in general, English is a little Indian language. In fact, we used to say instead of saying, you know, 24, we would say 4 in 20.
+
+Right. Like the pies in the the blackbirds in the pie.
+
+Right. It's backwards. Right. It's a nursery rhyme.
+
+We used to say numbers like that, but now we write down our numbers with the big in first, and we read them with the big and first.
+
+We don't say eight, three, three, three tens and 1000 or 830.
+
+In 1000, we say 1038. Why?
+
+They may know. My last class.
+
+Didn't know either. I assume that somebody has taught you something before you got here, but I haven't identified what that thing is yet.
+
+That's the. That appears to be what I experience as an educator.
+
+Where do we get our numbers from? Arabic, which is Arabic, right?
+
+Right to left. We write our numbers backwards because we learned them from the Arab world.
+
+Which writes right to left. The Arabs in turn learned them from the Indian subcontinent.
+
+They're originally Sanskrit numbers, right. And then they became, um, Arabic numbers, and then they became the numbers that we use in English.
+
+And we still call them Arabic numerals. Right?
+
+We call them they don't look like the Arabic numerals particularly, but we still call them Arabic numerals.
+
+And Arabic is written right to left. And so our numbers are written Big Indian.
+
+When English is kind of a little Indian language, and we naturally do a lot of things in little Indian format.
+
+In American English. Our dates are not Little Indian.
+
+They're kind of an inter Indian format, but in continental English and in British English, our dates are little Indian.
+
+Right. You would say the today is the 16th, 17th, 17th of October 2025.
+
+Right. We started with the day and then we moved it a month and then we moved to the year.
+
+Of course, there's only one proper way to write dates. There's a standard, it's ISO 8601 and that is year month day.
+
+But that's a topic for another time. Um.
+
+So the point of this is it doesn't matter, right? What are you doing here?
+
+How long have you been there? Since I started. As you just noticed before you.
+
+Will you crash in my class for, you know, I have ADHD. I was in my last class.
+
+Okay. Sorry. I'll move past it. Um.
+
+It doesn't matter, right? It doesn't matter.
+
+But the point is that when I write down the number 1038, we all know that I'm going to write the one first.
+
+I'm going to write the last. As long as we agree it doesn't matter what order I write it and I could write it 8301
+
+and as long as we all agree that we're going to read it from the right to the left, then it wouldn't be a problem, right?
+
+It would still make sense. And you can see that by the fact that in English we actually write our numbers backwards.
+
+Right? And we in fact,
+
+our language has changed to accommodate the fact that we write our numbers backwards from the way that they would originally have been written.
+
+We just weren't, you know, literate at that time as a.
+
+People. Um. So when computers were designed, we had to decide what order do we write these bytes down in?
+
+Because we have these words and they can be addressed in different orders. And we just had to pick something.
+
+Does that make sense? Are there any questions about indigenous? I will point out that we're talking about Little Indian and Big Indian.
+
+There are other Indian formats. I think I said this last time, right. There are any number of patterns.
+
+Did you put any four bytes in? Uh, there are other Indian formats, uh, in particular,
+
+there's one that we sometimes call nutsy or stupid Indian or Indian, that's from a particular, um, computer in the 1970s.
+
+In fact, the one that C was invented on the PDP 11, um, where they wrote little Indian half words in big Indian words.
+
+Um, and that's just how it was. Right? And so they're like inside out and sideways.
+
+And it doesn't matter as long as everybody agrees that that's the order.
+
+We're going to write our numbers, right. We don't do that anymore. We just do big Indian, little Indian for the most part.
+
+Now, the next thing I want to talk about other questions. The next thing I want to talk about is sign extension.
+
+Now we've talked about sign unsigned numbers.
+
+Um, and the fact that sign numbers can be positive or negative and unsigned numbers are only positive or non non-negative I should say.
+
+Um. And we talk about the fact that this actually this slide is going to have an error on it.
+
+And I'll tell you that error it doesn't online. The online slide is correct, but this slide has an error on it.
+
+Um, and I'll tell you why here in a minute. But um.
+
+Care on x86 64 is site right?
+
+Remember I told the whole story about. PowerPC had unsigned characters and there were bugs and, you know, whatever.
+
+And I made a big deal out of it. It feels like sort of thing.
+
+You should probably know, um, not necessarily PowerPC and etc. but like signed versus unsigned cares, like a choice that the language makes.
+
+Um. So see here is a signed number.
+
+Um, and we saw eight zero in it. And then we assign that to a, an integer.
+
+And then we print out what we get. And here's where the bug is on the slide.
+
+See where it says output 80000000.
+
+These slides when there's code and output on the slides.
+
+The code is actually in the source of the slides.
+
+And when I build the slides, it compiles the code and runs it and inserts the output on the screen.
+
+Turns out this laptop. Is unsigned care.
+
+And I wrote code that assumes.
+
+Skin care. Which I just told you on Wednesday.
+
+It's dangerous. You should never do that. Happens.
+
+Don't do it. I did it. Doesn't mean you have to. Anyway.
+
+So supposed to say eight zero? I'm sorry. 8FFFFF no a0 f f f f f f.
+
+Right. Which is 0580. Uh, why why aren't all those ones come from right.
+
+Because f f is 1111 where they all come from. And the answer is something that we call, uh, it's I thought it was on the slide, but it's not.
+
+It's something that we call sine extinction. We'll talk about that here in a minute. But it just goes to show the representation is important, right?
+
+It matters how we decide to represent these integers, because it has impact on the things that we see when we look at the way the program runs.
+
+Now, I had a student in the last class stuck his hand up and very boldly said, when I got to this slide, Ethan.
+
+It's Ethan. You said, why do I care?
+
+Which a great question. And the reasons are. Great question.
+
+I just talked to a student about this this morning who was talking about study habits and things like that.
+
+You should always ask yourself. Why do I care?
+
+And if you don't know. You should ask because if you don't know why you care, you don't know if you're studying the right thing.
+
+You don't know if you're understanding the right thing. You don't know if you get the point of what you're being taught.
+
+And sometimes the answer is because I told you, you have to know this.
+
+But sometimes the answer is because we're going to build on this, because we're going to use this for something else,
+
+because it's going to matter for something else we're going to do. Yes. That cares.
+
+You do see that? I'm holding a bottle of water right now, right? Okay.
+
+Just checking. Um. And the answer to why do we have to care is, uh, multiple sort of answers.
+
+The first one is, I'm going to teach you about how integers are represented.
+
+We're going to look at the structure of some integers, and we're going to look at some values in binary.
+
+Not because you are going to use binary directly, you almost certainly are not.
+
+If you do systems programing, you will do some binary. You will do some hexadecimal.
+
+Um, quite a bit of it at various points, but typically not as integers,
+
+more as like bit fields and, and patterns of bits that you care about in some way.
+
+But as a programmer, you are very often going to see numbers that aren't what you expect them to be and have to figure out where's the bug?
+
+Where did this number come from? And if you understand the structure of the representation, many of those bugs are in fact representational.
+
+And so when you look at the value, you're like, I know what happened here. I had an integer overflow, I had an integer underflow.
+
+I had, you know, like some arithmetic problem that's related to the way integers are represented because our machines are finite, right.
+
+So that's one reason is debugging. Right. And things like that. Another reason is that after this course, um,
+
+you are at some point going to take 341 and you're going to learn about other
+
+representations other than integer representations like floating point numbers.
+
+Um, and if you don't understand integers, you are not going to have a good time when it comes time to understand floating point numbers.
+
+Right. And there are other things that you'll learn along the way for which the fundamental way that we pack bits in
+
+and give them values will be important for your understanding of things that are like bigger down the line.
+
+Right? So we're prepping you for things down the line. Anyway, it was a reasonable question to ask.
+
+I mean, a lot of people were like, did he just ask why we care?
+
+But it's important. I mean, if you ask, why do we care? Like, oh, man, why are you teaching me?
+
+This is [INAUDIBLE]. Why do I care? That's dumb. Why are you here?
+
+But if you're like, wait, no,
+
+why am I going to need to care about this so that I can understand which was the spirit in which this question was asked,
+
+right, so that I can understand what I'm supposed to do with it.
+
+If you don't know, ask, right? Always ask. Okay.
+
+So let's formalize this a little bit and do some math. An unsigned integer.
+
+Just an integer that is used as just magnitude on a modern machine is a vector of bits, right, or a string of bits right?
+
+Each of those bits is either a one or a zero, and we put some number of them together,
+
+and we call that an integer on our system there's 32 of them, right?
+
+32 bits together makes an unsigned integer.
+
+Um. If I have those bits, then I may be interested in knowing what the value of those bits is,
+
+as like a number that's useful to me as a human being, like as a decimal number, because we're not very good at binary math, right?
+
+We just haven't practiced it. So I may want to know what the value of that number is.
+
+If I break that number down into a vector where I number each of the bits starting with the big end, as however many bits there are in the word.
+
+So if our word is w bits, so say 32 bits.
+
+The big end I call x sub w minus one, and then the very next bit is x sub, w minus two, etc. etc. until I get down to x sub zero.
+
+If you remember we have this. Number that we wrote out.
+
+Look at this masterpiece of chalk. Where we had 1038.
+
+And we said, this is, uh, one times ten to the three.
+
+And this is one times ten to the zero.
+
+Right. So if this is a double digit number, we're not talking about bits right now.
+
+We're talking about decimal digits. But a bit is just a binary right.
+
+Stands for bit stands for binary digit right bit right.
+
+So we number our digits. This is digit 3210.
+
+And it is 210 to the 310 to the 210 to the one, ten to the zero.
+
+If I have a binary number, it's still in that case it would be 2 to 3, 22222 to the one to the zero.
+
+Right. Those are the names that I'm giving. Those are 3210.
+
+Does that make sense? So I name them in that way.
+
+And then I compute the sum right. The value of that bit vector x in decimal is the sum of all bits from zero to w minus one.
+
+Of the bit. Which is either a 0 or 1.
+
+So x sub w minus one is either a 0 or 1. X sub zero is either a zero or a one times.
+
+Two to the bits position two to the eye. So it's x sub w minus one times two to the power minus one down to x sub zero times two to the power of zero.
+
+Well zero times anything is zero. So I could just ignore all the bits that have value zero.
+
+And then I add up the powers of two that remain. So the zero bid is worth one and the one bid is worth two, and the two bid is.
+
+Well, I shouldn't say it that way. The zero. The bit in position zero is worth one.
+
+The bit in position one is worth two because that's two to the one, which is two.
+
+The bit in position two is worth four because that's two to the two, which is four, etc. and I just add up any bit.
+
+That's one and I throw away any bit to zero. When I'm done I have the sum.
+
+I have the decimal value of that integer. So let's look at a short example.
+
+Because 32 minutes is a lot to put on slide. So I've have the binary number 00101011.
+
+I say that is zero times two to the seven plus, zero times two to the six plus one times two to the five, etc., etc.
+
+Right? And if I expand that out, then two to the seven is 128 and two to the six is 64 and to the five is 32,
+
+etc., etc., etc. then I throw away all of the time zero because time zero anything times zero is zero.
+
+I'm left with the ones that are times one, one times anything is that thing.
+
+And when I'm all done, I have whatever is 32 plus eight plus two plus one.
+
+If I add those together, it's 43. The binary number 00101011 is worth 43.
+
+So it makes sense. It's just like decimal. It's just not natural to us because we haven't spent, you know,
+
+13 years of primary education and several years of, you know, college now doing math in binary.
+
+We've been doing it in decimal. Yes.
+
+So the question is when you type something in right, does the compiler read, how does the compiler read it?
+
+The compiler does exactly what you did in our old code.
+
+Right where you did it. Decimal numbers at a time.
+
+Uh, because it uses that very nice, beautiful fact that the Ascii numbers are laid out in their actual decimal order,
+
+and you could just subtract and offset and get the binary number that corresponds to that digit, which is why Ascii is laid out that way.
+
+There are other encodings, such as, for example, Ebcdic uh, which was used by IBM, where that's not the case,
+
+where it's much more complicated to figure out what the actual value of that number is somewhere somebody in some way had to do this.
+
+But once you have some sort, even just an assembler that can read those decimal numbers, you no longer have to do it right.
+
+You just allow the layers of software underneath you to do it. Yes.
+
+Well, in this case, we only have one bite. And if we only have one bite, then there is no big Indian or little Indian.
+
+Because let me say this.
+
+Remember, the reason that we have indianness is that our words are more than one byte, and our addresses are in bytes within a byte.
+
+Can you tell what order the bits are in? Why not?
+
+It's all at the same address. You can't address a bit. So you can't tell whether the bits are in what order the bits are.
+
+And inside the processor they could be, you know, just in random order in like in terms of the, the wires.
+
+Right. They could be in random positions,
+
+arbitrary positions could be in different positions in one part of the processor than they are in another, and they probably are.
+
+But you can't tell because you can't address those bits. Right.
+
+So when you're talking about a number as a number, it doesn't have Indians.
+
+It's only when you're talking about it as bytes in memory that it has Indians.
+
+Did that answer your question? Yes.
+
+Binary. Because if I gave you the number 1010111.
+
+Wait. 101011. Is that 101,011.
+
+Or is it, uh, 101011 hex?
+
+Or is it like you can't tell. Right. So I have to tell you the base. So here I say that it's B for binary.
+
+Right. In C there is in C 99.
+
+There is no way to write a binary number in many languages. You know how we use zero for hexadecimal.
+
+Many languages use zero b for binary. Uh c 11 or 21 of those has zero b um, but C 99 does not does not have zero b.
+
+So we put the b at the end for binary.
+
+Sometimes you'll see a little subscript two or a little subscript 16 depending on like a textbook or whatever that you read to indicate the base.
+
+When it matters, you'll normally see the base indicated. Yes.
+
+I. It's obvious fault, I understand. It's not that you hate me today. Yes.
+
+Yeah. I will talk to him about that later. I would rephrased the question.
+
+You show us them. With the binary bits.
+
+No. If you wanted to initialize a variable with a specific binary bit pattern, what would you use?
+
+If you want to initialize a variable with a specific binary bit pattern.
+
+What representation would you use? I do know hexadecimal.
+
+Because the hexadecimal. You can map each individual bit to the hex values for the time.
+
+That's the convenient way to do it. So normally when you have a constant that you actually care about, the pattern of the bits,
+
+which typically comes about when you're like dealing with device drivers and things like that, you'll use hexadecimal.
+
+Yeah. Because because C does not have zero B. If it did we would use zero B but it doesn't.
+
+So we use zero x because it's easy to do the conversion. All right.
+
+Now, if you remember, we have that sign extension. I said, hey, sign extension is the thing.
+
+So there's this interesting problem, which is that if I want a negative number in, in like math.
+
+I do this? I just had a symbol.
+
+Inside the computer. I have ones and zeros.
+
+Do I have a minus sign? Do not. I just have ones and zeros.
+
+There's no minus on. There's no decimal point. Right? There's no way to write a fractional value directly.
+
+There's just ones and zeros. That's all I have is ones and zeros.
+
+So what I have to do is I have to decide that some patterns of ones and zeros represent negative numbers,
+
+and other patterns of ones and zeros represent non-negative numbers.
+
+And I have to make some rules and say, hey, when I see this pattern of ones and zeros, I'm going to call that a negative number.
+
+And when I see this other pattern of ones and zeros, I'm going to call that a positive number.
+
+When I see this other pattern of ones and zeros I'm going to call that zero.
+
+Now almost everybody agrees that all zeros is zero, but everything else is a question, right?
+
+What pattern means what? Almost everybody agrees that for unsigned numbers, that math that we just used is how we represent unsigned numbers, right?
+
+But with negative numbers, there's not necessarily an easy and obvious representation.
+
+Um, at first approximation, there's not necessarily an easy and obvious interpretation.
+
+Um. Just like Indianness.
+
+It's a choice, right? That the architecture, when you design the architecture, you can decide what pattern of ones and zeros am I going to?
+
+How am I going to store my bytes in memory? And what pattern of ones and zeros is going to be positive?
+
+And what pattern of ones and zeros is going to be negative?
+
+It turns out that there's two of these that for mathematical reasons, make some sense to use, and we call them one complement in twos comma.
+
+Just like we had two Indian PCs. That kind of made sense Big Indian and little Indian.
+
+I really don't feel good about sitting on the end of that table. Big Indian and little Indian.
+
+We have two sort of patterns of ones and zeros that make sense for representing negative numbers.
+
+And we call them ones complement in twos. There's a third that makes fair sense.
+
+And then there's some more confusing ones after that.
+
+Um, I guess by the time you're done with your career, you're probably going to know at least four of them.
+
+Although unless you think about it in the future, you probably won't notice that you know four of them.
+
+You're only going to think you know, ones and twos complement. Um.
+
+But most computers for integers use one compliment and two.
+
+Now. In 2025.
+
+Almost all computers use to complement. It's very rare that you'll see once.
+
+Commonly there are some places that one's complement is left.
+
+Um, some digital signal processors use ones component just because they've been around for a long time,
+
+and they use ones compliment the internet checksum every time your computer sends a packet across the network,
+
+the checksum that says, has this packet been corrupted or not? Uh, is one compliment because in 19, you know, 82 or whatever,
+
+the Honeywell DDP 116 was a one's complement computer and somebody wrote a network stack on it, right?
+
+Um, but for the most part, you'll use two's complement.
+
+So you might say, Ethan, why are you giving me one compliment if nothing uses it?
+
+And the answer is that the first time I taught this course, I didn't teach one's complement.
+
+I just taught two's complement. And everybody was like, what are you talking about?
+
+So the next time I taught this course, I taught one component which is easier to understand.
+
+And then I said, and this is how common was different. Everybody was like, oh, that makes perfect sense.
+
+So we're going to learn one compliment, not because I expect you to use it anytime soon,
+
+but because once you understand one's compliment, two's compliment follows fairly directly from there.
+
+And if I teach you two's complement first you'll be like, why are you. What is happening right now?
+
+Now, uh, I also want to point out that the apostrophe goes after the s and ones and before the s in twos,
+
+because this is the is it is it is the complement of the ones, but it's the complement of two.
+
+So the apostrophe moves. I don't expect you to get that right.
+
+I have to look it up most of the time. But grammatically they go in different places.
+
+So if I have a number represented in binary.
+
+In ones and zeros, a fixed number of ones and zeros.
+
+Right. Because it's like a 32 bit integer. And I want its negative counterpart the number of the same magnitude but the opposite sign.
+
+In one compliment. I take all the ones and I make them zeros.
+
+And I take all the zeros and I make them ones.
+
+So I think we can all agree that I have a whole bunch of zeros, and then a one at the end, that the magnitude of that number is one.
+
+Because zero times anything is zero and one times 2 to 0 is one, right?
+
+So that's one. If I have a 32 bit ones.
+
+Complement one. And I want the equivalent 32 bit ones.
+
+Compliment negative one. I just flip all the bits. So instead of having 001, I have 11110.
+
+Right. One. Negative one.
+
+This makes sense. Now that I've said that.
+
+Ones complement. Is a now.
+
+Not a verb. When I give you a number and I say this is a one compliment number.
+
+It just is a once complete number. Like if I give you a number and I say this is an even number.
+
+It just is an even number. You don't have to do anything to it to make it a one compliment number.
+
+And the reason I mentioned this is that some of you on your final exam,
+
+I'm going to give you a binary number and say this is a one component number and you're going to go flip all the bits.
+
+Don't do that. It just is a once compliment.
+
+Number one compliment is not an active thing. It is a property.
+
+If I want you to flip all the bits, I will say take the ones component of this number,
+
+in which case you'll take that one and you'll make it a negative one.
+
+I'm not going to ask you to do that, but that's what what I would say is take the ones component of this number.
+
+Just like if I say two isn't even number. You don't go add one to it to make it even.
+
+Because now it's hard. Just because I told you the difference between even a number and an odd number is one.
+
+Right. So one complement is a noun, not a verb.
+
+Yes. I just don't like how. We understand that.
+
+We will. I will explain that to you. We have not got that far yet.
+
+In fact, I will explain that to you. Right now.
+
+Uh, not quite yet. Here. In a second. Did we miss a slide?
+
+Oh, no. I just haven't finished the slide. It's at the bottom of the slide. So formal.
+
+Remember, we had this summation before. We said for, uh, an integer.
+
+I take the sum of all bits from zero to w minus one of the bits I times two to the power of I.
+
+For once. Compliment. I only do that from 0 to -2.
+
+And then out here I add to that. Uh, x.
+
+Sub minus one times the quantity two to the w minus one plus one plus.
+
+That summation. So everything is the same.
+
+Except that bit. On the far left hand side.
+
+Right. That bit on the far left hand side now changed its value.
+
+It used to be worth, in this case approximately 2 billion.
+
+And now it's worth approximately -2 billion. It's the only thing that changed.
+
+Plus one. Fun fact I was told a fun fact today. Victoria told me a fun fact today in Roon scape.
+
+Which people still play, even though it's older than, like, probably a lot of you.
+
+That's not true. But you were not very old when it came out. Um.
+
+I found out that one of my Tas was born in 2007.
+
+No, one of my students, one of you guys was born in 2007. How many of you were in 2007?
+
+Okay. Good, good. It was an outlier. 2000 and.
+
+Six. Okay, good. That's not great, but it's better than 2007.
+
+Two. 2000. It's still learning the 21st century.
+
+It's ridiculous. Uh, anyway, where was I going with this, uh, Roos game?
+
+If you have somewhat over 2 billion. Money's gold.
+
+What do they use? Rune runes. I don't know. Money's. It'll cap out and you can't get any more money.
+
+Because it's exactly two to the 31 minus one.
+
+That's the maximum money you can have in runes because of what we're talking about here, right?
+
+Because they keep their money in a 32 bit signed. Two's complement.
+
+Uh, number. So it's relevant, right?
+
+Real world relevance right there. Because those people, they have a lot more than 2 to 32 minus one dollars by now.
+
+Well that may not be true. That's a lot of money. But they have a lot of money right now.
+
+Okay, so, uh, this is how one's gonna work, so let's do it.
+
+We're going to do a four bit number this time to speed things up a little bit. So suppose that I have a four bit one's compliment number.
+
+1110. Its magnitude will be negative one.
+
+And the reason is it's one times negative two to the three plus one.
+
+Which is negative seven.
+
+Plus one times two to the two, which is four plus one times two to the one, which is two plus zero times to the zero zero times gaining a zero.
+
+So it's zero. So it's negative seven plus four plus two which is negative one.
+
+So that's the answer to the question. That's how we got that number. So we got that negative one.
+
+Now. There's a problem though. 00000.
+
+1111. Is -0.
+
+And if I do the math, it is indeed -0 because it's negative seven plus four plus two plus one.
+
+Which is zero. But I think we can agree that 0000 and 1111 are meaningfully different numbers, but they're both zero and we call them zero and -0.
+
+Although -0 is a nonsensical like arithmetically zero is neither positive nor negative right?
+
+But we call them zero and -0. So for this reason and some other reasons, ones complement is not super great and we don't love it.
+
+It makes doing math more difficult. When we declare an integer on a one machine as signed or unsigned.
+
+And then we want to add that integer to another value.
+
+The computer has to know whether that value is signed or unsigned, because when it gets into overflow territory,
+
+which we'll talk about overflow a little bit later, it will behave differently depending on whether it is signed or unsigned.
+
+And so we have to account for that. So some smart character at some point.
+
+And by the way, one compliment whose compliment? Um, are not new.
+
+Um, the. In decimal we have nines complement and tens complement, which are exactly the same thing.
+
+And there were calculators back in the day that couldn't subtract.
+
+So instead of subtracting you did nines complement arithmetic and you added the nines complement of a number or
+
+the tens complement of a number to do the subtraction because that was the equivalent of a negative number,
+
+etc. You don't need to know how that works or why that is or whatever. That's a different class.
+
+But like we didn't invent this because of binary.
+
+It's a natural property of numeric basis.
+
+Right. If you take number theory or something, you'll run across it at some point. So some smart person was like, what if we didn't want to zeros?
+
+How could we get rid of it? And then they looked at it and they were like, what is this crap?
+
+Who puts it plus one in the middle of an equation? What if we didn't do that?
+
+Oh, look to compliment. Instead of the first bit.
+
+Having the value negative the quantity.
+
+Of two to the W minus one plus one. It just is negative two to the W minus one.
+
+And we're done. Um, now there's only one zero.
+
+Among other things, there's only one zero. Right.
+
+Um, I want to come back to this slide. So let's look at that same 1110.
+
+One compliment. This was negative one. In twos complement.
+
+If I add this up, that first one is now instead of negative seven it's negative eight.
+
+So negative eight plus four plus two is negative two.
+
+Right. So I've changed the value of that. And it turns out that 1111 will be negative one.
+
+Right. So we have negative one. And then we have uh 1111 plus one would be zero.
+
+Now this does mean that two components a little bit unbalanced. There is one more negative number than there are positive numbers.
+
+So if I have a four bit two's complement number it runs from negative eight through zero to positive seven.
+
+One compliment ran from negative seven to positive seven, which is balanced and kind of nice, but we had two zeros to be able to make that happen.
+
+Two component we only have one zero, but that value basically shifted down and became a negative number.
+
+So now there's one more negative number than there are positive numbers.
+
+But they're exactly the same number of negative and non negative numbers.
+
+It's just that one of them is zero, which we like to think of as a special number.
+
+Right? Okay. So now let me go back to my chart. This is an example of the four bit two's complement.
+
+Um number line. Note that is not a line.
+
+It is in fact a circle. Because four bits is a finite quantity.
+
+If I have one one, one one and I add one.
+
+One plus one is zero. Carry the one. One plus one is zero.
+
+Carry the one. One plus one is zero. Carry the one one plus one is zero.
+
+Carry the one. That's 10000.
+
+I only have four bits. So I lose the one and it becomes 0000.
+
+Right. It falls off the end. Right? Um.
+
+So if we start from 0000 and we add one. Well, that's clearly 0001.
+
+And that has the integer value of one.
+
+If I have 0001 and I add one, that becomes 0010 because one plus one is zero carry the one one plus zero is one, right?
+
+This is just binary math, right? I go around till I get to 111.
+
+Which is four plus two plus one, which is seven.
+
+When I add one in binary to that.
+
+I get one plus one is zero carry the one. One plus one is zero.
+
+Carry the one. One plus one is zero. Carry the one one plus zero is one.
+
+1000 is eight.
+
+And if we do the unsigned math that's true. That's eight.
+
+But in two complement we have said that that first bit in a four bit number does not have the value eight has the value negative eight.
+
+So I took seven and I added one. And I got the answer negative eight.
+
+Do you remember that slide where we did 50,000 times? 50,000. We got a negative number.
+
+That's why. We added up to a number that was large enough that the top bit became a one, and that has a negative value.
+
+Right. This is called integer overflow. I just overflowed my four bit assigned number and now my value is negative eight.
+
+Now the nice thing is from here on out, the math works, right?
+
+So I have 1000 and I add one that's 1001 which is negative eight plus one which is negative seven.
+
+Negative eight plus one is in fact negative seven which is what I wanted right.
+
+I add 11010 negative six etc. etc. until I get around to 1111.
+
+And as I said before, when I add one to that I get 10000, but I only have four bits.
+
+So I throw the one away and I'm back to zero. And so my number line turned into a circle.
+
+Note that everything on the left side of the dotted line is a negative number,
+
+and everything on the right side of the dotted line is a non-negative number.
+
+There are eight non-negative values and eight negative values.
+
+And the difference is, is the first bit a one or a zero?
+
+So if I give you a hexadecimal four bit number.
+
+How many hex digits is that? A hexadecimal four bit number.
+
+How many hex digits is that? Someone who can count. One.
+
+Because a hex digit is four bits, right? If I give you the hexadecimal digit E.
+
+It is to complement four bit. Is it positive or negative?
+
+Negative. Should it be that fast? Negative. Why?
+
+It's eight or greater. Eight or greater.
+
+Remember I told you that that chart, like everything on this side, the one at the top bit was set and everything on this side, it was a zero.
+
+Eight nine. A b c d e f negative.
+
+01234567. Positive. And if I have a 32 bit number, I have the 32 bit number.
+
+0XDEADBEEF.
+
+Positive or negative. Negative.
+
+Why? The first bit's one because D is 13 is 1011.
+
+Nope. 1101. Yeah.
+
+So this is one which means it's negative. What about 0X9?
+
+900. DCAFE9.
+
+Negative. Right. What about?
+
+I'm running out of clever things to spell. There's another good one that's just fun.
+
+Right. You can feed face. You can.
+
+Coffee. There's all kinds of these things. These are great things to like.
+
+Remember the things, the words you can spell out of hexadecimal letters and digits that are messed up in different ways.
+
+Because when you need a value to poke into memory just to see if it gets overwritten, you put something like feed face in there,
+
+and you can just scan through very quickly and see whether it's been overwritten or not.
+
+Whereas if it's like 093F, you know, whatever. It's like, I don't know man, I don't know.
+
+Anyway. So if it was um, six for A9CD03 positive or negative.
+
+Positive Y0110.
+
+That's a zero right? It's positive. Okay.
+
+Um. Somehow I got behind the other class.
+
+Nope, I didn't. We're in the same place. Okay, we'll pick up, uh, after that on, um, Monday.
+
+Be prepared on Monday. I'm going to throw some binary strings at you and ask you about their properties.
+
+Right. We'll have top hat questions. Okay, so look at this.
+
+Yes, sir. There's a question about double.
+

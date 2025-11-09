@@ -1,0 +1,993 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Their review material for the midterm is on.
+
+Um. You've learned there's a Piazza announcement that, um, explains what it is and you know what to do with it.
+
+There's a test, a practice exam that is of the same format, layout, types of questions, you know, etc. that you'll expect on the actual.
+
+It looks exactly like a midterm from this class. Um, but of course, the questions may or may not be the same ones that you get on your midterm.
+
+And then there is a quiz on you.
+
+B learns with a whole bunch of just like top hat style, like the ones we've been doing and top hat questions that you can do.
+
+The U-b learns quiz, it will tell you your like, score or whatever.
+
+Um, but it's not graded right. Like we're not it's not worth any points.
+
+It's just for practice. The midterm, we won't even grade.
+
+Uh, but you have the course materials. You can look it up if you have questions or you can ask us, um, so that's that.
+
+Um. Oops.
+
+Of course, the midterm is one week from today in this room.
+
+Um. It will be during the class period.
+
+There will be a post on, uh, Piazza this weekend that has all of the logistics.
+
+Where do you show up? What do you bring, all that stuff? Was that your question?
+
+No. Uh, like questions like, um. That's.
+
+Well. Well, the practice exam is just a PDF, so you do with it what you want to do with it.
+
+The, uh, u-b learns quizzes are, um.
+
+If it's not unlimited attempts, let me know and I'll make it unlimited attempts. Because the idea is that you can use it to study.
+
+However, as best you know, for you. There's no answer key for the PDF.
+
+No, but you have the slides, you have the required readings, you have the lecture videos.
+
+And you can ask questions if you have them. Here's the thing. Everybody always wants answer keys for the practice midterm.
+
+But then what happens is you read the question, you read the answer, you memorize that and you're like, I'm good for the exam.
+
+I'm not going to ask that question on the exam. Right?
+
+Like you need to look up why it's that way so that when I ask a related question, you know the answer.
+
+Yes. Wednesday. Did I say a week from today?
+
+Okay. It's on Wednesday the eighth. Wednesday the eighth.
+
+Not a week from today. Wednesday the eighth. What? Uh, no.
+
+That feels like work to me. I have to graded on Thursday, so that's going to be logistically problematic.
+
+All right, uh, any questions before I finish up the material that you need to know for the exam?
+
+So I think we left off right here. Right. We push this struct onto the stack.
+
+If you remember, we're talking about the structure of the stack and how things get pushed on to it.
+
+Um, you push this from the top down, high addresses down to lower addresses.
+
+Why? It's just that way.
+
+We use this, um, struct example to show that even though it's pushing from the top down, the data items that you push on it aren't like upside down.
+
+Right. So this struct is still laid out exactly like how we talked about before.
+
+Talked about before. It doesn't get turned upside down. Uh, which confuses people sometimes.
+
+So there's that, uh, the last thing I want to say about the stack, um, structure, uh, is when we pop something off the stack.
+
+Oh, okay. So let me say this first.
+
+Um, when we talk about the location of stock items, we normally talk about them with relation to the top, not the base.
+
+So we would say that pause is at top -0.
+
+Uh, D is at top minus eight and I is at top -20 right.
+
+We would talk about it from with respect to where the top is.
+
+And the reason for that is that at any given point in time, you know exactly where the top is and you know what you've put on the stack.
+
+But the stack, there could be an arbitrarily large number of items further away from you on the stack that you don't know how many there are.
+
+It could be different each time you get like an A function gets called or whatever, right?
+
+So we normally talk about it with respect to the top. You'll see why.
+
+Uh, in the last part of this lecture, uh, before we finish it up, which, by the way,
+
+we will everything in this entire lecture will be on the midterm, even if we have finished on Monday.
+
+My goal is to finish it today. So when we pop the stack.
+
+So we push to put items on the stack. The term we use is push.
+
+When we take items off the stack, the term we use is pop.
+
+So you push items on, you pop them off.
+
+When we pop the stack, all we do is we adjust the top pointer to move higher in memory so that the distance between the base and the top is smaller.
+
+So when we do that, if we pop here D and pause, then top becomes just after I there.
+
+So there's only one thing on the stack right. Top minus base is for bytes.
+
+The only thing in there is an integer. But note that D and pause are still on this diagram, because while we move that pointer up,
+
+the memory didn't go away and the values that were stored in the memory weren't immediately overwritten.
+
+Right. So D and pause, the values that they had are still present there.
+
+But if I were to push something new onto the stack, it would overwrite D and pause.
+
+Right? I would write over those positions as I push new things onto the stack.
+
+So this is kind of like with Malik and Free. When I free memory, the memory doesn't go away, I just.
+
+Or when something gets popped off the stack. It's not. Use it anymore.
+
+And what this means is, say, a pointer to the stack to some data that gets popped off, which you can.
+
+Lecture.
+
+If you have a pointer to a local variable in a function, uh, and it gets popped off when you try to read it, it may appear to have the correct value.
+
+If I tried to read D right now, it would appear to have the correct value.
+
+But then at some point in the future with it, I can't predict it may become overwritten, right, and become not the correct value.
+
+So you have to be careful. Once that item is popped off the stack not to use it anymore.
+
+Uh, effectively in C, this means that local variables from functions.
+
+If you take a pointer to a local variable and to a in a function,
+
+you have to ensure that no one tries to use that variable after your function returns.
+
+Once your function returns, that variable is invalid. And we'll see why again in the rest of this lecture.
+
+All right. Any questions about stack operations before we talk about automatic variables and functions?
+
+Besides. Is it larger when you have more memory?
+
+Yeah. So, um, the Zach section, is it larger when you have more memory in the system?
+
+Yes. So in the days. So the original Unix system had 64kB maximum memory, 64kB, 65,536 possible bytes.
+
+Uh, their stack was very small. It was a few hundred bytes, right.
+
+Maybe five, 12 bytes or something like that. Our stack is eight Meg.
+
+So it's many, many times the size of that. Original Unix stack.
+
+It doesn't make sense to allow it to become arbitrarily large,
+
+because we just don't put that much data on it in practice, we just don't put that much data on it.
+
+Several megabytes is plenty large enough.
+
+But yes, if you have systems that have less Ram, they will have smaller stacks, which means that you can blow the stack more easily.
+
+You have to be more careful. So one thing that we don't talk about in this course, but when you get to 3 or 5, you'll talk about it.
+
+When you write recursive functions that call themselves. You can run out of stack if you recurse too deeply.
+
+Right. So it matters. You have to keep track of that. All right.
+
+So, um. We said this before, but when I declare a variable, it says two things, right?
+
+So if I say int array square bracket 32, I'm both asking the compiler to allocate space for me to store data.
+
+And I'm also asking it to give that space a name so that I can refer to it in my program.
+
+So I say int array square bracket 32. And what I'm saying is make space for two integers somewhere.
+
+And when I say array I'm talking about that space for 32 integers that you, um, created.
+
+So when we ask it to make space, where's it making space.
+
+We saw that if it's a if we declare a global variable, it's putting in the data section.
+
+It's putting it in BSS. Right. But if we could declare a variable in a function okay.
+
+There's cube boxes okay. If we declare a variable in a function it becomes what we call an automatic variable.
+
+So every local variable that does not have the static keyword I don't want to talk about the static keyword.
+
+Uh, it's in k and R. I don't even get any of the readings we ask you to make.
+
+It might be, but I don't want to talk about static. Don't worry about it, but be aware that it matters.
+
+Right? If it ever comes up, uh, every local variable becomes what we call an automatic variable that is
+
+automatically created for you and is automatically freed for you when it's done.
+
+This is not like garbage collection, though.
+
+The creation and the freeing are done at specific points in your program, not just when you're done with the memory or whatever.
+
+So we get the compiler guarantees that an automatic variable will be allocated before it is ever first referenced.
+
+So if you say int x and then somewhere you say x equals ten.
+
+In between where you say and X and where you say x equals ten,
+
+the compiler will ensure that X in fact does exist, and that it is valid to assign the number ten into x.
+
+Uh, if you say and x equals ten on one line, then the time between when it is declared and when it is first referenced is zero.
+
+And so at the time that it is declared, it will, uh, become available.
+
+It is guaranteed to remain valid until the block in which it is declared closes.
+
+And by that I mean somewhere there's an opening curly bracket.
+
+You declare variable after an opening curly bracket. Somewhere that curly bracket is closed.
+
+When that curly bracket is closed, the variable may go away.
+
+It may not. The compiler says it will last at least until that closing curly bracket.
+
+But it may last after, right? That's not part of the guarantee.
+
+It's guaranteed to exist before you use it the first time. Until that closing curly bracket.
+
+So what that means is if you replicate the outer scope of a function, right, you say f parentheses, opening curly bracket and then into x, right.
+
+That x will persist until the closing curly bracket of the function f.
+
+But if you declare a variable, say inside a for loop, then that variable will disappear when the closing bracket of the for loop comes up.
+
+And you've probably seen this because if you try to use that variable name outside of the loop,
+
+the compiler will say, hey, you can't use that variable, it's out of scope.
+
+Write it to a compiler tries to protect you from trying to use a variable after it falls out of scope.
+
+In C, you can still get in trouble if you have a pointer to the variable, right, because that may not fall out of scope.
+
+So. What you said about like. I think. The.
+
+Thank you for the for the coming to the school, for the princes inside the practice.
+
+I'm really. Yes. Yeah, it's not in car because k rc 89.
+
+But you can say this. And we've done this in class, right?
+
+Like, uh. Like you. Uh, well, I couldn't hear, I could say into x equals I plus, you know, some constant or whatever.
+
+Right. This variable x will persist until this closing bracket.
+
+I bucket. I.
+
+Well, I can't iterate in here because that's outside of the curly brackets.
+
+So if I say int I here, I can do that. Now I have two eyes, I have this eye and I have this eye.
+
+And that's almost certainly not what I wanted. Same as I could say I out here now I have three eyes.
+
+Which is definitely not what I want. At some point the compiler will be like, bro, you got a lot of eyes.
+
+Is that an intentional? And they'll give you a warning. It'll say something about a shadowed variable.
+
+Does that make sense? Those are three different eyes. This is an eye.
+
+This is an eye. This is an eye. There's three different eyes. Okay.
+
+All right. Um, so what we do is we have a stack called the program stack.
+
+And what we do is we place these automatic variables on the stack.
+
+We push them onto the stack when they become available. We pop them off of the stack when the function is executed.
+
+So because this is bounded, let me erase the superfluous I's here.
+
+Because this is bounded by a region of code.
+
+The compiler can simply say, okay, I'm going to push AI here, and I'm going to pop AI here.
+
+And the only valid place to use AI is inside this loop.
+
+So now AI is created when I need it and it's destroyed when I'm done with it.
+
+Right. And it makes this nice nested. Structure.
+
+If I had an int y in the enclosing function, I could push y out here and then pop it down here.
+
+And then why would persist for longer than I did. Makes sense.
+
+All right. So these are automatic variables. That's the rules for when they're created and destroyed.
+
+So you can allocate when they are declared.
+
+They may be allocated absolutely anywhere in memory and you cannot predict where in memory.
+
+So if I take the address of either I or X here.
+
+The value that I get back could be wildly and arbitrarily different every time I run my program.
+
+Sometimes I may be before X, sometimes X, maybe before I like.
+
+I just can't predict where in memory an automatic variable will be placed, right?
+
+It can be absolutely anywhere. Uh, in some cases.
+
+Remember we said all data that you have in your system, uh, is at in memory at an address that you can access till CRO.
+
+The pill crow is I might only be in a register.
+
+It may never actually be in memory. Now, if you take the address of it, the compiler will put it in memory and give you the address where it put it,
+
+but it may actually only be stored in a register right in EBS.
+
+Remember we talked about those when we looked at the disassembly of code earlier in the.
+
+Semester. So, uh,
+
+you may not even be able to say where two variables are within relation to one another without taking the address and doing that math manually.
+
+However, wherever the local variables are stored in memory, their internal structure will be preserved.
+
+So if you expect a struct to be laid out in memory with the first address,
+
+the first member at the lowest address, the next member at the next higher address, etc. that will still be true.
+
+If you expect an array to be a bunch of elements of the same size back to back,
+
+where you just add the size of the element to every address to find the next element, that will still be true.
+
+Just where is the base of the array? Where is the base of the structure?
+
+Could be anywhere in memory. You cannot predict that, right? You cannot make any assumptions about where it will be put in memory.
+
+So as an example, if I declare, um a local variable and a struct.
+
+Either of these two top things are perfectly valid, or they could be arbitrarily removed from each other in memory, right?
+
+I could be in one place and pause could be somewhere entirely different, right?
+
+But it's okay if I have I at some address and then all of pause below I in memory.
+
+And it's okay if pause is above I in memory. The order in which I declared them doesn't matter, right?
+
+The compiler can do whatever it wants.
+
+When we talked about structure packing and how, you know, there's an order of variables to declare that minimizes padding,
+
+the compiler will rearrange your local variables to minimize padding, right?
+
+It will do that when you compile your program.
+
+So you can't assume just because I declared it first, it's going to have a larger address because I pushed it first unnecessarily.
+
+The compiler will push it where it wants to push it. What it will never do is this.
+
+Hey struct or pause is made up of two different members x and y.
+
+I'll put x over here and y over there, and I'll put AI in between, because that's not what a struct looks like.
+
+A struct pause looks like this. So it will never, ever do this right.
+
+That's not valid. No, it's just memory you're not using anymore.
+
+Why isn't all memories stored in a linear fashion?
+
+Um. Yes, but there are questions like what does linear mean and linear with respect to what?
+
+So if I compile two different files and they both have global variables, which one should go first.
+
+Like there's not a natural ordering. Um, basically speaking things are stored linearly.
+
+But then the compiler will take where there's ambiguities and just make a decision.
+
+And it will also do things like if it has, you know,
+
+a long and two ints and you declare int long int if it pushed down the end and then the long and then the end, you would have eight bytes of padding.
+
+But if it pushes down int inch long you have zero bytes of padding, so it'll just rearrange right to avoid that.
+
+So basically it will do things linearly, but because it reserves the freedom to say, hey, you didn't specify this, I can do whatever I want.
+
+And also you specified this, but I know of a way to do it that's not going to change your program.
+
+Semantics in any way will be better. It's going to use less memory.
+
+It's going to be faster whatever. It can rearrange things. So it will try to do this right.
+
+And it will only do something different if it turns out that there's a reason that it shouldn't in practice.
+
+The thing is that those reasons may not be obvious to you when you write the program, because it's after it does optimizations and stuff.
+
+Yes. No.
+
+It does not automatically get free. So the question is if you create a local pointer variable so the pointer itself will be deallocated.
+
+Like it will disappear. So remember when we drew.
+
+Really all the way down there. We drew this and we had like P was here.
+
+And then the memory that was allocated was down here and P pointed here.
+
+P will be deallocated or not. You have to free that.
+
+Does that answer your question? Nope.
+
+There are systems that do that. C is not one of them. Okay.
+
+So let's talk about functions now. So note that when we call functions, function calls form a tree over the life of the program.
+
+But at any given instant in time they form a stack.
+
+And so what I mean by that is if I have some function f.
+
+And F calls G. And I have some function g.
+
+And G calls H. And I have some function h.
+
+And it does whatever it does. When I call f.
+
+First f will be called F will call G.
+
+G will call H. H will return. G will return.
+
+F will call. I'm sorry. After. Need to call each year for this example F will call H.
+
+So over time this forms a tree right. We have branches in this tree.
+
+Time moves in this direction like that way right.
+
+Um so f calls g g calls h h returns.
+
+H returns g, returns f calls h,
+
+but at any point in time on either in this side of the tree or I'm in this side of the tree for every branch of the tree.
+
+And so at any point in time, the function calls form a stack.
+
+So we could also look at it like this. F g h.
+
+H returns. G returns. H is called.
+
+H returns. F returns. And in that sense, it was a stack, right?
+
+We pushed some things down. They popped off one after another.
+
+We take advantage of that stack nature when we store the information that's required to process the function calls in the memory of the computer,
+
+we actually put them on a stack when we call F. We push the notion that we are in the middle of F and doing something in F onto the stack.
+
+When F calls g, we push G onto the stack. When G calls h, we push h onto the stack.
+
+When h returns, we pop it off. When G returns, we pop it off right.
+
+We treat it like a stack. And what we do is for each one of these functions, uh,
+
+we push their local variables and all the information required to make them happen onto the stack and what we call a,
+
+uh, stack frame or an activation record. So in the simplest case, all a function does is jump somewhere else, run some code, and jump back.
+
+Right. So f calls h, h runs some code and comes back.
+
+It doesn't call anything else. We didn't declarative local variables.
+
+We just call H. It does something. It comes back. Um, but in more complicated cases, your functions may have local variables.
+
+They may call other functions. They may sort of be arbitrarily complicated in some way.
+
+They use registers in the CPU. They do different things.
+
+So when we call a function, there are some information that keep track of.
+
+For that function, what are the values of the local variables when it calls another function?
+
+Where should it return to? Because note that when f calls h h should return to f, but when g calls h h should return to g.
+
+So h cannot have encoded in it. When I'm done, I return to f, or when I am done, I return to G.
+
+It won't work. When you call H you have to tell it when you're done.
+
+Here's where you should come back to and continue executing right.
+
+So we take all this stuff and we saw it on the program stack and what we call a stack frame.
+
+I think it's in the slides here somewhere. You will sometimes see stack frame called activation record.
+
+That's a fairly common term. Um, it depends on like if you have a textbook,
+
+who wrote the textbook and whether they're a compiler person or an operating systems person or whatever.
+
+Right. Different people use different terms. But be aware.
+
+I try not to give you more than one term for the same thing for most of the things we talk about, because, um, it's just confusing.
+
+But when you go to look at documentation, when you go to read up on these things, in fact, if you read.
+
+K and R. Uh, computer science from the bottom up.
+
+Um, operating systems in Three Easy pieces. And, uh, Brian O'Halloran.
+
+Um, computer systems a programmer's perspective.
+
+Those are four different books that we give you references out of in this class.
+
+I would be very surprised if you don't see that some of them say activation record and some of them say staggering, right.
+
+So you need to be aware of that term. It's in the slides somewhere. We will call them stack frames in this course.
+
+Oh, it's right there. Um, so each of those stack frames contains all of the information that is necessary to
+
+call a function and do what a function needs for a given invocation of a function.
+
+So if you call f and then f calls f, it's a recursive function.
+
+There will be two stack frames because the the stack frame doesn't go with the function, it goes with the invocation of the function, right?
+
+What exactly will be stored in that stack frame varies based on the platform and the
+
+operating system and other things as both the hardware platform and also the API.
+
+We talked about APIs earlier in the semester, the application binary interface,
+
+which was like the example we saw, was when I call a function, where do I put the arguments.
+
+And we saw that we put them in particular registers on our platform.
+
+On another platform, they might all go on to the stack on another on the same platform, a different operating system.
+
+They might go into different registers. Right. That's the API. So the API will control exactly what the stack frame looks like.
+
+But in general it is going to contain any processor registers that we have to save,
+
+which happens sometimes if we need to use more data that we can fit in processor registers.
+
+Don't worry about that. We're not going to talk about that in this course.
+
+If you take 379 you will definitely see that in 379.
+
+That's microprocessors. Um, it will contain local variables for the current function.
+
+Right. Any local variables that you declare that are automatically allocated and freed in this function,
+
+it will contain any arguments for a function that this function is going to call.
+
+And it will contain the return address to which this function should return when it is done.
+
+Which is if imh was I called from f or from G?
+
+Right. It will contain that information. Right. So these are the things that we will put on a stack frame.
+
+In this course we are going to see examples of all of those accepts build registers the saved processor registers.
+
+We call them spilled registers. I don't actually know what. Well and sparks are definitely spilled.
+
+Registers all platforms, I don't know. Um, so we talked about automatic variables just a few slides ago.
+
+Um, so it is frequently the case.
+
+Remember we said the automatic variables are created before we use in the first
+
+time and they're just destroyed no sooner than the closing curly bracket,
+
+um, in which in the scope in which they were declared.
+
+Um, frequently what we actually do is no matter where they're declared or where they're first used in a function,
+
+we allocate them as soon as we enter the function.
+
+And no matter where the last place they're used in a function, we, we, um, remove them when the function returns.
+
+And what this allows is you just add up the sizes of all the local variables in a function.
+
+And when you enter the function, you just push that much data onto the stack.
+
+And when you exit the function, you just chop it back off of the stack. You pop the whole thing off of the stack.
+
+It just makes the compiler's job a little bit easier. Rather than saying, oh, here's I o, here's x, o here's y, right?
+
+You just say, no, no, no, I x and y boom, put them all on the stack.
+
+We'll use them when we use them. And that's one of the reasons that the rules say that they will be declared before the first time you use them,
+
+and persist until the scope is exited, so that the compiler can decide exactly where it wants to create and destroy them for efficiency reasons.
+
+Um. So the size of that stack frame.
+
+Exactly how many bytes of registers there are and exactly you know,
+
+where they're located and etc. it's frequently not like saved as a value that you can just look up.
+
+It is implicit in the behavior of the instructions that the program that the computer runs.
+
+So the computer, remember we had the base in the top of the stack. It will subtract some number from top.
+
+And that's how big the stack frame is. But as long as when it's done it adds that same number back to top.
+
+It doesn't have to like store it in a variable anywhere, right?
+
+It may be encoded in the actual instructions that the CPU runs.
+
+Um, likewise, the locations of the individual variables in the function may not be recorded anywhere.
+
+They may just be implicit in the instructions that the computer runs.
+
+It may say, hey, at top plus four, add top plus zero to top plus four.
+
+And in your code is add at x to Y. But the code, the program that the computer runs doesn't know anything about X and y.
+
+It just says, hey, whatever's on top of the stack, whatever's above that on the stack, right.
+
+It doesn't have to save that information.
+
+Um, when it doesn't save that information, then you get like gdb saying that something is optimized out or whatever, right?
+
+And then if you add gdb to your compiler, uh, lines, what it'll do is it'll say, oh, actually,
+
+let me make a note of that so that when the programmer goes to debug your application, I can find x and Y, right.
+
+Because the program didn't need it. You needed it in order to debug your program.
+
+Any questions? Yes. Yeah.
+
+Every programing language will have its own rules for scope in Python.
+
+Once a variable is declared, it will persist until um, the enclosing function returns.
+
+Sometimes. Not always. It's actually a little confusing in Python how scope works, at least to me.
+
+It's a little confusing how scope works.
+
+Um, in C and Java, it's until the next closing curly bracket and C and Java enforce that you don't even try to use it.
+
+After the closing curly bracket Python, you can try to access a variable that doesn't exist at any time,
+
+and as long as you don't actually run that code, Python doesn't care.
+
+So if you say if something that will never be true, use a variable that doesn't exist.
+
+Your program will never complain that that variable doesn't exist, right?
+
+Which is terrible. It's terrible, because what that means is that something that can never be true will eventually be true,
+
+but only after you've given that code to the customer.
+
+And then it will crash for the customer and you'll be like, I've never seen this error before, right?
+
+This is life with dynamic languages. Um, but they just have different rules.
+
+Different languages have different rules. Um, there are languages like Lisp.
+
+So Emacs uses Lisp as this configuration language,
+
+which you all know because you read at nine and you went through the like the little tutorial and you saw a little bit about Lisp.
+
+Lisp has like four different ways to talk about scope.
+
+And they all mean different things and they behave in different ways. And like only one of them corresponds to absolutely anything that exists in C.
+
+So it's really a language language thing. What you'll find is that the more C like languages.
+
+So C C plus plus Java even um, Rust and Zig and Nim and whatever all these new languages are, they behave basically like C behaves.
+
+But as you go higher up the language stack,
+
+when you start talking about Python and JavaScript and Ruby and Lisp and whatever, and to the very high level languages.
+
+[INAUDIBLE] gets weird, right? When you talk about those very high level languages.
+
+I don't know if I answered your question, but that's the answer you're going to get. I've been really struggling with my.
+
+Attention deficit this week, so I'm just trying to stay on the rails and get done with class.
+
+All right. I already said this. Uh, a little bit of things I didn't say.
+
+It turns out that on x86 64 Linux. Um, the first six arguments were the size of the arguments is up to 64 bits, up to eight bytes.
+
+So that means um, anything care int long, right?
+
+Etc. structures wouldn't fall into this category if they're larger than 64 bits will go into registers,
+
+and only after that will we use the program stack.
+
+Um, the examples we're going to use after that, this we're going to talk about after this are going to assume all arguments.
+
+Go to the program stack. But this is actually a property of the Abi. It turns out that our our platform,
+
+most functions don't put any arguments on the stack because they go into program registers or I'm sorry, processor registers.
+
+Um, but on some platforms, essentially all arguments go on the stack.
+
+It just depends on what you're Abis, 32 bit x86.
+
+They all go on the stack, uh, in x86 64, 64 bit x86, uh, the first six go into program processor registers.
+
+Uh, just be aware that that's a thing. Um, we aren't going to ask you about the exact details, because, again, you'll like if you take in 341,
+
+you'll see this a little bit in 379, you'll see this a whole lot if you take three, seven, nine.
+
+Yeah. Uh, okay.
+
+So this is an interesting question. Should you ever take the memory address of a local variable?
+
+Sure we do it all the time, but you have to be careful.
+
+You have to be careful that you know exactly who's going to get hold of that pointer and how long they're going to keep it.
+
+You want to be sure that that pointer is never used again after your function returns.
+
+So generally speaking, if you use a local very Jacob address of a local variable and you pass it to a
+
+function as an argument and that function only use it for local computation,
+
+it doesn't store it to a data structure anywhere. You're good if that function stores it to a data structure somewhere.
+
+Bad news. Eventually you're going to try to access a stack frame that has been popped right, and your program will get garbage.
+
+Okay, so when we do push arguments onto the stack, let's assume from here on out that we push all arguments onto the stack.
+
+We normally push them in reverse order. So if I call f of x, y, z I will normally push z, then y, then x.
+
+And the reason for that is that it allows us to declare a kind of function that we call variadic functions,
+
+which is functions that take a variable number of arguments.
+
+We have already seen a very modest function in this class, and it is out.
+
+Print. If you provide with one argument, which is the format string, and then you provide it with an arbitrarily large number of additional arguments,
+
+that it knows what type they are and what to do with them based on the contents of the format string.
+
+So if you say percent D, it says, okay, I should find an int and I'm going to print that out.
+
+If you say percent f it says okay, I should find a double and then print that out.
+
+If you say percent p it says, okay, I should find a pointer and I print that out.
+
+Right. And you can do this as many times as you want. Um, remember that I said that we normally find variables based on the top of the stack.
+
+If we push the first argument of the function last.
+
+Then you always know where to find the first argument of the function.
+
+Because it's as close to the top of the stack as it can get. It's basically at top plus zero or top plus some fixed offset depending on your API.
+
+So then in a function like printf, you know where to find the format string.
+
+Once you found the format string, the format string tells you where to find the other arguments.
+
+Right. But you need to know how many arguments they're going to be and what types they're going to have.
+
+For this reason, we pushed the first argument last. And variadic functions ordinarily take as their first argument.
+
+Um. Information that tells them where to find their additional arguments.
+
+We're not going to talk about variadic functions anymore in this course. That's it.
+
+That's all we're going to say about variadic functions.
+
+But for this reason, when we push the arguments of functions, we normally push them in reverse order f of x, y z pushes z, then y, then x.
+
+Questions. All right, let's see it happen.
+
+We've already made plans to put a sign on that door that says Examine session.
+
+Please don't walk through the back of my classroom. Um.
+
+So the only other thing that we haven't talked about that we push on to the program stack.
+
+I said before, we're going to push down where the function should return to.
+
+We call that the program counter. So the program counter is a special register inside the processor that says when I run an instruction,
+
+which instruction should I run under normal execution?
+
+It runs an instruction. And then it effectively adds one to the program counter.
+
+And then it runs the next instruction and it adds one, and then it runs the next instruction.
+
+If we, as we saw in the um, if. Statement example.
+
+Uh, and when we looked at the assembly language, it may include a jump instruction or something like that,
+
+which does instead of just adding one of the programs counter, go to this other location, right.
+
+Change the program counter immediately to at some different location.
+
+When you call a function, what you do is you say, okay, remember the current value of the program counter by pushing it onto the stack.
+
+Then jump to the code that executes this function.
+
+When the function is done. It pops the old value of the program counter off of the stack and jumps to that location.
+
+Jumps back to the location from which it was called.
+
+This is how H knows whether it should return to F or to G.
+
+Right. It's because in this case, the program counter is after calling h and F,
+
+and in this case the program counter is after calling h in G when it's pushed onto the stack.
+
+On some architectures. There's a dedicated instruction for this. Uh, on uh, x86 64, it's called call.
+
+You have a function called call and you have a function called ret for return.
+
+So you do call and some address.
+
+That function will simultaneously push the current program counter onto the stack and jump to the address that you give it.
+
+And you have ret, which will simultaneously pop the top address off the stack and jump to that address.
+
+Location is the next location of the program counter, right?
+
+So you call h h rets to either f.
+
+Right. Uh, on arm. Um, there.
+
+It's actually a paired set of functions that are not call and ret.
+
+It is XLR and. I don't know what the other one is.
+
+It'd be Zeus Red. Anyway, there's a pair on arm also.
+
+Get old. What's the other one? Doesn't matter. You're not going to use it.
+
+You'll see it when you get to 379. It might be call and be XR.
+
+Anyway. It doesn't matter. There's a pair, right? That does exactly this because it's so valuable to have this not one arm.
+
+It doesn't actually push the program counter to the stack.
+
+Remember we said that program that function arguments can be in registers.
+
+It actually puts it in a special register. Right. So if you want to call a recursive function you have to push that to the stack.
+
+Then call the next function. Um, but this is very common that there's a dedicated instruction because this is how we do functions.
+
+All right. So here's a stack frame. Um.
+
+When a function is called, the argument to the function will be pushed on the stack in reverse order,
+
+and then the very last thing before it jumps to the function the return address to which it should return.
+
+When it's done, the old program counter will be pushed on the stack.
+
+When the function is entered, it will push down its, uh, any saved registers which we're not going to talk about.
+
+It will push down any local variables that it needs, and if it ever chooses to call a function, it will push down the arguments for that function.
+
+And then the return address to which that function is returned when it is done.
+
+Right. So this whole thing is the stack frame for some function f at some point in time.
+
+Um, now deciding here.
+
+So note that we have our arguments return address up there, and we have the arguments return address for the next function down here.
+
+So one of those belongs to me and one of them belongs to another function.
+
+Whether I say that my arguments and the address to which I return belongs to the function that called me.
+
+And these belong to me. Or whether we say that those the green and everything down to local vase belongs to me.
+
+And these belong to the function I call is just depends on who's asking, right?
+
+If you're writing a compiler, you may think about it one way. If you're writing a runtime, you may think about it another way.
+
+It's just it's a. Philosophical question of who do the arguments and return value?
+
+Which stack frame do they belong with?
+
+And you can choose to push them in either direction in, um, CSS app, which is where there's some of your optional readings.
+
+They use this convention that the um.
+
+Arguments and return address belong to the current function, not the function that is called.
+
+But just be aware that you'll see that in both sets of semantics, and that's okay.
+
+It doesn't matter. So let's see this in action.
+
+Suppose that I have this code. I have a function foo. It has a local variable I.
+
+It calls a function bar, which has an argument I a local variable j.
+
+Does some computation and returns to foo.
+
+My stack starts out empty. There's something above me on the stack, but I don't know what right?
+
+Foo doesn't take any arguments and we're not going to talk necessarily about anything but the return value, so we don't care what's above it.
+
+When foo is called, that return value will be placed on the stack.
+
+Right. Some function calls foo. When it calls foo, it will place a return value on the stack.
+
+This is where foo should go when it's done and it will jump into foo.
+
+See the blue line over there? That's where we're currently executing. It will jump into foo.
+
+When food starts executing, the first thing it's going to do is it's going to push down enough area on the stack to store its local variables.
+
+It's going to have a local variable named I. That's the only local variable it has.
+
+So it's going to say okay, give me four bytes between the base of the stack when I was called and the new top,
+
+so that I can store my local variable AI. And it will remember that its local variable AI is stored at that light blue position right there.
+
+That victory blue position right there. Um, and then as it starts executing, it will use that location for those local variables.
+
+So it says I equals three. Fine.
+
+It will store three into that, uh, location at some point down the line for who is going to decide it wants to call bar.
+
+When it decides it wants to call bar, it's going to push the arguments for bar onto the stack.
+
+So it's going to make more room on the stack by moving the top down further.
+
+It's going to say this is the arguments for bar. And it's going to put the arguments that it wants bar to use in that memory.
+
+So note that the argument that it's passing to bar is I.
+
+So it makes room on the stack for Barr's argument.
+
+I note that foo I and bar I are different locations on the stack.
+
+It will copy the value of foo I because that's the value that it passed bar into the location bar.
+
+I. So we have two threes on the stack.
+
+Then it will push down the address immediately after that line of code.
+
+And jump into bar. So when bar is called, it has the.
+
+The top thing on the stack is the location to which it should return.
+
+And immediately above that is its argument I right.
+
+So we have full PC and then we have bars I which is three immediately above it on the stack.
+
+BAA will make room for its local variable J. It will then store something into that local variable J.
+
+It will then recalculate its I. So note see the arrows right there around that seven bars?
+
+I is now seven because it said I equals five plus j.
+
+J is equal to two bars. I is now equal to seven.
+
+Note that FUS AI is still on the stack and what value does it have?
+
+Three. Didn't change. We passed foo's ide a bar.
+
+As an argument bar even named it ie it has the same name, but it's a different variable.
+
+And because C is called by value. Baa got a copy of fus I.
+
+This is the mechanism by which C is called by value.
+
+When we call a function, we make a copy of all of the values that we pass into it, right?
+
+When bar is done, it returns. It goes back into foo, and Foo continues doing whatever's in that dot dot dot right there.
+
+When foo is all done, it will pop and it will return to wherever it came from.
+
+Any questions? Yes. Right at the bar.
+
+Uh. Yep. It's pretty pop.
+
+The three would pop along with its return value. Yeah, so because it will pop with this closing curly bracket.
+
+Right. Fish or pops?
+
+Yep. Yeah. Other questions.
+
+All right. Monday. Do you have no lab next week?
+
+You have no assignment assigned now.
+
+You have nothing to do for CSC 220 between now and your midterm on Wednesday.
+
+On Monday. In this class, we will review the entire semester to date.
+
+I will have slides to talk about. Bring your questions.
+
+All right. I'll see you on Monday. Have a good weekend. Please be on those required readings.
+
+Thank you. Yeah. You two take care.
+

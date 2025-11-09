@@ -1,0 +1,705 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Thank you. Um, that's mostly what lab exams are for.
+
+So that's not primarily what the, uh, exam is about. It's more about the conceptual things that come up when using the C programing language.
+
+Um, after that, we went to, um, again, more about programing, C conditionals and control flow.
+
+Um, and here the biggest thing that we did, I mean, we talked about conditionals and we talked about,
+
+you know, what a conditional means, the fact that they're statements,
+
+not expressions and C etc. but the biggest thing that we did was we went through and we looked at,
+
+um, the assembly language implementation of the uh, if statement, uh, or of some conditionals.
+
+Right. And we looked at short circuit evaluation in assembly language, and we looked at the implementation of the if um, conditional.
+
+Now we will not ask you to read or write assembly language on the exam.
+
+But what you do need to understand is this idea that the computer does these very, very small, discrete steps one at a time,
+
+and that everything that we write in a higher level language is built up of some combination of those small, discrete things.
+
+Right? So that's what you really need to take about out of this.
+
+Well, talking about the Boolean type, the fact that it can store only a zero or a one, the fact that true is any value that is not zero.
+
+So you can have true values that are, um, not equal to each other.
+
+And like that's okay. Um. I feel like that's most of the things in that lecture.
+
+Any questions about that? Okay, let me see if I want to ask a topic question yet.
+
+We're gonna do a few topic questions today for review.
+
+I wish top hat wasn't so slow. Okay, so Carl has named this 2025 ten six Mid-term Review day in all caps.
+
+I don't know if I accidentally used the wrong day one time and I'm in trouble or.
+
+Um. Oh, yeah.
+
+So we'll do this one before we get to this material, just so you can refresh yourself on it.
+
+Oh. Top hat says things are taking longer than expected. Please wait.
+
+Well, actually, I expect it to be slow. So we'll see if that wakes back up and then I'll do something with them.
+
+So afterwards we moved on to a tour of computer systems. This one called back heavily to that very first lecture.
+
+Right? We hit many of the things that we hit in the very first lecture again,
+
+and then it also called forward into a bunch of things that we have hit or will hit again later in the semester.
+
+So the idea of dedicated computer model showed up here.
+
+Um, again, um.
+
+This is where we really started to open up the idea that the details of the computer architecture of the specific computer that you are running on,
+
+not just the broad architecture of, you know, memory and data is in memory and there are addresses,
+
+but the specific architecture of how does it represent its numbers and how does it do its individual computations came up.
+
+We looked at the, um, behavior of overflow on our system in integers.
+
+Right. And we saw that integers did not preserve all of the numeric, um, properties that um, we might expect in algebraic numbers.
+
+And we looked at the um. Uh, representational issues and floating point with respect to, um, commutativity and associativity, right.
+
+Which has to do with the way that they represent, uh, rational numbers and the fact that they are, in both cases,
+
+finite representations that cannot, you know, represent all possible numbers because there's an infinite number of numbers, right?
+
+You guys know the thing about integers and floating point,
+
+like there's an infinite number of integers and there's infinitely more rational numbers than there are integers.
+
+Did you have that 191? I'm getting yes and no.
+
+Okay. All right, well, some of you had it in 191. Um.
+
+Again, we hit on this idea that, see, in politics there's just one way to do things,
+
+but that there are many problems that are solved in C and on politics systems that have to be solved no matter what the system is.
+
+And those solutions are going to look similar in a lot of cases because of the realities of the underlying, um, architecture.
+
+Then we spend a little bit of time talking about software, um, correctness.
+
+Top hat is in fact ready for us. There.
+
+Why is it not? Okay, there we go.
+
+I want 100% on this question. First poll. Okay, 100% first poll.
+
+Otherwise, I'm going to be worried that you're going to let me down on the midterm. This was on the practice midterm.
+
+We've done it in class once before. I've told you twice in class exactly what the answer is.
+
+No pressure. Yes, sir.
+
+Are you asking a question? You're just pointing. You're just pointing. Okay. We'll see you later.
+
+All right. We'll try again. I'm worried about the midterm.
+
+It's. Don't be too harsh on the one person.
+
+If one person got it wrong, that means there's ten more people who guessed.
+
+But if you do get this one wrong, I think you need to ask yourself what your priorities are in this class.
+
+All right. I expect full credit on the midterm.
+
+Otherwise, I'm going to. I mean, honestly, I'll probably just cry.
+
+It's not one question, but that question is going to be on it. All right?
+
+No. Um.
+
+All right. So after the tour of computing systems, we started talking specifically about, um, the way that C treats memory and pointers,
+
+which are C's access to sort of the, um, the most basic level of access to memory on the system.
+
+A pointer is a variable that holds just a number.
+
+That number is treated as an address of, you know, where data is stored in memory and it associates it with a type.
+
+Um, we talked about the fact that our system in particular,
+
+where we have byte address memory and it runs from zero to the maximum possible integer size on the system.
+
+It really just acts like a, um, a giant array of bytes, right, that we can access using a pointer,
+
+go to a particular place in that array and draw a value out of it.
+
+We also talked about the idea that Posix processes have their own dedicated memory,
+
+in the fact that the memory starts at zero and runs at the top of memory,
+
+even though there's multiple processes on the system, which we then hit again.
+
+This will be the fourth time it comes up in process layout.
+
+When we looked at where we put things and where they are in the memory of the system and how consistent that, uh, layout is.
+
+Um. Du du, du du, pointers and rays are closely related, but they are not the same.
+
+And we saw some examples of in particular see syntax that did different things between pointers and arrays.
+
+And in particular we saw an example of something that would compile with pointers but doesn't compile with arrays.
+
+But on the other hand, we saw that you can just use a pointer like an array.
+
+You can dereference it with square brackets, etc. and it will work normally.
+
+Right? It will act like an array.
+
+Um, we also talked just a little bit about how the offsets into arrays are calculated and how the offsets from pointers are calculated,
+
+uh, and how those are related, which we hit again when we talked about alignment, padding and packing in the stride of different things.
+
+Right. Uh, any questions about memory and pointers?
+
+Yes. Yeah, although that is an implementation.
+
+That is absolutely true. That is an implementation detail that's unrelated to exactly the relationship between, for example, pointers and arrays.
+
+So the observation is this is absolutely true what you're saying. So if I save this to be.
+
+Right. Um. This string may be loaded.
+
+Uh, maybe stored in memory. That is immutable. And if I try to change it, my program will crash.
+
+Right? If I do this. It will be mutable and I can change it in my program will not crash.
+
+And what will happen is this is allowed to be a pointer to, um, the executable file itself,
+
+and the compiler is allowed to unify all of the strings that are equal in the program.
+
+So if I had the same string in more than one place,
+
+is allowed to store it only once in memory and point to it from everywhere that that would use that particular string.
+
+The problem is that then if I change it, I might break other parts of the code that expect to have their own string.
+
+That doesn't change, right? So it won't allow you to change this here.
+
+It will create a local string array like on the stack or whatever, and then copy that data into the local array.
+
+Right. And so you get a local copy. But that's um, this is true.
+
+This is something you should know. It feels a little subtle for the midterm.
+
+Um, the distinction between those two things, because we've only talked about it sort of implicitly rather than as a discussion.
+
+But you're. You know. Questions.
+
+Thoughts? Yeah.
+
+What you said the question I. What's your answer to their question?
+
+Oh, the question was, um, if you do this.
+
+Is it possible? I don't remember the exact wording,
+
+but is it possible that that is actually immutable and not an or an immutable string somewhere, and not just an array?
+
+And the answer is yes. Sorry, I tried to repeat questions in particular.
+
+So they show up on the recording, which apparently I didn't record the first part of this class.
+
+So, uh, that's fine. We're doing this review in um.
+
+Four different sections today, so one of them will have audio probably.
+
+All right. After this we talked about structs and allocation. Um, we in particular.
+
+Ah, we spent a lot of time here talking about the layout of the memory inside of structures and the alignment requirements of the system
+
+that make that layout more difficult than just getting one piece of data after another after another in the memory of the system.
+
+Of course, we said that if you have primitive types, you can put one after another and it's no problem.
+
+But as soon as you have more complicated types where you have, um, uh, I'm sorry if you have an array of primitive types,
+
+as soon as you have more complicated types where you might have like two types of different sizes beside one another,
+
+alignment rules become such that, uh, you have to put padding in between.
+
+Now, the basic alignment rule that we work with in our system is, um, in order to store a sort of native data type, a simple data type in memory.
+
+I think simple is the term that we used. Uh, in order to store a simple data type in memory, you must store it at an address that,
+
+when divided by the size of what you are storing, yields a remainder of zero.
+
+So something that is congruent to zero mod the size of what you are storing when you layout structures,
+
+or when you look for things in memory, um, where you might have simple data types of different sizes adjacent to one another.
+
+If you are going to store one at an address that doesn't meet that property,
+
+you wind up having to put space in between in order to make the alignment.
+
+Uh, work out. If you just declare a struct, the C compiler will do that for you.
+
+If you try to access something that is not aligned. If you try to access a simple data type without respecting the rules of alignment,
+
+the results are somewhere between your program does not run as fast as it otherwise could, and your program will crash.
+
+And that depends on a lot of factors that are not necessarily in your control.
+
+When you're writing the program, what compiler did you use? What system are you running on?
+
+It was the hardware that's underlying the, uh, execution.
+
+Right. Um, so because this is a big deal and was I think is confusing to a lot of people,
+
+we will, uh, ask a question about that, a top hat question about that.
+
+That's not right. Don't answer that one. Come on, Top hat.
+
+Um. It's so hot over here.
+
+Talk amongst yourselves. 30s. And we'll pull it again.
+
+If I can just keep my word.
+
+Another 40. Five minutes.
+
+I thought that was important.
+
+For us. All right, let's do it again.
+
+Don't just. Yes, he had a.
+
+And that's. What we're to.
+
+All right. The so let's talk about this.
+
+So under what circumstance do we require padding.
+
+Who remembers? When the remainder of the of the what is in zero the largest.
+
+Size. In terms of bytes. Your two two.
+
+General. You're right.
+
+But your your statement is too general. When the remainder of what is not zero, the.
+
+What? Two memory spots? Um. It's possible to, uh, variables that are almost.
+
+Raised your hand up. So somebody over there, do you have your hand up?
+
+I saw hand. I'll come after it. Liza. Thank you. Oh, Lord.
+
+The next type has to be aligned with respect to what? Is it the previous.
+
+That's what he said. It's close. The offset from the base of the structure.
+
+Right. The type that you're aligning has to be aligned with respect to the base of the structure.
+
+So how far are you from the beginning of the entire structure?
+
+Is what you're aligning right. You can handle that one item to another.
+
+If you keep track of that offset from the base of the structure, you can take it mod whatever size that you're currently aligning, right?
+
+But you have to know the offset from the beginning of the structure,
+
+and you want the offset when divided by the size of the data item that you're storing right now.
+
+To yield a remainder of zero. Right. So if we look at a, we have a double and then an int a double is eight bytes.
+
+So I have 0 to 8. And then I want to put it in there and it is four bytes.
+
+Can I put an int there. I don't know.
+
+We got Winnie the Pooh going on and over here, I didn't understand. So, uh, I have a here's my offset zero.
+
+Right. I have a double. Here's offset eight.
+
+Can I put an int right here? Yes I can.
+
+Because an end is for, right? So then that takes us to offset 12.
+
+Am I done? No. Why not?
+
+I think the overall size of the structure also has to be.
+
+This goes into the largest item. Whoever said the largest item, you said largest item.
+
+The overall padding of the entire thing when divided by the size of the largest item,
+
+which is eight, has to also be congruent to zero, so that I then have padding here.
+
+For a total size of 16 bytes with four bytes of padding. Right?
+
+Yes. To offset or so.
+
+To double or to offset zero, which is eight bytes.
+
+It's going up to. Is that offset eight or output scale.
+
+This this is so address is zero through seven are the double eight is the next available address.
+
+It's where the is right offset from the beginning of the struct.
+
+Four. Yeah. So 8 to 11 and then 12 is where the padding begins and it runs through 15.
+
+And then the 16 is where the next struct would be if I put something a memory right here.
+
+Um, okay. So a requires padding.
+
+Does being require padding? Where?
+
+Between it and the double. Same thing. Right? We put in pad and then double.
+
+We just turn this upside down. Right. Uh, does sea require padding?
+
+No, it does not. Because we have a double which is eight bytes.
+
+We have an int which is four. We have an int which is four which takes us that 16.
+
+We don't need any padding. It's fully occupied. D I think is the opposite right.
+
+It's double right. So int so we have uh int to four we have int to eight.
+
+Eight is the size of a double. To 16.
+
+No padding. All right, so we're fine. Uh, EA has tons of padding, right?
+
+We have an int, which is four four bytes of padding, a double what? There's eight.
+
+Four bytes of int, four bytes of padding. So we have eight bytes of padding in each.
+
+So the correct answer should be KD. Yes. Probably the best way to do it because I guess not really understand it.
+
+But in reality you find out you need padding in a struct.
+
+All you have to do is take the large. It's like the numbers we have to find here as a couple intent out of the bites of that.
+
+So that's case 16, and I divide it by the largest number of bites.
+
+That's not enough because that tells you if you can pack everything tight where you need padding at the end,
+
+but you may not be able to pack everything tight. So in this case, um, if this was, then double.
+
+You need padding here. And you can't tell that by doing that. Yeah.
+
+Uh, okay. Um. All right.
+
+So the answer should be C and D. How did we do. Okay.
+
+We did. Okay. Um, my suggestion is, you see those little diagrams I was drawing over there?
+
+You don't have to draw while you guys can't see those diagrams, but it's just basically like.
+
+Right. I just drew out what I have to put in memory and where I have to put it in the offset from the base of the struct.
+
+Um, go home and practice some of these, right?
+
+Go home, practice some of these until they make sense. Um, if you have questions, there are some examples of this in the you've learned squares.
+
+There's an example of this on the practice I think two on the practice midterm.
+
+Right. If you have questions ask us. Yes. We did not talk about any types that occupy more than eight bytes.
+
+Our bus size is eight bytes. So any. So. Okay, this is a shaded question.
+
+Um, there's two sort of sides of the answer. One is on our platform, we actually don't have any native types that are larger than eight bytes.
+
+This platform just doesn't support any. Two is that normally once you get larger than a word size, these concerns change anyway.
+
+But we didn't talk about that. Okay.
+
+Um. We put this back on.
+
+What? Another hand? Yes. You.
+
+Yeah. It was double int right. He was it double int.
+
+So an int is four bytes. I cannot put a double after an int because the double is eight bytes.
+
+So zero plus four is four. Uh, four divided by eight is zero.
+
+Remainder four. Right. So I need four bytes of padding.
+
+And then it also turned out that it had it was double int.
+
+So you have four bytes of integer, four bytes of padding, eight bytes of double four bytes of integer.
+
+And it turns out you need four bytes of padding again.
+
+So even though it adds up to 16 bytes and this is where your example was, there's there's a problem, right?
+
+Even though it adds up to 16 bytes, they can't be put immediately beside each other.
+
+So you still have to have padding. 16 bytes. Seems like it's okay for the overall size though, right?
+
+So there's two concerns. One is where does the next thing go? Two is how big is the overall structure.
+
+Okay. Um, after that, we talked about, um.
+
+Yeah, I thought we were on an alignment, Patty. And packing next, but we're not. Did I get out of order somehow?
+
+Doesn't matter. Um. So after that, we talked about, um.
+
+Declaring structures and using structures to make self-referential data types.
+
+And we talked about using malic and Calc and free and the standard library standard allocator.
+
+In some general sense, this goes back to the.
+
+Given only a pointer to a piece of memory allocated using Malik, Catholic or Relic.
+
+How can you find out how large the original allocation was? I'll wait.
+
+I've got to wait till everybody says it. We all can. We?
+
+We have to do it again. Because you're talking. Yeah. Okay, now what if we all get.
+
+If everyone in the entire class. All four sections.
+
+Although I did get this question right.
+
+I will come in on Friday. Clean shaven. Oh.
+
+Oh, no. I will not shave in your.
+
+I think that's a health code violation. Um, it's also just gross.
+
+Um, so talk to your friends.
+
+Everybody in the whole class. Um.
+
+Okay. Alignment, padding and packing.
+
+Um, we this is the example that we just did from the top hat question.
+
+Uh, we have to maintain alignment of everything.
+
+Um, we also have to maintain stride, which is related to alignment because it, uh, for compound types, right?
+
+It becomes related to alignment for compound types. Then we also saw that pointers are special in that when we do pointer arithmetic,
+
+pointer arithmetic is calculated in terms of the stride of the pointer, not in terms of individual bytes.
+
+So some pointers uh value address right is an integer plus one doesn't necessarily add one to the address.
+
+It adds one times the size of whatever that, um, object is, right?
+
+Whatever that, that thing that it points to, uh, is and then we said in order to do pointer math,
+
+then we frequently use pointers that have a stride of exactly one on our system.
+
+Void star will, uh, give us that.
+
+Any questions about that? Yes. Stride is simply the distance between two pointers to an object of the same type in memory.
+
+If there as close together as possible. So if I have an int and is four bytes, the pointer to an int is at, you know, some offset n address n.
+
+The next possible pointer in memory is at n plus four.
+
+The stride of that pointer is four. If I have one of these structs, that's 16 bytes.
+
+The stride of that pointer is 16 right? That's just the size of the size of whatever it's pointing to.
+
+Yep. And that is also, uh, in order to make it always be exactly the size of what is pointing to.
+
+That's why we do this padding at the end. Right? This padding at the end makes those two items the same.
+
+If we didn't do that, then the stride in the size of what is pointing to it might be different.
+
+And that becomes a problem.
+
+Uh, I mean, it's a solvable problem, but it's the sort of thing that you would have to write extra code to deal with when doing pointer manipulations.
+
+If it wasn't the case. And. All right.
+
+The last topic that we talked about was the layout of processes in memory.
+
+Um, we talked about the fact that, uh, processes are divided into sections.
+
+We talked about five different sections text, data base, heap and stack.
+
+We talked about what goes into each one of those sections and what we store where in the process memory.
+
+Um, we then uh, looked at some examples of some code asking where different parts of the code went into which section.
+
+Right. Um, and then finally we talked about the manipulation of the process stack and how it's used to keep track of the, uh,
+
+accounting that is required to be able to make function calls and then return from them in a correct way,
+
+right, to store the local variables to get back to where you came from.
+
+If a function might be called from more than one place in the program. Um, things like that.
+
+Um, I have a top hat question that will run this review for that.
+
+Bonus question. Why is the name River?
+
+Where's that from? There are two answers I will accept here.
+
+One of those more correct than the other. As a hint, Carl wrote this question.
+
+And then.
+
+Talk amongst yourselves. What are the correct answers and why?
+
+Who is River? General rivers.
+
+Is a rare and well-known composer called River Carl. It's know that he's a mad guy.
+
+Think. About. It.
+
+I'm using sway. It's thoroughly mediocre, I don't know.
+
+So I just said. All right, let's do it again.
+
+You like what you said, neary?
+
+Yeah. Cool. I keep seeing this.
+
+Hey, something. Hey.
+
+Why some. Hey. Something, right? What is it? It's just an H.
+
+No, no, no. It's.
+
+Okay. All right, first things first.
+
+Before we get to the part that's on the midterm. Who's river? Who knows? Cal.
+
+Yeah. River Tam.
+
+That's right. That is the absolutely correct answer. No, but see me after class.
+
+Uh, who was the other answer that would have been acceptable? River song has the other answer that would have been acceptable.
+
+All right. Uh, what are the correct answers? Uh, star Peter is the only thing on the heap.
+
+Where is Peter? On the stack.
+
+On the stack. The layout of the program looks like this.
+
+Here's the stack. Here's the heap. Peter is here.
+
+Malik allocates memory here. Peter points to here.
+
+This is on the heap. This is on the stack.
+
+Right. Peter is on the stack. The thing that Peter points to is on the heat.
+
+All right, now that's it. That's all of the.
+
+Um, review that I have. What questions do you have?
+
+Yes. Peter.
+
+The variable is eight bytes of memory that is stored on the stack. But the address stored in Peter Star Peter is memory that is stored on the heap.
+
+Yes. Somebody over here at a question to ask.
+
+What is pass by value? Pass by value says that when I pass a value into a function in C.
+
+The function receives a copy of the thing that I pass in.
+
+And if you remember, when we looked at the stack manipulations, we saw that bar had its own copy of the argument, right?
+
+So if you change the arguments to a function, it is not reflected in the original data type.
+
+Yes. There is no way to find the length of an array and see there's no way to find the length of an array.
+
+There's no way to find the length of a string. There's no way to find the size of an allocation made by Malick.
+
+In the case of a string, we have a special property, which is that we know what the last byte looks like.
+
+So you can count the characters, right? You don't actually know whether the memory allocation is that size or not.
+
+It could be larger. It's not smaller. Right?
+
+Yes. The base of a struct is aligned to the largest memory member of the struct.
+
+Why is that? Um, that is so that the rules for alignment work for every struct.
+
+So if I don't align it to the largest member, then the rules for alignment may not work at any given alignment on the system.
+
+So for example. I don't know who's talking over here, but I'm trying to answer a question.
+
+So, for example, if I have an int and then a double,
+
+and I know that the struct is going to be aligned at a four byte address that is not an eight byte address, then I don't need any padding there.
+
+I can just do int double. I don't need any padding right. But I would have to know that that particular struct is set at this weird alignment, right?
+
+So instead what the system says is every single struct will follow exactly the same rules.
+
+And that involves aligning the struct to the largest alignment of the largest member to the alignment of the largest member in the entire struct.
+
+And once I follow that rule, then all the rules for where I put the padding are exactly the same for every data type.
+
+Right. Um. Another time that this matters.
+
+Is, uh, when you have data types that have sizes that are not powers of two.
+
+We don't have any on our system. They're all powers of two. But there are systems that have data types that are not powers of two.
+
+And then the rules, like you have to be very, very careful about how you lay things out.
+
+Did I answer your question? So it just gets rid of special cases.
+
+Um. So. If you have like, a charm in.
+
+We often have, like a panang curry. If you were to later on add a double, would it go back to change that amount of padding?
+
+So, uh, if you have a care and an int that would have three bytes of padding between the care and if you later on when add a double stop,
+
+you right there, you can't do that. Right. Because in C every structs total size has to be known at the time the program is compiled.
+
+So it's either care int or it's care int double. It can't change.
+
+Does that make sense? It turns out that you're not going to do any padding either way.
+
+But you can't change the size of struct.
+
+Unlike in, there are languages that have what we call open types, right where you can change the types after the, um, program is running.
+
+Um, but C is not one of them. At the time you compile the program, every type of has to be known completely to the compiler.
+
+And if you declare a struct with two different layouts and two different parts of your program,
+
+the compiler will stop you and say, I can't do this, right. They're different.
+
+They're not compatible. Yes.
+
+That's right. How?
+
+Can I know that? So the observation is that Java and Python allow systems that are of wildly different architectures to run the same program,
+
+because they run on a virtual machine. C doesn't have that.
+
+Could you have such a thing? Yes. There is, in fact, a compiler.
+
+It is the default compiler on Mac OS, um, called clang for C language.
+
+Right? Clang clang uh, clang uh can be asked to compile to uh, Llvm bytecode, which is a very,
+
+very low level bytecode that you can run on the Llvm interpreter on any platform.
+
+Uh, the it has the disadvantage that it will run much slower, not much slower, but significantly slower than a than native code.
+
+So normally we don't do that. Normally we compile to native code, but there is at least one C compiler that compiles to an interpreter bytecode,
+
+and you have to do extra work to make that happen outside the scope of this course.
+
+All right, one last question. Otherwise I'll see you on Wednesday.
+
+All right. I'll see you on Wednesday. Please be here at 1 p.m.
+
+Remember that there are two doors if the weather is nice. Q at both doors.
+
+When you queue in the hallway out here, queue down the side of the hallway.
+
+Don't block the hallway.
+

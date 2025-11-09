@@ -1,0 +1,1003 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+All right. For legal purposes.
+
+I was not threatening Gavin before class. Um.
+
+Let's talk about processor threads and concurrency. So we left off on, uh, Monday,
+
+we had sort of introduced the idea of concurrency and the idea that we might have more than one logical flow of control.
+
+Shut out. More than one logical flow of control running, uh, in the computer at the same time.
+
+And of course, we said, I believe we said, then did I show you, like, how many processors are running on different computers and stuff?
+
+Did we do that? I'm getting yeses and nos.
+
+Like, I feel like we either did or we did not. Okay, well, I'll do it right now.
+
+Now, I'll do that here in a minute.
+
+Uh, but clearly every computer we're using is running more than one process, so there are multiple logical flows of control, right?
+
+Or I shouldn't say is more running. More than one processor is doing more than one thing, right?
+
+Like I've got my, um, PDF viewer going here, and I have a web browser running and I have terminals open, and I have, you know, whatever else.
+
+Right. Like there's all kinds of stuff going on on this computer. Um, and then we talked about the process, right.
+
+This fundamental abstraction that we've talked about over and over, which is the process.
+
+And we went through the process layout. Right. And we talked about the anatomy of a process and the different sections,
+
+and how a process consists of the program that you are running and all of the memory that it uses and the resources that it occupies.
+
+And like all of those things and like, that's what a process is.
+
+Um, and then we said that, as we've said before, right.
+
+This is not new, that this is sort of the, um.
+
+Abstraction through which our operating systems maintain this dedicated computer model, which is convenient to us as programmers,
+
+so that when we write programs, we don't have to worry about what other things are going on the computer,
+
+right, and what other processes are happening. I'm going to start taking top hat like at the hour.
+
+15 people have come in in the last two minutes. All right.
+
+Um. It's a little bit hypocritical me because sometimes I'm a little bit late, but like,
+
+I'm late because I'm answering questions in my last lecture, which is really your fault.
+
+Because you have questions. Like every day after class, there's like a line of people with questions who, by the way, do not come to my office hours.
+
+Um, so, you know. I blame them.
+
+Bonnie Raitt. Rules are for thee and not for me. You know how that works, right?
+
+Yeah. Okay, so, um, there's a second abstraction, which is threads.
+
+Which threads are very similar to processes. But whereas we made a big deal about how threads, um, or how processes,
+
+each process gets its own dedicated computer abstraction threads do not multiple threads within a process.
+
+Threads are within processes in our particular system, multiple threads within a process, uh, run in the same dedicated computer.
+
+So they instead of having their own memory space that is separate from the memory spaces of the other processes, they share memory.
+
+The threads of one process can access directly the memory.
+
+Uh, or I'm sorry, the threads within a process can access directly the memory of the other threads within that process.
+
+Um, and we'll talk more about that, uh, later.
+
+No. So, um. I said early on, uh, last time that you can have more than one, um, process running concurrently,
+
+more than one logical flow of control on a system that only has the capability of running one thing at a time.
+
+And the way we do that is by multitasking. And I want to define two terms here multitasking and multiprocessing.
+
+And I want to make it very clear that within this course we will use these definitions.
+
+We will use them consistently. And we expect you to know them. However.
+
+These terms are not necessarily well defined in the sense that if you go to another resource,
+
+if you use, you know, if you are in a different discussion, these terms may be used exactly the opposite from one another,
+
+or they may be used interchangeably, or they there is not, unfortunately, a good solid agreement.
+
+In the sort of computer, you know, software community for what to call these two things.
+
+So we are going to say that multitasking is switching between multiple logical flows of control, one after another,
+
+where each of those logical flows of control is present in the system at the same time,
+
+but they may not be running at exactly the same instant in time.
+
+Whereas multiprocessing means running more than one logical flow of control at exactly the same instant in time.
+
+In both cases, these logical flows of control are concurrent.
+
+But in one case they are actually running at exactly the same instant in time.
+
+And in the other we just switch between them.
+
+So if we see here on the left we have processes AB or logical flows of control A, B and C, we run A for a little while where the dotted line is,
+
+we sort of stop running A, we switch, we run C for a little while where the dotted line is, we stop running C, we start running B for a little while.
+
+So at no point in time are any pair of A, B, and C running at the same time, but between the top of the graph and the bottom of the graph.
+
+All of A, B, and C have run for some period of time, right?
+
+This is multitasking. On the right we have the logical flows of control X, Y, and z,
+
+and you can see that in the third period they're x, y and z are all running at exactly the same time.
+
+They're all doing something at exactly the same time.
+
+Um, from the time. From the top of the graph to the second line.
+
+X and z are running at the same time, but y is not. At some point y starts, then z stops, etc., right?
+
+But at some various points in time there are more than one logical flow of control running at exactly the same time.
+
+Um. On this side we have multitasking.
+
+On this side we have multiprocessing. Those specifically are the two terms that we will absolutely use consistently in CSS 20.
+
+And you need to know them. But I do want you to be aware that you may see them used in inconsistent ways outside of this course.
+
+And that's okay. There is not like solid agreement on exactly how to talk about and differentiate these two concepts.
+
+You will usually see them defined. Yes. Processes or threads or it doesn't matter.
+
+There are logical flows of control in whatever form that abstraction takes on a unique system.
+
+There. It's either a process or a thread, but on another system it could be something else, right?
+
+Whatever. Lot. So a form of control of abstraction, whatever specific implementation provides the abstraction of a logical flow of control.
+
+Yes. Which one is more effective?
+
+So the question. Yeah.
+
+Um, well, let me punt on that for a moment.
+
+We'll talk about that in just a moment. Um, let me answer the.
+
+Let me answer the first question more concisely, which is to say that neither one is more effective than the other.
+
+It depends on your environment.
+
+You will choose one or the other, or both, depending on the situation, and in some situations one might be more effective than the other.
+
+But in totality you cannot say that one is more effective, but one is just better than the other.
+
+Right. But there are cases where in fact I will show you. We will talk about, I think maybe the next slide where you absolutely have to do both.
+
+You can't do one or the other. You have to do both. Um, so.
+
+Stuff. This slide. It's the next slide. Um, so let's talk about multitasking for a moment, and then I'll get back to that question.
+
+In multitasking. Concurrent flows are present in the system at the same time, even though they are not executing at exactly the same time.
+
+But I assert to you. That in a multitasking system, the individual flows cannot tell.
+
+That they are multitasking and not multiprocessing in many cases.
+
+From their perspective, there are other flows that are running at the same time,
+
+and they cannot tell whether they are running at exactly the same time or just also running in the system.
+
+And the reason is that those dotted lines where we had the context switches from A to C to B to A, etc. are not.
+
+That is not an event that the process has any, that the logical flow of control has any knowledge of.
+
+It does not know that there was a context switch and it was taken off of execution.
+
+And another, another, um, logical flow of control was placed into execution.
+
+So, uh, if we do a thought experiment, we think about the situation where A and B are both running in the system at the same time.
+
+The only way that A can tell that B is running at the same time is that it observes B at multiple points in time,
+
+and it sees that B has done something in between those points in time.
+
+Right? It has observing changed something.
+
+So as an example, consider that B creates a file A looks at a directory.
+
+The file is not there. B creates the file a looks at the directory.
+
+The file is there. Therefore B must have run while A was running at the same time the day was running right, or something like that.
+
+Well, the way multitasking works, A is running and then A observes B in some way, either directly or indirectly.
+
+Some time passes.
+
+The operating system, for example, suspends A, runs B for A while, suspends B, comes back to A, starts executing again right where it left off.
+
+It doesn't know that anything happened. It observes B, it says oh, B has changed, right?
+
+Therefore, from A's point of view, even though we're doing this multitasking,
+
+where we're just time slicing a little bit at a time between these two things, from A's point of view, B did something simultaneously to A.
+
+Um, and this is a philosophical thing, but essentially stems from the fact that our computers do not operating continuous time.
+
+They will operate in discrete time. They take discrete steps from one place to another.
+
+And so I cannot tell if you and I took steps at exactly the same time, or whether I observed you at one step,
+
+and I observed you in another step, and you did something in between.
+
+I can't tell the difference because of the just this discrete nature of time.
+
+Um, anyway, don't sweat the that aspect of it.
+
+Just be aware that the process itself, the logical flow of control itself,
+
+cannot tell the difference between whether it is multitask or it is multi process.
+
+If it is multitask, some things just take longer. Right.
+
+Because you weren't running. Any questions?
+
+Yes. The reason we are speaking. Is it because.
+
+Uh. He definitely. Why are we talking about multitasking?
+
+Multiprocessing. Um, because.
+
+When you design concurrent systems.
+
+You will at some point after 220. Not now.
+
+We're not going to talk about the details right now. We're just setting up foundations, right.
+
+You will have to understand the idea of when I actually create concurrent logical flows of control.
+
+When am I deriving benefit from that and when am I not?
+
+And in order to answer that question, you're going to need to understand the ways in which these multiple logical flows of control behave.
+
+I will tell you straight up that in CSS 220,
+
+we are never going to lay anything on top of this foundation that requires you to directly understand this difference.
+
+But when you go take operating systems or web development or distributed systems or some other course in the future,
+
+you're going to need to understand how this works, right? So we're laying foundation right now.
+
+Almost all the concurrency we talk about is laying foundation, not because we're going to do it directly.
+
+No. Multitask so you can have multitasking in interpreted language.
+
+You can have multiprocessing. In interpreted language, you can have both just like you can in a compiled language.
+
+All right, so, um. With multiprocessing, we can also have multitasking.
+
+And in fact that is normal in modern systems.
+
+So if I look at, uh, this computer right here.
+
+So you guys know socks, right? So socks gives you like, all the processors that are processes that are running on the system at the same time.
+
+Um. I can count the number of lines in that output.
+
+There's one line that tells me what each of the columns mean, and then the rest of the lines are processes.
+
+So this has 238. There are 237 separate processes, separate logical flows of control running on this computer at the same time.
+
+I do not have 238 processors.
+
+Processor cores. I cannot multiprocessors.
+
+238 programs at the same time.
+
+Um, in fact, I have eight processor cores.
+
+See this processor seven down here. If I scroll up, you'll see that the first processor is name processor zero.
+
+I have eight processors on this computer. I have 237 separate logical flows of control running at the same time.
+
+I am both multiprocessing and multitasking.
+
+Up to eight of those processes of those logical flows of control are actually running simultaneously.
+
+And the computer switches rapidly, between which eight are running at any given point in time.
+
+Um, so I can actually look. Uh, right now, probably there's only a couple of them running at the same time.
+
+So if you see here in the CPU column, uh, how there's only a few of them are actually trying to do anything at any given point in time.
+
+Well, there we have all eight. Right. Or more? Um, more.
+
+It can be more here because this slices on like one second at a time.
+
+So it's like, which ones did something in the last second? You can see most of them aren't actually trying to do anything,
+
+but sometimes they they are most of them are waiting for things like the network to send some traffic to the browser,
+
+or me to push a key on the keyboard or, you know, whatever. Um, but it slices, uh, between them.
+
+So, um, on the other hand, if I go to Iman. Tell me I didn't type it wrong.
+
+What's doing? Okay.
+
+Um. And I do the same thing.
+
+There are 1199 processes running on demand right now.
+
+Logical flows of control. Running on demand. And if I can't.
+
+Proc CPU info. I will see that Iman has in fact 15 uh, 16.
+
+Sorry, uh, processor cores. So out of those 1199 logical close of control, up to 16 of them might be executing at any given instant in time.
+
+The rest of them, it slices between it multitasks those 16 available execution contexts across those 1200 possible processes.
+
+And again, if I go in here, I probably don't have h top here. Oh I do. Uh, and see what's running.
+
+You'll see that in fact, a ton of things are actually running on him on that 0.0 means it is doing something,
+
+but it didn't do enough to to add up to one, uh, 10th of a percent of the CPU time.
+
+Right? Um, and I don't know how many pages of this there will be.
+
+Can I page down? Is that a thing that I can do? Okay, maybe it isn't doing anything because it looks like they all say zero.
+
+Yeah, so maybe they aren't actually doing it, but many of them are, in fact, doing things.
+
+Um. What else do I want to show you while I'm here?
+
+You get the point, right? We can have many, many more logical flows of control than we have places to run them.
+
+And that's okay, because we can both multiprocessor and multitask at the same time.
+
+Yes. Um, if you go to Piazza.
+
+There's a post at nine. It has a lot of this stuff.
+
+Um, some of this stuff is the sort of thing you learn not just from using a unique system, but also from like administering Unix systems.
+
+We actually have a course here that you can take CSC 411, that is, um, system administration for computer scientists or something like that.
+
+Um, that would teach you some of this stuff. But the biggest thing is just like using Unix systems, having problems and having to solve them.
+
+I cannot stress enough the value of just being curious and doing things you can't.
+
+How? Probably almost all of you could come up with an old computer that somebody else doesn't want, essentially for free, right?
+
+Like an old laptop that somebody is discarding or, you know, whatever, just get one install.
+
+Linux or whatever on it and play.
+
+Right. It's so valuable. It's so valuable. Play with programing languages, play with operating systems.
+
+Don't just install Linux, install haiku, install, be install.
+
+Um, I would say windows, but don't do that. Um, BSD uh, plan nine.
+
+Like there's dozens of operating systems out there. Just get them in play.
+
+Because the more you learn about different systems, the better into focus it brings.
+
+The systems. When you use them, it's like, oh, I saw plan nine, does this thing, oh, how does Unix do that differently.
+
+Right. What does that teach me about the way we design systems. Uh, I started in, um.
+
+So in the early 1990s, um, we bought a PC.
+
+Before that, we'd had an Apple two. We bought a PC and it had, uh, Microsoft DOS on it, um, and windows, but it wasn't windows like you use now.
+
+It was, uh, windows 3.1. It was windows was just a program that you ran on your computer inside DOS.
+
+Like, it wasn't like it's an operating system as it is, um, now.
+
+And, um, it frankly, it sucked, although computers sucked back then.
+
+I mean, a lot of ways they really did suck back then. Um, and in the early 90s, it's in the mid 90s.
+
+Sorry. I, uh, was at a computer store, so it used to be we didn't have the internet.
+
+Like at home or at all, really, but at home, certainly I didn't have the internet,
+
+but I was aware that there were free Unix systems that you could run on PCs because I'd read about them in books,
+
+like that's the kind of era we were in. We had books. It's like a bunch of pieces of paper that are kind of glued together at the back.
+
+It's like a web page, but you don't scroll it, you turn it.
+
+Um, and I had read about Unix systems, and I was aware that there were free Unix systems out there, but I was at, um, a store which still exists.
+
+It's called Micro Center Mall. Um, there was one in, um, West Chester, Ohio, I think.
+
+Or maybe it's, it's closer to Cincinnati. But anyway, it's in southern Ohio.
+
+And I was at the store and they had a box of CDs because you used to get software on CDs.
+
+Uh, before that you got on floppy disks. At some point you bought it on CDs. There are about 700MB of data.
+
+Um, and there was this box of CDs that had Linux on them, and I bought it and I brought it home and it had, uh, it was like $10.
+
+Right. Because Linux is open source software. Right? So you're paying for the disks, right?
+
+And I bought it and I brought it home, and it had a pamphlet in the front that had like follow these steps to install Linux on your computer.
+
+Right. Type these things, run these commands right to install Linux on your computer.
+
+So I did that, um, and I installed Linux on my computer and I was like, Holy [INAUDIBLE], is this better than mS-DOS ever has been before?
+
+Like, I can do two things at the same time.
+
+DOS can do two things at the same time, like you did one, and then you would quit it and then you would go do the other one.
+
+And I was like, I can do two things at the same time. This is amazing, right? Um, and so, uh, there's a moral of the story, I promise.
+
+And so I, um. Started using Linux then and back then.
+
+When you did so, this computer that had 238 processes running on it.
+
+Um, I just booted it before my last lecture.
+
+Right. That 220 of those 238 processes are just it computery, right?
+
+Like, I don't care about any of them. They're just there so that it can computer.
+
+Well back then. When you ask the computer how many processors are running right after you booted the computer, there would be like three.
+
+In it. Getty. And your shell. So in it was the thing that started when the computer started,
+
+and Getty was the thing that let you log in and your shell was the thing you were typing commands into, and that was it.
+
+That was all that was running on the whole computer. And so you could look at that list and just ask, what are each of those things and figure it out.
+
+Right at the time, you could install Linux from maybe six floppy disks, so you had maybe 30 or 40MB total of data on your hard disk.
+
+In a few hundred files, you could look at all of those files and know what they were and understand what they all were.
+
+If you were 14 years old and didn't have anything else to do because there was no internet yet.
+
+Right. And so I did, and I looked to see what all those files were.
+
+On the other hand. There are 51GB of files on the hard disk of my laptop right now.
+
+Now, to be fair, probably like eight gigabytes of those are music, right?
+
+But there's probably 30GB of operating system on there.
+
+You can't look at 38GB of operating system and know what all of that stuff does.
+
+It's just not practical, right? Computers have gotten so much more complicated in the intervening 35 years, right?
+
+30 years. Um, so the moral of this story is one of the reasons we step back and we teach you, like, all of these fundamentals.
+
+And I know students find frustration sometimes.
+
+You're like, they're all they're teaching me is about like, they're not teaching me how to, like, write applications.
+
+They're not teaching me about the technologies that I'm going to use. They're teaching me all this.
+
+It's because once you understand this stuff, the rest of it all follows.
+
+But when you learn the applications, they change. What's hot now will not be hot in two years, will not be hot.
+
+And you don't have the experience of starting with a computer that only has several hundred files on it,
+
+and three processes running where you can look and understand it all.
+
+As I sort of grew in maturity of my understanding of computers, computers got more complicated and at no point in time was it like,
+
+wow, this computer is way more complicated than what I understand because like, I would learn how my computer works.
+
+They would get a little bit more complicated. I only had to learn the difference.
+
+You were born into a world where a minimal install of an operating system is 20GB, and there are 200 processes running.
+
+Of course you don't know what they do, right? Like, it's unreasonable to go from 0 to 200 to 20GB in 200 processes with no steps in between.
+
+So get yourself an old computer, get yourself an old operating system, install it on it and play with it.
+
+Something is small that you can understand. Then say, well, how does this apply to newer systems?
+
+How does that apply to bigger systems? Things like a Raspberry Pi or Great run a Raspberry Pi, right?
+
+Anyway, that's my preaching about that. Are there any other questions? That was more than you signed up for, but I hope it.
+
+Also at nine. If you have a single core CPU.
+
+And that goes back to your question of why would I use you know, that's why I have to use both.
+
+But if I had a single core CPU, multitasking would be the only option I would have at my disposal.
+
+Yep, I would have to. If I want to run more than one logical flow of control, I would have to multitask.
+
+There would be no other option. You can also have a CPU that has multiple cores and does multiprocessing, but not multitasking.
+
+Embedded systems actually do this a lot, where you will have two cores, and one of them takes care of monitoring the nuclear reactor,
+
+and the other one communicates with the control panel or something like that. Right.
+
+And like they're dedicated and that's just what they do not. About, like embedded systems.
+
+Yeah. In embedded systems, doing only multi-tasking or only multiple processing is very common.
+
+On desktop systems, we almost always do both.
+
+Um, in windows, if you hit Control Alt delete and hit Task Manager, it'll show you the tasks that are running.
+
+Um, it tends to be a much smaller number than on a unique system for multiple reasons.
+
+One, it just hides some of them from you and, uh, like, so that you don't break it.
+
+Because if you did something with them, like, it would just be bad and the system would crash.
+
+Linux is like, go ahead, crash the system. That sounds like your problem.
+
+Windows there. Like now we actually have a tech support line. So you know, we won't let you do that.
+
+And two uh, windows tends to windows architecture tends to consist of a smaller number of a large of large systems,
+
+whereas Unix architectures tends to consist of a large number of small systems.
+
+Right. So it's just like a design philosophy difference. Okay.
+
+That's all I want to say about that. Are there other questions? Yes.
+
+Who chooses what's multitasking, what's multiprocessing when all the operating system.
+
+The operating system on a modern Linux system.
+
+It will multitask across every processor you have available unless you tell it not to.
+
+So it will slice all eight of those processors against over the runnable, you know, processes.
+
+You can tell it. And for example, people who do audio stuff will frequently do this because latency is a big deal in audio,
+
+like the delay that it takes after you ask something to happen until it happens. They'll say, take my audio daemon, pin it to one of those processors.
+
+Don't let anything else run on that processor. I'm going to dedicate one eighth of my computer to just the audio stream, right.
+
+Or whatever. That's a thing like real time systems will do that a lot, but in general it'll use all of them.
+
+Why do some courts have a higher usage than others? Is a little bit of a different question.
+
+Um, if you are switching. So bringing a process back to the same court was on before is cheaper.
+
+It's faster than bringing it back to a new court for one and for two.
+
+If you're not utilizing the entire capacity of the computer, it is useful to take some of the cores and actually tell them to sleep,
+
+and you'll lower your power consumption, your battery consumption.
+
+So frequently, you'll see that it will only use a few of the course.
+
+Uh, if you only have a few programs running, or it'll only use a few of the cores if, uh, you're not asking it to work very hard.
+
+But then when you try to do something compute intensive or with a large number of programs, it will spread out and use them all.
+
+Yeah, but that's all engineering. Trade offs that are baked into the operating system.
+
+Somebody's like on this processor. For example, I have four cores that are faster than the other four.
+
+So it'll try to use the four slow ones while I'm on battery until they're mostly utilized.
+
+And then it'll start bringing the fast ones in so that my computer feels fast. Right.
+
+But it'll try to use the slow ones when it can.
+
+Um, somebody sat down and read the manual and figured out how all how the hardware works and how the processors interact with one another,
+
+and how users would like their computer to be used, and wrote software that does all of that.
+
+Again, I've said it before, the operating system is just a program. Someone like you wrote the operating system.
+
+Right? In fact, in many cases, it was literally a college student that wrote a lot of the important operating system code that we use.
+
+Famously, uh, Linus Torvalds was an undergraduate student at, um, a Finnish university when he wrote Linux, the original version of Linux.
+
+Now it has hundreds of authors, right? Or thousands, tens of thousands of authors.
+
+But when he started it. All right.
+
+Um. Did I say these things? Yeah, I said these things.
+
+So when I have concurrent logical flows.
+
+Let me back up. I go on these digressions. Right. That was a fairly long digression.
+
+It's not going to be on the final. Right. I'm not going to ask when it was that I first used Linux,
+
+or why you should try to use older operating systems, or like how things have progressed over the years.
+
+And sometimes students complain. By sometimes I mean literally every semester at least one of my evals says, bro, can you stay on topic?
+
+Sometimes it literally says, bro, can you stay on topic? Um, and I can.
+
+But I would not be giving you the same quality of education as if I go off topic and I talk about those things,
+
+because you may not be aware that like, that's a you mean you're aware like peripherally or aware, but you may not have ever thought, hey, I could.
+
+Next time somebody throws away a laptop,
+
+I could just ask if I could have it and go install an operating system that's not Unix or Linux or Windows on it and see what it's like.
+
+Like it may not have occurred to you. And if one person in this room does that, it was worth that digression.
+
+Right? Anyway, so the digressions serve a purpose.
+
+It's fine. Put it on the. If you don't like it, that's fine.
+
+I understand that sometimes is hard to pay attention, but, um, you can put it in the evals, but, like, I know, I know, also, I have ADHD.
+
+Um, so anyway, when we have multiple logical flows of control, um, sometimes those logical flows of control, they come about in different ways.
+
+Sometimes I just have multiple programs that I'm running on a computer,
+
+and they don't have anything to do with each other, and they just happen to be running on the same computer.
+
+And sometimes they sometimes it's multiple copies of the same program.
+
+Right? Like I just had two terminals open at the same time. I have two versions of my PDF viewer running at the same time.
+
+Um, and sometimes they are um.
+
+Different programs and they have nothing to do with one another.
+
+So I'm running a music player and I'm running a web browser, and I'm running a code editor, and I'm running the compiler, right, or whatever.
+
+Right. And they don't really have anything to do with each other.
+
+Um, sometimes they are closely related and they have something to do with one another.
+
+So for example, if I am, um, doing streaming video, then I will have something that is reading my webcam and I will have something that is, you know,
+
+I'm running some program on my computer and I am have another program that is
+
+taking the output from the webcam and the output from the program I'm running,
+
+and it's compositing and together and putting a cool background on it with like moving stuff so the kids don't get bored and they'll buy my.
+
+What do they buy on Twitch these days? What's the name of their tokens?
+
+Is it bits anyway? Is Twitch not a thing anymore?
+
+You guys don't twitch. What do you do other than TikTok? YouTube like streamers on YouTube.
+
+People watch streamers know, okay. Okay, but you guys are too cool for streaming.
+
+That's not true. I'm looking at you. That's not true. Yeah, okay.
+
+All right. No, I don't either. That's because I'm old. Um, so at any rate, you know, all these things are sort of working together, right?
+
+They're they're cooperating. But on the other hand,
+
+the person who wrote the streaming software didn't build the webcam and they didn't write the game that you're streaming, right?
+
+They're working together, but they're not really related to one another.
+
+They just happened to be working together on the same system at the same time.
+
+And there's all kinds of different ways to slice these things.
+
+In the case that the programs that are running are completely unrelated from one another.
+
+Then this dedicated computer abstraction is beautiful, and it's exactly what we want.
+
+Because I write a program, that program does its thing.
+
+It doesn't have to care that you're also listening to music, or you're also watching Netflix or you're also playing.
+
+League of Legends, or you're also doing whatever it is that you do these days.
+
+I don't really know what that is that kids do with computers these days. I'm sure it's a waste of time.
+
+Um, do scrolling on Twitter or whatever.
+
+Um. And they don't have to care about one another.
+
+And this this dedicated computer model is perfect for that. Because I write my program, it does its thing.
+
+Nothing else matters. But sometimes they actually want to work with one another, and when they actually want to work with one another,
+
+we have to start breaking down that dedicated computer model and allowing them to observe one another.
+
+And when we do, things get more complicated. So why would I have them get more complicated?
+
+Why would I ever design a program that had multiple concurrent flows?
+
+Um, a big thing is sometimes I need to wait for one thing.
+
+While I also want to do something else. There are multiple ways to solve that problem.
+
+But one of the more straightforward ways is to dedicate one concurrent flow to waiting for the thing,
+
+and another concurrent flow to doing whatever it is I want to do.
+
+So, for example, if I am writing a video game, I am waiting for the user's input.
+
+I am probably also waiting for data to come in from the network, and in the meantime,
+
+I am rendering some environment or running some game logic or whatever at the same time
+
+that I'm waiting for the user's input or I'm waiting for data to come from the network.
+
+And so I can have multiple concurrent flows, and one of them is talking to the network,
+
+and one of them is talking to the user, and one of them is drawing pretty pixels on the screen.
+
+Um, sometimes I want to achieve rapid response to some particular event.
+
+So I have a real time system, and I have an end stop on a, um, machine that is moving rolls of steel around in a factory,
+
+and it needs to stop when the roll of steel gets to the end so that it doesn't, like, smash the operator.
+
+Well, that stop is pretty freaking important, so I might just dedicate a process to waiting for that thing to be hit.
+
+Or like the emergency stop button on a piece of machinery, right?
+
+Like all it's doing is saying is the emergency stop button been pushed? Nope. We're good.
+
+Has it been pushed down? We're good.
+
+Like that's all it's doing so that no matter how bad I mess up the rest of my software, that logical flow is going to work.
+
+It's like, okay, button was pushed. Shut the thing down. Um, and sometimes on modern computers, we want to utilize multiple physical CPU cores.
+
+We just want to do more computation than we can possibly do in a single CPU core.
+
+That's fairly common. Um, if I only use one logical flow of control on my laptop,
+
+my program can only do about one eighth as much computation as if I used eight logical flows of control.
+
+Sometimes that's fine, and sometimes it's not. Um, and then sometimes there's this cool thing we'll talk more about later.
+
+I can just break my program up into multiple separate programs that communicate, because the dedicated computer model is so beautiful.
+
+And if one part of my program crashes, the other parts of my program will keep running.
+
+So we've already seen process level concurrency in this course,
+
+where we had multiple processes running on the system at the same time, and we actually cared about that.
+
+In the case of the I am client server, the I am server is a you.
+
+You may have looked at it right is you have it. You had a copy of it on your system.
+
+Um, is a Python program right? The I am client is a C program of which you wrote a chunk of that code,
+
+and you run both of those pieces of software on the same computer at the same time, and they can communicate with one of them.
+
+And then, of course, we had the class wide server and we ran that, which is also in Python, right?
+
+We ran that class wide server and then dozens of you at a time,
+
+at various points were connected to that server and all communicating with one another.
+
+So I would send something from my, um, client to the server.
+
+The server would receive that data, and then it would send it out to all the students who were connected to that server at the same time.
+
+Right, and you would see it and you could reply. Um, I don't know how many of you actually played with that server, but like 100 probably.
+
+Or, you know, 50. Anyway, students actually log into that server. You saw this in action.
+
+Um, when we have process level concurrency, it's possible that those processes, as we said before,
+
+are related or unrelated, or are working together or are not in the case of the chat client and server,
+
+I would say that they are, uh, proceeding independently on related tasks or may be cooperating, right, depending on where you want to draw that line.
+
+But you also frequently have processes that are proceeding independently on unrelated tasks.
+
+This is, again, the generic case that I am both running a music application and my web browser at the same time.
+
+They don't care about each other. They have nothing to do with one another. They just happen to run on the computer at the same time.
+
+Or I'm running Emacs and I'm running, uh, a shell terminal, right?
+
+They just happen to be running on a computer at the same time. Um, it turns out that this is valuable in and of itself.
+
+If we never go any further, if we just say, hey, I can have more than one process and maybe they can communicate with each other a little bit.
+
+This is valuable even if we never go any farther. And we use this to produce software that is more robust.
+
+In particular, a great example of this is your web browser.
+
+When you run a web browser, every single tab in a modern web browser, any modern web browser that I'm aware of,
+
+whether it's Safari or, um, Chrome or Firefox, there's really only three web browsers right now, right?
+
+There's WebKit, which is Safari, there's chromium, which is Chrome, and there's, um, Firefox, right.
+
+That's it. The other ones are all just rebrands of one of those are there are niche web browsers,
+
+but like of the big web browsers, there's really just three, uh, all three of them.
+
+Um, every time you create a tab, that's a new process. It's a new program running on your computer.
+
+Every single tab is a new program. And, um, if you run Chrome, for example, I don't remember what the other browsers do.
+
+I haven't seen a Firefox tab crash in a very long time.
+
+Um, but I've seen a Chrome tab crash recently. Uh, they crash and it shows like a little picture of a computer monitor, and I think there's,
+
+like an elephant in front of it or something, and it says, oh, snap underneath it.
+
+And then it says, something went wrong, you know, hit reload to restore your, um, progress.
+
+Um, that is because the process that was running in that tab crashed.
+
+But the browser didn't. Your other tab stayed open, the browser frame stayed there, you just hit reload and you're right back where you came from.
+
+It took advantage of the fact that I that it can separate the sort of concerns of each individual tab into separate processes,
+
+so that if something goes wrong in one of them, it doesn't go wrong in all of them.
+
+Right. And this is a beautiful thing. This is using the dedicated computer, uh, model.
+
+On the other hand, this is can be expensive. And by expensive I mean slow.
+
+Um, when you are running inside the dedicated computer model and you want to communicate with a process that is in another dedicated machine, right?
+
+You have to ask the operating system to allow you to do that.
+
+Most of these mechanisms that you can ask the operating system to do require work on the behalf of the operating system,
+
+and they require what we call a context switch, which is like where we switch from A to B to C on the multitasking and they're slow.
+
+And by slow I mean if I want to copy data from one place to another within my process, maybe it takes 100 nanoseconds.
+
+If I want to copy data from my process to another process, maybe it takes 100 microseconds.
+
+That's a factor of 1000. Write in difference in speed.
+
+And if I'm not copying a lot of data and I'm not doing it very often, that doesn't matter.
+
+But if I'm copying a lot of data or I'm doing it frequently, then that becomes a problem, right?
+
+It becomes too slow. No.
+
+So, uh, threads are like processes in that they represent a logical flow of control.
+
+But unlike processes which each run in their own dedicated, uh, machine, in this dedicated machine model.
+
+Threads running within a process all share the same dedicated machine in the dedicated machine model.
+
+Which means, in particular, that all threads running in the same process have the same memory space.
+
+So if you have a global variable X and you access it from two threads in the same process, it's the same x.
+
+If you have a global variable x in two different programs, two different processes on the system, it's they're different x's, right.
+
+Um. Switching between threads is frequently less expensive than switching between processes.
+
+This is for a variety of reasons. Many of them are related to security.
+
+But also, if you remember when we talked about the virtual memory model, how we said that every process has its own virtual memory space.
+
+You have to communicate that to the.
+
+So if you switch from one process to another, you have to tell the moon, hey, here's your new virtual memory space.
+
+And it turns out that that's kind of slow. If you have two threads that access the same variable, how do you make sure that nothing gets messed up?
+
+That will be the topic of the entire next set of lecture slides. That is indeed a problem is in fact the problem.
+
+It is indeed a problem. So here is an example.
+
+We have three processes here p1, p2 and p3 p1 and p2.
+
+Uh all three of these are running on the same system. You can see that P1 and P2 are each running in their own memory space,
+
+and each one of them has a single logical flow of control that has a program stack associated with it.
+
+Um, if P1 changes something in its heap and P2 goes to check that same memory location, it sees a different value because it's a different heap.
+
+P3. Likewise, if anything in P3 tries to look at anything in P1 or P2, it can't, right?
+
+Because they're in different memory spaces. On the other hand, the threads t1 and t2 inside process P3 are running in the same memory space.
+
+So T1 and T2 each have their own stack. But if t1 and t2 both change a variable at the same location in memory,
+
+they're talking about the same variable because their memory space is exactly 100% overlapped, right?
+
+Yes. Um.
+
+I don't know that it ever is. Ever.
+
+But there may be cases where the cost is the same.
+
+So it's typically the case that switching threads is either the same cost as switching between processes or less expensive.
+
+And whether it's the same cost or less expensive depends on a lot of factors.
+
+Um, on modern machines with modern operating systems, switching between threads is almost always just cheaper.
+
+That's what you would do. Processes on older hardware.
+
+With modern operating systems, they may be the same cost on older hardware.
+
+With older operating systems, threads work cheaper, but we've discovered that there were some,
+
+like security problems with doing cheap switches between threads or processes on older
+
+hardware that now newer hardware has dedicated like transistors to solve those problems.
+
+And so it made it faster again. Does that answer your question? So it's not like they can be like this.
+
+It's like they can be like this or like this. Yes.
+
+Yes. So yeah. So the terminology, if they say the CPU has six cores and 12 threads, is that the same.
+
+It's not they're, they're uh, sort of abusing the term thread.
+
+What they mean is that you can have 12 process contexts stored in the CPU at the same time,
+
+even though only six of them can run at any one point in time. Um, basically that if you have.
+
+So let's go to the simple case of one core, two threads. That means you have one processor, but as two complete sets of registers.
+
+And so when you want to switch between processes, you don't have to do like a lot of extra software work.
+
+You just say use these registers for one process, use those registers for the other process, and you just swap between those.
+
+Right. So it's related, but it's not actually the same thing as the threads that we're talking about.
+
+Yes. Uh, yes.
+
+Right. This is a great observation. One thread crashing can crash the entire program.
+
+If P1 crashes, P2 does not care. If T1 crashes, T2 might go down with it.
+
+Right. And that comes to the advantages and disadvantages of threading.
+
+So threads are cheaper than processes. We already said these things in particular.
+
+If two threads want to communicate with one another, they do not have to talk to the operating system.
+
+They do not have to ask the kernel for permission because they share memory.
+
+So T1 can change their memory location. T2 can observe that change.
+
+They have now communicated with one another. Right. And so that is much, much much faster.
+
+Disadvantages. If T1 messes up T2 dies, right?
+
+That's a big one. Uh, also, um, we have lost the ability to reason about our program as if it is the only program in the entire system.
+
+We now have two programs in the system, or 3 or 4 or five.
+
+And now we have to think, well, if I do this here, how is that going to affect that over there with the dedicated machine model?
+
+We don't have to think about that. That's the operating systems problem.
+
+But as soon as we have multiple logical flows of control in the same memory space,
+
+if this thread does this, what does that mean for that other thread? Right.
+
+We have to start thinking about that. And so it makes us have to work a lot harder.
+
+Furthermore many APIs so API we've said it before stands for Application Programing Interface.
+
+It's the set of like sort of interfaces to a piece of software are not what we call thread safe,
+
+which means that you cannot use them from two threads at the same time without expecting shenanigans in particular.
+
+A lot of times graphics libraries and stuff like that.
+
+You can't use them for more than one thread at the same time, or your program will actually crash.
+
+Um, malloc is thread safe, but as you know from the handout, your malloc is not thread safe.
+
+We said you can't run multi-threaded programs with your malloc. Um, over the next few lectures.
+
+Think about that. Why is your malloc not thread safe and how would you fix it.
+
+Don't do it. You're not required to do it. And that's work that you don't need to do this semester.
+
+But just think about why is it not thread safe and how would you fix it if you were to fix it.
+
+And I think that will be illustrative for you. All right. I think that's basically it.
+
+Uh, yeah. There is this slide. Go read it. I don't think you have any questions.
+
+We will start with the next lecture on Friday.
+
+My faculty advisor. And I did ask him to discuss.
+
+That's. The best bang for your buck.
+
+Because. And I went away and he was like, okay, we we can discuss.
+
+But I think it would be better if you go to CS advisor instead.
+
+And who's your advisor? Don't think. Changed my advisor, like two times.
+
+No, no, no. You're a faculty advisor who does your own function?
+
+Yeah. You don't like.
+
