@@ -4,16 +4,17 @@ from transcriber import transcribeMedia
 from chunkCreator import createTranscriptChunks
 from behaviorAnalyzer import analyzeBehavior, compileBehaviorProfile
 from critiqueFeedback import critiqueProfile
-from FireBase import saveProfile, updateProfile, saveTranscript
+from FireBase import saveProfile, saveTranscript
 from tagCreator import createTaggedChunks
 
 
 def main(userFiles, userDescription, userRules):
     userId = str(uuid.uuid4())
     formattedData = formatUserData(userFiles)
-    profile = generateBehaviorProfile(formattedData)
+    chunks = createTranscriptChunks(formattedData)
+    profile = generateBehaviorProfile(chunks)
     if profile:
-        createUserInFirebase(userId, profile, formattedData, userDescription, userRules)
+        createUserInFirebase(userId, profile, chunks, userDescription, userRules)
         print(f"User {userId} profile created and saved successfully.")
     else:
         print("Profile generation failed.")
@@ -33,15 +34,12 @@ def formatUserData(userFiles):
     return transcribedData
 
 
-def generateBehaviorProfile(interactionData):
-    chunks = createTranscriptChunks(interactionData)
+def generateBehaviorProfile(chunks):
     behaviorAnalysis = analyzeBehavior(chunks)
     generalProfile = compileBehaviorProfile(behaviorAnalysis)
     if critiqueProfile(generalProfile):
-        saveProfile({"profileDescription": generalProfile}, "temporaryProfile")
         return generalProfile
     else:
-        updateProfile("unverifiedProfile", {"profileDescription": generalProfile})
         return None
 
 

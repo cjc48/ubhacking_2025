@@ -1,16 +1,16 @@
 from aiDelegate import critiqueAI, generateAI, mainLLM
 
 
-def critiqueProfile():
+def critiqueProfile(generalProfile):
     count = 0
     while True:
-            simulatedResponse = simulateProfileResponse(generalProfile)
-            accuracyReport = evaluateProfileAccuracy(simulatedResponse, generalProfile)
-            if (accuracyReport.strip().lower() == 'True') or count >= 3:
-                return True
-            else:
-                generalProfile = refineProfileDescription(generalProfile, accuracyReport)
-
+        simulatedResponse = simulateProfileResponse(generalProfile)
+        accuracyReport = evaluateProfileAccuracy(simulatedResponse, generalProfile)
+        if accuracyReport.strip().lower() == 'true' or count >= 3:
+            return True
+        else:
+            generalProfile = refineProfileDescription(generalProfile, accuracyReport)
+            count += 1
 
 
 def simulateProfileResponse(generalProfile):
