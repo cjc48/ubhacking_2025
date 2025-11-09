@@ -1,7 +1,7 @@
 import asyncio
 from flask import Flask, jsonify, request
-from typeManager import identify_response_type
-from retriever import retrieve_required_chunks
+from backend.messenger.typeManager import identify_response_type
+from .retriever import retrieve_required_chunks
 from responseGenerator import generate_llm_response
 from stylizer import transform_stylistic_response
 from FireBase import getProfile

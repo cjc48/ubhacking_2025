@@ -2,8 +2,8 @@ from flask import Flask, jsonify, request
 import firebase_admin
 from firebase_admin import credentials, firestore
 from flask_cors import CORS
-import messengerMain
-import profileMain
+from backend.messenger import messengerMain
+from backend.profileCreation import profileMain
 import json
 
 app = Flask(__name__)

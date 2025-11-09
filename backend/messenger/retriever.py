@@ -1,7 +1,7 @@
 
 import asyncio
-from aiDelegate import retrievalAI
-from FireBase import getTranscripts
+from ..aiDelegate import retrievalAI
+from ..FireBase import getTranscripts
 
 async def retrieve_required_chunks(user_id, user_prompt, response_type):
     transcripts = getTranscripts(user_id)
