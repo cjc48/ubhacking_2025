@@ -1,5 +1,8 @@
 import React from 'react';
-import { TextField, Box, Typography, Grid } from '@mui/material';
+import { TextField, Box, Typography, Grid, ListItemText } from '@mui/material';
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 
 const backgroundPrompt = `- Education:
   - Degrees, institutions, and years of graduation.
@@ -19,13 +22,14 @@ const backgroundPrompt = `- Education:
 
 
 function MyDoppel() {
-    const [transcript, setTranscript] = React.useState('');
+    const [transcriptFiles, setTranscriptFiles] = React.useState<File[]>([]);
     const [background, setBackground] = React.useState(backgroundPrompt);
     const [rules, setRules] = React.useState('');
 
-
-    const handleTranscriptChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTranscript(event.target.value);
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+            setTranscriptFiles(Array.from(event.target.files));
+        }
     };
 
     const handleBackgroundChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,27 +45,42 @@ function MyDoppel() {
             <Typography variant="h4" gutterBottom>
                 My Doppel
             </Typography>
-            <Typography variant="h6" gutterBottom>
-                Transcripts
-            </Typography>
-            <Typography variant="body1" paragraph>
-                Paste your transcripts so we can get a feel for your mentoring style.
-            <TextField
-                label="Paste Transcript"
-                multiline
-                rows={15}
-                fullWidth
-                variant="outlined"
-                value={transcript}
-                onChange={handleTranscriptChange}
-                placeholder="Paste your conversation transcripts here..."
-                sx={{
-                    '& .MuiOutlinedInput-root': {
-                        height: 'auto',
-                    },
-                }}
-            />
-            </Typography>
+            <Box>
+                <Typography variant="h6" gutterBottom>
+                    Transcripts
+                </Typography>
+                <Typography variant="body1" paragraph>
+                    Please provide field-relevant transcripts here. For now, provide only in .txt (plaintext) format.
+                </Typography>
+                <Button variant="contained" component="label">
+                    Upload Files
+                    <input
+                        type="file"
+                        hidden
+                        multiple
+                        accept="text/plain"
+                        onChange={handleFileChange}
+                    />
+                </Button>
+                <Box sx={{ mt: 2 }}>
+                    <Typography variant="subtitle1" gutterBottom>
+                        Selected Files:
+                    </Typography>
+                    <List>
+                        {transcriptFiles.length > 0 ? (
+                            transcriptFiles.map((file, index) => (
+                                <ListItem key={index}>
+                                    <ListItemText primary={file.name} />
+                                </ListItem>
+                            ))
+                        ) : (
+                            <ListItem>
+                                <ListItemText primary="No files selected." />
+                            </ListItem>
+                        )}
+                    </List>
+                </Box>
+            </Box>
             <Typography variant="h6" gutterBottom>
                 User Background
             </Typography>
@@ -87,8 +106,11 @@ function MyDoppel() {
             <Typography variant="h6" gutterBottom>
                 Rules
             </Typography>
+            <Typography variant="body1" paragraph>
+                Please provide any rules the LLM should follow here.
+            </Typography>
             <TextField
-                label="LLM Rules"
+                label="Rules"
                 multiline
                 rows={8}
                 fullWidth
