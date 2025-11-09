@@ -1,14 +1,12 @@
+import asyncio
 from aiDelegate import messageStyleAI
 from FireBase import getTranscripts
 
-def transform_stylistic_response(mentor_id, llm_response):
-    # Fetch all mentor transcripts from Firebase
+async def transform_stylistic_response(mentor_id, llm_response):
     transcripts = getTranscripts(mentor_id)
     if not transcripts:
-        print("No transcripts found for mentor.")
         return llm_response
 
-    # Combine all mentor speech samples into one text reference
     combined_samples = "\n".join(t.get("content", "") for t in transcripts)
 
     prompt = (
@@ -37,5 +35,5 @@ def transform_stylistic_response(mentor_id, llm_response):
         "Produce the final rewritten response below."
     )
 
-    response = messageStyleAI(prompt)
+    response = await asyncio.to_thread(messageStyleAI, prompt)
     return response
