@@ -5,6 +5,7 @@ import { createTheme } from '@mui/material/styles';
 import PsychologyAlt from '@mui/icons-material/PsychologyAlt';
 import { AppProvider, type Navigation } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
+import { db } from './firebase';
 
 /*
 *
@@ -22,8 +23,8 @@ const MentorList : Navigation = [
         icon: <PsychologyAlt />,
     },
     {
-        segment: 'orders',
-        title: 'Orders',
+        segment: 'ash',
+        title: 'Ash',
         icon: <PsychologyAlt />,
     },
 ]
