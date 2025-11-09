@@ -25,7 +25,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Root />}>
                     {/* 1. Update the redirect to point to the new default mentor route */}
-                    <Route index element={<Navigate to="/mentor/socrates" replace />} />
+                    <Route index element={<Navigate to="/mydoppel" replace />} />
                     <Route path="settings" element={<Settings />} />
                     <Route path="mydoppel" element={<MyDoppel />} />
                     {/* 2. Create a new 'mentor' path that contains the dynamic chat page */}

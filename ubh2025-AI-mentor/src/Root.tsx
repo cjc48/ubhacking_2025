@@ -24,7 +24,9 @@ export default function Root() {
 
     const router = {
         pathname: location.pathname,
-        navigate: (path: string) => navigate(path),
+        navigate: (path: string) => {
+            navigate(path);
+        },
     };
 
     const navigation: Navigation = [
